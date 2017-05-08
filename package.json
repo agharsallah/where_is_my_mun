@@ -4,6 +4,7 @@
   "description": "defining in which mun the citizen is with Google Maps JavaScript API Geocoder with React.js",
   "main": "gulpfile.js",
   "scripts": {
+    "start": "webpack-dev-server --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,7 +18,13 @@
   },
   "homepage": "https://github.com/fedosejev/google-maps-api-geocoder-react#readme",
   "devDependencies": {
+    "babel-core": "~6.7.*",
+    "babel-loader": "~6.2.*",
+    "babel-preset-es2015": "~6.6.*",
     "babel-preset-react": "^6.5.0",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "webpack": "~1.12.*",
+    "webpack-dev-server": "~1.14.*",
     "babelify": "^7.3.0",
     "browserify": "^9.0.3",
     "gulp": "^3.8.11",
@@ -27,8 +34,11 @@
     "vinyl-source-stream": "^1.0.0"
   },
   "dependencies": {
+    "leaflet": "^1.0.3",
     "node-uuid": "^1.4.2",
+    "point-in-polygon": "^1.0.1",
     "react": "^15.0",
-    "react-dom": "^15.0"
+    "react-dom": "^15.0",
+    "react-leaflet": "^1.1.6"
   }
 }

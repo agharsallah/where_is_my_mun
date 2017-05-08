@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>My_mun</title>
+    <!-- bootstrap -->
+    <!-- map -->
+     <link rel="stylesheet" href="/css/leaflet.css"/>
+     <link rel="stylesheet" href="/css/leaflet-search.css">
+     <!-- highchart -->
+     <script src="http://code.highcharts.com/highcharts.js"></script>
+    <!-- mystyle -->
+
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="shortcut icon" type="image/x-icon"  href="/img/favicon.ico" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <style>
+      .form-inline {
+        margin: 20px 0;
+      }
+
+      .form-inline .form-group {
+        margin-bottom: 0;
+      }
+
+      .form-inline .form-group,
+      .form-inline .form-control,
+      .form-inline button {
+        width: 100%;
+      }
+
+      .bg-danger,
+      .bg-info {
+        padding: 15px;
+        margin-bottom: 20px;
+      }
+
+      .map {
+        height: 300px;
+      }
+    </style>
+  </head>
+  <body class="shop">
+        <div id="root">
+          <div style="margin-left: 45%; margin-top: 18%">   
+            <div class="loader"  ></div>
+            <h3 style="margin-left: 10px">Loading...</>  
+          </div>
+        </div>
+
+    <!-- jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- map -->
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script src="/js/leaflet-search.min.js"></script>
+    <script src="/js/leaflet-stripes.min.js"></script>
+
+    <!--load data from google spreadsheet-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js" ></script>-->
+    
+    <!-- gejson data -->
+    <script src= "/geojson/turnout.geojson"></script>
+    <script src= "/geojson/delegations.geojson"></script>
+    <script src= "/geojson/districts.geojson"></script>
+    <script src= "/geojson/OldDelegationTurnout.geojson"></script>
+    <script src= "/geojson/inexistant_invalid_delegation_data.geojson"></script>
+    <script src= "/geojson/existant_invalid_delegation_data.geojson"></script>
+    <script src= "/geojson/municipalities/municipalities_shape.js"></script>
+
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2fgI8v3-pjcX-Mz-pNw-SjuhA-D1Cjq8"></script>
+
+   <!-- bundle -->
+    <script src="/bundle.js"></script>
+
+  </body>
+</html>
