@@ -55,9 +55,9 @@ npm run build
 ## Built With
 
 * [React](https://facebook.github.io/react/) - Js library to build the User Interface 
-* [leaflet](leafletjs.com//) - Load the maps
+* [leaflet](https://leafletjs.com//) - Load the maps
 * [mapbox](https://facebook.github.io/react/) - Map Layer & Geocoding API
-* [Google maps](https://facebook.github.io/react/) - Geocoding API
+* [Google maps](https://developers.google.com/maps/documentation/geocoding/start) - Geocoding API
 
 ## License
 
