@@ -62,3 +62,9 @@ npm run build
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+Warranties
+
+## Warranties
+
+We provide no warranties or guarantees of any kind as to the correctness or usability of the data.
+By using the service you agree that this application is not responsible, in any way, for any consequences resulting from use of information provided by the service.

@@ -7,7 +7,7 @@ class App extends Component {
     
     constructor(props){
         super(props);
-        this.state=({isGeocodingError:false,foundAddress:[0, 0],munname:""})
+        this.state=({isGeocodingError:false,foundAddress:[0, 0],munname:"Type an address Or a known place next to the Citizen's home"})
         this.geocodeAddress=this.geocodeAddress.bind(this);
         this.handleFormSubmit=this.handleFormSubmit.bind(this);
         this.setSearchInputElementReference=this.setSearchInputElementReference.bind(this);
@@ -35,7 +35,7 @@ class App extends Component {
         for (var i = 0; i < AllSahapsArray.length; i++) {
             var shapeCoord=g_mun_shapes.features[i].geometry.coordinates[0];
             if (inside(MarkerLonLat,shapeCoord)) {
-                let text = "Your municipality is :"+ AllSahapsArray[i].properties.name_en
+                let text = "Your municipality is : "+ AllSahapsArray[i].properties.name_en+" --("+AllSahapsArray[i].properties.circ+")";
                 this.setState({munname:text});
             }
         }
