@@ -39,7 +39,10 @@ npm start
 
 ## Warning !!
 
-The Google geocoding API is free until exceeding 25,000 map loads per 24 hours
+The Google geocoding API is free until exceeding 25,000 map loads per 24 hours.
+
+We provide no warranties or guarantees of any kind as to the correctness or usability of the data.
+By using the service you agree that this application is not responsible, in any way, for any consequences resulting from use of information provided by the service.
 
 ## Running the tests
 
@@ -63,8 +66,3 @@ npm run build
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 Warranties
-
-## Warranties
-
-We provide no warranties or guarantees of any kind as to the correctness or usability of the data.
-By using the service you agree that this application is not responsible, in any way, for any consequences resulting from use of information provided by the service.
