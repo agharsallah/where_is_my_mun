@@ -15,13 +15,17 @@ class App extends Component {
  
         this.setState({gouv:chosenRequest});
         console.log(chosenRequest);
-
+        if (indexOf(gouvernorates, chosenRequest)!=-1) {
+            this.setState({disabled:false});
+        }else{
+         this.setState({disabled:true});   
+        }
         
     }
     handleClick(){
         //send value from the input to parent
         console.log("click",this.state.gouv);
-        let qString="http://localhost:3000/api/bears/"+"Tunis";
+        let qString="http://localhost:3000/api/bears/"+this.state.gouv;
         axios({
             method: 'get',
             url: qString,
