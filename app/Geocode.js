@@ -27,28 +27,38 @@ class Geocode extends Component {
     
     geocodeAddress(address){
     this.geocoder.geocode({  componentRestrictions: {country: 'TN'},'address': address }, function handleResults(results, status) {
-        //console.log(results[0].geometry.location)
+        console.log(results)
+        console.log(status);
       if (status === google.maps.GeocoderStatus.OK) {
-        const MarkerLatLon=[ results[0].geometry.location.lat(),results[0].geometry.location.lng()];
-        this.setState({
-          foundAddress:MarkerLatLon,
-          isGeocodingError: false
-        });
-        //console.log('Adress founded');
-        //get the name of which the point
-        var shapefromdb=JSON.parse(this.props.shape)
-        //console.log(shapefromdb.features[0].geometry.coordinates[0])
-        //AllSahapsArray access to the geojsonshape feauture 
-        var AllSahapsArray=shapefromdb.features;
-        const MarkerLonLat=[ results[0].geometry.location.lng(),results[0].geometry.location.lat()];
-        for (var i = 0; i < AllSahapsArray.length; i++) {
-            //shapeCoord access to municipality polygon (shape)
-            var shapeCoord=shapefromdb.features[i].geometry.coordinates[0];
-            if (inside(MarkerLonLat,shapeCoord)) {
-                let text = "Your municipality is : "+ AllSahapsArray[i].properties.LABEL+" --("+AllSahapsArray[i].properties.gouv_name+")";
-                this.setState({munname:text});
+            const lat = results[0].geometry.location.lat();
+            const lng = results[0].geometry.location.lng()
+            const MarkerLatLon=[lat,lng];
+            if ( (lat ==33.886917)&& (lng==9.537499000000025) ) {
+                this.setState({
+                foundAddress: null,
+                isGeocodingError: true
+                });
+            }else{
+                this.setState({
+                foundAddress:MarkerLatLon,
+                isGeocodingError: false
+                });
+                //console.log('Adress founded');
+                //get the name of which the point
+                var shapefromdb=JSON.parse(this.props.shape)
+                //console.log(shapefromdb.features[0].geometry.coordinates[0])
+                //AllSahapsArray access to the geojsonshape feauture 
+                var AllSahapsArray=shapefromdb.features;
+                const MarkerLonLat=[ results[0].geometry.location.lng(),results[0].geometry.location.lat()];
+                for (var i = 0; i < AllSahapsArray.length; i++) {
+                    //shapeCoord access to municipality polygon (shape)
+                    var shapeCoord=shapefromdb.features[i].geometry.coordinates[0];
+                    if (inside(MarkerLonLat,shapeCoord)) {
+                    let text = "Your municipality is : "+ AllSahapsArray[i].properties.LABEL+" --("+AllSahapsArray[i].properties.gouv_name+")";
+                    this.setState({munname:text});
+                    }
+                }
             }
-        }
         }else{
           this.setState({
           foundAddress: null,

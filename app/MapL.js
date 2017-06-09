@@ -29,19 +29,16 @@ class MapL extends Component {
             color: 'black',weight: 2,
 	    };
 	}
-  componentWillUnmount() {
-    console.log('unmnt');
-  }
   
   render() {
 
-    console.log('RRREENNDDEERR');
+    //console.log('RRREENNDDEERR');
     if (typeof this.props.shape==='string') {
-      console.log('changes');
+     // console.log('changes');
       var shape = JSON.parse(this.props.shape)
-      console.log(typeof(shape));
+      //console.log(typeof(shape));
     }else{
-      console.log('render MpL object');
+      //console.log('render MpL object');
       var shape =this.props.shape
     }
     
