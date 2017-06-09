@@ -18,7 +18,7 @@ fs.readdir('./shapes', (err, files) => {
             url: qString,
 			data: {
     			name: gouvernorate_name[1],
-    			data: JSON.stringify(data)
+    			data: data
   			}
         })
 	    .then(response=>{

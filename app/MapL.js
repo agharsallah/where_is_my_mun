@@ -39,7 +39,7 @@ class MapL extends Component {
     if (typeof this.props.shape==='string') {
       console.log('changes');
       var shape = JSON.parse(this.props.shape)
-      console.log(shape);
+      console.log(typeof(shape));
     }else{
       console.log('render MpL object');
       var shape =this.props.shape
