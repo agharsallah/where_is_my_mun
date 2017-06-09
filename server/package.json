@@ -2,10 +2,14 @@
   "name": "node-token-authentication",
   "main": "server.js",
   "dependencies": {
+    "axios": "^0.16.2",
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.15.0",
+    "cors": "^2.8.3",
     "express": "^4.13.4",
     "jsonwebtoken": "^5.7.0",
     "mongoose": "^4.4.5",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "request": "^2.81.0"
   }
 }
