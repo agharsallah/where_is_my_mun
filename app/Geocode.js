@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import MapL from './MapL';
 import inside from 'point-in-polygon';
 import SearchOne from './SearchOne' ;
+import RaisedButton from 'material-ui/RaisedButton';
+
 class Geocode extends Component {
     constructor(props){
         super(props);
@@ -26,9 +28,9 @@ class Geocode extends Component {
 
     
     geocodeAddress(address){
-    this.geocoder.geocode({  componentRestrictions: {country: 'TN'},'address': address }, function handleResults(results, status) {
-        console.log(results)
-        console.log(status);
+      this.geocoder.geocode({  componentRestrictions: {country: 'TN'},'address': address }, function handleResults(results, status) {
+        //console.log(results)
+        //console.log(status);
       if (status === google.maps.GeocoderStatus.OK) {
             const lat = results[0].geometry.location.lat();
             const lng = results[0].geometry.location.lng()
@@ -83,6 +85,9 @@ class Geocode extends Component {
     setMapElementReference(mapElementReference){
         this.mapElement = mapElementReference;
     }
+    handleBackClick(){
+        this.props.BackToSelect();
+    }
     render() {
         return (
         <div className="container">
@@ -95,7 +100,10 @@ class Geocode extends Component {
 
                 {this.state.isGeocodingError ? <p className="bg-danger">Address not found.</p> : <h4 className="bg-info">{this.state.munname} </h4>}
             {/* <div className="map" ref={this.setMapElementReference.bind(this)}></div>*/}
-                <div className="map"><MapL key={this.props.key} shape={this.props.shape} shapes={this.props.shapes} markerpos={this.state.foundAddress}/></div>
+                <div className="map two-elm-container">
+                    <MapL key={this.props.key} shape={this.props.shape} markerpos={this.state.foundAddress}/>
+                    <RaisedButton onTouchTap={this.handleBackClick.bind(this)} className="one"  label="Back"  />
+                </div>
             </div>
             </div>
         </div>
