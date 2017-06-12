@@ -7,7 +7,7 @@ class App extends Component {
     
     constructor(props){
         super(props);
-        this.state=({key:1,shape:g_mun_shapes,gouv:'Ariana',show:"layer2",hide:"layer1"})
+        this.state=({key:1,shape:g_mun_shapes,show:"layer2",hide:"layer1"})
         }
     //function from AutoSuggest executed when user clicks on submit button 
     getGouv(value){

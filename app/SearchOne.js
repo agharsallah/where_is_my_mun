@@ -11,7 +11,7 @@ class SearchOne extends Component {
 
                   <div className="form-group">
                     <label className="sr-only" htmlFor="address">Address</label>
-                    <input type="text" className="form-control input-lg" id="address" placeholder="Name of the Avenue or road here" ref={this.props.setSearchInputElementReference} required />
+                    <input type="text" className="form-control input-lg" id="address" placeholder="Name of the Avenue or road here" ref={this.props.setSearchInputElement} required />
                   </div>
 
                 </div>
