@@ -2,7 +2,15 @@ import React, { Component } from 'react';
 import AutoComplete from 'material-ui/AutoComplete';
 import RaisedButton from 'material-ui/RaisedButton';
 import axios from 'axios' ;
-import { indexOf } from 'underscore'
+import { indexOf } from 'underscore';
+import FontIcon from 'material-ui/FontIcon';
+import IconButton from 'material-ui/IconButton';
+import counterpart  from 'counterpart';
+import Translate    from 'react-translate-component';
+const _t = Translate.translate;
+counterpart.registerTranslations('en',require('./../locales/en'));
+counterpart.registerTranslations('fr',require('./../locales/fr'));
+counterpart.registerTranslations('ar',require('./../locales/ar'));
 const gouvernorates =["Ariana","Beja","BenArous","Bizerte","Gabes","Gafsa","Jendouba","Kairouan","Kasserine","Kebili","Mannouba","Kef","Mahdia","Medenine","Monastir","Nabeul","Sfax","SidiBouzid","Siliana","Sousse","Tataouine","Tozeur","Tunis","Zaghouan"]
 
 class App extends Component {
@@ -10,6 +18,14 @@ class App extends Component {
     constructor(props){
         super(props);
          this.state=({gouv:'',disabled:true})
+    }
+    
+    componentWillMount() {
+        counterpart.setLocale('ar');
+    }
+    handleTranslation(e){
+        console.log(e.target.dataset.value);
+        counterpart.setLocale(e.target.dataset.value)
     }
     ChosenGouv(chosenRequest){
  
@@ -49,10 +65,24 @@ class App extends Component {
     render() {
         return (
    <div>
+   <div>
+        <IconButton onTouchTap={this.handleTranslation.bind(this)} tooltip="Arabic">
+            <FontIcon className="flag-icon flag-icon-tn" data-value='ar'/>
+        </IconButton>
+
+         <IconButton onTouchTap={this.handleTranslation.bind(this)} tooltip="French">
+            <FontIcon className="flag-icon flag-icon-fr" data-value='fr'/>
+        </IconButton>
+
+         <IconButton onTouchTap={this.handleTranslation.bind(this)} tooltip="English">
+            <FontIcon className="flag-icon flag-icon-gb" data-value='en'/>
+        </IconButton>
+    </div>
    <div className="row titleTop">
+   
 				<div className="col-md-8 col-md-offset-2 text-center gtco-heading">
-					<h2>Registration Helper</h2>
-					<p>The concept of municipality is quite new for citizens, that's why this project is about helping ISIE Support team to determine from an adress the municipality where a citizen belongs.</p>
+					<h2>{_t('AutoSuggest.Title')}</h2>
+					<p>{_t('AutoSuggest.SubTitle')}</p>
 				</div>
 			</div>
     <div className="col-md-12">
@@ -63,14 +93,14 @@ class App extends Component {
           dataSource={gouvernorates}
           filter={AutoComplete.fuzzyFilter}
           maxSearchResults={5}
-          floatingLabelText="Type Gouvernorate Here"
+          floatingLabelText={_t('AutoSuggest.InputGuide')}
           fullWidth={true}
           onNewRequest={this.ChosenGouv.bind(this)}
         />
         </div>
 
         <div className="col-md-1" style={{marginTop:"3%"}}>
-         <RaisedButton onTouchTap={this.handleClick.bind(this)} disabled={this.state.disabled} label="Submit"  />
+         <RaisedButton onTouchTap={this.handleClick.bind(this)} disabled={this.state.disabled} label={_t('AutoSuggest.SubmitButton')}  />
         </div>
 
          <div className="col-md-2"></div>
@@ -78,7 +108,6 @@ class App extends Component {
       
     <div className="footer">
       <div className="footercontainer">
-              <a href='#'><img src="/img/DI.PNG" className="fa btn btn-space" alt="DI" height="80" width="150"/></a>
               <a href='#'><img src="/img/ISIE.PNG" className="fa btn btn-space" alt="DI" height="80" width="150"/></a>
               
       </div>

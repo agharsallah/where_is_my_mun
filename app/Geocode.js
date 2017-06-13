@@ -3,12 +3,17 @@ import MapL from './MapL';
 import inside from 'point-in-polygon';
 import SearchOne from './SearchOne' ;
 import RaisedButton from 'material-ui/RaisedButton';
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import GeoRadioButton from './GeoRadioButton' ;
 import axios from 'axios' ;
+import counterpart  from 'counterpart';
+import Translate    from 'react-translate-component';
+const _t = Translate.translate;
+
 class Geocode extends Component {
     constructor(props){
         super(props);
-        this.state=({isGeocodingError:false,GeocodeOption:'google',foundAddress:[0, 0],munname:"Type an address Or a known place next to the Citizen's home"})
+        this.state=({isGeocodingError:false,GeocodeOption:'google',foundAddress:[0, 0],governorate:'',munname:"Type an address Or a known place next to the Citizen's home",translation:false})
         this.geocodeAddress=this.geocodeAddress.bind(this);
     }
 
@@ -32,8 +37,9 @@ class Geocode extends Component {
                     //shapeCoord access to municipality polygon (shape)
             var shapeCoord=shapefromdb.features[i].geometry.coordinates[0];
             if (inside(MarkerLonLat,shapeCoord)) {
-            let text = "Your municipality is : "+ AllSahapsArray[i].properties.LABEL+" --("+AllSahapsArray[i].properties.gouv_name+")";
-            this.setState({munname:text});
+            let munname = AllSahapsArray[i].properties.LABEL
+            let governorate=AllSahapsArray[i].properties.gouv_name
+            this.setState({munname,governorate,translation:true});
             }
         }
     }
@@ -118,6 +124,7 @@ class Geocode extends Component {
 
     setSearchInputElement(inputReference){
         this.searchInputElement = inputReference;
+        console.log(inputReference);
     }
 
     handleBackClick(){
@@ -133,7 +140,7 @@ class Geocode extends Component {
         <div className="container">
 
             <div className="row">
-            <SearchOne handleFormSubmit={this.handleFormSubmit.bind(this)} setSearchInputElement={this.setSearchInputElement.bind(this)}  />
+            <SearchOne handleFormSubmit={this.handleFormSubmit.bind(this)} setSearchInputElement={this.setSearchInputElement.bind(this)}/>
             </div>
             
             <div >
@@ -142,11 +149,18 @@ class Geocode extends Component {
             
             <div className="row">
                 <div className="col-sm-12">
-                    {this.state.isGeocodingError ? <p className="bg-danger">Address not found.</p> : <h4 className="bg-info">{this.state.munname} </h4>}
+                    {this.state.isGeocodingError ? <p className="bg-danger">{_t('Geocode.InavailableInfo')}</p> :
+                        (this.state.translation ?<h4 className="bg-info">{_t('Geocode.AvailableInfo')}{this.state.munname}{_t('Geocode.AvailableInfo2')}{this.state.governorate}</h4>:<h4 className="bg-info">{_t('Geocode.AvailableInfo0')}</h4>)}
                     <div className="map two-elm-container">
                         <MapL key={this.props.key} shape={this.props.shape} markerpos={this.state.foundAddress}/>
-                        <RaisedButton onTouchTap={this.handleBackClick.bind(this)} className="one"  label="Back"  />
-                    </div>
+                        <RaisedButton onTouchTap={this.handleBackClick.bind(this)} className="one"  label={_t('Geocode.BackButton')}  />
+                         <RadioButtonGroup name="shipSpeed" defaultSelected="not_light">
+                            <RadioButton
+                                value="light"
+                                label="Polling center"
+                            />
+                            </RadioButtonGroup>
+                        </div>
                 </div>
             </div>
         </div>
