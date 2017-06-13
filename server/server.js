@@ -1,4 +1,4 @@
-// =================================================================
+	// =================================================================
 // get the packages we need ========================================
 // =================================================================
 var express 	= require('express');
@@ -12,6 +12,7 @@ var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var config = require('./config'); // get our config file
 var User   = require('./app/models/user'); // get our mongoose model
 var Shape   = require('./app/models/shape'); // get our shape model
+var Polling   = require('./app/models/polling'); // get pollings model
 
 // =================================================================
 // configuration ===================================================
@@ -47,6 +48,7 @@ app.get('/setup', function(req, res) {
 		res.json({ success: true });
 	});
 });
+
 app.post('/addshape', function(req, res) {
 	var shape = new Shape();		// create a new instance of the Bear model
 		shape.name = req.body.name;  // set the bears name (comes from the request)
@@ -55,8 +57,20 @@ app.post('/addshape', function(req, res) {
 		shape.save(function(err) {
 			if (err)
 				res.send(err);
-
 			res.json({ message: 'shape created!' });
+		});
+
+});
+
+app.post('/addpolling', function(req, res) {
+	var polling = new Polling();		// create a new instance of the Bear model
+		polling.name = req.body.name;  // set the bears name (comes from the request)
+		polling.data = req.body.data;  // set the bears name (comes from the request)
+
+		polling.save(function(err) {
+			if (err)
+				res.send(err);
+			res.json({ message: req.body.name+' polling created!' });
 		});
 
 });
@@ -114,6 +128,13 @@ apiRoutes.route('/isie/:gouv')
 		});
 });
 
+apiRoutes.get('/polling/:gouv', function(req, res) {
+		Polling.findOne({name:req.params.gouv}, function(err, datashape) {
+			if (err)
+				res.send(err);
+			res.json(datashape);
+		});
+});
 app.use('/api', apiRoutes);
 
 // =================================================================

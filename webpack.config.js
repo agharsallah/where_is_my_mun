@@ -4,7 +4,7 @@ var webpack = require('webpack');
 /*
  * Default webpack configuration for development
  */
-
+/*eval-source-map | cheap-source-map*/
 var config = {
   devtool: 'eval-source-map',
   entry:  __dirname + "/app/index.js",

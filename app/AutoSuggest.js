@@ -25,7 +25,7 @@ class App extends Component {
     handleClick(){
         //send value from the input to parent
         console.log("click",this.state.gouv);
-        let qString="http://localhost:3000/api/isie/"+this.state.gouv;
+        let qString="http://mymunicipality.nadhra.tn:3000/api/isie/"+this.state.gouv;
         axios({
             method: 'get',
             url: qString,

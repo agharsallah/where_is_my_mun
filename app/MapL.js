@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Map,Marker, Popup, TileLayer, GeoJSON, FeatureGroup, Tooltip,LayersControl } from 'react-leaflet';
+import { Map,Marker, Popup, TileLayer, GeoJSON, FeatureGroup, Tooltip,LayersControl,Circle } from 'react-leaflet';
 const { BaseLayer, Overlay } = LayersControl;
 import { isEqual } from 'underscore'
 
@@ -73,6 +73,21 @@ class MapL extends Component {
                             url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                             />
                         </BaseLayer>
+                        <LayersControl.Overlay name='Marker with popup'>
+    <Marker position={[35.055360, 9.749795]}>
+      <Popup>
+        <span>A pretty CSS3 popup. <br/> Easily customizable.</span>
+      </Popup>
+    </Marker>
+  </LayersControl.Overlay>
+  <LayersControl.Overlay name='Feature group'>
+    <FeatureGroup color='purple'>
+      <Popup>
+        <span>REGISTRATION CENTER</span>
+      </Popup>
+      <Circle center={[36.879110, 10.324788]} radius={50} />
+    </FeatureGroup>
+  </LayersControl.Overlay>
                     </LayersControl>
                 </Map>
     );

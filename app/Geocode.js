@@ -78,8 +78,10 @@ class Geocode extends Component {
         .then(response=>{
             //console.log(response.data.data)
                     console.log('we got data frm Nomination');
-                 if (response.data[0].length>0) {
+                    console.log(response.data.length>0);
+                 if (response.data.length>0) {
                     const lat = response.data[0].lat;
+                    console.log(lat);
                     const lon = response.data[0].lon
                     const MarkerLatLon=[lat,lon];
                     const MarkerLonLat=[lon, lat];
