@@ -19,7 +19,7 @@ class MapL extends Component {
       //console.log(nextProps.shape);
         this.setState({shape:JSON.parse(nextProps.shape)})
     }else{
-     this.setState({center:nextProps.markerpos,zoom:11,shape:JSON.parse(nextProps.shape)});
+     this.setState({center:nextProps.markerpos,zoom:13,shape:JSON.parse(nextProps.shape)});
     }
 
   }
@@ -73,21 +73,7 @@ class MapL extends Component {
                             url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                             />
                         </BaseLayer>
-                        <LayersControl.Overlay name='Marker with popup'>
-    <Marker position={[35.055360, 9.749795]}>
-      <Popup>
-        <span>A pretty CSS3 popup. <br/> Easily customizable.</span>
-      </Popup>
-    </Marker>
-  </LayersControl.Overlay>
-  <LayersControl.Overlay name='Feature group'>
-    <FeatureGroup color='purple'>
-      <Popup>
-        <span>REGISTRATION CENTER</span>
-      </Popup>
-      <Circle center={[36.879110, 10.324788]} radius={50} />
-    </FeatureGroup>
-  </LayersControl.Overlay>
+                        
                     </LayersControl>
                 </Map>
     );
