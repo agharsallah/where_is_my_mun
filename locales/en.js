@@ -14,6 +14,7 @@ module.exports = {
     AvailableInfo2:'. Governorate is : ',
     AvailableInfoar:'',
     InavailableInfo:'adress inavailable',
-    BackButton:'Search',
+    BackButton:'Back',
+    PollingLayer:'Polling Station'
  }
 }

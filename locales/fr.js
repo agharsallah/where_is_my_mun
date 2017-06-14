@@ -1,19 +1,20 @@
 ﻿module.exports = {
  AutoSuggest: {
-    Title: 'Aide a l\'enregistrement ',
-    SubTitle:'The concept of municipality is quite new for citizens, that\'s why this project is about helping ISIE Support team to determine from an adress the municipality where a citizen belongs.',
-    SubmitButton:'envoyer',
-    InputGuide:'Type de Governorat ici'
+    Title: 'Aide à l\'enregistrement ',
+    SubTitle:'Le concept de municipalité étant nouveau pour les citoyens, cette application vise à permettre aux agents de l\'ISIE de déterminer sur la base d\'une adresse la municipalité à laquelle ce citoyen est rattaché.' ,
+    SubmitButton:'soumettre',
+    InputGuide:'Entrez votre Gouvernorat ...'
  },
  Geocode: {
     InputGuide:'"Name of the Avenue or road here"',
     GoogleRadio: 'Google',
     OSMRadio: 'OSM',
-    AvailableInfo0:'Entrer une adresse ou un endroit près de locale actuelle de citoyen ',
+    AvailableInfo0:'Entrer l\'adresse du citoyen ou un endroit proche de son adresse (édifice publique..) ',
     AvailableInfo:'La municipalitée est : ',
-    AvailableInfo2:'. Governorat de :',
+    AvailableInfo2:'. Gouvernorat de :',
     AvailableInfoar:'',
-    InavailableInfo:'désolé l\'adresse n\est pas trouvée',
-    BackButton:'Search',
+    InavailableInfo:'désolé impossible de trouver l\'adresse, veuillez écrire d\'une autre façon ou essayer un autre service(open street map..)',
+    BackButton:'Retour',
+    PollingLayer:'Polling Station'
  }
 }

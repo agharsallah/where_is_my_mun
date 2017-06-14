@@ -15,5 +15,6 @@ module.exports = {
     AvailableInfoar:' ولاية',
     InavailableInfo:'  نتائج غير موجودة الرجاء إدخال العنوان  أو الشارع أو مكان قريب من العنوان الفعلي للمواطن ',
     BackButton:'عودة للإختيار',
+    PollingLayer:'Polling Station'
  }
 }

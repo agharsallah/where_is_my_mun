@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Map,Marker, Popup, TileLayer, GeoJSON, FeatureGroup, Tooltip,LayersControl,Circle } from 'react-leaflet';
 const { BaseLayer, Overlay } = LayersControl;
 import { isEqual } from 'underscore'
-
+import PollingCenter from './PollingCenter' ;
 class MapL extends Component {
   constructor(props){
     super (props);
@@ -73,7 +73,20 @@ class MapL extends Component {
                             url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                             />
                         </BaseLayer>
-                        
+                        <LayersControl.Overlay name='Marker with popup'>
+    <Marker position={[35.055360, 9.749795]}>
+      <Popup>
+        <span>A pretty CSS3 popup. <br/> Easily customizable.</span>
+      </Popup>
+    </Marker>
+  </LayersControl.Overlay>
+  <LayersControl.Overlay name='Feature group'>
+    <FeatureGroup color='purple'>
+       {ArianaPolling.map(function(object, i){
+        return <PollingCenter lat={object.Latitude} lon={object.Longitude} title={object.Centre_de_vote} key={i} />;
+        })}
+    </FeatureGroup>
+  </LayersControl.Overlay>
                     </LayersControl>
                 </Map>
     );
