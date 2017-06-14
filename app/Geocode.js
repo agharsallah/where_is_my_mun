@@ -111,6 +111,7 @@ class Geocode extends Component {
   }
     
     handleFormSubmit(e){
+        this.setState({governorate:'',munname:'',translation:false});
         e.preventDefault();
         var address = this.searchInputElement.value;
         if (this.state.GeocodeOption=='google') {
@@ -150,7 +151,7 @@ class Geocode extends Component {
             <div className="row">
                 <div className="col-sm-12">
                     {this.state.isGeocodingError ? <p className="bg-danger">{_t('Geocode.InavailableInfo')}</p> :
-                        (this.state.translation ?<h4 className="bg-info">{_t('Geocode.AvailableInfo')}{this.state.munname}{_t('Geocode.AvailableInfo2')}{this.state.governorate}</h4>:<h4 className="bg-info">{_t('Geocode.AvailableInfo0')}</h4>)}
+                        (this.state.translation ?<h4 className="bg-info">{_t('Geocode.AvailableInfo')}{this.state.munname}{_t('Geocode.AvailableInfo2')}{this.state.governorate}{_t('Geocode.AvailableInfoar')}</h4>:<h4 className="bg-info">{_t('Geocode.AvailableInfo0')}</h4>)}
                     <div className="map two-elm-container">
                         <MapL key={this.props.key} shape={this.props.shape} markerpos={this.state.foundAddress}/>
                         <RaisedButton onTouchTap={this.handleBackClick.bind(this)} className="one"  label={_t('Geocode.BackButton')}  />

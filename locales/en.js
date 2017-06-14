@@ -10,8 +10,9 @@ module.exports = {
     GoogleRadio: 'Google',
     OSMRadio: 'OSM',
     AvailableInfo0:'Type an address Or a known place next to the Citizen\'s home ',
-    AvailableInfo:'',
-    AvailableInfo2:'adress not found ',
+    AvailableInfo:'Municipality is : ',
+    AvailableInfo2:'. Governorate is : ',
+    AvailableInfoar:'',
     InavailableInfo:'adress inavailable',
     BackButton:'Search',
  }
