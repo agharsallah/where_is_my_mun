@@ -13,7 +13,7 @@ const _t = Translate.translate;
 class Geocode extends Component {
     constructor(props){
         super(props);
-        this.state=({isGeocodingError:false,GeocodeOption:'google',foundAddress:[0, 0],governorate:'',munname:"Type an address Or a known place next to the Citizen's home",translation:false})
+        this.state=({isGeocodingError:false,GeocodeOption:'Google',foundAddress:[0, 0],governorate:'',munname:"Type an address Or a known place next to the Citizen's home",translation:false})
         this.geocodeAddress=this.geocodeAddress.bind(this);
     }
 
@@ -111,10 +111,12 @@ class Geocode extends Component {
   }
     
     handleFormSubmit(e){
+        //console.log('FOOOOOOOOORRRRRRMMMM SSUUUUBBBBMMMIIIT');
         this.setState({governorate:'',munname:'',translation:false});
         e.preventDefault();
         var address = this.searchInputElement.value;
-        if (this.state.GeocodeOption=='google') {
+        if (this.state.GeocodeOption=='Google') {
+            //console.log('dddddddddddddddddddddddddddddddddddd');
             this.geocodeAddress(address);
         }else{
            this.geocodeAddressOSM(address); 
@@ -125,7 +127,7 @@ class Geocode extends Component {
 
     setSearchInputElement(inputReference){
         this.searchInputElement = inputReference;
-        console.log(inputReference);
+        //console.log(inputReference);
     }
 
     handleBackClick(){
@@ -134,7 +136,7 @@ class Geocode extends Component {
 
     handleGeocoderOption(event){
         console.log(event.target.value);
-        this.setState({GeocodeOption:'OSM'});
+        this.setState({GeocodeOption:event.target.value});
     }
     render() {
         return (

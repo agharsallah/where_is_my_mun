@@ -9,7 +9,7 @@ module.exports = {
     InputGuide:'adress...',
     GoogleRadio: 'منظومة الدعم التقني',
     OSMRadio: 'منظومة الدعم التقني',
-    AvailableInfo0:'إدخال العنوان  أو الشارع أو مكان قريب من العنوان الفعلي للمواطن',
+    AvailableInfo0:'نتائج البحث تظهر هنا ',
     AvailableInfo:' ',
     AvailableInfo2:' --> ',
     AvailableInfoar:' ولاية',
