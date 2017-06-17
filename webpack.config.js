@@ -1,12 +1,12 @@
 var webpack = require('webpack');
 //var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-//var CompressionPlugin = require("compression-webpack-plugin");
+var CompressionPlugin = require("compression-webpack-plugin");
 /*
  * Default webpack configuration for development
  */
 /*eval-source-map | cheap-source-map*/
 var config = {
-  devtool: 'eval-source-map',
+  devtool: 'cheap-source-map',
   entry:  __dirname + "/app/index.js",
   output: {
     path: __dirname + "/public",
@@ -59,7 +59,13 @@ var config = {
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.NoErrorsPlugin(),
-
+    new CompressionPlugin({
+      asset: "[path].gz[query]",
+      algorithm: "gzip",
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     })

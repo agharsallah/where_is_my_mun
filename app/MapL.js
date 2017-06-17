@@ -74,13 +74,13 @@ class MapL extends Component {
                             />
                         </BaseLayer>
                         
-  <LayersControl.Overlay name='Polling center'>
+ {/* <LayersControl.Overlay name='Polling center'>
     <FeatureGroup color='purple'>
        {ArianaPolling.map(function(object, i){
         return <PollingCenter lat={object.Latitude} lon={object.Longitude} title={object.Centre_de_vote} key={i} />;
         })}
     </FeatureGroup>
-  </LayersControl.Overlay>
+  </LayersControl.Overlay>*/}
                     </LayersControl>
                 </Map>
     );

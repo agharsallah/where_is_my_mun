@@ -66,11 +66,10 @@ app.post('/addpolling', function(req, res) {
 	var polling = new Polling();		// create a new instance of the Bear model
 		polling.name = req.body.name;  // set the bears name (comes from the request)
 		polling.data = req.body.data;  // set the bears name (comes from the request)
-
 		polling.save(function(err) {
 			if (err)
 				res.send(err);
-			res.json({ message: req.body.name+' polling created!' });
+			res.json( { message: req.body.name+' polling created!' } );
 		});
 
 });
@@ -85,7 +84,7 @@ var apiRoutes = express.Router();
 // ---------------------------------------------------------
 apiRoutes.use(function(req, res, next) {
 	// find the user
-	console.log(JSON.stringify(req.headers));
+	//console.log(JSON.stringify(req.headers));
 	User.findOne({
 		name: req.headers['name']
 	}, function(err, user) {

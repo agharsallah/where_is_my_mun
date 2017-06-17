@@ -1,7 +1,6 @@
 var axios = require('axios');
 var fs = require('fs');
 const path = require('path')
-
 fs.readdir('./polling', (err, files) => {
 //Loop through files and get file name 
   files.forEach(file => {
@@ -9,27 +8,26 @@ fs.readdir('./polling', (err, files) => {
     const delExtens=/(.*)\./g;
     const gouvernorate_name = delExtens.exec(file); //file name without extension
 
-    var qString="http://localhost:3000/addshape";
-
+    var qString="http://localhost:3000/addpolling";
+	var str = '';
     fs.readFile(dir, 'utf8', function(err, data) {
-    	 
-    	 axios({
-            method: 'post',
-            url: qString,
-			data: {
-    			name: gouvernorate_name[1],
-    			data: data
-  			}
-        })
+    	 str += data
+		axios({
+					method: 'post',
+					url: qString,
+					data: {
+						name: gouvernorate_name[1],
+						data: JSON.parse(str)
+					}
+        		}) 
 	    .then(response=>{
 	        //console.log(response.data.data)
-	                console.log('we posted data into db');
-	        }
+	                console.log(gouvernorate_name[1]+'posted data into db');
+	    }
 	    )
 	    .catch(function (error) {
-	        console.log(error);
+	        console.log("error");
 	    });
-
 	})
 
     
