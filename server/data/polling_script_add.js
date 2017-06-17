@@ -8,13 +8,17 @@ fs.readdir('./polling', (err, files) => {
     const delExtens=/(.*)\./g;
     const gouvernorate_name = delExtens.exec(file); //file name without extension
 
-    var qString="http://localhost:3000/addpolling";
+    var qString="http://localhost:3000/api/addpolling";
 	var str = '';
     fs.readFile(dir, 'utf8', function(err, data) {
     	 str += data
 		axios({
 					method: 'post',
 					url: qString,
+					headers: {
+                'name': 'Isie',
+                'password': 'Isie@ndDi'
+            },
 					data: {
 						name: gouvernorate_name[1],
 						data: JSON.parse(str)

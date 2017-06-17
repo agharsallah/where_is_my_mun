@@ -10,9 +10,12 @@ var cors     = require('cors');
 
 var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var config = require('./config'); // get our config file
+var router = require('./router'); // get our config file
+
 var User   = require('./app/models/user'); // get our mongoose model
 var Shape   = require('./app/models/shape'); // get our shape model
 var Polling   = require('./app/models/polling'); // get pollings model
+var Statistics   = require('./app/models/statistics'); // get Stat model
 
 // =================================================================
 // configuration ===================================================
@@ -33,7 +36,9 @@ app.use(morgan('dev'));
 // =================================================================
 // routes ==========================================================
 // =================================================================
-app.get('/setup', function(req, res) {
+
+/*Adding user *****DONE ONLY ONCE********* */
+/*app.get('/setup', function(req, res) {
 
 	// create a sample user
 	var nick = new User({ 
@@ -47,9 +52,10 @@ app.get('/setup', function(req, res) {
 		console.log('User saved successfully');
 		res.json({ success: true });
 	});
-});
+});*/
 
-app.post('/addshape', function(req, res) {
+/*Preparing Data for Map ******DONE ONLY ONCE*************/
+/*app.post('/addshape', function(req, res) {
 	var shape = new Shape();		// create a new instance of the Bear model
 		shape.name = req.body.name;  // set the bears name (comes from the request)
 		shape.data = req.body.data;  // set the bears name (comes from the request)
@@ -60,19 +66,12 @@ app.post('/addshape', function(req, res) {
 			res.json({ message: 'shape created!' });
 		});
 
-});
+});*/
 
-app.post('/addpolling', function(req, res) {
-	var polling = new Polling();		// create a new instance of the Bear model
-		polling.name = req.body.name;  // set the bears name (comes from the request)
-		polling.data = req.body.data;  // set the bears name (comes from the request)
-		polling.save(function(err) {
-			if (err)
-				res.send(err);
-			res.json( { message: req.body.name+' polling created!' } );
-		});
 
-});
+
+/*POSTING STATISTICS INTO THE DATABASE*/
+
 
 // ---------------------------------------------------------
 // get an instance of the router for api routes
@@ -113,28 +112,39 @@ apiRoutes.use(function(req, res, next) {
 	});
 	
 });
+router.default(app,apiRoutes);
 
 // ---------------------------------------------------------
 // authenticated routes
 // ---------------------------------------------------------
-apiRoutes.route('/isie/:gouv')
-
+/*Get Gouvernorates shape*/
+/*apiRoutes.route('/isie/:gouv')
 .get(function(req, res) {
 	Shape.findOne({name:req.params.gouv}, function(err, datashape) {
 			if (err)
 				res.send(err);
 			res.json(datashape);
 		});
-});
-
-apiRoutes.get('/polling/:gouv', function(req, res) {
+});*/
+/*Get Gouvernorates Polling*/
+/*apiRoutes.get('/polling/:gouv', function(req, res) {
 		Polling.findOne({name:req.params.gouv}, function(err, datashape) {
 			if (err)
 				res.send(err);
 			res.json(datashape);
 		});
-});
-app.use('/api', apiRoutes);
+});*/
+/*apiRoutes.post('/addpolling', function(req, res) {
+	var polling = new Polling();		// create a new instance of the Bear model
+		polling.name = req.body.name;  // set the bears name (comes from the request)
+		polling.data = req.body.data;  // set the bears name (comes from the request)
+		polling.save(function(err) {
+			if (err)
+				res.send(err);
+			res.json( { message: req.body.name+' polling created!' } );
+		});
+
+});*/
 
 // =================================================================
 // start the server ================================================

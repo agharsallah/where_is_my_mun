@@ -9,13 +9,17 @@ fs.readdir('./shapes', (err, files) => {
     const delExtens=/(.*)\./g;
     const gouvernorate_name = delExtens.exec(file); //file name without extension
 
-    var qString="http://localhost:3000/addshape";
+    var qString="http://localhost:3000/api/addshape";
 
     fs.readFile(dir, 'utf8', function(err, data) {
     	 
     	 axios({
             method: 'post',
             url: qString,
+			headers: {
+                'name': 'Isie',
+                'password': 'Isie@ndDi'
+            },
 			data: {
     			name: gouvernorate_name[1],
     			data: data
