@@ -52,15 +52,37 @@ class App extends Component {
         })
     .then(response=>{
         //console.log(response.data.data)
-                console.log('we got data frm db');
-                console.log(response);
+         console.log('we got shape data frm db');
+         console.log(response);
          this.props.getGouv(response.data.data)
          this.props.getGouvName(this.state.gouv)
         }
     )
     .catch(function (error) {
         console.log(error);
-    });           
+    });
+
+    console.log("request the db for polling ",this.state.gouv);
+    let qString2="http://localhost:3000/api/polling/"+this.state.gouv;
+        axios({
+            method: 'get',
+            url: qString2,
+            headers: {
+                'name': 'Isie',
+                'password': 'Isie@ndDi'
+            }
+        })
+    .then(response=>{
+         console.log('we got polling data frm db');
+         //console.log(response.data[0].data);
+         //console.log(typeof(response.data[0].data));
+         this.props.getGouvPolling(response.data[0].data)
+        }
+    )
+    .catch(function (error) {
+        console.log(error);
+    });
+
     }
 
     render() {

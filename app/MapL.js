@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
 import { Map,Marker, Popup, TileLayer, GeoJSON, FeatureGroup, Tooltip,LayersControl,Circle } from 'react-leaflet';
 const { BaseLayer, Overlay } = LayersControl;
-import { isEqual } from 'underscore'
+import { isEqual } from 'underscore';
 import PollingCenter from './PollingCenter' ;
 class MapL extends Component {
   constructor(props){
     super (props);
-    this.state=({shape:g_mun_shapes,center:[35.055360, 9.749795],zoom:7})
+    this.state=({shape:g_mun_shapes,center:[35.055360, 9.749795],zoom:7,polling:[]})
   }
 
-  
-/*  componentWillMount() {
-    console.log(this.props.shape);
-  }*/
-  
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps.polling);
     if (isEqual(nextProps.markerpos, [0, 0])) {
       //console.log(nextProps.shape);
-        this.setState({shape:JSON.parse(nextProps.shape)})
+        this.setState({shape:JSON.parse(nextProps.shape),polling:nextProps.polling})
     }else{
-     this.setState({center:nextProps.markerpos,zoom:13,shape:JSON.parse(nextProps.shape)});
+     this.setState({center:nextProps.markerpos,zoom:13,shape:JSON.parse(nextProps.shape),polling:nextProps.polling});
     }
 
   }
@@ -73,14 +69,16 @@ class MapL extends Component {
                             url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
                             />
                         </BaseLayer>
-                        
- {/* <LayersControl.Overlay name='Polling center'>
-    <FeatureGroup color='purple'>
-       {ArianaPolling.map(function(object, i){
-        return <PollingCenter lat={object.Latitude} lon={object.Longitude} title={object.Centre_de_vote} key={i} />;
-        })}
-    </FeatureGroup>
-  </LayersControl.Overlay>*/}
+                    </LayersControl>
+                    
+                    <LayersControl position="topleft" className="one">
+                       <LayersControl.Overlay name='Polling center'>
+                        <FeatureGroup color='purple'>
+                          {this.state.polling.map(function(object, i){
+                            return <PollingCenter lat={object.latitude} lon={object.longitude} title={object.center} key={i} />;
+                            })}
+                        </FeatureGroup>
+                      </LayersControl.Overlay>
                     </LayersControl>
                 </Map>
     );

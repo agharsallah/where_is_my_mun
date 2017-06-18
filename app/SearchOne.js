@@ -5,8 +5,7 @@ const _t = Translate.translate;
 
 class SearchOne extends Component {
     render() {
-              const test = <Translate type="text" content="Geocode.InputGuide"/>;
-              console.log(test);
+
         return (
             <div className="col-sm-12">
             <form className="form-inline" onSubmit={this.props.handleFormSubmit}>
