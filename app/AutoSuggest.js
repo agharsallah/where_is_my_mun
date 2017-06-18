@@ -55,6 +55,7 @@ class App extends Component {
                 console.log('we got data frm db');
                 console.log(response);
          this.props.getGouv(response.data.data)
+         this.props.getGouvName(this.state.gouv)
         }
     )
     .catch(function (error) {
@@ -108,7 +109,7 @@ class App extends Component {
       
     <div className="footer">
       <div className="footercontainer">
-              <a href='#'><img src="/img/ISIE.PNG" className="fa btn btn-space" alt="DI" height="80" width="150"/></a>
+              <a href='#'><img src="/img/ISIE.PNG" className="fa btn btn-space" alt="ISIE" height="80" width="150"/></a>
               
       </div>
     </div>

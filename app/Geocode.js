@@ -43,6 +43,33 @@ class Geocode extends Component {
             }
         }
     }
+    saveStat(address,geocodeService){
+    let qString="http://localhost:3000/api/addstat";
+    axios({
+        method: 'post',
+        url: qString,
+        headers: {
+            'name': 'Isie',
+            'password': 'Isie@ndDi'
+        },
+        data: {
+            city: this.props.gouvName,
+            searchedAdress: address ,
+            result: !this.state.isGeocodingError,
+            service: geocodeService ,
+            searchedTime: new Date
+		}
+    })
+    .then(response=>{
+        //console.log(response.data.data)
+        console.log('stat saved');
+        }
+    )
+    .catch(function (error) {
+        console.log(error);
+    });   
+
+    }
     geocodeAddress(address){
       this.geocoder.geocode({componentRestrictions: {country: 'TN'},'address': address }, function handleResults(results, status) {
         //console.log(results)
@@ -58,6 +85,8 @@ class Geocode extends Component {
                 foundAddress: null,
                 isGeocodingError: true
                 });
+            //Send stat to database
+            this.saveStat(address,'Google');
             }else{
                 this.setState({
                 foundAddress:MarkerLatLon,
@@ -65,12 +94,15 @@ class Geocode extends Component {
                 });
                 //console.log('Adress founded');
                 this.checkShape(MarkerLonLat)
+                //Send stat to database
+                this.saveStat(address,'Google')
             }
         }else{
           this.setState({
           foundAddress: null,
           isGeocodingError: true
         });
+        this.saveStat(address,'Google')
         }
       
     }.bind(this));
@@ -95,12 +127,14 @@ class Geocode extends Component {
                         foundAddress:MarkerLatLon,
                         isGeocodingError: false
                     });
-                    this.checkShape(MarkerLonLat)
+                    this.checkShape(MarkerLonLat);
+                    this.saveStat(address,'OSM')
                  }else{
                     this.setState({
                     foundAddress: null,
                     isGeocodingError: true
                     }); 
+                    this.saveStat(address,'OSM')
                  }
                  
             }
@@ -153,7 +187,9 @@ class Geocode extends Component {
             <div className="row">
                 <div className="col-sm-12">
                     {this.state.isGeocodingError ? <p className="bg-danger">{_t('Geocode.InavailableInfo')}</p> :
-                        (this.state.translation ?<h4 className="bg-info">{_t('Geocode.AvailableInfo')}{this.state.munname}{_t('Geocode.AvailableInfo2')}{this.state.governorate}{_t('Geocode.AvailableInfoar')}</h4>:<h4 className="bg-info">{_t('Geocode.AvailableInfo0')}</h4>)}
+                        (this.state.translation ?
+                        <h4 className="bg-info">{_t('Geocode.AvailableInfo')}{this.state.munname}{_t('Geocode.AvailableInfo2')}{this.state.governorate}{_t('Geocode.AvailableInfoar')}</h4>
+                        :<h4 className="bg-info">{_t('Geocode.AvailableInfo0')}</h4>)}
                     <div className="map two-elm-container">
                         <MapL key={this.props.key} shape={this.props.shape} markerpos={this.state.foundAddress}/>
                         <RaisedButton onTouchTap={this.handleBackClick.bind(this)} className="one"  label={_t('Geocode.BackButton')}  />

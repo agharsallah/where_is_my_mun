@@ -37,45 +37,6 @@ app.use(morgan('dev'));
 // routes ==========================================================
 // =================================================================
 
-/*Adding user *****DONE ONLY ONCE********* */
-/*app.get('/setup', function(req, res) {
-
-	// create a sample user
-	var nick = new User({ 
-		name: 'Isie', 
-		password: 'Isie@ndDi',
-		admin: true 
-	});
-	nick.save(function(err) {
-		if (err) throw err;
-
-		console.log('User saved successfully');
-		res.json({ success: true });
-	});
-});*/
-
-/*Preparing Data for Map ******DONE ONLY ONCE*************/
-/*app.post('/addshape', function(req, res) {
-	var shape = new Shape();		// create a new instance of the Bear model
-		shape.name = req.body.name;  // set the bears name (comes from the request)
-		shape.data = req.body.data;  // set the bears name (comes from the request)
-
-		shape.save(function(err) {
-			if (err)
-				res.send(err);
-			res.json({ message: 'shape created!' });
-		});
-
-});*/
-
-
-
-/*POSTING STATISTICS INTO THE DATABASE*/
-
-
-// ---------------------------------------------------------
-// get an instance of the router for api routes
-// ---------------------------------------------------------
 var apiRoutes = express.Router(); 
 
 // ---------------------------------------------------------
@@ -112,39 +73,8 @@ apiRoutes.use(function(req, res, next) {
 	});
 	
 });
+
 router.default(app,apiRoutes);
-
-// ---------------------------------------------------------
-// authenticated routes
-// ---------------------------------------------------------
-/*Get Gouvernorates shape*/
-/*apiRoutes.route('/isie/:gouv')
-.get(function(req, res) {
-	Shape.findOne({name:req.params.gouv}, function(err, datashape) {
-			if (err)
-				res.send(err);
-			res.json(datashape);
-		});
-});*/
-/*Get Gouvernorates Polling*/
-/*apiRoutes.get('/polling/:gouv', function(req, res) {
-		Polling.findOne({name:req.params.gouv}, function(err, datashape) {
-			if (err)
-				res.send(err);
-			res.json(datashape);
-		});
-});*/
-/*apiRoutes.post('/addpolling', function(req, res) {
-	var polling = new Polling();		// create a new instance of the Bear model
-		polling.name = req.body.name;  // set the bears name (comes from the request)
-		polling.data = req.body.data;  // set the bears name (comes from the request)
-		polling.save(function(err) {
-			if (err)
-				res.send(err);
-			res.json( { message: req.body.name+' polling created!' } );
-		});
-
-});*/
 
 // =================================================================
 // start the server ================================================

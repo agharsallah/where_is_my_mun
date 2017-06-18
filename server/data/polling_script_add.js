@@ -26,7 +26,7 @@ fs.readdir('./polling', (err, files) => {
         		}) 
 	    .then(response=>{
 	        //console.log(response.data.data)
-	                console.log(gouvernorate_name[1]+'posted data into db');
+	        console.log(gouvernorate_name[1]+'posted data into db');
 	    }
 	    )
 	    .catch(function (error) {
