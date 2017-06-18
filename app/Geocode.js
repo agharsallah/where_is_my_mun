@@ -193,8 +193,7 @@ class Geocode extends Component {
                     <div className="map two-elm-container">
                         <MapL key={this.props.key} shape={this.props.shape} markerpos={this.state.foundAddress} polling={this.props.polling}/>
                         <RaisedButton onTouchTap={this.handleBackClick.bind(this)} className="one"  label={_t('Geocode.BackButton')}  />
-                         
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>

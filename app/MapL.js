@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Map,Marker, Popup, TileLayer, GeoJSON, FeatureGroup, Tooltip,LayersControl,Circle } from 'react-leaflet';
 const { BaseLayer, Overlay } = LayersControl;
 import { isEqual } from 'underscore';
-import PollingCenter from './PollingCenter' ;
+import PollingCenter from './PollingCenter' ; 
+import PollingFilter from './PollingFilter' ;
+
 class MapL extends Component {
   constructor(props){
     super (props);
@@ -18,6 +20,10 @@ class MapL extends Component {
      this.setState({center:nextProps.markerpos,zoom:13,shape:JSON.parse(nextProps.shape),polling:nextProps.polling});
     }
 
+  }
+  setZoom(value){
+    let center=value.split(";")
+    this.setState({center:[center[0],center[1]],zoom:13});
   }
   style(feature) {
      return {
@@ -39,7 +45,9 @@ class MapL extends Component {
     }
     
     return (
- <Map  id='map' ref='map' maxZoom={23}  flyTo={true} center ={this.state.center} zoom={this.state.zoom} className="initialposition two " style={{height:550,position:"relative",zIndex:0}}>
+      <div>
+      <PollingFilter polling={this.props.polling} setZoom={this.setZoom.bind(this)} />
+      <Map  id='map' ref='map' maxZoom={23}  flyTo={true} center ={this.state.center} zoom={this.state.zoom} className="initialposition two " style={{height:550,position:"relative",zIndex:0}}>
                     <TileLayer
                     url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -71,8 +79,8 @@ class MapL extends Component {
                         </BaseLayer>
                     </LayersControl>
                     
-                    <LayersControl position="topleft" className="one">
-                       <LayersControl.Overlay name='Polling center'>
+                    <LayersControl position="topleft" className="one" collapsed={false}>
+                       <LayersControl.Overlay name='Polling center' >
                         <FeatureGroup color='purple'>
                           {this.state.polling.map(function(object, i){
                             return <PollingCenter lat={object.latitude} lon={object.longitude} title={object.center} key={i} />;
@@ -81,6 +89,7 @@ class MapL extends Component {
                       </LayersControl.Overlay>
                     </LayersControl>
                 </Map>
+        </div>
     );
   }
 }
