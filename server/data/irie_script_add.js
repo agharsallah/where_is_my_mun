@@ -1,6 +1,7 @@
 var axios = require('axios');
 var fs = require('fs');
 var Irie= require('./Irie/Irie.json')
+//map through thee Irie Array Object
 for (var i = 0; i < Irie.length; i++) {
 		var qString="http://localhost:3000/api/addirie";
 			axios({

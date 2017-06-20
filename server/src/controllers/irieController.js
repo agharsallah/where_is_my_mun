@@ -15,7 +15,7 @@ export const getAllIrie = (req, res, next) => {
   Irie.find({}, function(err, datashape) {
 			if (err) { return next(err); }
 
-			res.json(datashape);
+			console.log(datashape); res.json(datashape);
 		});
 };
 export const postIrie = (req, res, next) => {

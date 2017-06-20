@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Map, Popup, TileLayer, GeoJSON, FeatureGroup, Tooltip,LayersControl } from 'react-leaflet';
 import axios from 'axios' ;
-import PollingCenter from '../PollingCenter' ; 
+import IrieMarker from './IrieMarker' ; 
 
 class StatMap extends Component {
     constructor(props){
@@ -30,7 +30,7 @@ class StatMap extends Component {
         console.log(error);
     });
 
-    let qString2="http://localhost:3000/api/polling/Ariana";
+    let qString2="http://localhost:3000/api/iries/";
         axios({
             method: 'get',
             url: qString2,
@@ -41,9 +41,9 @@ class StatMap extends Component {
         })
     .then(response=>{
          console.log('we got polling data frm db');
-         //console.log(response.data[0].data);
-         //console.log(typeof(response.data[0].data));
-         this.setState({Irie:response.data[0].data});
+         console.log(response.data);
+         console.log(typeof(response.data.data));
+         this.setState({Irie:response.data});
         }
     )
     .catch(function (error) {
@@ -118,7 +118,9 @@ class StatMap extends Component {
                     {this.props.checkedIrieButton?
                          <FeatureGroup color='purple'>
                           {this.state.Irie.map(function(object, i){
-                            return <PollingCenter lat={object.latitude} lon={object.longitude} title={object.center} key={i} />;
+                              console.log(object.latlon);
+                              console.log(object);
+                            return <IrieMarker latlon={object.data.latlon}  title={object.data.city_en} key={i} />;
                             })}
                         </FeatureGroup>:
                         <div/>
