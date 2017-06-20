@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Map, Popup, TileLayer, GeoJSON, FeatureGroup, Tooltip,LayersControl } from 'react-leaflet';
 import axios from 'axios' ;
+import PollingCenter from '../PollingCenter' ; 
 
 class StatMap extends Component {
     constructor(props){
         super(props);
-        this.state={feature:"",shape:g_mun_shapes,key:1}
+        this.state={feature:"",shape:g_mun_shapes,key:1,Irie:[]}
     }
     
     componentWillMount() {
@@ -23,6 +24,26 @@ class StatMap extends Component {
          console.log('we got shape data frm db');
          console.log(response);
          this.setState({shape:JSON.parse(response.data.data),key:2});
+        }
+    )
+    .catch(function (error) {
+        console.log(error);
+    });
+
+    let qString2="http://localhost:3000/api/polling/Ariana";
+        axios({
+            method: 'get',
+            url: qString2,
+            headers: {
+                'name': 'Isie',
+                'password': 'Isie@ndDi'
+            }
+        })
+    .then(response=>{
+         console.log('we got polling data frm db');
+         //console.log(response.data[0].data);
+         //console.log(typeof(response.data[0].data));
+         this.setState({Irie:response.data[0].data});
         }
     )
     .catch(function (error) {
@@ -75,6 +96,16 @@ class StatMap extends Component {
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     />
                     <GeoJSON
+                    key={"a"+this.state.key}
+                    data= {this.state.shape}
+                    style={this.style.bind(this)} 
+                    onEachFeature={
+                        (feature, layer) => {
+                            layer.bindTooltip(feature.properties.LABEL,{ permanent: false,className:"tooltipnamear",direction:"center" })
+                      }    
+                    }
+                    />
+                    <GeoJSON
                     key={this.state.key}
                     data= {this.state.shape}
                     style={this.style.bind(this)} 
@@ -84,6 +115,14 @@ class StatMap extends Component {
                       }    
                     }
                     />
+                    {this.props.checkedIrieButton?
+                         <FeatureGroup color='purple'>
+                          {this.state.Irie.map(function(object, i){
+                            return <PollingCenter lat={object.latitude} lon={object.longitude} title={object.center} key={i} />;
+                            })}
+                        </FeatureGroup>:
+                        <div/>
+                    }
                 </Map>
 
         );

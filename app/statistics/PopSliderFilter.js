@@ -6,18 +6,19 @@ class PopSliderFilter extends Component {
     constructor(props) {
             super(props);
             this.state = {
-                value: { min: 0, max: 5 },
+                value: { min: 10000, max: 30000 },
             };
     }
  
-    handleChange (event, index, value) {this.props.getclickedbutton(value);this.setState({value})}
+    //handleChange (event, index, value) {this.props.getclickedbutton(value);this.setState({value})}
     
     render() {
         return (
                 <InputRange
-                    maxValue={20}
-                    minValue={0}
-                    step={5}
+                    style={{fontSize:"1rem !important"}}
+                    maxValue={200000}
+                    minValue={10000}
+                    step={10000}
                     value={this.state.value}
                     onChange={value => {this.setState({ value });this.props.getPopSlider(value)}} />  
         );

@@ -1,3 +1,11 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+html, body, #statmapmap {
+    height: 100vh;
+    width: 100vw;
+}
 .form-inline {
         margin: 20px 0;
       }
@@ -35,8 +43,16 @@
           left:10px;
           top:130px;
           z-index:2;
-            width: 15%;
+          width: 27%;
       }
+      .oneDrawerButton{
+         position:absolute;
+          left:10px;
+          top:90vh;
+          z-index:2;
+          width: 10%;
+      }
+
       .two{
           position:absolute;
           top:0;
@@ -46,6 +62,7 @@
       .two-elm-container{
         position: relative;
       }
+
       /*two layers ontop of eachother*/
     .container_row {
         height: auto;
@@ -130,4 +147,12 @@ cursor: auto;
 font-family: Helvetica;
 font-size: 11pt;
 z-index: 1;
+}
+/*Slider React*/
+
+.input-range__label{
+  font-size: 1.1rem !important
+}
+.input-range__label--value { 
+  top: -2.3rem !important
 }
