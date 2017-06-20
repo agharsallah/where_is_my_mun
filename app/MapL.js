@@ -4,6 +4,9 @@ const { BaseLayer, Overlay } = LayersControl;
 import { isEqual } from 'underscore';
 import PollingCenter from './PollingCenter' ; 
 import PollingFilter from './PollingFilter' ;
+import counterpart  from 'counterpart';
+import Translate    from 'react-translate-component';
+const _t = Translate.translate;
 
 class MapL extends Component {
   constructor(props){
@@ -23,7 +26,7 @@ class MapL extends Component {
   }
   setZoom(value){
     let center=value.split(";")
-    this.setState({center:[center[0],center[1]],zoom:13});
+    this.setState({center:[center[0],center[1]],zoom:16});
   }
   style(feature) {
      return {
@@ -80,7 +83,7 @@ class MapL extends Component {
                     </LayersControl>
                     
                     <LayersControl position="topleft" className="one" collapsed={false}>
-                       <LayersControl.Overlay name='Polling center' >
+                       <LayersControl.Overlay name= 'polling center' >
                         <FeatureGroup color='purple'>
                           {this.state.polling.map(function(object, i){
                             return <PollingCenter lat={object.latitude} lon={object.longitude} title={object.center} key={i} />;

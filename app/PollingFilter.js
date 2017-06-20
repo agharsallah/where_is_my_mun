@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import counterpart  from 'counterpart';
+import Translate    from 'react-translate-component';
+const _t = Translate.translate;
 
 class PollingFilter extends Component {
     constructor(props){
@@ -26,8 +29,9 @@ class PollingFilter extends Component {
         return (
             <div className='pollingfilter'>
              <Select
- clearable="false"
+ clearable={false}
   name="form-field-name"
+  placeholder={_t('filter.placeholder')}
   value={this.state.value}
   options={options}
   onChange={this.logChange.bind(this)}

@@ -16,5 +16,12 @@
     InavailableInfo:'désolé impossible de trouver l\'adresse, veuillez écrire d\'une autre façon ou essayer un autre service(open street map..)',
     BackButton:'Retour',
     PollingLayer:'Polling Station'
+ },
+  filter: {
+    placeholder:'vérifier le carreau au dessus et choisir le CV',
+ },
+  statDrawer: {
+     open: "ouvrir filtre" ,
+     menu:"menu"
  }
 }

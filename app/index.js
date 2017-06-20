@@ -5,16 +5,16 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import App from "./App.js"
-import Geocode from "./Geocode.js"
+import RootMap from "./statistics/RootMap.js"
 injectTapEventPlugin();
 
 
 ReactDOM.render(
     <MuiThemeProvider>
     <Router history={browserHistory}>
-        <Route  path="/" component={App}> 
-        <Route path="/geocode" component={Geocode}/> 
-        </Route>
+        <Route  path="/" component={App}/> 
+        <Route path="/statistics" component={RootMap}/> 
+
     </Router>
     </MuiThemeProvider>,
      document.getElementById('root')

@@ -161,7 +161,7 @@ class Geocode extends Component {
 
     setSearchInputElement(inputReference){
         this.searchInputElement = inputReference;
-        //console.log(inputReference);
+    console.log(inputReference);
     }
 
     handleBackClick(){

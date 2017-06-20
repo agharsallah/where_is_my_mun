@@ -16,5 +16,12 @@ module.exports = {
     InavailableInfo:'adress inavailable',
     BackButton:'Back',
     PollingLayer:'Polling Station'
+ },
+ filter: {
+    placeholder:'Check the box above & Select your PC',
+ },
+  statDrawer: {
+     open: "Open filter" ,
+     menu:"Menu"
  }
 }
