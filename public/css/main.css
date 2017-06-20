@@ -156,3 +156,28 @@ z-index: 1;
 .input-range__label--value { 
   top: -2.3rem !important
 }
+/*style popu*/
+.popupinfo{
+  height:11rem !important;
+}
+/*POPUPSTYLE*/
+/*two blocks ontop of eachother*/
+#container1, #container2 {
+    padding: 0 0 0 ;
+    width: 100%;
+}
+.blockright {
+    width: 45%;
+    position: relative;
+    display:inline-block;
+    
+}
+.blockleft {
+    width: 30%;
+    position: relative;
+    display:inline-block;
+}
+.centerName{
+  margin-left: 100px
+
+}

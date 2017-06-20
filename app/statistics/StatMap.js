@@ -120,7 +120,7 @@ class StatMap extends Component {
                           {this.state.Irie.map(function(object, i){
                               console.log(object.latlon);
                               console.log(object);
-                            return <IrieMarker latlon={object.data.latlon}  title={object.data.city_en} key={i} />;
+                            return <IrieMarker data={object.data}  title={object.data.city_en} key={i} />;
                             })}
                         </FeatureGroup>:
                         <div/>
