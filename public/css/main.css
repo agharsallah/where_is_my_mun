@@ -178,5 +178,19 @@ z-index: 1;
 }
 .centerName{
   margin-left: 50px
-
+}
+/*square brew*/
+.square {
+	width: 24px;
+	height: 24px;
+    float:left;
+    margin-left: 1px;
+        border: 1px solid;    
+        stroke: #333;
+    stroke-width: .5px;
+   }
+#squareBrew{
+    margin-top: 15px;
+    display: flex;
+    margin-left: 12%;
 }

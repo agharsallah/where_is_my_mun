@@ -41,8 +41,6 @@ class StatMap extends Component {
         })
     .then(response=>{
          console.log('we got polling data frm db');
-         console.log(response.data);
-         console.log(typeof(response.data.data));
          this.setState({Irie:response.data});
         }
     )
@@ -52,16 +50,16 @@ class StatMap extends Component {
     
 }
     
-     getColor(d) {
-	    return d > 30000 ? 'green' :
-	           d > 20000  ? 'red' :
-	           d > 15000  ? '#81D4FA' :
-	           d > 10000  ? 'blue' :
-	           d == 'norange'? '#FFFFFF' :
-	                      '#B2DFDB';
+     getColor(d,c1) {
+        if      (d > 60000)      {return (c1[5]); }
+        else if (d > 40000)      {return (c1[4]);}
+        else if (d>30000)        {return (c1[3]);}
+        else if (d>20000)        {return (c1[2]);}
+        else if (d>10000)        {return (c1[1]);}
+        else if (isNaN(d))    {return ('white')}
+        else                  {return (c1[0]);}
 	}
     style(feature) {
-        console.log("ATTENTION",this.props.SliderValues);
         const slider = this.props.SliderValues;
         if ((feature.properties.POP>=slider.min)&&(feature.properties.POP<=slider.max)) {
             var POPULATION = feature.properties.POP;
@@ -69,14 +67,15 @@ class StatMap extends Component {
         if ((slider.min==10000)&&(feature.properties.POP<10000)) {
             var POPULATION = feature.properties.POP; 
         }
-        if ((slider.max==200000)&&(feature.properties.POP>200000)) {
+        if ((slider.max==90000)&&(feature.properties.POP>90000)) {
             var POPULATION = feature.properties.POP; 
         }
         
 	    return {
-            fillColor: this.getColor(POPULATION),
+            fillColor: this.getColor(POPULATION,this.props.GetSelectedSets),
             color: 'black',
-            weight: 2
+            weight: 2,
+            fillOpacity: 0.8
 	    };
 	}
     highlightFeature(e) {
