@@ -53,17 +53,30 @@ class StatMap extends Component {
 }
     
      getColor(d) {
-	    return d > 30 ? '#000000' :
-	           d > 20  ? '#2c7fb8' :
-	           d > 18  ? '#81D4FA' :
-	           d > 12  ? '#B3E5FC' :
-	           d == 'inexistant'? '#FFFFFF' :
+	    return d > 30000 ? 'green' :
+	           d > 20000  ? 'red' :
+	           d > 15000  ? '#81D4FA' :
+	           d > 10000  ? 'blue' :
+	           d == 'norange'? '#FFFFFF' :
 	                      '#B2DFDB';
 	}
     style(feature) {
+        console.log("ATTENTION",this.props.SliderValues);
+        const slider = this.props.SliderValues;
+        if ((feature.properties.POP>=slider.min)&&(feature.properties.POP<=slider.max)) {
+            var POPULATION = feature.properties.POP;
+        }else {var POPULATION = "norange";}
+        if ((slider.min==10000)&&(feature.properties.POP<10000)) {
+            var POPULATION = feature.properties.POP; 
+        }
+        if ((slider.max==200000)&&(feature.properties.POP>200000)) {
+            var POPULATION = feature.properties.POP; 
+        }
+        
 	    return {
-	       fillColor: '#cadfae',
-            color: 'black',weight: 2,
+            fillColor: this.getColor(POPULATION),
+            color: 'black',
+            weight: 2
 	    };
 	}
     highlightFeature(e) {
@@ -105,22 +118,13 @@ class StatMap extends Component {
                       }    
                     }
                     />
-                    <GeoJSON
-                    key={this.state.key}
-                    data= {this.state.shape}
-                    style={this.style.bind(this)} 
-                    onEachFeature={
-                        (feature, layer) => {
-                            layer.bindTooltip(feature.properties.LABEL,{ permanent: false,className:"tooltipnamear",direction:"center" })
-                      }    
-                    }
-                    />
+
                     {this.props.checkedIrieButton?
                          <FeatureGroup color='purple'>
                           {this.state.Irie.map(function(object, i){
                               console.log(object.latlon);
                               console.log(object);
-                            return <IrieMarker data={object.data}  title={object.data.city_en} key={i} />;
+                            return <IrieMarker data={object.data} key={i} />;
                             })}
                         </FeatureGroup>:
                         <div/>

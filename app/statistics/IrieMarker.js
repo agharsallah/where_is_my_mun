@@ -11,7 +11,7 @@ class IrieMarker extends Component {
                 <Marker position={JSON.parse("[" + this.props.data.latlon + "]")} icon={polling} >
                 <Popup minWidth={250} >
                 <div className="popupinfo">
-                <h4 className="centerName" >{this.props.data.city}</h4>
+                <h4 className="centerName" >{this.props.data.city} _ {this.props.data.city_en}</h4>
                 <div id="container1" >
                  <img className="blockleft" src="/img/mobile-phone.svg" width="25px" height='25px' alt='phone img'  />
                  <h4  className="blockright" dir="rtl" >{phone}</h4>

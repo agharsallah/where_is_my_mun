@@ -8,11 +8,11 @@ import Translate    from 'react-translate-component';
 class RootMap extends Component {
     constructor(props) {
         super(props);
-        this.state = {buttonclicked:"all",checkedIrieButton:false};
+        this.state = {SliderValues:{min:10000,max:20000},checkedIrieButton:false};
     }
     getPopSlider(val) {
         console.log(val);
-        this.setState({buttonclicked:val});
+        this.setState({SliderValues:val});
     }
     getIrieButton(val) {
         this.setState({checkedIrieButton:!this.state.checkedIrieButton});
@@ -20,7 +20,7 @@ class RootMap extends Component {
     render() {
         return (
             <div>
-                <StatMap selectedMarker={this.state.buttonclicked} checkedIrieButton={this.state.checkedIrieButton} />
+                <StatMap SliderValues={this.state.SliderValues} checkedIrieButton={this.state.checkedIrieButton} />
                 <MenuDrawer getPopSlider={this.getPopSlider.bind(this)} getIrieButton={this.getIrieButton.bind(this)} />
             </div>
         );

@@ -170,7 +170,6 @@ z-index: 1;
     width: 45%;
     position: relative;
     display:inline-block;
-    
 }
 .blockleft {
     width: 30%;
@@ -178,6 +177,6 @@ z-index: 1;
     display:inline-block;
 }
 .centerName{
-  margin-left: 100px
+  margin-left: 50px
 
 }
