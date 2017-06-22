@@ -5,6 +5,7 @@ import SearchOne from './SearchOne' ;
 import RaisedButton from 'material-ui/RaisedButton';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import GeoRadioButton from './GeoRadioButton' ;
+import Demo from './Demo.js' ;
 import axios from 'axios' ;
 import counterpart  from 'counterpart';
 import Translate    from 'react-translate-component';
@@ -13,8 +14,9 @@ const _t = Translate.translate;
 class Geocode extends Component {
     constructor(props){
         super(props);
-        this.state=({isGeocodingError:false,GeocodeOption:'Google',foundAddress:[0, 0],governorate:'',munname:"Type an address Or a known place next to the Citizen's home",translation:false})
+        this.state=({isGeocodingError:false,GeocodeOption:'Google',foundAddress:[0, 0],governorate:'',munname:"Type an address Or a known place next to the Citizen's home",translation:false,GeolocationClicked:false})
         this.geocodeAddress=this.geocodeAddress.bind(this);
+        this.geocodePosition=this.geocodePosition.bind(this)
     }
 
     
@@ -115,11 +117,11 @@ class Geocode extends Component {
             })
         .then(response=>{
             //console.log(response.data.data)
-                    console.log('we got data frm Nomination');
-                    console.log(response.data.length>0);
+                    //console.log('we got data frm Nomination');
+                    //console.log(response.data.length>0);
                  if (response.data.length>0) {
                     const lat = response.data[0].lat;
-                    console.log(lat);
+                    //console.log(lat);
                     const lon = response.data[0].lon
                     const MarkerLatLon=[lat,lon];
                     const MarkerLonLat=[lon, lat];
@@ -168,7 +170,36 @@ class Geocode extends Component {
         this.props.BackToSelect();
     }
 
-    handleGeocoderOption(event){
+    //function trigered when user wantes to know his location
+    geocodePosition(e){
+        const MarkerLonLat=[e.coords.longitude,e.coords.latitude];
+    const MarkerLatLon=[e.coords.latitude,e.coords.longitude];
+    this.setState({
+            foundAddress:MarkerLatLon,
+            isGeocodingError: false
+        });
+    this.checkShape(MarkerLonLat)
+    }
+    handleGeoLocatio(){
+        //this.setState({GeolocationClicked:true});
+         if (navigator.geolocation)
+  {
+    console.log("navigator.geolocation is supported");
+    navigator.geolocation.getCurrentPosition(this.geocodePosition);
+
+  }
+  else
+  {
+    console.log("navigator.geolocation not supported");
+  }
+
+
+function onError(error){
+    console.log(error.code)
+}
+    }
+    //function for the radio button, determine which service to use Google or OSM
+    GeolocationClicked(event){
         console.log(event.target.value);
         this.setState({GeocodeOption:event.target.value});
     }
@@ -181,7 +212,7 @@ class Geocode extends Component {
             </div>
             
             <div >
-            <GeoRadioButton handleGeocoderOption={this.handleGeocoderOption.bind(this)}/>
+            <GeoRadioButton GeolocationClicked={this.GeolocationClicked.bind(this)}/>
             </div>
             
             <div className="row">
@@ -193,6 +224,7 @@ class Geocode extends Component {
                     <div className="map two-elm-container">
                         <MapL key={this.props.key} shape={this.props.shape} markerpos={this.state.foundAddress} polling={this.props.polling}/>
                         <RaisedButton onTouchTap={this.handleBackClick.bind(this)} className="one"  label={_t('Geocode.BackButton')}  />
+                        <RaisedButton onTouchTap={this.handleGeoLocatio.bind(this)} className="oneGeoLocation"  label={_t('Geocode.WhereAmI')}  />
                     </div>
                 </div>
             </div>

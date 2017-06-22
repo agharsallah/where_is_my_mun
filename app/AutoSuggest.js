@@ -105,7 +105,9 @@ class App extends Component {
    
 				<div className="col-md-8 col-md-offset-2 text-center gtco-heading">
 					<h2>{_t('AutoSuggest.Title')}</h2>
-					<p>{_t('AutoSuggest.SubTitle')}</p>
+					<p style={{color:'#00267f'}}>{_t('AutoSuggest.sub1')}</p>
+					<p style={{color:'#00267f'}} >{_t('AutoSuggest.sub2')}</p>
+					<p style={{color:'red',fontSize:"17px"}}>{_t('AutoSuggest.rk1')}</p>
 				</div>
 			</div>
     <div className="col-md-12">
@@ -131,7 +133,6 @@ class App extends Component {
       
     <div className="footer">
       <div className="footercontainer">
-              <a href='#'><img src="/img/ISIE.PNG" className="fa btn btn-space" alt="ISIE" height="80" width="150"/></a>
               
       </div>
     </div>
