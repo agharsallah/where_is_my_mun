@@ -38,7 +38,7 @@ class ColorBrew extends Component {
     
         return (
             <div className="yeartoggle" style={{ left: "1%",top: "40%"}}>
-              <RaisedButton label="Change Color" onTouchTap={this.handleOpen.bind(this)} icon={<ActionAutorenew />}/>
+              <RaisedButton label="Change Map Color" onTouchTap={this.handleOpen.bind(this)} icon={<ActionAutorenew />}/>
         <Dialog
           title="Choose color sets "
           actions={actions}

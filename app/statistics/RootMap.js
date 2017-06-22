@@ -21,14 +21,18 @@ class RootMap extends Component {
     getIrieButton(val) {
         this.setState({checkedIrieButton:!this.state.checkedIrieButton});
     }
-    
-    GetSelectedSets(e){this.setState({sets:e});console.log(e);}
+    getChoroplethColors(sets) {
+        this.setState({sets})
+    }
     render() {
         return (
             <div>
-                <ColorBrew GetSelectedSets={this.GetSelectedSets.bind(this)}/>
                 <StatMap SliderValues={this.state.SliderValues} checkedIrieButton={this.state.checkedIrieButton} GetSelectedSets={this.state.sets}/>            
-                <MenuDrawer getPopSlider={this.getPopSlider.bind(this)} getIrieButton={this.getIrieButton.bind(this)} />
+                <MenuDrawer 
+                 getPopSlider={this.getPopSlider.bind(this)}
+                 getIrieButton={this.getIrieButton.bind(this)}
+                 getChoroplethColors={this.getChoroplethColors.bind(this)} 
+                />
             </div>
         );
     }
