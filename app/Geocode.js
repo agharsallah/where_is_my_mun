@@ -5,7 +5,6 @@ import SearchOne from './SearchOne' ;
 import RaisedButton from 'material-ui/RaisedButton';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import GeoRadioButton from './GeoRadioButton' ;
-import Demo from './Demo.js' ;
 import axios from 'axios' ;
 import counterpart  from 'counterpart';
 import Translate    from 'react-translate-component';
@@ -173,36 +172,37 @@ class Geocode extends Component {
     //function trigered when user wantes to know his location
     geocodePosition(e){
         const MarkerLonLat=[e.coords.longitude,e.coords.latitude];
-    const MarkerLatLon=[e.coords.latitude,e.coords.longitude];
-    this.setState({
+        const MarkerLatLon=[e.coords.latitude,e.coords.longitude];
+        this.setState({
             foundAddress:MarkerLatLon,
             isGeocodingError: false
         });
-    this.checkShape(MarkerLonLat)
+        this.checkShape(MarkerLonLat)
     }
     handleGeoLocatio(){
         //this.setState({GeolocationClicked:true});
-         if (navigator.geolocation)
-  {
-    console.log("navigator.geolocation is supported");
-    navigator.geolocation.getCurrentPosition(this.geocodePosition);
+        if (navigator.geolocation)
+        {
+            console.log("navigator.geolocation is supported");
+            navigator.geolocation.getCurrentPosition(this.geocodePosition);
 
-  }
-  else
-  {
-    console.log("navigator.geolocation not supported");
-  }
+        }
+        else
+        {
+            console.log("navigator.geolocation not supported");
+        }
 
-
-function onError(error){
-    console.log(error.code)
-}
+        function onError(error){
+            console.log(error.code)
+        }
     }
+    
     //function for the radio button, determine which service to use Google or OSM
     GeolocationClicked(event){
         console.log(event.target.value);
         this.setState({GeocodeOption:event.target.value});
     }
+
     render() {
         return (
         <div className="container">
@@ -223,8 +223,8 @@ function onError(error){
                         :<h4 className="bg-info">{_t('Geocode.AvailableInfo0')}</h4>)}
                     <div className="map two-elm-container">
                         <MapL key={this.props.key} shape={this.props.shape} markerpos={this.state.foundAddress} polling={this.props.polling}/>
-                        <RaisedButton onTouchTap={this.handleBackClick.bind(this)} className="one"  label={_t('Geocode.BackButton')}  />
                         <RaisedButton onTouchTap={this.handleGeoLocatio.bind(this)} className="oneGeoLocation"  label={_t('Geocode.WhereAmI')}  />
+                        <RaisedButton onTouchTap={this.handleBackClick.bind(this)} className="one"  label={_t('Geocode.BackButton')}  />
                     </div>
                 </div>
             </div>

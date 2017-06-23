@@ -47,6 +47,8 @@ class MapL extends Component {
       var shape =this.props.shape
     }
     
+    const pin = L.icon({iconUrl: '/img/pin.svg',iconSize: [50, 50],iconAnchor: [40, 40]});
+
     return (
       <div>
       <PollingFilter polling={this.props.polling} setZoom={this.setZoom.bind(this)} />
@@ -56,7 +58,7 @@ class MapL extends Component {
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     />
                     
-                    <Marker position= {this.props.markerpos}/>
+                    <Marker position= {this.props.markerpos} icon={pin} />
                     <GeoJSON
                     key={this.props.key}
                     data= {shape}

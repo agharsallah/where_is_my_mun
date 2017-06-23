@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import AutoComplete from 'material-ui/AutoComplete';
+//import AutoComplete from 'material-ui/AutoComplete';
+import Select from 'react-select';
 import RaisedButton from 'material-ui/RaisedButton';
 import axios from 'axios' ;
 import { indexOf } from 'underscore';
@@ -11,7 +12,6 @@ const _t = Translate.translate;
 counterpart.registerTranslations('en',require('./../locales/en'));
 counterpart.registerTranslations('fr',require('./../locales/fr'));
 counterpart.registerTranslations('ar',require('./../locales/ar'));
-const gouvernorates =["Ariana","Beja","BenArous","Bizerte","Gabes","Gafsa","Jendouba","Kairouan","Kasserine","Kebili","Mannouba","Kef","Mahdia","Medenine","Monastir","Nabeul","Sfax","SidiBouzid","Siliana","Sousse","Tataouine","Tozeur","Tunis","Zaghouan"]
 
 class App extends Component {
     
@@ -28,15 +28,6 @@ class App extends Component {
         counterpart.setLocale(e.target.dataset.value)
     }
     ChosenGouv(chosenRequest){
- 
-        this.setState({gouv:chosenRequest});
-        console.log(chosenRequest);
-        if (indexOf(gouvernorates, chosenRequest)!=-1) {
-            this.setState({disabled:false});
-        }else{
-         this.setState({disabled:true});   
-        }
-        
     }
     handleClick(){
         //send value from the input to parent
@@ -86,56 +77,57 @@ class App extends Component {
     }
 
     render() {
+        var options = [{value: "Ariana",label: "Ariana" }, {value: "Beja",label: "Beja" }, {value: "BenArous",label: "BenArous" }, {value: "Bizerte",label: "Bizerte" }, {value: "Gabes",label: "Gabes" }, {value: "Gafsa",label: "Gafsa" }, {value: "Jendouba",label: "Jendouba" }, {value: "Kairouan",label: "Kairouan" }, {value: "Kasserine",label: "Kasserine" }, {value: "Kebili",label: "Kebili" }, {value: "Mannouba",label: "Mannouba" }, {value: "Kef",label: "Kef" }, {value: "Mahdia",label: "Mahdia" }, {value: "Medenine",label: "Medenine" }, {value: "Monastir",label: "Monastir" }, {value: "Nabeul",label: "Nabeul" }, {value: "Sfax",label: "Sfax" }, {value: "SidiBouzid",label: "SidiBouzid" }, {value: "Siliana",label: "Siliana" }, {value: "Sousse",label: "Sousse" }, {value: "Tataouine",label: "Tataouine" }, {value: "Tozeur",label: "Tozeur" }, {value: "Tunis",label: "Tunis" }, {value: "Zaghouan",label: "Zaghouan" }]
         return (
    <div>
-   <div>
-        <IconButton onTouchTap={this.handleTranslation.bind(this)} tooltip="Arabic">
-            <FontIcon className="flag-icon flag-icon-tn" data-value='ar'/>
-        </IconButton>
+    <div>
+            <IconButton onTouchTap={this.handleTranslation.bind(this)} tooltip="Arabic">
+                <FontIcon className="flag-icon flag-icon-tn" data-value='ar'/>
+            </IconButton>
 
-         <IconButton onTouchTap={this.handleTranslation.bind(this)} tooltip="French">
-            <FontIcon className="flag-icon flag-icon-fr" data-value='fr'/>
-        </IconButton>
+            <IconButton onTouchTap={this.handleTranslation.bind(this)} tooltip="French">
+                <FontIcon className="flag-icon flag-icon-fr" data-value='fr'/>
+            </IconButton>
 
-         <IconButton onTouchTap={this.handleTranslation.bind(this)} tooltip="English">
-            <FontIcon className="flag-icon flag-icon-gb" data-value='en'/>
-        </IconButton>
-    </div>
-   <div className="row titleTop">
-   
-				<div className="col-md-8 col-md-offset-2 text-center gtco-heading">
-					<h2>{_t('AutoSuggest.Title')}</h2>
-					<p style={{color:'#00267f'}}>{_t('AutoSuggest.sub1')}</p>
-					<p style={{color:'#00267f'}} >{_t('AutoSuggest.sub2')}</p>
-					<p style={{color:'red',fontSize:"17px"}}>{_t('AutoSuggest.rk1')}</p>
-				</div>
-			</div>
-    <div className="col-md-12">
-        <div className="col-md-2"></div>
+            <IconButton onTouchTap={this.handleTranslation.bind(this)} tooltip="English">
+                <FontIcon className="flag-icon flag-icon-gb" data-value='en'/>
+            </IconButton>
+        </div>
+    <div className="row titleTop">
+    
+                    <div className="col-md-8 col-md-offset-2 text-center gtco-heading">
+                        <h2>{_t('AutoSuggest.Title')}</h2>
+                        <p style={{color:'#00267f'}}>{_t('AutoSuggest.sub1')}</p>
+                        <p style={{color:'#00267f'}} >{_t('AutoSuggest.sub2')}</p>
+                        <p style={{color:'red',fontSize:"17px"}}>{_t('AutoSuggest.rk1')}</p>
+                    </div>
+                </div>
+        <div className="col-md-12">
+            <div className="col-md-2"></div>
+            
+            <div className="col-md-7">
+            <Select
+                    clearable={false}
+                    name="gouvernorate_chousing"
+                    placeholder={_t('AutoSuggest.InputGuide')}
+                    value={this.state.gouv}
+                    options={options}
+                    onChange={this.ChosenGouv.bind(this)}
+            />
+
+            </div>
+
+            <div className="col-md-1" style={{marginTop:"0%"}}>
+            </div>
+
+            <div className="col-md-2"></div>
+        </div>
         
-        <div className="col-md-7">
-        <AutoComplete
-          dataSource={gouvernorates}
-          filter={AutoComplete.fuzzyFilter}
-          maxSearchResults={5}
-          floatingLabelText={_t('AutoSuggest.InputGuide')}
-          fullWidth={true}
-          onNewRequest={this.ChosenGouv.bind(this)}
-        />
+        <div className="footer">
+            <div className="footercontainer">
+                    
+            </div>
         </div>
-
-        <div className="col-md-1" style={{marginTop:"3%"}}>
-         <RaisedButton onTouchTap={this.handleClick.bind(this)} disabled={this.state.disabled} label={_t('AutoSuggest.SubmitButton')}  />
-        </div>
-
-         <div className="col-md-2"></div>
-      </div>
-      
-    <div className="footer">
-      <div className="footercontainer">
-              
-      </div>
-    </div>
 
     </div>
         );
