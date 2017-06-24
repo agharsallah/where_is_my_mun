@@ -20,7 +20,9 @@ module.exports = {
     BackButton:'Back',
     PollingCheck:'Polling Station',
     RegistrationCheck:'Registration Center',
-        WhereAmI:"My location  "
+        WhereAmI:"My location ",
+                    download:'Registration center'
+
 
  },
  filter: {

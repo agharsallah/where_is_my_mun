@@ -8,6 +8,8 @@ import FontIcon from 'material-ui/FontIcon';
 import IconButton from 'material-ui/IconButton';
 import counterpart  from 'counterpart';
 import Translate    from 'react-translate-component';
+import config from './config'
+
 const _t = Translate.translate;
 counterpart.registerTranslations('en',require('./../locales/en'));
 counterpart.registerTranslations('fr',require('./../locales/fr'));
@@ -33,7 +35,7 @@ class App extends Component {
     handleClick(){
         //send value from the input to parent
         console.log("click",this.state.gouv);
-        let qString="http://localhost:3000/api/shape/"+this.state.gouv;
+        let qString=config.apiUrl+"/api/shape/"+this.state.gouv;
         axios({
             method: 'get',
             url: qString,
@@ -55,7 +57,7 @@ class App extends Component {
     });
 
     console.log("request the db for polling ",this.state.gouv);
-    let qString2="http://localhost:3000/api/polling/"+this.state.gouv;
+    let qString2=config.apiUrl+"/api/polling/"+this.state.gouv;
         axios({
             method: 'get',
             url: qString2,

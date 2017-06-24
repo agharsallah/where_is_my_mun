@@ -20,7 +20,9 @@
     BackButton:'Retour',
     PollingCheck:'Centre de Vote',
     RegistrationCheck:'Centre d\'enregistrement',
-        WhereAmI:"mon emplacement "
+        WhereAmI:"mon emplacement ",
+            download:' lieu d\'enregistrement'
+
 
  },
   filter: {

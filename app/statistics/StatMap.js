@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Map, Popup, TileLayer, GeoJSON, FeatureGroup, Tooltip,LayersControl } from 'react-leaflet';
 import axios from 'axios' ;
 import IrieMarker from './IrieMarker' ; 
+import config from '../config'
 
 class StatMap extends Component {
     constructor(props){
@@ -10,7 +11,7 @@ class StatMap extends Component {
     }
     
     componentWillMount() {
-        let qString="http://localhost:3000/api/shape/All";
+        let qString=config.apiUrl+"/api/shape/All";
         axios({
             method: 'get',
             url: qString,
@@ -30,7 +31,7 @@ class StatMap extends Component {
         console.log(error);
     });
 
-    let qString2="http://localhost:3000/api/iries/";
+    let qString2=config.apiUrl+"/api/iries/";
         axios({
             method: 'get',
             url: qString2,

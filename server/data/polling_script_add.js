@@ -1,4 +1,6 @@
 var axios = require('axios');
+import config from './config'
+
 var fs = require('fs');
 const path = require('path')
 fs.readdir('./polling', (err, files) => {
@@ -8,7 +10,7 @@ fs.readdir('./polling', (err, files) => {
     const delExtens=/(.*)\./g;
     const gouvernorate_name = delExtens.exec(file); //file name without extension
 
-    var qString="http://localhost:3000/api/addpolling";
+    var qString=config.apiUrl+"/api/addpolling";
 	var str = '';
     fs.readFile(dir, 'utf8', function(err, data) {
     	 str += data

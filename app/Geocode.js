@@ -9,6 +9,9 @@ import axios from 'axios' ;
 import counterpart  from 'counterpart';
 import Translate    from 'react-translate-component';
 const _t = Translate.translate;
+import config from './config'
+console.log('---------------------------------');
+console.log(config.apiUrl);
 
 class Geocode extends Component {
     constructor(props){
@@ -45,7 +48,7 @@ class Geocode extends Component {
         }
     }
     saveStat(address,geocodeService){
-    let qString="http://localhost:3000/api/addstat";
+    let qString=config.apiUrl+"/api/addstat";
     axios({
         method: 'post',
         url: qString,
@@ -179,7 +182,7 @@ class Geocode extends Component {
         });
         this.checkShape(MarkerLonLat);
         //save address
-        let qString="http://localhost:3000/api/addlocationstat";
+        let qString=config.apiUrl+"/api/addlocationstat";
     axios({
         method: 'post',
         url: qString,

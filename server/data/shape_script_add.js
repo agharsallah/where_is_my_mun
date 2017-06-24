@@ -1,6 +1,7 @@
 var axios = require('axios');
 var fs = require('fs');
 const path = require('path')
+import config from './config'
 
 fs.readdir('./shapes', (err, files) => {
 //Loop through files and get file name 
@@ -9,7 +10,7 @@ fs.readdir('./shapes', (err, files) => {
     const delExtens=/(.*)\./g;
     const gouvernorate_name = delExtens.exec(file); //file name without extension
 
-    var qString="http://localhost:3000/api/addshape";
+    var qString=config.apiUrl+"/api/addshape";
 
     fs.readFile(dir, 'utf8', function(err, data) {
     	 

@@ -9,6 +9,8 @@ import Translate    from 'react-translate-component';
 const _t = Translate.translate;
 import Checkbox from 'material-ui/Checkbox';
 import RaisedButton from 'material-ui/RaisedButton';
+import Download from 'material-ui/svg-icons/File/file-download';
+
 import { Link  } from 'react-router';
 
 
@@ -61,7 +63,7 @@ class MapL extends Component {
         label={_t('Geocode.RegistrationCheck')}
         onCheck={event => this.setState({checkedPollingButton:!this.state.checkedPollingButton})}
       />*/}
-      <RaisedButton containerElement={<Link to="http://localhost:8080/file/registration.pdf"/>} className="oneRegistrationDownload"  label={_t('Geocode.download')}  />
+      <RaisedButton icon={<Download />} containerElement={<Link to="/file/registration.pdf"/>} className="oneRegistrationDownload"  label={_t('Geocode.download')}  />
       <hr className="pollingfilter" style={{width:"27%",top:"138px",backgroundColor:'black',height:"2px"}} />
       <PollingFilter polling={this.props.polling} setZoom={this.setZoom.bind(this)} />
       <Checkbox
