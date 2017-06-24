@@ -63,7 +63,12 @@ class MapL extends Component {
         label={_t('Geocode.RegistrationCheck')}
         onCheck={event => this.setState({checkedPollingButton:!this.state.checkedPollingButton})}
       />*/}
-      <RaisedButton icon={<Download />} containerElement={<Link to="/file/registration.pdf"/>} className="oneRegistrationDownload"  label={_t('Geocode.download')}  />
+      <RaisedButton 
+        icon={<Download />} 
+        containerElement={<Link to="/file/registration.pdf" target="_blank" onClick={(event) => {event.preventDefault(); window.open(this.makeHref("route"))}}/>}
+        className="oneRegistrationDownload"  
+        label={_t('Geocode.download')}  
+      />
       <hr className="pollingfilter" style={{width:"27%",top:"138px",backgroundColor:'black',height:"2px"}} />
       <PollingFilter polling={this.props.polling} setZoom={this.setZoom.bind(this)} />
       <Checkbox
