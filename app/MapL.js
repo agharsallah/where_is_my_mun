@@ -90,7 +90,13 @@ class MapL extends Component {
                     }
                     />
                     <LayersControl position="topright" className="one">
-                        <BaseLayer checked name="Leaflet">
+                     <BaseLayer checked name="Light">
+                                <TileLayer
+                                attribution="mapbox"
+                                url="https://api.mapbox.com/styles/v1/hunter-x/cixhpey8700q12pnwg584603g/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaHVudGVyLXgiLCJhIjoiY2l2OXhqMHJrMDAxcDJ1cGd5YzM2bHlydSJ9.jJxP2PKCIUrgdIXjf-RzlA"
+                                />
+                        </BaseLayer>
+                        <BaseLayer  name="Leaflet">
                                 <TileLayer
                                 attribution="Leaflet"
                                 url="https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaHVudGVyLXgiLCJhIjoiY2l2OXhqMHJrMDAxcDJ1cGd5YzM2bHlydSJ9.jJxP2PKCIUrgdIXjf-RzlA"

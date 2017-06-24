@@ -177,7 +177,30 @@ class Geocode extends Component {
             foundAddress:MarkerLatLon,
             isGeocodingError: false
         });
-        this.checkShape(MarkerLonLat)
+        this.checkShape(MarkerLonLat);
+        //save address
+        let qString="http://localhost:3000/api/addlocationstat";
+    axios({
+        method: 'post',
+        url: qString,
+        headers: {
+            'name': 'Isie',
+            'password': 'Isie@ndDi'
+        },
+        data: {
+            lat: e.coords.latitude,
+            lng: e.coords.longitude,
+            searchedTime: new Date
+		}
+    })
+    .then(response=>{
+        //console.log(response.data.data)
+        console.log('stat saved');
+        }
+    )
+    .catch(function (error) {
+        console.log(error);
+    });   
     }
     handleGeoLocatio(){
         //this.setState({GeolocationClicked:true});
@@ -192,9 +215,7 @@ class Geocode extends Component {
             console.log("navigator.geolocation not supported");
         }
 
-        function onError(error){
-            console.log(error.code)
-        }
+
     }
     
     //function for the radio button, determine which service to use Google or OSM
