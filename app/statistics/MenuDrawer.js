@@ -3,6 +3,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import PopSliderFilter from './PopSliderFilter' ;
+import IrieButtonFilter from './IrieButtonFilter' ;
+import ColorBrew from './dynamic color/ColorBrew';
+
 import counterpart  from 'counterpart';
 import Translate    from 'react-translate-component';
 const _t = Translate.translate;
@@ -15,6 +18,13 @@ class MenuDrawer extends Component {
     getPopSlider(val) {
         this.props.getPopSlider(val)
     }
+    getIrieButton(val) {
+        this.props.getIrieButton(val)
+    }
+    GetSelectedSets(e){
+        this.props.getChoroplethColors(e)
+    }
+
     render() {
         return (
             <div>
@@ -30,9 +40,16 @@ class MenuDrawer extends Component {
                     <div style={{marginLeft:"2rem"}}>
                         <h3 className="widget-title"  >Filter by Population</h3>
                     </div>
-                    <div style={{marginLeft:"2rem",marginRight:"2rem"}}>
-                <PopSliderFilter getPopSlider={this.getPopSlider.bind(this)}/>
-                </div>                
+                    <div style={{margin:"3rem"}}>    
+                        <PopSliderFilter getPopSlider={this.getPopSlider.bind(this)}/>
+                    </div>                
+                    <div style={{marginLeft:"2rem",marginTop:"5rem"}}>
+                        <h3 className="widget-title"  >IRIE Filter</h3>
+                        <IrieButtonFilter getIrieButton={this.getIrieButton.bind(this)}/>   
+                    </div> 
+                    <div style={{marginLeft:"2rem",marginTop:"4rem"}}>
+                        <ColorBrew GetSelectedSets={this.GetSelectedSets.bind(this)}/>
+                    </div>
                 </Drawer>
             </div>
         );

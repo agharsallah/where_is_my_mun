@@ -3,7 +3,10 @@ module.exports = {
     Title: 'Registration Helper ',
     SubTitle:'The concept of municipality is quite new for citizens, that\'s why this project is about helping ISIE Support team to determine from an adress the municipality where a citizen belongs.',
     SubmitButton:'Submit',
-    InputGuide:'Type Governorate Here'
+    InputGuide:'Type Governorate Here',
+    sub1:"The concept of municipality is quite new for citizens, ",
+    sub2:"that\'s why this project aims to help them determine from an adress the municipality where they belong.",
+    rk1:"The used municipality delimitation are close to reality but they might contains some errors. we've also used arround 4600 Polling Center that might change a bitt in these elections "
  },
  Geocode: {
     InputGuide:'"Name of the Avenue or road here"',
@@ -15,7 +18,10 @@ module.exports = {
     AvailableInfoar:'',
     InavailableInfo:'adress inavailable',
     BackButton:'Back',
-    PollingLayer:'Polling Station'
+    PollingCheck:'Polling Station',
+    RegistrationCheck:'Registration Center',
+        WhereAmI:"My location  "
+
  },
  filter: {
     placeholder:'Check the box above & Select your PC',

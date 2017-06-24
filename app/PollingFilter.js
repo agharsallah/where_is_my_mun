@@ -28,14 +28,14 @@ class PollingFilter extends Component {
        
         return (
             <div className='pollingfilter'>
-             <Select
- clearable={false}
-  name="form-field-name"
-  placeholder={_t('filter.placeholder')}
-  value={this.state.value}
-  options={options}
-  onChange={this.logChange.bind(this)}
-/>   
+            <Select
+                clearable={false}
+                name="form-field-name"
+                placeholder={_t('filter.placeholder')}
+                value={this.state.value}
+                options={options}
+                onChange={this.logChange.bind(this)}
+            />   
             </div>
         );
     }

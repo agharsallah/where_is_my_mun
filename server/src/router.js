@@ -1,6 +1,8 @@
 import { getPolling, postPolling } from './controllers/pollingController';
 import { getShape, postShape } from './controllers/shapeController';
+import { getIrie, postIrie,getAllIrie } from './controllers/irieController';
 import { postStatistics } from './controllers/statisticsController';
+import { postLoctionStat } from './controllers/locationStatController';
 import { postUser } from './controllers/userController';
 
 const router = (app,apiRoutes) => {
@@ -14,7 +16,13 @@ const router = (app,apiRoutes) => {
   apiRoutes.get('/shape/:gouv', getShape);
   apiRoutes.post('/addshape', postShape);
 
+  apiRoutes.get('/irie/:gouv', getIrie);
+  apiRoutes.get('/iries', getAllIrie);
+  apiRoutes.post('/addirie', postIrie);
+
   apiRoutes.post('/addstat', postStatistics);
+
+  apiRoutes.post('/addlocationstat', postLoctionStat);
 };
 
 export default router;

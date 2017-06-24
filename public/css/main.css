@@ -1,3 +1,11 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+html, body, #statmapmap {
+    height: 100vh;
+    width: 98vw;
+}
 .form-inline {
         margin: 20px 0;
       }
@@ -26,17 +34,51 @@
       .one{
           position:absolute;
           right:10px;
-          top:80px;
+          top:160px;
           z-index:2;
-            width: 10%;
+            width: 14%;
       }
+      .oneGeoLocation{
+          position:absolute;
+          right:10px;
+          top:100px;
+          z-index:2;
+            width: 14%;
+      }
+      .onePollingCheck{
+        position:absolute !important;
+          left:4%;
+          top:36%;
+          z-index:2;
+          background: white;
+          width: 20% !important;
+          padding-top:5px;
+          padding-right: 10px;
+      }
+      .oneRegistrationDownload{
+        position:absolute !important;
+          left:4%;
+          top:36%;
+          z-index:2;
+          width: 20% !important;
+      }
+
       .pollingfilter{
         position:absolute;
-          left:10px;
-          top:130px;
+          left:1%;
+          top:77%;
           z-index:2;
-            width: 15%;
+          width: 27%;
       }
+
+      .oneDrawerButton{
+         position:absolute;
+          left:10px;
+          top:90vh;
+          z-index:2;
+          width: 10%;
+      }
+
       .two{
           position:absolute;
           top:0;
@@ -46,6 +88,7 @@
       .two-elm-container{
         position: relative;
       }
+
       /*two layers ontop of eachother*/
     .container_row {
         height: auto;
@@ -68,7 +111,7 @@
         left: 0;
         top: 0;
         height: 750px;
-        width:100%
+        width:99%
     }
 /*AutoSuggest title*/
 .gtco-heading {
@@ -90,14 +133,14 @@
   color: #828282;
 }
 .titleTop{
-margin-top: 5em;
+margin-top: 4em;
 }
     /*footer*/
 .footer {
   position: absolute;
   bottom: 0;
-  width: 100%;
-  height: 210px;
+  width: 97vw;
+  height: 150px;
   background-color:rgba(17, 17, 17, 0.04);
   text-align: center;
 }
@@ -130,4 +173,50 @@ cursor: auto;
 font-family: Helvetica;
 font-size: 11pt;
 z-index: 1;
+}
+/*Slider React*/
+
+.input-range__label{
+  font-size: 1.1rem !important
+}
+.input-range__label--value { 
+  top: -2.3rem !important
+}
+/*style popu*/
+.popupinfo{
+  height:11rem !important;
+}
+/*POPUPSTYLE*/
+/*two blocks ontop of eachother*/
+#container1, #container2 {
+    padding: 0 0 0 ;
+    width: 100%;
+}
+.blockright {
+    width: 45%;
+    position: relative;
+    display:inline-block;
+}
+.blockleft {
+    width: 30%;
+    position: relative;
+    display:inline-block;
+}
+.centerName{
+  margin-left: 50px
+}
+/*square brew*/
+.square {
+	width: 24px;
+	height: 24px;
+    float:left;
+    margin-left: 1px;
+        border: 1px solid;    
+        stroke: #333;
+    stroke-width: .5px;
+   }
+#squareBrew{
+    margin-top: 15px;
+    display: flex;
+    margin-left: 12%;
 }

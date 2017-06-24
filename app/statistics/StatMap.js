@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Map, Popup, TileLayer, GeoJSON, FeatureGroup, Tooltip,LayersControl } from 'react-leaflet';
 import axios from 'axios' ;
+import IrieMarker from './IrieMarker' ; 
 
 class StatMap extends Component {
     constructor(props){
         super(props);
-        this.state={feature:"",shape:g_mun_shapes,key:1}
+        this.state={feature:"",shape:g_mun_shapes,key:1,Irie:[]}
     }
     
     componentWillMount() {
@@ -28,21 +29,53 @@ class StatMap extends Component {
     .catch(function (error) {
         console.log(error);
     });
+
+    let qString2="http://localhost:3000/api/iries/";
+        axios({
+            method: 'get',
+            url: qString2,
+            headers: {
+                'name': 'Isie',
+                'password': 'Isie@ndDi'
+            }
+        })
+    .then(response=>{
+         console.log('we got polling data frm db');
+         this.setState({Irie:response.data});
+        }
+    )
+    .catch(function (error) {
+        console.log(error);
+    });
     
 }
     
-     getColor(d) {
-	    return d > 30 ? '#000000' :
-	           d > 20  ? '#2c7fb8' :
-	           d > 18  ? '#81D4FA' :
-	           d > 12  ? '#B3E5FC' :
-	           d == 'inexistant'? '#FFFFFF' :
-	                      '#B2DFDB';
+     getColor(d,c1) {
+        if      (d > 60000)      {return (c1[5]); }
+        else if (d > 40000)      {return (c1[4]);}
+        else if (d>30000)        {return (c1[3]);}
+        else if (d>20000)        {return (c1[2]);}
+        else if (d>10000)        {return (c1[1]);}
+        else if (isNaN(d))    {return ('white')}
+        else                  {return (c1[0]);}
 	}
     style(feature) {
+        const slider = this.props.SliderValues;
+        if ((feature.properties.POP>=slider.min)&&(feature.properties.POP<=slider.max)) {
+            var POPULATION = feature.properties.POP;
+        }else {var POPULATION = "norange";}
+        if ((slider.min==10000)&&(feature.properties.POP<10000)) {
+            var POPULATION = feature.properties.POP; 
+        }
+        if ((slider.max==90000)&&(feature.properties.POP>90000)) {
+            var POPULATION = feature.properties.POP; 
+        }
+        
 	    return {
-	       fillColor: '#cadfae',
-            color: 'black',weight: 2,
+            fillColor: this.getColor(POPULATION,this.props.GetSelectedSets),
+            color: 'black',
+            weight: 2,
+            fillOpacity: 0.8
 	    };
 	}
     highlightFeature(e) {
@@ -75,7 +108,7 @@ class StatMap extends Component {
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     />
                     <GeoJSON
-                    key={this.state.key}
+                    key={"a"+this.state.key}
                     data= {this.state.shape}
                     style={this.style.bind(this)} 
                     onEachFeature={
@@ -84,6 +117,17 @@ class StatMap extends Component {
                       }    
                     }
                     />
+
+                    {this.props.checkedIrieButton?
+                         <FeatureGroup color='purple'>
+                          {this.state.Irie.map(function(object, i){
+                              console.log(object.latlon);
+                              console.log(object);
+                            return <IrieMarker data={object.data} key={i} />;
+                            })}
+                        </FeatureGroup>:
+                        <div/>
+                    }
                 </Map>
 
         );

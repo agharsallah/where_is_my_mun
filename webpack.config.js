@@ -50,7 +50,8 @@ var config = {
         pure_getters: true,
         unsafe: true,
         unsafe_comps: true,
-        screw_ie8: true
+        screw_ie8: true,
+        drop_console: true
       },
       output: {
         comments: false,
