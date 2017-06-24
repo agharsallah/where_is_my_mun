@@ -18,7 +18,10 @@
     AvailableInfoar:'',
     InavailableInfo:'désolé impossible de trouver l\'adresse, veuillez écrire d\'une autre façon ou essayer un autre service(open street map..)',
     BackButton:'Retour',
-    PollingLayer:'Polling Station'
+    PollingCheck:'Centre de Vote',
+    RegistrationCheck:'Centre d\'enregistrement',
+        WhereAmI:"mon emplacement "
+
  },
   filter: {
     placeholder:'vérifier le carreau au dessus et choisir le CV',

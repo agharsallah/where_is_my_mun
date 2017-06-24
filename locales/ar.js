@@ -18,8 +18,10 @@ module.exports = {
     AvailableInfoar:' ولاية',
     InavailableInfo:'  نتائج غير موجودة الرجاء إدخال العنوان  أو الشارع أو مكان قريب من العنوان الفعلي للمواطن ',
     BackButton:'عودة للإختيار',
-    PollingLayer:'Polling Station',
-    WhereAmI:"آنا فين "
+    PollingCheck:'مركز إقتراع',
+    RegistrationCheck:'مركز تسجيل',
+    WhereAmI:"آنا فين ",
+    download:'حمل أماكن التسجيل'
  },
 filter: {
     placeholder:'إضغط على المربع أعلاه وإختر مركز الاقتراع',

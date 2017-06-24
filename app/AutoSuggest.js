@@ -28,6 +28,7 @@ class App extends Component {
         counterpart.setLocale(e.target.dataset.value)
     }
     ChosenGouv(chosenRequest){
+        this.setState({gouv:chosenRequest.value,disabled:false});
     }
     handleClick(){
         //send value from the input to parent
@@ -118,6 +119,7 @@ class App extends Component {
             </div>
 
             <div className="col-md-1" style={{marginTop:"0%"}}>
+            <RaisedButton onTouchTap={this.handleClick.bind(this)} disabled={this.state.disabled} label={_t('AutoSuggest.SubmitButton')}  />
             </div>
 
             <div className="col-md-2"></div>

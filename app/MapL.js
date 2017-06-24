@@ -7,11 +7,15 @@ import PollingFilter from './PollingFilter' ;
 import counterpart  from 'counterpart';
 import Translate    from 'react-translate-component';
 const _t = Translate.translate;
+import Checkbox from 'material-ui/Checkbox';
+import RaisedButton from 'material-ui/RaisedButton';
+import { Link  } from 'react-router';
+
 
 class MapL extends Component {
   constructor(props){
     super (props);
-    this.state=({shape:g_mun_shapes,center:[35.055360, 9.749795],zoom:7,polling:[]})
+    this.state=({shape:g_mun_shapes,center:[35.055360, 8.849795],zoom:7,polling:[],checkedPollingButton:false})
   }
 
   componentWillReceiveProps(nextProps) {
@@ -51,7 +55,23 @@ class MapL extends Component {
 
     return (
       <div>
+{/*      <Checkbox
+        className="onePollingCheck"
+        key='reg'
+        label={_t('Geocode.RegistrationCheck')}
+        onCheck={event => this.setState({checkedPollingButton:!this.state.checkedPollingButton})}
+      />*/}
+      <RaisedButton containerElement={<Link to="http://localhost:8080/file/registration.pdf"/>} className="oneRegistrationDownload"  label={_t('Geocode.download')}  />
+      <hr className="pollingfilter" style={{width:"27%",top:"138px",backgroundColor:'black',height:"2px"}} />
       <PollingFilter polling={this.props.polling} setZoom={this.setZoom.bind(this)} />
+      <Checkbox
+        className="onePollingCheck"
+        style={{top:"59%"}}
+        key='poll'
+        label={_t('Geocode.PollingCheck')}
+        onCheck={event => this.setState({checkedPollingButton:!this.state.checkedPollingButton})}
+      />
+
       <Map  id='map' ref='map' maxZoom={23}  flyTo={true} center ={this.state.center} zoom={this.state.zoom} className="initialposition two " style={{height:"80vh",position:"relative",zIndex:0}}>
                     <TileLayer
                     url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
@@ -83,16 +103,14 @@ class MapL extends Component {
                             />
                         </BaseLayer>
                     </LayersControl>
-                    
-                    <LayersControl position="topleft" className="one" collapsed={false}>
-                       <LayersControl.Overlay name= 'polling center' >
-                        <FeatureGroup color='purple'>
+                    {this.state.checkedPollingButton?
+                          <FeatureGroup color='purple'>
                           {this.state.polling.map(function(object, i){
                             return <PollingCenter lat={object.latitude} lon={object.longitude} title={object.center} key={i} />;
                             })}
-                        </FeatureGroup>
-                      </LayersControl.Overlay>
-                    </LayersControl>
+                        </FeatureGroup>:
+                        <div/>}
+
                 </Map>
         </div>
     );

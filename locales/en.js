@@ -18,7 +18,10 @@ module.exports = {
     AvailableInfoar:'',
     InavailableInfo:'adress inavailable',
     BackButton:'Back',
-    PollingLayer:'Polling Station'
+    PollingCheck:'Polling Station',
+    RegistrationCheck:'Registration Center',
+        WhereAmI:"My location  "
+
  },
  filter: {
     placeholder:'Check the box above & Select your PC',

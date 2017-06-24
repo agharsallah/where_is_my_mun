@@ -34,24 +34,43 @@ html, body, #statmapmap {
       .one{
           position:absolute;
           right:10px;
-          top:140px;
+          top:160px;
           z-index:2;
-            width: 10%;
+            width: 14%;
       }
       .oneGeoLocation{
           position:absolute;
           right:10px;
-          top:80px;
+          top:100px;
           z-index:2;
-            width: 10%;
+            width: 14%;
       }
+      .onePollingCheck{
+        position:absolute !important;
+          left:4%;
+          top:36%;
+          z-index:2;
+          background: white;
+          width: 20% !important;
+          padding-top:5px;
+          padding-right: 10px;
+      }
+      .oneRegistrationDownload{
+        position:absolute !important;
+          left:4%;
+          top:36%;
+          z-index:2;
+          width: 20% !important;
+      }
+
       .pollingfilter{
         position:absolute;
-          left:10px;
-          top:130px;
+          left:1%;
+          top:77%;
           z-index:2;
           width: 27%;
       }
+
       .oneDrawerButton{
          position:absolute;
           left:10px;
@@ -120,7 +139,7 @@ margin-top: 4em;
 .footer {
   position: absolute;
   bottom: 0;
-  width: 98vw;
+  width: 97vw;
   height: 150px;
   background-color:rgba(17, 17, 17, 0.04);
   text-align: center;
