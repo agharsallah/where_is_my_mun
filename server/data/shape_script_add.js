@@ -1,7 +1,9 @@
 var axios = require('axios');
 var fs = require('fs');
 const path = require('path')
-import config from './config'
+var config = require('./config.js');
+var request = require('request');
+
 
 fs.readdir('./shapes', (err, files) => {
 //Loop through files and get file name 
@@ -10,30 +12,31 @@ fs.readdir('./shapes', (err, files) => {
     const delExtens=/(.*)\./g;
     const gouvernorate_name = delExtens.exec(file); //file name without extension
 
-    var qString=config.apiUrl+"/api/addshape";
+    var qString=config.apiUrl+"/api/addshape/";
 
     fs.readFile(dir, 'utf8', function(err, data) {
-    	 
-    	 axios({
-            method: 'post',
-            url: qString,
+		
+		var options = {
+			url: qString,
 			headers: {
-                'name': 'Isie',
-                'password': 'Isie@ndDi'
-            },
-			data: {
-    			name: gouvernorate_name[1],
+				'name': 'Isie',
+				'password': 'Isie@ndDi',
+				'Content-type': 'application/x-www-form-urlencoded'
+			},
+			 form: {
+				name: gouvernorate_name[1],
     			data: data
-  			}
-        })
-	    .then(response=>{
-	        //console.log(response.data.data)
-	                console.log('we posted data into db');
-	        }
-	    )
-	    .catch(function (error) {
-	        console.log(error);
-	    });
+  			} 
+		}
+		function callback(error, response, body) {
+			if (!error && response.statusCode == 200) {
+				console.log('Posted to DB');
+			}else{
+				console.log(error);
+			}
+		}
+
+		request.post(options, callback);
 
 	})
 

@@ -37,7 +37,7 @@ class MapL extends Component {
   style(feature) {
      return {
             fillColor: '#cadfae',
-            color: 'black',weight: 2,
+            color: 'red',weight: 2,
 	    };
 	}
   

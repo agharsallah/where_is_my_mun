@@ -1,5 +1,6 @@
 var axios = require('axios');
-import config from './config'
+var config = require('./config.js')
+var request = require('request');
 
 var fs = require('fs');
 const path = require('path')
@@ -14,26 +15,29 @@ fs.readdir('./polling', (err, files) => {
 	var str = '';
     fs.readFile(dir, 'utf8', function(err, data) {
     	 str += data
-		axios({
-					method: 'post',
-					url: qString,
-					headers: {
-                'name': 'Isie',
-                'password': 'Isie@ndDi'
-            },
-					data: {
-						name: gouvernorate_name[1],
-						data: JSON.parse(str)
-					}
-        		}) 
-	    .then(response=>{
-	        //console.log(response.data.data)
-	        console.log(gouvernorate_name[1]+'posted data into db');
-	    }
-	    )
-	    .catch(function (error) {
-	        console.log("error");
-	    });
+		 var options = {
+			url: qString,
+			headers: {
+				'name': 'Isie',
+				'password': 'Isie@ndDi',
+				'Content-type': 'application/x-www-form-urlencoded'
+			},
+			 form: {
+				name: gouvernorate_name[1],
+				data: JSON.parse(data)
+  			} 
+		}
+		function callback(error, response, body) {
+			if (!error && response.statusCode == 200) {
+				console.log('Posted to DB');
+
+			}else{
+				console.log("error");
+			}
+		}
+
+		request.post(options, callback);
+		
 	})
 
     

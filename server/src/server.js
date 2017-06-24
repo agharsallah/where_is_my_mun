@@ -27,7 +27,7 @@ app.set('superSecret', config.secret); // secret variable
 
 app.use(cors());
 // use body parser so we can get info from POST and/or URL parameters
-app.use(bodyParser.urlencoded({ extended: true,limit: '100mb' }));
+app.use(bodyParser.urlencoded({ extended: true,limit: '100mb',parameterLimit: 1000000 }));
 app.use(bodyParser.json({limit: '100mb'}));
 
 // use morgan to log requests to the console
