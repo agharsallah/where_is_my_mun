@@ -171,7 +171,31 @@ class Geocode extends Component {
     handleBackClick(){
         this.props.BackToSelect();
     }
-
+    saveAdress(lat,lng){
+         //save address
+        let qString=config.apiUrl+"/api/addlocationstat";
+        axios({
+            method: 'post',
+            url: qString,
+            headers: {
+                'name': 'Isie',
+                'password': 'Isie@ndDi'
+            },
+            data: {
+                lat: lat,
+                lng: lng,
+                searchedTime: new Date
+            }
+        })
+        .then(response=>{
+            //console.log(response.data.data)
+            console.log('stat saved');
+            }
+        )
+        .catch(function (error) {
+            console.log(error);
+        });   
+    }
     //function trigered when user wantes to know his location
     geocodePosition(e){
         const MarkerLonLat=[e.coords.longitude,e.coords.latitude];
@@ -182,32 +206,49 @@ class Geocode extends Component {
         });
         this.checkShape(MarkerLonLat);
         //save address
-        let qString=config.apiUrl+"/api/addlocationstat";
-    axios({
-        method: 'post',
-        url: qString,
-        headers: {
-            'name': 'Isie',
-            'password': 'Isie@ndDi'
-        },
-        data: {
-            lat: e.coords.latitude,
-            lng: e.coords.longitude,
-            searchedTime: new Date
-		}
-    })
-    .then(response=>{
-        //console.log(response.data.data)
-        console.log('stat saved');
-        }
-    )
-    .catch(function (error) {
-        console.log(error);
-    });   
+        this.saveAdress(e.coords.latitude,e.coords.longitude)
+    }
+    googleGeocode(){
+        let qString="https://www.googleapis.com/geolocation/v1/geolocate?key="+"AIzaSyDW8ExLsJba18G8SNcJruE-dImlxMTfa_8";
+        axios({
+            method: 'post',
+            url: qString
+        })
+        .then(response=>{
+            //console.log(response.data.data)
+            console.log('Google Geocode');
+            
+             const MarkerLatLon=[response.data.location.lat,response.data.location.lng];
+             const MarkerLonLat=[response.data.location.lng,response.data.location.lat];
+            this.setState({
+                foundAddress:MarkerLatLon,
+                isGeocodingError: false
+            });
+            this.checkShape(MarkerLonLat);
+            //save address
+            this.saveAdress(response.data.location.lat,response.data.location.lng)
+
+            }
+        )
+        .catch(function (error) {
+            console.log(error);
+        });   
     }
     handleGeoLocatio(){
         //this.setState({GeolocationClicked:true});
-        if (navigator.geolocation)
+        //check if used browser is chrome
+        var isChromium = window.chrome,
+        winNav = window.navigator,
+        vendorName = winNav.vendor,
+        isOpera = winNav.userAgent.indexOf("OPR") > -1,
+        isIEedge = winNav.userAgent.indexOf("Edge") > -1,
+        isIOSChrome = winNav.userAgent.match("CriOS");
+        
+        if(isIOSChrome||(isChromium !== null && isChromium !== undefined && vendorName === "Google Inc." && isOpera == false && isIEedge == false)){
+            this.googleGeocode();
+        }else { 
+         //not chrome and supported geolocation
+         if (navigator.geolocation)
         {
             console.log("navigator.geolocation is supported");
             navigator.geolocation.getCurrentPosition(this.geocodePosition);
@@ -216,7 +257,11 @@ class Geocode extends Component {
         else
         {
             console.log("navigator.geolocation not supported");
+            this.googleGeocode();
         }
+
+        }
+        
 
 
     }

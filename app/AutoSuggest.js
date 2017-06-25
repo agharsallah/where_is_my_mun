@@ -26,7 +26,7 @@ class App extends Component {
         counterpart.setLocale('ar');
     }
     handleTranslation(e){
-        //console.log(e.target.getAttribute('data-tag'));
+        // console.log(e.target.getAttribute('data-tag'));
         counterpart.setLocale(e.target.getAttribute('data-tag'))
     }
     ChosenGouv(chosenRequest){
