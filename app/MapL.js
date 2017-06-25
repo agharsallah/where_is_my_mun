@@ -17,16 +17,17 @@ import { Link  } from 'react-router';
 class MapL extends Component {
   constructor(props){
     super (props);
-    this.state=({shape:g_mun_shapes,center:[35.055360, 8.849795],zoom:7,polling:[],checkedPollingButton:false})
+    this.state=({center:[35.055360, 8.849795],zoom:7,polling:[],checkedPollingButton:false})
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.polling);
+    //console.log(nextProps.polling);
     if (isEqual(nextProps.markerpos, [0, 0])) {
+      console.log('00');
       //console.log(nextProps.shape);
-        this.setState({shape:JSON.parse(nextProps.shape),polling:nextProps.polling})
+        this.setState({polling:nextProps.polling})
     }else{
-     this.setState({center:nextProps.markerpos,zoom:13,shape:JSON.parse(nextProps.shape),polling:nextProps.polling});
+     this.setState({center:nextProps.markerpos,zoom:13,polling:nextProps.polling});
     }
 
   }
@@ -45,11 +46,11 @@ class MapL extends Component {
 
     //console.log('RRREENNDDEERR');
     if (typeof this.props.shape==='string') {
-     // console.log('changes');
+     console.log('changes');
       var shape = JSON.parse(this.props.shape)
       //console.log(typeof(shape));
     }else{
-      //console.log('render MpL object');
+      console.log('render MpL object');
       var shape =this.props.shape
     }
     

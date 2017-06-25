@@ -19,15 +19,15 @@ class App extends Component {
     
     constructor(props){
         super(props);
-         this.state=({gouv:'',disabled:true})
+         this.state=({gouv:'',disabled:true,loading:false})
     }
     
     componentWillMount() {
         counterpart.setLocale('ar');
     }
     handleTranslation(e){
-        console.log(e.target.dataset.value);
-        counterpart.setLocale(e.target.dataset.value)
+        //console.log(e.target.getAttribute('data-tag'));
+        counterpart.setLocale(e.target.getAttribute('data-tag'))
     }
     ChosenGouv(chosenRequest){
         this.setState({gouv:chosenRequest.value,disabled:false});
@@ -35,6 +35,7 @@ class App extends Component {
     handleClick(){
         //send value from the input to parent
         console.log("click",this.state.gouv);
+        this.setState({loading:true});
         let qString=config.apiUrl+"/api/shape/"+this.state.gouv;
         axios({
             method: 'get',
@@ -48,6 +49,7 @@ class App extends Component {
         //console.log(response.data.data)
          console.log('we got shape data frm db');
          console.log(response);
+         this.setState({loading:false});
          this.props.getGouv(response.data.data)
          this.props.getGouvName(this.state.gouv)
         }
@@ -69,7 +71,7 @@ class App extends Component {
     .then(response=>{
          console.log('we got polling data frm db');
          //console.log(response.data[0].data);
-         //console.log(typeof(response.data[0].data));
+         console.log(typeof(response.data[0].data));
          this.props.getGouvPolling(response.data[0].data)
         }
     )
@@ -84,16 +86,16 @@ class App extends Component {
         return (
    <div>
     <div>
-            <IconButton onTouchTap={this.handleTranslation.bind(this)} tooltip="Arabic">
-                <FontIcon className="flag-icon flag-icon-tn" data-value='ar'/>
+            <IconButton onTouchTap={this.handleTranslation.bind(this)} data-tag='ar' tooltip="Arabic">
+                <FontIcon className="flag-icon flag-icon-tn" data-tag='ar'/>
             </IconButton>
 
-            <IconButton onTouchTap={this.handleTranslation.bind(this)} tooltip="French">
-                <FontIcon className="flag-icon flag-icon-fr" data-value='fr'/>
+            <IconButton onTouchTap={this.handleTranslation.bind(this)} data-tag='fr' tooltip="French">
+                <FontIcon className="flag-icon flag-icon-fr" data-tag='fr'/>
             </IconButton>
 
-            <IconButton onTouchTap={this.handleTranslation.bind(this)} tooltip="English">
-                <FontIcon className="flag-icon flag-icon-gb" data-value='en'/>
+            <IconButton onTouchTap={this.handleTranslation.bind(this)} data-tag='en' tooltip="English">
+                <FontIcon className="flag-icon flag-icon-gb" data-tag='en'/>
             </IconButton>
         </div>
     <div className="row titleTop">
@@ -126,6 +128,7 @@ class App extends Component {
 
             <div className="col-md-2"></div>
         </div>
+        <div>{this.state.loading?<h3>Loading...</h3>:<div></div>}</div>
         
         <div className="footer">
             <div className="footercontainer">
