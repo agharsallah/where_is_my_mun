@@ -220,3 +220,7 @@ z-index: 1;
     display: flex;
     margin-left: 12%;
 }
+/*Place loader in the middle ->autosuggest*/
+.react-Loader{
+    margin-left: 13% !important;
+}
