@@ -130,14 +130,15 @@ class App extends Component {
 
             <div className="col-md-2"></div>
         </div>
-        <div><div className="col-md-5"></div><article className="col-md-6">
-      <h2>{_t('AutoSuggest.loading')}</h2>
-      <ReactLoading type="bars" color="#444" className="react-Loader" delay={0} />
-    </article>{this.state.loading?
-    <article>
-      <h2>{_t('AutoSuggest.loading')}</h2>
-      <ReactLoading type="bars" color="#444"  />
-    </article>:<div></div>}</div>
+        {this.state.loading?
+            <div>
+                <div className="col-md-5"></div>
+                <article className="col-md-6">
+                    <h2>{_t('AutoSuggest.loading')}</h2>
+                    <ReactLoading type="bars" color="#444" className="react-Loader" delay={0} />
+                </article>
+            </div>
+        :<div></div>}
         
         <div className="footer">
             <div className="footercontainer">

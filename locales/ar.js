@@ -19,7 +19,7 @@ module.exports = {
     AvailableInfoar:' ولاية',
     InavailableInfo:'  نتائج غير موجودة الرجاء إدخال العنوان  أو الشارع أو مكان قريب من العنوان الفعلي للمواطن ',
     BackButton:'عودة للإختيار',
-    PollingCheck:  "(مراكز إقتراع (إحداثيات دقيقة " ,
+    PollingCheck:  " (مراكز إقتراع (إحداثيات دقيقة " ,
     RegistrationCheck:'مراكز تسجيل',
     WhereAmI:"آنا فين ",
     download:'حمل أماكن التسجيل'

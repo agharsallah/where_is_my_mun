@@ -47,20 +47,20 @@ html, body, #statmapmap {
       }
       .onePollingCheck{
         position:absolute !important;
-          left:4%;
+          left:1%;
           top:36%;
           z-index:2;
           background: white;
-          width: 20% !important;
           padding-top:5px;
-          padding-right: 10px;
+          /*width: 20% !important;
+          padding-right: 10px;*/
       }
       .oneRegistrationDownload{
         position:absolute !important;
-          left:4%;
-          top:36%;
+          left:1%;
+          top:17vh;
           z-index:2;
-          width: 20% !important;
+          width: 230px;
       }
 
       .pollingfilter{
@@ -68,7 +68,7 @@ html, body, #statmapmap {
           left:1%;
           top:77%;
           z-index:2;
-          width: 27%;
+          width: 230px;
       }
 
       .oneDrawerButton{
