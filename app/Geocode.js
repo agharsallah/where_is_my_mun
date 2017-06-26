@@ -208,6 +208,7 @@ class Geocode extends Component {
         //save address
         this.saveAdress(e.coords.latitude,e.coords.longitude)
     }
+    error(err){this.setState({foundAddress:null,isGeocodingError: true});}
     googleGeocode(){
         let qString="https://www.googleapis.com/geolocation/v1/geolocate?key="+"AIzaSyDW8ExLsJba18G8SNcJruE-dImlxMTfa_8";
         axios({
@@ -251,8 +252,7 @@ class Geocode extends Component {
          if (navigator.geolocation)
         {
             console.log("navigator.geolocation is supported");
-            navigator.geolocation.getCurrentPosition(this.geocodePosition);
-
+            navigator.geolocation.getCurrentPosition(this.geocodePosition,this.error,{enableHighAccuracy: true,timeout: 5000,maximumAge: 0} );
         }
         else
         {

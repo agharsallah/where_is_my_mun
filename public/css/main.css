@@ -52,25 +52,76 @@ html, body, #statmapmap {
           z-index:2;
           background: white;
           padding-top:5px;
-          /*width: 20% !important;
-          padding-right: 10px;*/
+          width: 20% !important;
+          /*padding-right: 10px;*/
       }
       .oneRegistrationDownload{
         position:absolute !important;
           left:1%;
           top:17vh;
           z-index:2;
-          width: 230px;
+          width: 20%;
       }
-
       .pollingfilter{
         position:absolute;
           left:1%;
-          top:77%;
+          top:79%;
           z-index:2;
-          width: 230px;
+          width: 21%;
       }
-
+@media only screen and (max-width: 1199px) {
+          .oneRegistrationDownload{
+        position:absolute !important;
+          left:1%;
+          top:17vh;
+          z-index:2;
+          width: 40%;
+      }
+            .onePollingCheck{
+        position:absolute !important;
+          left:1%;
+          top:36%;
+          z-index:2;
+          background: white;
+          padding-top:5px;
+          width: 40% !important;
+          /*padding-right: 10px;*/
+      }
+        .pollingfilter{
+        position:absolute;
+          left:1%;
+          top:82%;
+          z-index:2;
+          width: 40%;
+      }
+      
+}
+@media only screen and (max-width: 365px) {
+            .oneRegistrationDownload{
+        position:absolute !important;
+          left:1%;
+          top:17vh;
+          z-index:2;
+          width: 40%;
+      }
+            .onePollingCheck{
+        position:absolute !important;
+          left:1%;
+          top:36%;
+          z-index:2;
+          background: white;
+          padding-top:5px;
+          width: 40% !important;
+          /*padding-right: 10px;*/
+      }
+        .pollingfilter{
+        position:absolute;
+          left:1%;
+          top:97%;
+          z-index:2;
+          width: 40%;
+      }
+}
       .oneDrawerButton{
          position:absolute;
           left:10px;

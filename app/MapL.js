@@ -74,7 +74,7 @@ class MapL extends Component {
       <PollingFilter polling={this.props.polling} setZoom={this.setZoom.bind(this)} />
       <Checkbox
         className="onePollingCheck"
-        style={{top:"60%",width:"230px"}}
+        style={{top:"59%"}}
         key='poll'
         label={_t('Geocode.PollingCheck')}
         onCheck={event => this.setState({checkedPollingButton:!this.state.checkedPollingButton})}
