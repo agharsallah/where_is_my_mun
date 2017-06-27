@@ -20,13 +20,13 @@ import { Link  } from 'react-router';
 class MapL extends Component {
   constructor(props){
     super (props);
-    this.state=({center:[35.055360, 8.849795],zoom:7,polling:[],regSpot:[],checkedPollingButton:false,checkedRegButton:false})
+    this.state=({center:[35.055360, 8.849795],zoom:7,polling:[],regSpot:[],oneIrie:[],checkedPollingButton:false,checkedRegButton:false})
   }
   
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.gouv);
+    //console.log(nextProps.gouv);
     if (isEqual(nextProps.markerpos, [0, 0])) {
-      console.log('00');
+      //console.log('00');
       //console.log(nextProps.shape);
         this.setState({polling:nextProps.polling})
     }else{
@@ -44,13 +44,31 @@ class MapL extends Component {
     })
     .then(response=>{
         //console.log(response.data.data)
-        console.log("regSpot",response.data);
+        //console.log("regSpot",response.data);
         this.setState({regSpot:response.data});
         }
     )
     .catch(function (error) {
         console.log(error);
-    });   
+    });
+    //get Irie List from db
+    let qString2=config.apiUrl+"/api/irie/"+nextProps.gouv;
+    axios({
+        method: 'get',
+        url: qString2,
+        headers: {
+            'name': 'Isie',
+            'password': 'Isie@ndDi'
+        }
+    })
+    .then(response=>{
+        //console.log("irie",response.data);
+        this.setState({oneIrie:response.data});
+        }
+    )
+    .catch(function (error) {
+        console.log(error);
+    });      
 
   }
   setZoom(value){
@@ -68,16 +86,18 @@ class MapL extends Component {
 
     //console.log('RRREENNDDEERR');
     if (typeof this.props.shape==='string') {
-     console.log('changes');
+     //console.log('changes');
       var shape = JSON.parse(this.props.shape)
       //console.log(typeof(shape));
     }else{
-      console.log('render MpL object');
+      //console.log('render MpL object');
       var shape =this.props.shape
     }
-    
     const pin = L.icon({iconUrl: '/img/pin.svg',iconSize: [50, 50],iconAnchor: [40, 40]});
-
+    
+    var allreg=[]
+    allreg=this.state.oneIrie.concat(this.state.regSpot)
+    
     return (
       <div>
 {/*      */}
@@ -150,12 +170,10 @@ class MapL extends Component {
                     {/*check for registration marker*/}
                     {this.state.checkedRegButton?
                           <FeatureGroup color='grey'>
-                          {this.state.regSpot.map(function(object, i){
-                            return <RegSpotMarker data={object.data} key={i} />;
-                            })}
+                          <RegSpotMarker regData={allreg} />
                         </FeatureGroup>:
-                        <div/>}
-
+                        <div/>
+                    }
                 </Map>
         </div>
     );
