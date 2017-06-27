@@ -1,6 +1,6 @@
 [
     {
-        "city_en": "kasserine",
+        "city_en": "Kasserine",
         "latlon": "35.167617, 8.831479",
         "type": "c",
         "name": "المغازة العــــامة",
@@ -8,7 +8,7 @@
         "city": "القصرين"
     },
     {
-        "city_en": "kasserine",
+        "city_en": "Kasserine",
         "latlon": "35.166715, 8.829250",
         "type": "c",
         "name": "مغازة البركة",
@@ -16,7 +16,7 @@
         "city": "القصرين"
     },
     {
-        "city_en": "kasserine",
+        "city_en": "Kasserine",
         "latlon": "35.166928, 8.830696",
         "type": "p",
         "name": "مكتب بريد القصرين",
@@ -24,7 +24,7 @@
         "city": "القصرين"
     },
     {
-        "city_en": "kasserine",
+        "city_en": "Kasserine",
         "latlon": "35.570547, 8.675282",
         "type": "p",
         "name": "مكتب بريد خمودة، مكتب بريد بودرياس",
@@ -32,7 +32,7 @@
         "city": "القصرين"
     },
     {
-        "city_en": "kasserine",
+        "city_en": "Kasserine",
         "latlon": "34.950758, 8.568160",
         "type": "p",
         "name": "مكتب بريد سبيبة",
@@ -40,7 +40,7 @@
         "city": "القصرين"
     },
     {
-        "city_en": "kasserine",
+        "city_en": "Kasserine",
         "latlon": "35.542199, 9.074106",
         "type": "p",
         "name": "مكتب بريد سبيطلة",
@@ -48,7 +48,7 @@
         "city": "القصرين"
     },
     {
-        "city_en": "kasserine",
+        "city_en": "Kasserine",
         "latlon": "34.946856, 8.566521",
         "type": "p",
         "name": "مكتب بريد فريانة",
@@ -56,7 +56,7 @@
         "city": "القصرين"
     },
     {
-        "city_en": "kasserine",
+        "city_en": "Kasserine",
         "latlon": "36.701546, 10.161436",
         "type": "p",
         "name": "مكتب بريد فوسانة",
@@ -1611,7 +1611,7 @@
         "city_en": "Gabes",
         "latlon": "33.849234, 10.112757",
         "type": "c",
-        "name": "مغازة GM",
+        "name": "مغازة MG",
         "mun": "طبلبو",
         "city": "قابس"
     },
@@ -1619,7 +1619,7 @@
         "city_en": "Gabes",
         "latlon": "33.891086, 9.803836",
         "type": "c",
-        "name": "مغازة gm",
+        "name": "مغازة MG",
         "mun": "الحامة",
         "city": "قابس"
     },
@@ -1627,7 +1627,7 @@
         "city_en": "Gabes",
         "latlon": "33.880997, 10.092053",
         "type": "c",
-        "name": "مغازة GM املنزل",
+        "name": "مغازة MG املنزل",
         "mun": "قابس",
         "city": "قابس"
     },
@@ -1635,7 +1635,7 @@
         "city_en": "Gabes",
         "latlon": "33.884677, 10.103603",
         "type": "c",
-        "name": "مغازة GM باب البحر",
+        "name": "مغازة MG باب البحر",
         "mun": "قابس",
         "city": "قابس"
     },
@@ -1907,7 +1907,7 @@
         "city_en": "Nabeul",
         "latlon": "36.453273, 10.733720",
         "type": "c",
-        "name": "مركزتجاري gm",
+        "name": "مركزتجاري MG",
         "mun": "نابل",
         "city": "نابل 1"
     },
@@ -1915,7 +1915,7 @@
         "city_en": "Nabeul",
         "latlon": "36.845135, 11.094899",
         "type": "c",
-        "name": "مركزتجاري gm",
+        "name": "مركزتجاري MG",
         "mun": "قليبية",
         "city": "نابل 1"
     },
@@ -1923,7 +1923,7 @@
         "city_en": "Nabeul",
         "latlon": "36.452369, 10.731038",
         "type": "c",
-        "name": "مركزتجاري ruoferrac",
+        "name": "مركزتجاري carrefour",
         "mun": "نابل",
         "city": "نابل 1"
     },
@@ -1931,7 +1931,7 @@
         "city_en": "Nabeul",
         "latlon": "36.562568, 10.854095",
         "type": "c",
-        "name": "مركزتجاري ruoferrac",
+        "name": "مركزتجاري carrefour",
         "mun": "قربة",
         "city": "نابل 1"
     },
@@ -1939,7 +1939,7 @@
         "city_en": "Nabeul",
         "latlon": "36.847265, 11.090536",
         "type": "c",
-        "name": "مركزتجاري ruoferrac",
+        "name": "مركزتجاري carrefour",
         "mun": "قليبية",
         "city": "نابل 1"
     },
@@ -1947,7 +1947,7 @@
         "city_en": "Nabeul",
         "latlon": "36.448124, 10.737793",
         "type": "c",
-        "name": "مركزتجاري xirponom",
+        "name": "مركزتجاري monoprix",
         "mun": "نابل",
         "city": "نابل 1"
     },
@@ -1955,7 +1955,7 @@
         "city_en": "Nabeul",
         "latlon": "36.577872, 10.859919",
         "type": "c",
-        "name": "مركزتجاري xirponom",
+        "name": "مركزتجاري monoprix",
         "mun": "قربة",
         "city": "نابل 1"
     },
@@ -1963,7 +1963,7 @@
         "city_en": "Nabeul",
         "latlon": "36.780404, 10.986584",
         "type": "c",
-        "name": "مركزتجاري xirponom",
+        "name": "مركز تجاري monoprix",
         "mun": "منزل تميم",
         "city": "نابل 1"
     },
@@ -1971,7 +1971,7 @@
         "city_en": "Nabeul",
         "latlon": "36.453291, 10.733699",
         "type": "c",
-        "name": "مركزتجاريgm",
+        "name": "مركزتجاريmg",
         "mun": "نابل",
         "city": "نابل 1"
     },
@@ -1987,7 +1987,7 @@
         "city_en": "Nabeul",
         "latlon": "36.414499, 10.651513",
         "type": "c",
-        "name": "كارفور املرازقة",
+        "name": "كارفور المرازقة",
         "mun": "الحمامات",
         "city": "نابل 2"
     },

@@ -4,7 +4,7 @@ const RegistrationSpots = require ('../app/models/registrationSpots');
  * Fetch Irie Center of 
  */
 export const getOneRegistrationSpot = (req, res, next) => {
-  RegistrationSpots.find({name:req.params.gouv}, function(err, regspot) {
+  RegistrationSpots.find({"data.city_en":req.params.gouv}, function(err, regspot) {
 			if (err) { return next(err); }
 
 			res.json(regspot);

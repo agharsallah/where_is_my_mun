@@ -4,12 +4,15 @@ const { BaseLayer, Overlay } = LayersControl;
 import { isEqual } from 'underscore';
 import PollingCenter from './PollingCenter' ; 
 import PollingFilter from './PollingFilter' ;
+import RegSpotMarker from './RegSpotMarker' ;
 import counterpart  from 'counterpart';
 import Translate    from 'react-translate-component';
 const _t = Translate.translate;
 import Checkbox from 'material-ui/Checkbox';
 import RaisedButton from 'material-ui/RaisedButton';
 import Download from 'material-ui/svg-icons/File/file-download';
+import axios from 'axios' ;
+import config from './config';
 
 import { Link  } from 'react-router';
 
@@ -17,11 +20,11 @@ import { Link  } from 'react-router';
 class MapL extends Component {
   constructor(props){
     super (props);
-    this.state=({center:[35.055360, 8.849795],zoom:7,polling:[],checkedPollingButton:false})
+    this.state=({center:[35.055360, 8.849795],zoom:7,polling:[],regSpot:[],checkedPollingButton:false,checkedRegButton:false})
   }
-
+  
   componentWillReceiveProps(nextProps) {
-    //console.log(nextProps.polling);
+    console.log(nextProps.gouv);
     if (isEqual(nextProps.markerpos, [0, 0])) {
       console.log('00');
       //console.log(nextProps.shape);
@@ -29,6 +32,25 @@ class MapL extends Component {
     }else{
      this.setState({center:nextProps.markerpos,zoom:13,polling:nextProps.polling});
     }
+    //get registration spots from server
+    let qString=config.apiUrl+"/api/oneregspot/"+nextProps.gouv;
+    axios({
+        method: 'get',
+        url: qString,
+        headers: {
+            'name': 'Isie',
+            'password': 'Isie@ndDi'
+        }
+    })
+    .then(response=>{
+        //console.log(response.data.data)
+        console.log("regSpot",response.data);
+        this.setState({regSpot:response.data});
+        }
+    )
+    .catch(function (error) {
+        console.log(error);
+    });   
 
   }
   setZoom(value){
@@ -58,17 +80,18 @@ class MapL extends Component {
 
     return (
       <div>
-{/*      <Checkbox
-        className="onePollingCheck"
-        key='reg'
-        label={_t('Geocode.RegistrationCheck')}
-        onCheck={event => this.setState({checkedPollingButton:!this.state.checkedPollingButton})}
-      />*/}
+{/*      */}
       <RaisedButton 
         icon={<Download />} 
         containerElement={<Link to="/file/registration.pdf" target="_blank" onClick={(event) => {event.preventDefault(); window.open(this.makeHref("route"))}}/>}
         className="oneRegistrationDownload "  
         label={_t('Geocode.download')}
+      />
+      <Checkbox
+        className="oneRegistrationCheck"
+        key='reg'
+        label={_t('Geocode.RegistrationCheck')}
+        onCheck={event => this.setState({checkedRegButton:!this.state.checkedRegButton})}
       />
 {/*      <hr className="pollingfilter" style={{width:"27%",top:"138px",backgroundColor:'black',height:"2px"}} />*/}
       <PollingFilter polling={this.props.polling} setZoom={this.setZoom.bind(this)} />
@@ -121,6 +144,14 @@ class MapL extends Component {
                           <FeatureGroup color='purple'>
                           {this.state.polling.map(function(object, i){
                             return <PollingCenter lat={object.latitude} lon={object.longitude} title={object.center} key={i} />;
+                            })}
+                        </FeatureGroup>:
+                        <div/>}
+                    {/*check for registration marker*/}
+                    {this.state.checkedRegButton?
+                          <FeatureGroup color='grey'>
+                          {this.state.regSpot.map(function(object, i){
+                            return <RegSpotMarker data={object.data} key={i} />;
                             })}
                         </FeatureGroup>:
                         <div/>}

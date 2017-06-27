@@ -62,6 +62,13 @@ html, body, #statmapmap {
           z-index:2;
           width: 20%;
       }
+      .oneRegistrationCheck{
+        position:absolute !important;
+          left:1%;
+          top:45vh;
+          z-index:2;
+          width: 20%;
+      }
       .pollingfilter{
         position:absolute;
           left:1%;
