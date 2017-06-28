@@ -5,6 +5,7 @@ const market = L.icon({iconUrl: '/img/cart.svg',iconSize: [30, 30],iconAnchor: [
 const post = L.icon({iconUrl: '/img/post-office.svg',iconSize: [30, 30],iconAnchor: [20, 20]});
 const transpot = L.icon({iconUrl: '/img/bus-stop.svg',iconSize: [30, 30],iconAnchor: [20, 20]});
 const service = L.icon({iconUrl: '/img/service.svg',iconSize: [30, 30],iconAnchor: [20, 20]});
+const municipality = L.icon({iconUrl: '/img/city-hall.svg',iconSize: [40, 40],iconAnchor: [20, 20]});
 const irie = L.icon({iconUrl: '/img/office-block.svg',iconSize: [30, 30],iconAnchor: [20, 20]});
 
 var markerIcon;
@@ -30,7 +31,7 @@ class RegSpotMarker extends Component {
             }else{
                 lat= data.lat;
                 long=data.long;
-                name=" بلدية"+data.mun
+                name=" بلدية "+data.mun
             }
             
         if (data.type=="c") {
@@ -41,6 +42,8 @@ class RegSpotMarker extends Component {
              markers.push({lat:lat,lng:long,options:{icon:service,title:city_en},popup:name}  )  
         }else if(data.type=="t"){
              markers.push({lat:lat,lng:long,options:{icon:transpot,title:city_en},popup:name}  )  
+        }else if(data.type=="m"){
+             markers.push({lat:lat,lng:long,options:{icon:municipality,title:city_en},popup:name}  )  
         }else{
             markers.push({lat:lat,lng:long,options:{icon:irie,title:city_en},popup:name}  )
         }

@@ -80,7 +80,7 @@ class MapL extends Component {
         }
     })
     .then(response=>{
-        //console.log("irie",response.data);
+        console.log("mun",response.data);
         this.setState({munCoord:response.data});
         }
     )
