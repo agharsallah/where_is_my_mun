@@ -261,8 +261,6 @@ class Geocode extends Component {
         }
 
         }
-        
-
 
     }
     

@@ -20,7 +20,7 @@ import { Link  } from 'react-router';
 class MapL extends Component {
   constructor(props){
     super (props);
-    this.state=({center:[35.055360, 8.849795],zoom:7,polling:[],regSpot:[],oneIrie:[],municipalities:[],checkedPollingButton:false,checkedRegButton:false})
+    this.state=({center:[35.055360, 8.849795],zoom:7,polling:[],regSpot:[],oneIrie:[],munCoord:[],checkedPollingButton:false,checkedRegButton:false})
   }
   
   componentWillReceiveProps(nextProps) {
@@ -69,7 +69,24 @@ class MapL extends Component {
     .catch(function (error) {
         console.log(error);
     });      
-
+    
+    let qString3=config.apiUrl+"/api/onemuncoord/"+nextProps.gouv;
+    axios({
+        method: 'get',
+        url: qString3,
+        headers: {
+            'name': 'Isie',
+            'password': 'Isie@ndDi'
+        }
+    })
+    .then(response=>{
+        //console.log("irie",response.data);
+        this.setState({munCoord:response.data});
+        }
+    )
+    .catch(function (error) {
+        console.log(error);
+    });      
   }
   setZoom(value){
     let center=value.split(";")
@@ -84,13 +101,13 @@ class MapL extends Component {
   
   onEachFeature(feature, layer){
       layer.bindTooltip(feature.properties.LABEL,{ permanent: false,className:"tooltipnamear",direction:"center" })
-      //console.log("ccccccceeeeeeeeee",layer.getBounds().getCenter());
+ /*     //console.log("ccccccceeeeeeeeee",layer.getBounds().getCenter());
       var arr=this.state.municipalities;
       arr.push({data:{lat:layer.getBounds().getCenter().lat,lng:layer.getBounds().getCenter().lng,name:"Municipalité de  "+feature.properties.LABEL}})
      // console.log(arr);
       this.setState({ 
         municipalities: arr
-      })
+      })*/
   }    
   render() {
 
@@ -106,11 +123,10 @@ class MapL extends Component {
     const pin = L.icon({iconUrl: '/img/pin.svg',iconSize: [50, 50],iconAnchor: [40, 40]});
     
     var allreg=[]
-    allreg=this.state.oneIrie.concat(this.state.regSpot,this.state.municipalities)
-    var allmun=[]
+    allreg=this.state.oneIrie.concat(this.state.regSpot,this.state.munCoord)
+
     return (
       <div>
-{/*      */}
       <RaisedButton 
         icon={<Download />} 
         containerElement={<Link to="/file/registration.pdf" target="_blank" onClick={(event) => {event.preventDefault(); window.open(this.makeHref("route"))}}/>}
@@ -127,7 +143,6 @@ class MapL extends Component {
       <PollingFilter polling={this.props.polling} setZoom={this.setZoom.bind(this)} />
       <Checkbox
         className="onePollingCheck"
-        style={{top:"59%"}}
         key='poll'
         label={_t('Geocode.PollingCheck')}
         onCheck={event => this.setState({checkedPollingButton:!this.state.checkedPollingButton})}
@@ -177,7 +192,7 @@ class MapL extends Component {
                     {/*check for registration marker*/}
                     {this.state.checkedRegButton?
                           <FeatureGroup color='grey'>
-                          <RegSpotMarker regData={allreg} municipalities={this.state.municipalities} />
+                          <RegSpotMarker regData={allreg}  />
                         </FeatureGroup>:
                         <div/>
                     }

@@ -45,16 +45,7 @@ html, body, #statmapmap {
           z-index:2;
             width: 14%;
       }
-      .onePollingCheck{
-        position:absolute !important;
-          left:1%;
-          top:36%;
-          z-index:2;
-          background: white;
-          padding-top:5px;
-          width: 20% !important;
-          /*padding-right: 10px;*/
-      }
+      /*style of the download button*/
       .oneRegistrationDownload{
         position:absolute !important;
           left:1%;
@@ -62,17 +53,31 @@ html, body, #statmapmap {
           z-index:2;
           width: 20%;
       }
+      /*style of the Registration checkbox*/
       .oneRegistrationCheck{
         position:absolute !important;
           left:1%;
-          top:45vh;
+          top:59%;
           z-index:2;
-          width: 20%;
+          width: 20% !important;
+          background: white;
       }
+      /*style of Pollig center checkbox*/
+      .onePollingCheck{
+        position:absolute !important;
+          left:1%;
+          top:79%;
+          z-index:2;
+          background: white;
+          padding-top:5px;
+          width: 20% !important;
+          /*padding-right: 10px;*/
+      }
+      /*style of autocomplete filter checkbox*/
       .pollingfilter{
         position:absolute;
           left:1%;
-          top:79%;
+          top:99%;
           z-index:2;
           width: 21%;
       }
@@ -84,10 +89,18 @@ html, body, #statmapmap {
           z-index:2;
           width: 40%;
       }
-            .onePollingCheck{
+      .oneRegistrationCheck{
         position:absolute !important;
           left:1%;
-          top:36%;
+          top:59%;
+          z-index:2;
+          width: 40% !important;
+          background: white;
+      }
+      .onePollingCheck{
+        position:absolute !important;
+          left:1%;
+          top:79%;
           z-index:2;
           background: white;
           padding-top:5px;
@@ -97,13 +110,13 @@ html, body, #statmapmap {
         .pollingfilter{
         position:absolute;
           left:1%;
-          top:82%;
+          top:102%;
           z-index:2;
           width: 40%;
       }
       
 }
-@media only screen and (max-width: 365px) {
+@media only screen and (max-width: 538px) {
             .oneRegistrationDownload{
         position:absolute !important;
           left:1%;
@@ -111,10 +124,18 @@ html, body, #statmapmap {
           z-index:2;
           width: 40%;
       }
-            .onePollingCheck{
+      .oneRegistrationCheck{
         position:absolute !important;
           left:1%;
-          top:36%;
+          top:59%;
+          z-index:2;
+          width: 40% !important;
+          background: white;
+      }
+      .onePollingCheck{
+        position:absolute !important;
+          left:1%;
+          top:79%;
           z-index:2;
           background: white;
           padding-top:5px;
@@ -124,7 +145,7 @@ html, body, #statmapmap {
         .pollingfilter{
         position:absolute;
           left:1%;
-          top:97%;
+          top:108%;
           z-index:2;
           width: 40%;
       }
