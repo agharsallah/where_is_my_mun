@@ -20,7 +20,7 @@ import { Link  } from 'react-router';
 class MapL extends Component {
   constructor(props){
     super (props);
-    this.state=({center:[35.055360, 8.849795],zoom:7,polling:[],regSpot:[],oneIrie:[],checkedPollingButton:false,checkedRegButton:false})
+    this.state=({center:[35.055360, 8.849795],zoom:7,polling:[],regSpot:[],oneIrie:[],municipalities:[],checkedPollingButton:false,checkedRegButton:false})
   }
   
   componentWillReceiveProps(nextProps) {
@@ -82,6 +82,16 @@ class MapL extends Component {
 	    };
 	}
   
+  onEachFeature(feature, layer){
+      layer.bindTooltip(feature.properties.LABEL,{ permanent: false,className:"tooltipnamear",direction:"center" })
+      //console.log("ccccccceeeeeeeeee",layer.getBounds().getCenter());
+      var arr=this.state.municipalities;
+      arr.push({data:{lat:layer.getBounds().getCenter().lat,lng:layer.getBounds().getCenter().lng,name:"Municipalité de  "+feature.properties.LABEL}})
+     // console.log(arr);
+      this.setState({ 
+        municipalities: arr
+      })
+  }    
   render() {
 
     //console.log('RRREENNDDEERR');
@@ -96,8 +106,8 @@ class MapL extends Component {
     const pin = L.icon({iconUrl: '/img/pin.svg',iconSize: [50, 50],iconAnchor: [40, 40]});
     
     var allreg=[]
-    allreg=this.state.oneIrie.concat(this.state.regSpot)
-    
+    allreg=this.state.oneIrie.concat(this.state.regSpot,this.state.municipalities)
+    var allmun=[]
     return (
       <div>
 {/*      */}
@@ -134,11 +144,8 @@ class MapL extends Component {
                     key={this.props.key}
                     data= {shape}
                     style={this.style.bind(this)} 
-                    onEachFeature={
-                        (feature, layer) => {
-                            layer.bindTooltip(feature.properties.LABEL,{ permanent: false,className:"tooltipnamear",direction:"center" })
-                      }    
-                    }
+                    onEachFeature={this.onEachFeature.bind(this)}
+                    
                     />
                     <LayersControl position="topright" className="one">
                      <BaseLayer checked name="Light">
@@ -170,7 +177,7 @@ class MapL extends Component {
                     {/*check for registration marker*/}
                     {this.state.checkedRegButton?
                           <FeatureGroup color='grey'>
-                          <RegSpotMarker regData={allreg} />
+                          <RegSpotMarker regData={allreg} municipalities={this.state.municipalities} />
                         </FeatureGroup>:
                         <div/>
                     }

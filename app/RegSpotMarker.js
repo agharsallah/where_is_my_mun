@@ -13,14 +13,23 @@ class RegSpotMarker extends Component {
     render() {
         var markers=[];// add all position info in an array
         var rows=[];//append all markers
-        console.log(this.props.regData.length);
+        console.log("Municipalities : ",this.props.municipalities);
         for (var i = 0; i < this.props.regData.length; i++ ) {
             let data=this.props.regData[i].data
-            console.log(data);
-            let lat=data.latlon.split(",")[0];
-            let long=data.latlon.split(",")[1];
-            let city_en=data.city_en;
-            let city =data.city;
+            //console.log(data);
+            let lat,long,city_en,city
+            if (data.latlon) {
+                console.log(data.latlon);
+                lat=data.latlon.split(",")[0];
+                long=data.latlon.split(",")[1];
+                city_en=data.city_en;
+                city =data.city;
+            }else{
+                lat= data.lat;
+                long=data.lng;
+            }
+            
+           
             let name
             data.name ?  name =data.name:name="irie "+data.city_en;
 
