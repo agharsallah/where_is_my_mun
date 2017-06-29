@@ -119,7 +119,7 @@ class App extends Component {
         
         <div className="footer">
             <div className="footercontainer">
-                    
+                    <a href='#'><img src="/img/ISIE.PNG" className="fa btn btn-space" alt="DI" height="80" width="150"/></a>
             </div>
         </div>
 
