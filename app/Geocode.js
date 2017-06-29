@@ -48,6 +48,7 @@ class Geocode extends Component {
         }
     }
     saveStat(address,geocodeService){
+
     let qString=config.apiUrl+"/api/addstat";
     axios({
         method: 'post',

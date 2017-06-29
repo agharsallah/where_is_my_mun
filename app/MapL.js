@@ -13,6 +13,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Download from 'material-ui/svg-icons/File/file-download';
 import axios from 'axios' ;
 import config from './config';
+import Control from 'react-leaflet-control';
+import MapKey from './MapKey' ;
 
 import { Link  } from 'react-router';
 
@@ -121,7 +123,7 @@ class MapL extends Component {
       var shape =this.props.shape
     }
     const pin = L.icon({iconUrl: '/img/pin.svg',iconSize: [50, 50],iconAnchor: [40, 40]});
-    
+
     var allreg=[]
     allreg=this.state.oneIrie.concat(this.state.regSpot,this.state.munCoord)
 
@@ -196,7 +198,9 @@ class MapL extends Component {
                         </FeatureGroup>:
                         <div/>
                     }
+                    
                 </Map>
+               {this.state.checkedRegButton ?<MapKey />:<div></div>}
         </div>
     );
   }
