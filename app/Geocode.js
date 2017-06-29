@@ -21,7 +21,6 @@ class Geocode extends Component {
         this.geocodePosition=this.geocodePosition.bind(this)
     }
 
-    
     componentDidMount() {
         var mapElement = this.mapElement;
         this.geocoder = new google.maps.Geocoder();
@@ -291,8 +290,7 @@ class Geocode extends Component {
                         :<h4 className="bg-info">{_t('Geocode.AvailableInfo0')}</h4>)}
                     <div className="map two-elm-container">
                         <MapL key={this.props.key} shape={this.props.shape} markerpos={this.state.foundAddress} polling={this.props.polling} gouv={this.props.gouvName}/>
-                        <RaisedButton onTouchTap={this.handleGeoLocatio.bind(this)} className="oneGeoLocation"  label={_t('Geocode.WhereAmI')}  />
-                        <RaisedButton onTouchTap={this.handleBackClick.bind(this)} className="one"  label={_t('Geocode.BackButton')}  />
+                        <RaisedButton onTouchTap={this.handleBackClick.bind(this)} className="oneGeoLocation"  label={_t('Geocode.BackButton')}  />
                     </div>
                 </div>
             </div>

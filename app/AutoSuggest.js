@@ -61,25 +61,6 @@ class App extends Component {
     });
 
     console.log("request the db for polling ",this.state.gouv);
-    let qString2=config.apiUrl+"/api/polling/"+this.state.gouv;
-        axios({
-            method: 'get',
-            url: qString2,
-            headers: {
-                'name': 'Isie',
-                'password': 'Isie@ndDi'
-            }
-        })
-    .then(response=>{
-         console.log('we got polling data frm db');
-         //console.log(response.data[0].data);
-         console.log(typeof(response.data[0].data));
-         this.props.getGouvPolling(response.data[0].data)
-        }
-    )
-    .catch(function (error) {
-        console.log(error);
-    });
 
     }
 
@@ -100,28 +81,24 @@ class App extends Component {
                 <FontIcon className="flag-icon flag-icon-gb" data-tag='en'/>
             </IconButton>
         </div>
-    <div className="row titleTop">
-    
-                    <div className="col-md-8 col-md-offset-2 text-center gtco-heading">
-                        <h2>{_t('AutoSuggest.Title')}</h2>
-                        <p style={{color:'#00267f'}}>{_t('AutoSuggest.sub1')}</p>
-                        <p style={{color:'#00267f'}} >{_t('AutoSuggest.sub2')}</p>
-                        <p style={{color:'red',fontSize:"17px"}}>{_t('AutoSuggest.rk1')}</p>
-                    </div>
-                </div>
+            <div className="row titleTop">
+				<div className="col-md-8 col-md-offset-2 text-center gtco-heading">
+					<h2>{_t('AutoSuggest.Title')}</h2>
+					<p>{_t('AutoSuggest.SubTitle')}</p>
+				</div>
+			</div>
         <div className="col-md-12">
             <div className="col-md-2"></div>
             
             <div className="col-md-7">
-            <Select
-                    clearable={false}
-                    name="gouvernorate_chousing"
-                    placeholder={_t('AutoSuggest.InputGuide')}
-                    value={this.state.gouv}
-                    options={options}
-                    onChange={this.ChosenGouv.bind(this)}
-            />
-
+                <Select
+                        clearable={false}
+                        name="gouvernorate_chousing"
+                        placeholder={_t('AutoSuggest.InputGuide')}
+                        value={this.state.gouv}
+                        options={options}
+                        onChange={this.ChosenGouv.bind(this)}
+                />
             </div>
 
             <div className="col-md-1" style={{marginTop:"0%"}}>
