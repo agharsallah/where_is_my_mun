@@ -85,7 +85,7 @@ html, body, #statmapmap {
       .Mapkey{
         position:absolute;
           right:1%;
-          top:95%;
+          top:85%;
           z-index:2;
       }
 @media only screen and (max-width: 1199px) {

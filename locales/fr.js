@@ -32,5 +32,13 @@
   statDrawer: {
      open: "ouvrir filtre" ,
      menu:"menu"
+ },
+  registrationMapKey:{
+     title:"Registration Map Key :",
+     shopping:"Centre commercial",
+     post:"Poste",
+     transport:"Station de transport",
+     service:"Service",
+     municipality:"Municipalité"
  }
 }

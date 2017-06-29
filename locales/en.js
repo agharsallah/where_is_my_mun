@@ -32,5 +32,13 @@ module.exports = {
   statDrawer: {
      open: "Open filter" ,
      menu:"Menu"
+ },
+  registrationMapKey:{
+     title:"Registration Map Key :",
+     shopping:"Shopping center",
+     post:"Post Office",
+     transport:"Transportaion station",
+     service:"Service",
+     municipality:"Municipality"
  }
 }

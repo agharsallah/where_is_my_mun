@@ -31,5 +31,13 @@ filter: {
  statDrawer: {
      open: "إفتح القائمة" ,
      menu:"القائمة"
+ },
+ registrationMapKey:{
+     title:"مفتاح خريطة التسجيل  :",
+     shopping:"مركز تسوق",
+     post:"مركز بريد ",
+     transport:"محطة نقل ",
+     service:"مؤسسة خدماتية ",
+     municipality:"بلدية"
  }
 }
