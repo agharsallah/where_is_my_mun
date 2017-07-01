@@ -7,11 +7,11 @@ import config from '../config'
 class StatMap extends Component {
     constructor(props){
         super(props);
-        this.state={feature:"",shape:g_mun_shapes,key:1,Irie:[]}
+        this.state={feature:"",shape:g_mun_shapes,key:1,Irie:[],seats:"" ,population:"" ,etat:"" ,gouv_name:"",destroy:true}
     }
     
     componentWillMount() {
-        let qString=config.apiUrl+"/api/shape/All";
+        let qString=config.apiUrl+"/api/shape/AllShapes";
         axios({
             method: 'get',
             url: qString,
@@ -52,15 +52,17 @@ class StatMap extends Component {
 }
     
      getColor(d,c1) {
-        if      (d > 60000)      {return (c1[5]); }
-        else if (d > 40000)      {return (c1[4]);}
+        if      (d >60000)      {return (c1[5]); }
+        else if (d >40000)      {return (c1[4]);}
         else if (d>30000)        {return (c1[3]);}
         else if (d>20000)        {return (c1[2]);}
         else if (d>10000)        {return (c1[1]);}
         else if (isNaN(d))    {return ('white')}
         else                  {return (c1[0]);}
 	}
+
     style(feature) {
+        //check for what we have checked as filter subject : Population || state ||
         const slider = this.props.SliderValues;
         if ((feature.properties.POP>=slider.min)&&(feature.properties.POP<=slider.max)) {
             var POPULATION = feature.properties.POP;
@@ -79,9 +81,11 @@ class StatMap extends Component {
             fillOpacity: 0.8
 	    };
 	}
+
     highlightFeature(e) {
-	    var layer = e.target;
-     this.setState({feature:layer.feature.properties.seats});
+	    const layer = e.target;
+        const property = layer.feature.properties;
+     this.setState({destroy:false,seats:property.chair,population:property.POP,etat:property.etat,gouv_name:property.LABEL});
     return layer.setStyle( {
         weight: 2,
         color: '#666',
@@ -91,11 +95,11 @@ class StatMap extends Component {
 	}
     resetFeature(e) {
 	    var layer = e.target;
-	    layer.setStyle({
-	        weight: 5,
-
+	     layer.setStyle({
+	        weight: 5
 	    });
-        this.setState({feature:""});
+                this.setState({destroy:true});
+
 	}
 
     render() {
@@ -115,20 +119,24 @@ class StatMap extends Component {
                     onEachFeature={
                         (feature, layer) => {
                             layer.bindTooltip(feature.properties.LABEL,{ permanent: false,className:"tooltipnamear",direction:"center" })
-                      }    
+                            layer.on({mouseover: this.highlightFeature.bind(this)});
+                            layer.on({mouseout: this.resetFeature.bind(this)});   
+                    }    
                     }
                     />
 
                     {this.props.checkedIrieButton?
                          <FeatureGroup color='purple'>
-                          {this.state.Irie.map(function(object, i){
-                              console.log(object.latlon);
-                              console.log(object);
-                            return <IrieMarker data={object.data} key={i} />;
+                            {this.state.Irie.map(function(object, i){
+                                //console.log(object.latlon);
+                                //console.log(object);
+                                return <IrieMarker data={object.data} key={i} />;
                             })}
                         </FeatureGroup>:
                         <div/>
                     }
+                    {/*show the information Div*/}
+                    {(this.state.destroy==false)?<div className="one">{this.state.population}</div>: <div>aaaaa</div> }
                 </Map>
 
         );

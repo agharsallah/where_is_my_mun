@@ -325,3 +325,12 @@ z-index: 1;
   background-color: white;
   width: 27%;
 }
+/*Stat On hover info*/
+.one{
+    position:absolute;
+    right:10px;
+    top:160px;
+    z-index:1000;
+    width: 14%;
+    background-color: white
+}

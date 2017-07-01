@@ -27,11 +27,13 @@ class RootMap extends Component {
     render() {
         return (
             <div>
-                <StatMap SliderValues={this.state.SliderValues} checkedIrieButton={this.state.checkedIrieButton} GetSelectedSets={this.state.sets}/>            
+                <StatMap    SliderValues={this.state.SliderValues}
+                            checkedIrieButton={this.state.checkedIrieButton}
+                            GetSelectedSets={this.state.sets}/>            
                 <MenuDrawer 
-                 getPopSlider={this.getPopSlider.bind(this)}
-                 getIrieButton={this.getIrieButton.bind(this)}
-                 getChoroplethColors={this.getChoroplethColors.bind(this)} 
+                            getPopSlider={this.getPopSlider.bind(this)}
+                            getIrieButton={this.getIrieButton.bind(this)}
+                            getChoroplethColors={this.getChoroplethColors.bind(this)} 
                 />
             </div>
         );

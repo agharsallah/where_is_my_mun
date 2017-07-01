@@ -38,10 +38,13 @@
     "react-leaflet": "^1.1.6",
     "react-leaflet-markercluster": "^1.1.5",
     "react-loading": "^0.1.4",
+    "react-redux": "^5.0.5",
     "react-router": "^3.0.0",
     "react-select": "^1.0.0-rc.5",
     "react-tap-event-plugin": "^2.0.1",
     "react-translate-component": "^0.14.0",
+    "redux": "^3.7.1",
+    "redux-promise": "^0.5.3",
     "underscore": "^1.8.3"
   }
 }
