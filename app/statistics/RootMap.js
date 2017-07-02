@@ -22,11 +22,11 @@ class RootMap extends Component {
     render() {
         return (
             <div>
-                <StatMap    checkedIrieButton={this.state.checkedIrieButton}
+                <StatMap    
                             GetSelectedSets={this.state.sets}
                 /> 
 
-                <MenuDrawer getIrieButton={this.getIrieButton.bind(this)}
+                <MenuDrawer 
                             getChoroplethColors={this.getChoroplethColors.bind(this)} 
                 />
             </div>

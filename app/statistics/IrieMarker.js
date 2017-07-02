@@ -5,7 +5,7 @@ const polling = L.icon({iconUrl: '/img/office-block.svg',iconSize: [30, 30],icon
 class IrieMarker extends Component {
     render() {
         const phone=this.props.data.phone
-        console.log(typeof(phone));
+        //console.log(typeof(phone));
         return (
             <div>
                 <Marker position={JSON.parse("[" + this.props.data.latlon + "]")} icon={polling} >

@@ -16,9 +16,6 @@ class MenuDrawer extends Component {
     }
     handleToggle() {this.setState({open: !this.state.open})}
 
-    getIrieButton(val) {
-        this.props.getIrieButton(val)
-    }
     GetSelectedSets(e){
         this.props.getChoroplethColors(e)
     }
@@ -35,16 +32,20 @@ class MenuDrawer extends Component {
                 <Drawer width={400}  open={this.state.open}  onRequestChange={(open) => this.setState({open})}>
                     <AppBar title="Menu" onLeftIconButtonTouchTap={this.handleToggle.bind(this)} />
                     <div className="mb-30">&nbsp;</div>
+                    
                     <div style={{marginLeft:"2rem"}}>
                         <h3 className="widget-title"  >Filter by Population</h3>
                     </div>
+
                     <div style={{margin:"3rem"}}>    
                         <PopSliderFilter />
-                    </div>                
+                    </div>  
+
                     <div style={{marginLeft:"2rem",marginTop:"5rem"}}>
                         <h3 className="widget-title"  >IRIE Filter</h3>
-                        <IrieButtonFilter getIrieButton={this.getIrieButton.bind(this)}/>   
+                        <IrieButtonFilter/>   
                     </div> 
+
                     <div style={{marginLeft:"2rem",marginTop:"4rem"}}>
                         <ColorBrew GetSelectedSets={this.GetSelectedSets.bind(this)}/>
                     </div>

@@ -150,10 +150,10 @@ class StatMap extends Component {
 function mapStateToProps(state) {
   // Whatever is returned will show up as props
   // inside of StatMap
-  console.log("youhoooo",state.popSlider);
-  console.log("youhiiioo",state.popSlider.max);
+  console.log("youhoooo",state.irieCheckbox);
   return {
-    popSlider: state.popSlider
+    popSlider: state.popSlider,
+    checkedIrieButton:state.irieCheckbox
   };
 }
 
