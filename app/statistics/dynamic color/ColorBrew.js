@@ -18,10 +18,7 @@ class ColorBrew extends Component {
   handleClose ()  {
     this.setState({open: false});
   }
-  
-  GetBrewer(e){
-    this.props.GetSelectedSets(e);
-  }
+
     render() {
     const actions = [
       <FlatButton
@@ -50,10 +47,10 @@ class ColorBrew extends Component {
         >
         
         <div>
-        <ColorSeries colorRange={c1} keys="a" getBrewer={this.GetBrewer.bind(this)} />
-        <ColorSeries colorRange={c2} keys="b" getBrewer={this.GetBrewer.bind(this)}/>
-        <ColorSeries colorRange={c3} keys="b" getBrewer={this.GetBrewer.bind(this)}/>
-        <ColorSeries colorRange={c4} keys="b" getBrewer={this.GetBrewer.bind(this)}/>
+        <ColorSeries colorRange={c1} keys="a"  />
+        <ColorSeries colorRange={c2} keys="b" />
+        <ColorSeries colorRange={c3} keys="b" />
+        <ColorSeries colorRange={c4} keys="b" />
         </div>
         </Dialog>  
             </div>

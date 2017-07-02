@@ -16,10 +16,6 @@ class MenuDrawer extends Component {
     }
     handleToggle() {this.setState({open: !this.state.open})}
 
-    GetSelectedSets(e){
-        this.props.getChoroplethColors(e)
-    }
-
     render() {
         return (
             <div>
@@ -32,7 +28,7 @@ class MenuDrawer extends Component {
                 <Drawer width={400}  open={this.state.open}  onRequestChange={(open) => this.setState({open})}>
                     <AppBar title="Menu" onLeftIconButtonTouchTap={this.handleToggle.bind(this)} />
                     <div className="mb-30">&nbsp;</div>
-                    
+
                     <div style={{marginLeft:"2rem"}}>
                         <h3 className="widget-title"  >Filter by Population</h3>
                     </div>
@@ -47,7 +43,7 @@ class MenuDrawer extends Component {
                     </div> 
 
                     <div style={{marginLeft:"2rem",marginTop:"4rem"}}>
-                        <ColorBrew GetSelectedSets={this.GetSelectedSets.bind(this)}/>
+                        <ColorBrew />
                     </div>
                 </Drawer>
             </div>

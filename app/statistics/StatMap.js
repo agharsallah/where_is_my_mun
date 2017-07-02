@@ -79,7 +79,7 @@ class StatMap extends Component {
         }
         
 	    return {
-            fillColor: this.getColor(POPULATION,this.props.GetSelectedSets),
+            fillColor: this.getColor(POPULATION,this.props.mapColor),
             color: 'black',
             weight: 2,
             fillOpacity: 0.8
@@ -150,10 +150,11 @@ class StatMap extends Component {
 function mapStateToProps(state) {
   // Whatever is returned will show up as props
   // inside of StatMap
-  console.log("youhoooo",state.irieCheckbox);
+  console.log("youhoooo",state);
   return {
     popSlider: state.popSlider,
-    checkedIrieButton:state.irieCheckbox
+    checkedIrieButton:state.irieCheckbox,
+    mapColor:state.mapColor
   };
 }
 
