@@ -4,6 +4,10 @@ import axios from 'axios' ;
 import IrieMarker from './IrieMarker' ; 
 import config from '../config'
 
+import { connect } from "react-redux";
+import { getPopValue } from "./actions/index";
+import { bindActionCreators } from "redux";
+
 class StatMap extends Component {
     constructor(props){
         super(props);
@@ -63,7 +67,7 @@ class StatMap extends Component {
 
     style(feature) {
         //check for what we have checked as filter subject : Population || state ||
-        const slider = this.props.SliderValues;
+        const slider = this.props.popSlider;
         if ((feature.properties.POP>=slider.min)&&(feature.properties.POP<=slider.max)) {
             var POPULATION = feature.properties.POP;
         }else {var POPULATION = "norange";}
@@ -143,4 +147,18 @@ class StatMap extends Component {
     }
 }
 
-export default StatMap;
+function mapStateToProps(state) {
+  // Whatever is returned will show up as props
+  // inside of StatMap
+  console.log("youhoooo",state.popSlider);
+  console.log("youhiiioo",state.popSlider.max);
+  return {
+    popSlider: state.popSlider
+  };
+}
+
+// Promote BookList from a component to a container - it needs to know
+// about this new dispatch method, selectBook. Make it available
+// as a prop.
+export default connect(mapStateToProps)(StatMap);
+

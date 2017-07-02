@@ -15,9 +15,7 @@ class MenuDrawer extends Component {
         this.state = {open: true};
     }
     handleToggle() {this.setState({open: !this.state.open})}
-    getPopSlider(val) {
-        this.props.getPopSlider(val)
-    }
+
     getIrieButton(val) {
         this.props.getIrieButton(val)
     }
@@ -41,7 +39,7 @@ class MenuDrawer extends Component {
                         <h3 className="widget-title"  >Filter by Population</h3>
                     </div>
                     <div style={{margin:"3rem"}}>    
-                        <PopSliderFilter getPopSlider={this.getPopSlider.bind(this)}/>
+                        <PopSliderFilter />
                     </div>                
                     <div style={{marginLeft:"2rem",marginTop:"5rem"}}>
                         <h3 className="widget-title"  >IRIE Filter</h3>
