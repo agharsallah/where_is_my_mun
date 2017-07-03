@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
-import PopSliderFilter from './PopSliderFilter' ;
 import IrieButtonFilter from './IrieButtonFilter' ;
 import ColorBrew from './dynamic color/ColorBrew';
 
-import StatePickFilter from './containers/StatePickFilter' ;
-import AreaPickFilter from './containers/AreaPickFilter' ;
-import PopPickFilter from './containers/PopPickFilter' ;
+import StatePickFilter from './containers/pickFilter/StatePickFilter' ;
+import AreaPickFilter from './containers/pickFilter/AreaPickFilter' ;
+import PopPickFilter from './containers/pickFilter/PopPickFilter' ;
+
+import PopSliderFilter from './containers/sliderFilter/PopSliderFilter' ;
+import AreaSliderFilter from './containers/sliderFilter/AreaSliderFilter' ;
+import StateSliderFilter from './containers/sliderFilter/StateSliderFilter' ;
+
 
 import counterpart  from 'counterpart';
 import Translate    from 'react-translate-component';
@@ -38,8 +42,8 @@ class MenuDrawer extends Component {
                      </div> 
                         <div className="col-md-12" style={{marginBottom:"2rem",paddingLeft: "initial"}}>
                             <div className="col-md-3"><PopPickFilter/> </div>
-                            <div className="col-md-3"><StatePickFilter/> </div>
                             <div className="col-md-3"><AreaPickFilter/> </div>
+                            <div className="col-md-3"><StatePickFilter/> </div>
                         </div> 
                    
 
@@ -50,7 +54,21 @@ class MenuDrawer extends Component {
                         <PopSliderFilter />
                     </div>  
 
-                    <div style={{marginLeft:"2rem",marginTop:"5rem"}}>
+                    <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
+                        <h3 className="widget-title"  >Filter by Area</h3>
+                    </div>
+                    <div style={{margin:"3rem"}}>    
+                        <AreaSliderFilter />
+                    </div>  
+
+                    <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
+                        <h3 className="widget-title"  >Filter by type</h3>
+                    </div>
+                    <div style={{margin:"2rem"}}>    
+                        <StateSliderFilter />
+                    </div>  
+
+                    <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
                         <h3 className="widget-title"  >Marker Filter</h3>
                         <IrieButtonFilter/>   
                     </div> 

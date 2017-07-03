@@ -3,7 +3,7 @@ import MenuItem from 'material-ui/MenuItem';
 import InputRange from 'react-input-range';
 
 import { connect } from "react-redux";
-import { getPopValue } from "./actions/index";
+import { getPopValue } from "../../actions/index";
 import { bindActionCreators } from "redux";
 
 import 'react-input-range/lib/css/index.css'
@@ -12,6 +12,7 @@ class PopSliderFilter extends Component {
             super(props);
             this.state = {
                 value: { min: 10000, max: 90000 },
+                disabling:true
             };
     }
  
@@ -20,6 +21,7 @@ class PopSliderFilter extends Component {
     render() {
         return (
                 <InputRange
+                    disabled={!this.props.PopCheckbox}
                     style={{fontSize:"1rem !important"}}
                     maxValue={90000}
                     minValue={10000}
@@ -37,8 +39,12 @@ function mapDispatchToProps(dispatch) {
   // to all of our reducers
   return bindActionCreators({ getPopValue }, dispatch);
 }
+function mapStateToProps(state) {
 
-// Promote BookList from a component to a container - it needs to know
-// about this new dispatch method, selectBook. Make it available
-// as a prop.
-export default connect(null, mapDispatchToProps)(PopSliderFilter);
+  console.log("PopSlider Coponent Youhoo",state.PopCheckbox);
+  return {
+    PopCheckbox: state.PopCheckbox,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PopSliderFilter);

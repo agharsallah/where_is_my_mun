@@ -1,6 +1,5 @@
 import axios from "axios";
 
-export const SLIDERVALUE = "SLIDERVALUE";
 export const CHECKEDIRIEBUTTON = "CHECKEDIRIEBUTTON";
 export const MAPCOLOR = "MAPCOLOR";
 
@@ -8,13 +7,10 @@ export const POPACTIVATIONCHECKBOX = "POPACTIVATIONCHECKBOX";
 export const STATEACTIVATIONCHECKBOX = "STATEACTIVATIONCHECKBOX";
 export const AREAACTIVATIONCHECKBOX = "AREAACTIVATIONCHECKBOX";
 
-export function getPopValue(popValue) {
+export const SLIDERVALUE = "SLIDERVALUE";
+export const AREASLIDERVALUE = "AREASLIDERVALUE";
+export const STATESLIDERVALUE = "STATESLIDERVALUE";
 
-  return {
-    type: SLIDERVALUE,
-    payload: popValue
-  };
-}
 
 export function getIrieButton(checkIrieButton) {
 
@@ -54,5 +50,28 @@ export function getAreaPickFilter(AreaCheckbox) {
   return {
     type: AREAACTIVATIONCHECKBOX,
     payload: AreaCheckbox
+  };
+}
+/*get Slider Value*/
+export function getPopValue(popValue) {
+
+  return {
+    type: SLIDERVALUE,
+    payload: popValue
+  };
+}
+
+export function getAreaValue(areaValue) {
+
+  return {
+    type: STATESLIDERVALUE,
+    payload: popValue
+  };
+}
+export function getStateValue(stateValue) {
+
+  return {
+    type: AREASLIDERVALUE,
+    payload: stateValue
   };
 }

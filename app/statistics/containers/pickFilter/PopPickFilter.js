@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import Checkbox from 'material-ui/Checkbox';
 
 import { connect } from "react-redux";
-import { getStatePickFilter } from "../actions/index";
+import { getPopPickFilter } from "../../actions/index";
 import { bindActionCreators } from "redux";
 
-class StatePickFilter extends Component {
+class PopPickFilter extends Component {
     constructor(props) {
         super(props);
         this.state={value:false}
@@ -14,9 +14,10 @@ class StatePickFilter extends Component {
     render() {
         return (
             <Checkbox
-            key='type'
-            label="type"
-            onCheck={event => {this.setState({value:!this.state.value});this.props.getStatePickFilter(!this.state.value)}}
+                key='pop'
+                iconStyle={{marginRight:"5px"}}
+                label="Population"
+                onCheck={event => {this.setState({value:!this.state.value});this.props.getPopPickFilter(!this.state.value)}}
             />
         );
     }
@@ -26,10 +27,10 @@ class StatePickFilter extends Component {
 function mapDispatchToProps(dispatch) {
   // Whenever getPopValue is called, the result shoudl be passed
   // to all of our reducers
-  return bindActionCreators({ getStatePickFilter }, dispatch);
+  return bindActionCreators({ getPopPickFilter }, dispatch);
 }
 
 // Promote BookList from a component to a container - it needs to know
 // about this new dispatch method, selectBook. Make it available
 // as a prop.
-export default connect(null, mapDispatchToProps)(StatePickFilter);
+export default connect(null, mapDispatchToProps)(PopPickFilter);
