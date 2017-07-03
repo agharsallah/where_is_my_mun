@@ -41,7 +41,7 @@ function mapDispatchToProps(dispatch) {
 }
 function mapStateToProps(state) {
 
-  console.log("PopSlider Coponent Youhoo",state.PopCheckbox);
+  console.log("AreaSlider Coponent Youhoo",state.AreaCheckbox);
   return {
     AreaCheckbox: state.AreaCheckbox,
   };

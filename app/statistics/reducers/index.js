@@ -12,12 +12,17 @@ import PopCheckbox from './activateFilterCheckbox/reducer_PopCheckbox' ;
 import StateCheckbox from './activateFilterCheckbox/reducer_StateCheckbox' ;
 
 const rootReducer = combineReducers({
-  popSlider: popFilter,
   irieCheckbox:irieCheckbox,
   mapColor:changeMapColor,
+
   AreaCheckbox,
   PopCheckbox,
-  StateCheckbox
+  StateCheckbox,
+
+  popFilter,
+  areaFilter,
+  stateFilter
+
 });
 
 export default rootReducer;

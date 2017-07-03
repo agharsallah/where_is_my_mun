@@ -8,20 +8,13 @@ import { bindActionCreators } from "redux";
 
 import 'react-input-range/lib/css/index.css'
 class StateSliderFilter extends Component {
-    constructor(props) {
-            super(props);
-            this.state = {
-                value: { min: 10000, max: 90000 },
-                disabling:true
-            };
-    }
  
     //handleChange (event, index, value) {this.props.getclickedbutton(value);this.setState({value})}
     
     render() {
         return (
             <div>  
-            <RadioButtonGroup name="state of mun" defaultSelected="all" onChange={(e,value) => {console.log(value); this.props.getStateValue(value)} }>
+            <RadioButtonGroup name="state of mun" defaultSelected="All" onChange={(e,value) => {console.log(value); this.props.getStateValue(value)} }>
                 <RadioButton
                     value="All"
                     label="All"
@@ -57,7 +50,7 @@ function mapDispatchToProps(dispatch) {
 }
 function mapStateToProps(state) {
 
-  console.log("StateSlider Component Youhoo",state.PopCheckbox);
+  console.log("StateSlider Component Youhoo",state.StateCheckbox);
   return {
     StateCheckbox: state.StateCheckbox,
   };

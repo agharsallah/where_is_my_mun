@@ -1,8 +1,8 @@
-import { SLIDERVALUE } from "../../actions/index";
+import { STATESLIDERVALUE } from "../../actions/index";
 
-export default function(state = {min:10000, max:90000}, action) {
+export default function(state = "All", action) {
   switch (action.type) {
-    case SLIDERVALUE:
+    case STATESLIDERVALUE:
       return action.payload;
   }
   return state;

@@ -64,14 +64,14 @@ export function getPopValue(popValue) {
 export function getAreaValue(areaValue) {
 
   return {
-    type: STATESLIDERVALUE,
-    payload: popValue
+    type: AREASLIDERVALUE,
+    payload: areaValue
   };
 }
 export function getStateValue(stateValue) {
 
   return {
-    type: AREASLIDERVALUE,
+    type: STATESLIDERVALUE,
     payload: stateValue
   };
 }

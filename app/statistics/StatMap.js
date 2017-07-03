@@ -67,7 +67,7 @@ class StatMap extends Component {
 
     style(feature) {
         //check for what we have checked as filter subject : Population || state ||
-        const slider = this.props.popSlider;
+        const slider = this.props.popFilter;
         if ((feature.properties.POP>=slider.min)&&(feature.properties.POP<=slider.max)) {
             var POPULATION = feature.properties.POP;
         }else {var POPULATION = "norange";}
@@ -152,9 +152,9 @@ function mapStateToProps(state) {
   // inside of StatMap
   console.log("youhoooo",state);
   return {
-    popSlider: state.popSlider,
     checkedIrieButton:state.irieCheckbox,
-    mapColor:state.mapColor
+    mapColor:state.mapColor,
+    popFilter: state.popFilter,
   };
 }
 
