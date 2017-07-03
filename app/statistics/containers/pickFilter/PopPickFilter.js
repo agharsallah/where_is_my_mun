@@ -8,7 +8,7 @@ import { bindActionCreators } from "redux";
 class PopPickFilter extends Component {
     constructor(props) {
         super(props);
-        this.state={value:false}
+        this.state={value:true}
     }
     
     render() {
@@ -17,6 +17,7 @@ class PopPickFilter extends Component {
                 key='pop'
                 iconStyle={{marginRight:"5px"}}
                 label="Population"
+                checked={this.state.value}
                 onCheck={event => {this.setState({value:!this.state.value});this.props.getPopPickFilter(!this.state.value)}}
             />
         );

@@ -65,25 +65,59 @@ class StatMap extends Component {
         else                  {return (c1[0]);}
 	}
 
+    getColorArea(d,c1) {
+        if      (d >800)      {return (c1[5]); }
+        else if (d >600)      {return (c1[4]);}
+        else if (d>400)        {return (c1[3]);}
+        else if (d>200)        {return (c1[2]);}
+        else if (d>100)        {return (c1[1]);}
+        else if (isNaN(d))    {return ('white')}
+        else                  {return (c1[0]);}
+	}
+
     style(feature) {
         //check for what we have checked as filter subject : Population || state ||
-        const slider = this.props.popFilter;
-        if ((feature.properties.POP>=slider.min)&&(feature.properties.POP<=slider.max)) {
-            var POPULATION = feature.properties.POP;
-        }else {var POPULATION = "norange";}
-        if ((slider.min==10000)&&(feature.properties.POP<10000)) {
-            var POPULATION = feature.properties.POP; 
+        if (this.props.popCheckbox) {
+            
+            const slider = this.props.popFilter;
+            if ((feature.properties.POP>=slider.min)&&(feature.properties.POP<=slider.max)) {
+                var POPULATION = feature.properties.POP;
+            }else {var POPULATION = "norange";}
+            if ((slider.min==10000)&&(feature.properties.POP<10000)) {
+                var POPULATION = feature.properties.POP; 
+            }
+            if ((slider.max==90000)&&(feature.properties.POP>90000)) {
+                var POPULATION = feature.properties.POP; 
+            }
+            
+            return {
+                fillColor: this.getColor(POPULATION,this.props.mapColor),
+                color: 'black',
+                weight: 2,
+                fillOpacity: 0.8
+            };
+        }else if(this.props.areaCheckbox){
+            
+            const slider = this.props.areaFilter;
+            if ((parseInt(feature.properties.area)>=slider.min)&&(parseInt(feature.properties.area)<=slider.max)) {
+                var AREA = parseInt(feature.properties.area);
+            }else {var AREA = "norange";}
+            
+            if ((slider.min==50)&&(parseInt(feature.properties.area)<50)) {
+                var AREA = parseInt(feature.properties.area); 
+            }
+            if ((slider.max==1000)&&(parseInt(feature.properties.area)>1000)) {
+                var AREA = parseInt(feature.properties.area); 
+            }
+            
+            return {
+                fillColor: this.getColorArea(AREA,this.props.mapColor),
+                color: 'black',
+                weight: 2,
+                fillOpacity: 0.8
+            };            
         }
-        if ((slider.max==90000)&&(feature.properties.POP>90000)) {
-            var POPULATION = feature.properties.POP; 
-        }
-        
-	    return {
-            fillColor: this.getColor(POPULATION,this.props.mapColor),
-            color: 'black',
-            weight: 2,
-            fillOpacity: 0.8
-	    };
+
 	}
 
     highlightFeature(e) {
@@ -154,7 +188,12 @@ function mapStateToProps(state) {
   return {
     checkedIrieButton:state.irieCheckbox,
     mapColor:state.mapColor,
+    
     popFilter: state.popFilter,
+    areaFilter: state.areaFilter,
+    
+    popCheckbox:state.PopCheckbox,
+    areaCheckbox:state.AreaCheckbox,
   };
 }
 
