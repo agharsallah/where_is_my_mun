@@ -334,3 +334,43 @@ z-index: 1;
     width: 14%;
     background-color: white
 }
+/*map key of statistics page*/
+/*    #legend { display: flex; display: -webkit-box; padding-top: 7px; width: 23vw}
+    .color-key {
+      background: linear-gradient(to right,
+        hsl(5, 69%, 54%) 0%,
+        hsl(29, 71%, 51%) 17%,
+        hsl(54, 74%, 47%) 33%,
+        hsl(78, 76%, 44%) 50%,
+        hsl(102, 78%, 41%) 67%,
+        hsl(127, 81%, 37%) 83%,
+        hsl(151, 83%, 34%) 100%);
+      flex: 1;
+      -webkit-box-flex: 1;
+      margin: 0 5px;
+      text-align: left;
+      font-size: 1.0em;
+      line-height: 1.0em;
+    }*/
+    .legend {
+    line-height: 18px;
+    color: #555;
+}
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+}
+.infoLegendStat {
+    padding: 6px 8px;
+    background: white;
+    background: rgba(255,255,255,0.8);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info h4 {
+    margin: 0 0 5px;
+    color: #777;
+}
