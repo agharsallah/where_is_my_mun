@@ -12,7 +12,7 @@ import { bindActionCreators } from "redux";
 class StatMap extends Component {
     constructor(props){
         super(props);
-        this.state={feature:"",shape:g_mun_shapes,key:1,Irie:[],seats:"" ,population:"" ,etat:"" ,gouv_name:"",destroy:true,grades:[0,5000, 10000,20000,40000, 70000 ],keytitle:"Number of population per delegation",colorfun:this.getColor}
+        this.state={feature:"",shape:g_mun_shapes,key:1,Irie:[],seats:"" ,population:"" ,etat:"" ,gouv_name:"",destroy:true,grades:["Old","New","Extended"],keytitle:"Municipality color Representation",colorfun:this.getColor}
     }
     
     componentWillMount() {
@@ -55,81 +55,43 @@ class StatMap extends Component {
         });
     
     }
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.popCheckbox) {
-            this.setState({grades:[0,5000, 10000,20000,40000, 70000 ],
-                keytitle:"Number of population per Municipality",
-                colorfun:this.getColor
-            });
-        }
-        else if(nextProps.areaCheckbox){
-            this.setState({grades:[100,200,400,600,800],
-                keytitle:"Km² Area per Municipality",
-                colorfun:this.getColorArea});
 
-        }
-    }
     
      getColor(d,c1) {
-        if      (d >70000)      {return (c1[5]); }
-        else if (d >40000)      {return (c1[4]);}
-        else if (d>20000)        {return (c1[3]);}
-        else if (d>10000)        {return (c1[2]);}
-        else if (d>5000)        {return (c1[1]);}
-        else if (isNaN(d))    {return ('white')}
-        else                  {return (c1[0]);}
-	}
-
-    getColorArea(d,c1) {
-        if      (d >800)      {return (c1[5]); }
-        else if (d >600)      {return (c1[4]);}
-        else if (d>400)        {return (c1[3]);}
-        else if (d>200)        {return (c1[2]);}
-        else if (d>100)        {return (c1[1]);}
+        if      (d >2)      {return (c1[2]); }
+        else if (d >1)      {return (c1[1]);}
         else if (isNaN(d))    {return ('white')}
         else                  {return (c1[0]);}
 	}
 
     style(feature) {
         //check for what we have checked as filter subject : Population || state ||
-        if (this.props.popCheckbox) {
-            const slider = this.props.popFilter;
-            if ((feature.properties.POP>=slider.min)&&(feature.properties.POP<=slider.max)) {
-                var POPULATION = feature.properties.POP;
-            }else {var POPULATION = "norange";}
-            if ((slider.min==5000)&&(feature.properties.POP<5000)) {
-                var POPULATION = feature.properties.POP; 
+        
+            const etat = this.props.stateFilter;
+            if(etat=="All") {
+                if(feature.properties.state=="extended"){
+                    var ETAT = 1;
+                }else if(feature.properties.state=="new"){
+                    var ETAT = 2;
+                }else{
+                    var ETAT = 3;
+                }
             }
-            if ((slider.max==90000)&&(feature.properties.POP>90000)) {
-                var POPULATION = feature.properties.POP; 
+            if ((feature.properties.state=="extended")&&(etat=="Extended")){
+                var ETAT = 1;
+            }else if ((feature.properties.state=="new")&&(etat=="New")){
+                var ETAT = 2;
+            }else if ((feature.properties.state=="old")&&(etat=="Old")){
+                var ETAT = 3;
             }
+           
             
             return {
-                fillColor: this.getColor(POPULATION,this.props.mapColor),
+                fillColor: this.getColor(ETAT,this.props.mapColorState),
                 color: 'black',
                 weight: 2,
                 fillOpacity: 0.8
             };
-        }else if(this.props.areaCheckbox){
-            const slider = this.props.areaFilter;
-            if ((parseInt(feature.properties.area)>=slider.min)&&(parseInt(feature.properties.area)<=slider.max)) {
-                var AREA = parseInt(feature.properties.area);
-            }else {var AREA = "norange";}
-            
-            if ((slider.min==50)&&(parseInt(feature.properties.area)<50)) {
-                var AREA = parseInt(feature.properties.area); 
-            }
-            if ((slider.max==1000)&&(parseInt(feature.properties.area)>1000)) {
-                var AREA = parseInt(feature.properties.area); 
-            }
-            
-            return {
-                fillColor: this.getColorArea(AREA,this.props.mapColor),
-                color: 'black',
-                weight: 2,
-                fillOpacity: 0.8
-            };            
-        }
 
 	}
 
@@ -154,7 +116,6 @@ class StatMap extends Component {
 	}
 
     render() {
-        var grades=[0,10000, 20000,30000,40000, 60000 ]
         const position = [34.855360, 8.8049795];
         return (
             
@@ -189,7 +150,7 @@ class StatMap extends Component {
                 {/**/}
                     <Control position="bottomright" >
 
-                        <MapKey colorSet={this.props.mapColor} grades={this.state.grades} getColor={this.state.colorfun} keyTitle={this.state.keytitle} />
+                        <MapKey colorSet={this.props.mapColorState} grades={this.state.grades} getColor={this.state.colorfun} keyTitle={this.state.keytitle} />
                     </Control>
                     {/*show the information Div*/}
                     {(this.state.destroy==false)?<div className="one">{this.state.population}</div>: <div>aaaaa</div> }
@@ -202,14 +163,13 @@ class StatMap extends Component {
 function mapStateToProps(state) {
   // Whatever is returned will show up as props
   // inside of StatMap
-  console.log("youhoooo",state);
+  console.log("youhoooo",state.changeMapColorState);
   return {
     checkedIrieButton:state.irieCheckbox,
-    mapColor:state.changeMapColor,
-    
-    popFilter: state.popFilter,
-    areaFilter: state.areaFilter,
-    
+    mapColorState:state.changeMapColorState,
+
+    stateFilter:state.stateFilter,
+
     popCheckbox:state.PopCheckbox,
     areaCheckbox:state.AreaCheckbox,
   };

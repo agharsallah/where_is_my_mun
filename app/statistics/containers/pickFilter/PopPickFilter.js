@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Checkbox from 'material-ui/Checkbox';
 
 import { connect } from "react-redux";
-import { getPopPickFilter } from "../../actions/index";
+import { getPopPickFilter } from "../../../actions/index";
 import { bindActionCreators } from "redux";
 
 class PopPickFilter extends Component {

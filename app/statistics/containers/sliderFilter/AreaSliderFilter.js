@@ -3,7 +3,7 @@ import MenuItem from 'material-ui/MenuItem';
 import InputRange from 'react-input-range';
 
 import { connect } from "react-redux";
-import { getAreaValue } from "../../actions/index";
+import { getAreaValue } from "../../../actions/index";
 import { bindActionCreators } from "redux";
 
 import 'react-input-range/lib/css/index.css'

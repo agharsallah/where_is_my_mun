@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { connect } from "react-redux";
-import { getColorSets } from "../../actions/index";
+import { getStateColorSets } from "../../actions/index";
 import { bindActionCreators } from "redux";
 
 class ColorSeries extends Component {
@@ -14,7 +14,7 @@ class ColorSeries extends Component {
         this.setState({selectedseries:this.props.colorRange});
         let colorRange = this.props.colorRange;
         //save the chosen color range in the redux store
-        this.props.getColorSets(colorRange);
+        this.props.getStateColorSets(colorRange);
   }
   
 
@@ -26,6 +26,7 @@ class ColorSeries extends Component {
             let key=`${this.props.keys} ${i}`
             rows.push(<div key={key} className='square' style={{background:colorRange[i]}} />)
         }
+        console.log(rows);
         return (
              <div id="squareBrew"  onClick={this.testclick.bind(this)}>
                 {rows}
@@ -39,7 +40,7 @@ class ColorSeries extends Component {
 function mapDispatchToProps(dispatch) {
   // Whenever getPopValue is called, the result shoudl be passed
   // to all of our reducers
-  return bindActionCreators({ getColorSets }, dispatch);
+  return bindActionCreators({ getStateColorSets }, dispatch);
 }
 
 // Promote BookList from a component to a container - it needs to know

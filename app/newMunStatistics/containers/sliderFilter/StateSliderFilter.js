@@ -18,22 +18,18 @@ class StateSliderFilter extends Component {
                 <RadioButton
                     value="All"
                     label="All"
-                    disabled={!this.props.StateCheckbox}
                 />
                 <RadioButton
                     value="New"
                     label="New"
-                    disabled={!this.props.StateCheckbox}
                 />
                 <RadioButton
                     value="Old"
                     label="Old"
-                    disabled={!this.props.StateCheckbox}
                 />
                 <RadioButton
                     value="Extended"
                     label="Extended"
-                    disabled={!this.props.StateCheckbox}
                 />
             </RadioButtonGroup>
                  </div>
@@ -48,12 +44,6 @@ function mapDispatchToProps(dispatch) {
   // to all of our reducers
   return bindActionCreators({ getStateValue }, dispatch);
 }
-function mapStateToProps(state) {
 
-  console.log("StateSlider Component Youhoo",state.StateCheckbox);
-  return {
-    StateCheckbox: state.StateCheckbox,
-  };
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(StateSliderFilter);
+export default connect(null, mapDispatchToProps)(StateSliderFilter);

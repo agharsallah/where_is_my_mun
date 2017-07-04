@@ -7,11 +7,12 @@ import { Router, Route, browserHistory,IndexRoute  } from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import reducers from "./statistics/reducers";
+import reducers from "./reducers";
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
 import App from "./App.js"
 import RootMap from "./statistics/RootMap.js"
+import NewMunRoot from "./newMunStatistics/RootMap.js"
 injectTapEventPlugin();
 
 ReactDOM.render(
@@ -21,6 +22,7 @@ ReactDOM.render(
     <Router history={browserHistory}>
         <Route  path="/" component={App}/> 
         <Route path="/statistics" component={RootMap}/> 
+        <Route path="/newmun" component={NewMunRoot}/> 
 
     </Router>
     </MuiThemeProvider>

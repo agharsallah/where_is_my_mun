@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import irieCheckbox from './reducer_IrieCheckbox' ;
-import changeMapColor from './reducer_changeMapColor' ;
+import changeMapColor from './mapcolor/reducer_changeMapColor' ;
+import changeMapColorState from './mapcolor/reducer_changeMapColorState' ;
 
 import popFilter from './slider filter/reducer_popFilter' ;
 import areaFilter from './slider filter/reducer_areaFilter' ;
@@ -13,8 +14,8 @@ import StateCheckbox from './activateFilterCheckbox/reducer_StateCheckbox' ;
 
 const rootReducer = combineReducers({
   irieCheckbox:irieCheckbox,
-  mapColor:changeMapColor,
-
+  changeMapColor,
+  changeMapColorState,
   AreaCheckbox,
   PopCheckbox,
   StateCheckbox,

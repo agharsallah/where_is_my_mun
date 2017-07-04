@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Checkbox from 'material-ui/Checkbox';
 
 import { connect } from "react-redux";
-import { getIrieButton } from "../actions/index";
+import { getIrieButton } from "./actions/index";
 import { bindActionCreators } from "redux";
 
 class IrieButtonFilter extends Component {

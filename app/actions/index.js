@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const CHECKEDIRIEBUTTON = "CHECKEDIRIEBUTTON";
 export const MAPCOLOR = "MAPCOLOR";
+export const MAPCOLORSTATE = "MAPCOLORSTATE";
 
 export const POPACTIVATIONCHECKBOX = "POPACTIVATIONCHECKBOX";
 export const STATEACTIVATIONCHECKBOX = "STATEACTIVATIONCHECKBOX";
@@ -24,6 +25,13 @@ export function getColorSets(colorset) {
 
   return {
     type: MAPCOLOR,
+    payload: colorset
+  };
+}
+export function getStateColorSets(colorset) {
+
+  return {
+    type: MAPCOLORSTATE,
     payload: colorset
   };
 }
