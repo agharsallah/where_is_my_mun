@@ -1,0 +1,26 @@
+import React, { Component } from 'react';
+
+class MapKey extends Component {
+
+    render() {
+         var grades = this.props.grades;
+        return (
+             <div className="infoLegendStat legend">
+                <p style={{marginLeft:"10px"}}>{this.props.keyTitle}</p>
+                {grades.map(function(object, i){
+                    var bg=this.props.getColor(object + 1,this.props.colorSet)
+                    return (
+                            <div key={i+this.props.colorSet}>
+                                <i style={{background:bg}}  ></i>
+                                {(grades[i + 1] ? (grades[i]+' - '+grades[i+1]): '+ '+grades[i]) }
+                                <br/>
+                            </div>
+                        )
+                },this)}
+                <i style={{background:"#dddddd"}} ></i> {"inexistant"}
+            </div>
+        );
+    }
+}
+
+export default MapKey;

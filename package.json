@@ -45,6 +45,7 @@
     "react-translate-component": "^0.14.0",
     "redux": "^3.7.1",
     "redux-promise": "^0.5.3",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "react-leaflet-control":"*"
   }
 }
