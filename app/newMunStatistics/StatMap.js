@@ -5,6 +5,7 @@ import IrieMarker from './IrieMarker' ;
 import config from '../config'
 import Control from 'react-leaflet-control';
 import MapKey from './MapKey' ;
+import MapInfo from './MapInfo' ;
 import { connect } from "react-redux";
 import { getPopValue } from "../actions/index";
 import { bindActionCreators } from "redux";
@@ -12,7 +13,12 @@ import { bindActionCreators } from "redux";
 class StatMap extends Component {
     constructor(props){
         super(props);
-        this.state={feature:"",shape:g_mun_shapes,key:1,Irie:[],seats:"" ,population:"" ,etat:"" ,gouv_name:"",destroy:true,grades:["Old","New","Extended"],keytitle:"Municipality color Representation",colorfun:this.getColor}
+        this.state={
+            feature:"",shape:g_mun_shapes,key:1,Irie:[],seats:"" ,population:"" ,
+            etat:"" ,gouv_name:"",destroy:true,grades:["New","Old","Extended"],
+            keytitle:"Municipality color Representation",colorfun:this.getColor,
+            allpop:0,allarea:0
+        }
     }
     
     componentWillMount() {
@@ -56,7 +62,6 @@ class StatMap extends Component {
     
     }
 
-    
      getColor(d,c1) {
         if      (d >2)      {return (c1[2]); }
         else if (d >1)      {return (c1[1]);}
@@ -66,7 +71,6 @@ class StatMap extends Component {
 
     style(feature) {
         //check for what we have checked as filter subject : Population || state ||
-        
             const etat = this.props.stateFilter;
             if(etat=="All") {
                 if(feature.properties.state=="extended"){
@@ -112,7 +116,6 @@ class StatMap extends Component {
 	        weight: 5
 	    });
                 this.setState({destroy:true});
-
 	}
 
     render() {
@@ -149,8 +152,10 @@ class StatMap extends Component {
                     }
                 {/**/}
                     <Control position="bottomright" >
-
                         <MapKey colorSet={this.props.mapColorState} grades={this.state.grades} getColor={this.state.colorfun} keyTitle={this.state.keytitle} />
+                    </Control>
+                    <Control position="topright" >
+                        <MapInfo shape={this.state.shape} />
                     </Control>
                     {/*show the information Div*/}
                     {(this.state.destroy==false)?<div className="one">{this.state.population}</div>: <div>aaaaa</div> }
