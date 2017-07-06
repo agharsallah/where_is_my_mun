@@ -41,11 +41,15 @@ componentWillReceiveProps(nextProps) {
         return (
              <div className="infoLegendStat legend">
                <StackedBar 
-               title={["Popultaion"]} charttitle="Population representation" ytitle="Total Population perc."
-                allpop={this.state.allpop} extpop={this.state.extpop} newpop={this.state.newpop} oldpop={this.state.oldpop}/>
-                              <StackedBar 
-               title={["Area"]} charttitle="Area representation Km²" ytitle="Total Area perc."
-                allpop={this.state.allarea} extpop={this.state.extarea} newpop={this.state.newarea} oldpop={this.state.oldarea}/>
+                    title={["Popultaion"]} charttitle="Population representation" ytitle="Total Population perc."
+                    allpop={this.state.allpop} extpop={this.state.extpop} newpop={this.state.newpop} oldpop={this.state.oldpop}
+                    spec=" person"
+                    />
+                <StackedBar 
+                    title={["Area"]} charttitle="Area representation Km²" ytitle="Total Area perc."
+                    allpop={this.state.allarea} extpop={this.state.extarea} newpop={this.state.newarea} oldpop={this.state.oldarea}
+                    spec=" km²"
+                    />
             </div>
         );
     }

@@ -21,7 +21,7 @@ class PopSliderFilter extends Component {
     render() {
         return (
                 <InputRange
-                    disabled={!this.props.PopCheckbox}
+                    disabled={this.props.radioFilterPicker=="area"}
                     style={{fontSize:"1rem !important"}}
                     maxValue={90000}
                     minValue={5000}
@@ -44,6 +44,7 @@ function mapStateToProps(state) {
   console.log("PopSlider Coponent Youhoo",state.PopCheckbox);
   return {
     PopCheckbox: state.PopCheckbox,
+    radioFilterPicker:state.radioFilterPicker
   };
 }
 

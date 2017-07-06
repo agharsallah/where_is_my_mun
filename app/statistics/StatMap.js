@@ -92,7 +92,7 @@ class StatMap extends Component {
 
     style(feature) {
         //check for what we have checked as filter subject : Population || state ||
-        if (this.props.popCheckbox) {
+        if (this.props.radioFilterPicker=="pop") {
             const slider = this.props.popFilter;
             if ((feature.properties.POP>=slider.min)&&(feature.properties.POP<=slider.max)) {
                 var POPULATION = feature.properties.POP;
@@ -110,7 +110,7 @@ class StatMap extends Component {
                 weight: 2,
                 fillOpacity: 0.8
             };
-        }else if(this.props.areaCheckbox){
+        }else if(this.props.radioFilterPicker=="area"){
             const slider = this.props.areaFilter;
             if ((parseInt(feature.properties.area)>=slider.min)&&(parseInt(feature.properties.area)<=slider.max)) {
                 var AREA = parseInt(feature.properties.area);
@@ -209,9 +209,10 @@ function mapStateToProps(state) {
     
     popFilter: state.popFilter,
     areaFilter: state.areaFilter,
-    
+
     popCheckbox:state.PopCheckbox,
     areaCheckbox:state.AreaCheckbox,
+    radioFilterPicker:state.radioFilterPicker
   };
 }
 

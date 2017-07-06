@@ -11,14 +11,17 @@ import stateFilter from './slider filter/reducer_stateFilter' ;
 import AreaCheckbox from './activateFilterCheckbox/reducer_AreaCheckbox' ;
 import PopCheckbox from './activateFilterCheckbox/reducer_PopCheckbox' ;
 import StateCheckbox from './activateFilterCheckbox/reducer_StateCheckbox' ;
+import radioFilterPicker from './activateFilterCheckbox/reducer_Radio' ;
 
 const rootReducer = combineReducers({
   irieCheckbox:irieCheckbox,
   changeMapColor,
   changeMapColorState,
+
   AreaCheckbox,
   PopCheckbox,
   StateCheckbox,
+  radioFilterPicker,
 
   popFilter,
   areaFilter,

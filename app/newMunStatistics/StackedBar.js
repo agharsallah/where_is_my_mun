@@ -49,7 +49,7 @@ componentWillMount() {
             },
             tooltip: {
                 headerFormat: '<b>{point.x}</b><br/>',
-                pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+                pointFormat: '{series.name}: {point.y}'+this.props.spec+'<br/>Total: {point.stackTotal}'+this.props.spec
             },
             plotOptions: {
                 column: {

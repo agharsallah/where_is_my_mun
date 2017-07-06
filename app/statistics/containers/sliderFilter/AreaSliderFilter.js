@@ -20,7 +20,7 @@ class AreaSliderFilter extends Component {
     render() {
         return (
                 <InputRange
-                    disabled={!this.props.AreaCheckbox}
+                    disabled={this.props.radioFilterPicker=="pop"}
                     style={{fontSize:"1rem !important"}}
                     maxValue={1000}
                     minValue={50}
@@ -44,6 +44,7 @@ function mapStateToProps(state) {
   console.log("AreaSlider Coponent Youhoo",state.AreaCheckbox);
   return {
     AreaCheckbox: state.AreaCheckbox,
+    radioFilterPicker:state.radioFilterPicker
   };
 }
 
