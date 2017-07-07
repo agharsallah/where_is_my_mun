@@ -46,6 +46,11 @@ module.exports = {
      fr:"french",
      en:"english",
      about:"about",
-     viz:"vizualizations"
+     viz:"vizualizations",
+     sitetitle:"Just Data Viz"
+ },
+ vizroot:{
+     title:"Raw data to viz",
+
  }
 }

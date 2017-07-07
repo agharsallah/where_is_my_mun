@@ -18,7 +18,7 @@ import RootTwoMap from "./2maps/RootTwoMap.js"
 /*Data for Public*/
 import VizRoot from "./vizRoot/VizRoot.js"
 import About from "./vizRoot/About.js"
-import RegTrackRoot from "./registrationTracker/RegTrackRoot.js"
+import RegTrackRoot from "./vizRoot/registrationTracker/RegTrackRoot.js"
 injectTapEventPlugin();
 
 ReactDOM.render(

@@ -20,8 +20,7 @@ class Layout extends Component {
             counterpart.setLocale(event);
     	};
     render() {
-        const home = <Translate type="text" content="navbar.home"/>
-		const local_election = <Translate type="text" content="navbar.municipalities"/>
+        const sitetitle= <Translate type="text" content="navbar.sitetitle"/>
 		const viz = <Translate type="text" content="navbar.viz"/>
 		const about = <Translate type="text" content="navbar.about"/>
 		const en = <Translate type="text" content="navbar.en"/>
@@ -38,7 +37,7 @@ class Layout extends Component {
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                 </button>
-                <Link className="navbar-brand" to='/' >Just Data Viz</Link>
+                <Link className="navbar-brand" to='/' >{sitetitle}</Link>
                 </div>
                 <div className="navbar-collapse collapse">
                 <ul className="nav navbar-nav navbar-right">

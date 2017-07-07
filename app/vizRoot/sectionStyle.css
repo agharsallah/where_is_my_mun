@@ -79,8 +79,11 @@ h1.heading {
 .card-content {
   padding:15px;
   text-align:left;
-  height: 185px;
+  min-height: 25vh;
+  max-height: 45vh;
 }
+/*make the description bigger for smaller pixels*/
+
 .card-title {
   margin-top:0px;
   font-weight: 700;
