@@ -1,5 +1,6 @@
 import { getPolling, postPolling } from './controllers/pollingController';
 import { getShape, postShape } from './controllers/shapeController';
+import { getDailyIns, postDailyIns } from './controllers/daily_inscriptionController';
 import { getIrie, postIrie,getAllIrie } from './controllers/irieController';
 import { getOneRegistrationSpot, getRegistrationSpots,postRegistrationSpot } from './controllers/registrationSpotsController';
 import { getOneMunCoord, getMunCoords,postMunCoord } from './controllers/munCoordController';
@@ -17,6 +18,9 @@ const router = (app,apiRoutes) => {
  
   apiRoutes.get('/shape/:gouv', getShape);
   apiRoutes.post('/addshape', postShape);
+
+  apiRoutes.get('/dailyins/:gouv', getDailyIns);
+  apiRoutes.post('/adddailyins', postDailyIns);
 
   apiRoutes.get('/irie/:gouv', getIrie);
   apiRoutes.get('/iries', getAllIrie);
