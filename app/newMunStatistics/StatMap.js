@@ -15,14 +15,14 @@ class StatMap extends Component {
         super(props);
         this.state={
             feature:"",shape:g_mun_shapes,key:1,Irie:[],seats:"" ,population:"" ,
-            etat:"" ,gouv_name:"",destroy:true,grades:["New","Old","Extended"],
+            etat:"" ,gouv_name:"",destroy:true,grades:["New","Extended","Old"],
             keytitle:"Municipality color Representation",colorfun:this.getColor,
             allpop:0,allarea:0
         }
     }
     
     componentWillMount() {
-        let qString=config.apiUrl+"/api/shape/AllShapes";
+        let qString=config.apiUrl+"/api/shape/AllShapesOld";
         axios({
             method: 'get',
             url: qString,
@@ -124,7 +124,7 @@ class StatMap extends Component {
             
                 <Map  maxZoom={23} center={position} zoom={7} className="initialposition" style={{height: "100vh", width: "100vw",position:"relative",zIndex:0}}>
                     <TileLayer
-                    url='https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaHVudGVyLXgiLCJhIjoiY2l2OXhqMHJrMDAxcDJ1cGd5YzM2bHlydSJ9.jJxP2PKCIUrgdIXjf-RzlA'
+                    url='https://api.mapbox.com/styles/v1/hunter-x/cixhpey8700q12pnwg584603g/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaHVudGVyLXgiLCJhIjoiY2l2OXhqMHJrMDAxcDJ1cGd5YzM2bHlydSJ9.jJxP2PKCIUrgdIXjf-RzlA'
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     />
                     <GeoJSON
@@ -155,7 +155,7 @@ class StatMap extends Component {
                         <MapKey colorSet={this.props.mapColorState} grades={this.state.grades} getColor={this.state.colorfun} keyTitle={this.state.keytitle} />
                     </Control>
                     <Control position="topright" >
-                        <MapInfo shape={this.state.shape} />
+                        <MapInfo shape={this.state.shape}  colorSet={this.props.mapColorState}/>
                     </Control>
                     {/*show the information Div*/}
                     {(this.state.destroy==false)?<div className="one">{this.state.population}</div>: <div>aaaaa</div> }

@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { Map, Popup, TileLayer, GeoJSON, FeatureGroup, Tooltip,LayersControl } from 'react-leaflet';
 import axios from 'axios' ;
-import IrieMarker from './IrieMarker' ; 
 import config from '../config'
 import Control from 'react-leaflet-control';
 import MapKey from './MapKey' ;
 import ReactLoading from 'react-loading';
-
+import SocioEconomicToggle from './containers/pickFilter/SocioEconomicToggle' ;
 import { connect } from "react-redux";
 import { getPopValue } from "../actions/index";
 import { bindActionCreators } from "redux";
 
-class StatMap extends Component {
+class SocioMap extends Component {
     constructor(props){
         super(props);
-        this.state={feature:"",shape:g_mun_shapes,shapeIsLoaded:false, key:1,Irie:[],seats:"" ,population:"" ,etat:"" ,gouv_name:"",destroy:true,
-        grades:[0,5000, 10000,20000,40000, 70000 ],keytitle:"Number of population per delegation",colorfun:this.getColor}
+        this.state={feature:"",shape:g_mun_shapes,shapeIsLoaded:false, key:1,Irie:[],seats:"" ,population:"" ,
+        etat:"" ,gouv_name:"",destroy:true,grades:[0,5000, 10000,20000,40000, 70000 ],
+        keytitle:"Number of population per delegation",colorfun:this.getColor}
     }
     
     componentWillMount() {
@@ -158,13 +158,13 @@ class StatMap extends Component {
 
     render() {
         var grades=[0,10000, 20000,30000,40000, 60000 ]
-        const position = [34.855360, 8.8049795];
+        const position = [34.855360, 10.8049795];
         return (
                 <div>
-                {this.state.shapeIsLoaded ? <Map  maxZoom={23} center={position} zoom={7} className="initialposition" style={{height: "100vh", width: "100vw",position:"relative",zIndex:0}}>
+                {this.state.shapeIsLoaded ? <Map  maxZoom={23} center={position} zoom={7} className="initialposition" style={{height: "100vh", width: "49vw",position:"relative",zIndex:0}}>
                     <TileLayer
                     url='https://api.mapbox.com/styles/v1/hunter-x/cixhpey8700q12pnwg584603g/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaHVudGVyLXgiLCJhIjoiY2l2OXhqMHJrMDAxcDJ1cGd5YzM2bHlydSJ9.jJxP2PKCIUrgdIXjf-RzlA'
-                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> A.G'
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> DI'
                     />
                     <GeoJSON
                     key={"a"+this.state.key}
@@ -179,24 +179,15 @@ class StatMap extends Component {
                     }
                     />
 
-                    {this.props.checkedIrieButton?
-                         <FeatureGroup color='purple'>
-                            {this.state.Irie.map(function(object, i){
-                                //console.log(object.latlon);
-                                //console.log(object);
-                                return <IrieMarker data={object.data} key={i} />;
-                            })}
-                        </FeatureGroup>:
-                        <div/>
-                    }
-                {/**/}
                     <Control position="bottomright" >
-
                         <MapKey colorSet={this.props.mapColor} grades={this.state.grades} getColor={this.state.colorfun} keyTitle={this.state.keytitle} />
                     </Control>
-                    {/*show the information Div*/}
-                    {(this.state.destroy==false)?<div className="one">{this.state.population}</div>: <div>aaaaa</div> }
+                                        <Control position="topright" >
+                    <SocioEconomicToggle/>
+                    </Control>
+                    
                 </Map>:
+
                 <div>
                     <div className="col-md-7"></div>
                     <div className="col-md-5" style={{marginTop:"40vh"}}>
@@ -230,5 +221,5 @@ function mapStateToProps(state) {
 // Promote BookList from a component to a container - it needs to know
 // about this new dispatch method, selectBook. Make it available
 // as a prop.
-export default connect(mapStateToProps)(StatMap);
+export default connect(mapStateToProps)(SocioMap);
 

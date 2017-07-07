@@ -17,19 +17,19 @@ class StateSliderFilter extends Component {
             <RadioButtonGroup name="state of mun" defaultSelected="All" onChange={(e,value) => {console.log(value); this.props.getStateValue(value)} }>
                 <RadioButton
                     value="All"
-                    label="All"
+                    label="All (350)"
                 />
                 <RadioButton
                     value="New"
-                    label="New"
-                />
-                <RadioButton
-                    value="Old"
-                    label="Old"
+                    label="New (86)"
                 />
                 <RadioButton
                     value="Extended"
-                    label="Extended"
+                    label="Extended (189)"
+                />
+                <RadioButton
+                    value="Old"
+                    label="Old (75)"
                 />
             </RadioButtonGroup>
                  </div>

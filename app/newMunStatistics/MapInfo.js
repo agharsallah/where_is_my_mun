@@ -12,7 +12,7 @@ constructor(props) {
 componentWillReceiveProps(nextProps) {
     console.log(nextProps.shape.features);
     var array=nextProps.shape.features
-    var allpop=0,allarea=0,extpop=0,extarea=0,newpop=0,newarea=0,oldpop=0,oldarea=0
+    var count=0, allpop=0,allarea=0,extpop=0,extarea=0,newpop=0,newarea=0,oldpop=0,oldarea=0
     array.map((element,i)=>{
             if (isNaN(parseInt( element.properties.area))) {
                 console.log(element.properties.LABEL);
@@ -22,33 +22,36 @@ componentWillReceiveProps(nextProps) {
         if (element.properties.state=="extended") {
             extpop+=parseInt( element.properties.POP)
             extarea+=parseInt( element.properties.area)
-        }else if(element.properties.state=="new"){
+        }else if(element.properties.state=="new"||element.properties.state=="new2015"){
             newpop+=parseInt( element.properties.POP)
             newarea+=parseInt( element.properties.area)
+                        count++
+
         }else{
             oldpop+=parseInt( element.properties.POP)
             oldarea+=parseInt( element.properties.area) 
         }
     })
-    console.log(allarea);
-    console.log(extarea);
-    console.log(newarea);
-    console.log(oldarea);
+    console.log(allpop);
+    console.log(oldpop);
+    console.log(extpop);
+    console.log(newpop);
 }
 
 
     render() {
+        console.log();
         return (
              <div className="infoLegendStat legend">
                <StackedBar 
                     title={["Popultaion"]} charttitle="Population representation" ytitle="Total Population perc."
                     allpop={this.state.allpop} extpop={this.state.extpop} newpop={this.state.newpop} oldpop={this.state.oldpop}
-                    spec=" person"
+                    spec=" person" colorSet={this.props.colorSet}
                     />
                 <StackedBar 
                     title={["Area"]} charttitle="Area representation Km²" ytitle="Total Area perc."
                     allpop={this.state.allarea} extpop={this.state.extarea} newpop={this.state.newarea} oldpop={this.state.oldarea}
-                    spec=" km²"
+                    spec=" km²" colorSet={this.props.colorSet}
                     />
             </div>
         );

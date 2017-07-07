@@ -28,10 +28,10 @@ class ColorBrew extends Component {
       />
       
     ];
-    const c1=["#0096d6","#005288","#BBDEFB"]
-    const c2=["#E91E63","#880E4F","#F8BBD0"]
-    const c3=["#4CAF50","#1B5E20","#C8E6C9"]
-    const c4=["#795548","#4E342E","#D7CCC8"]
+    const c1=chroma.scale(['#9ecae1','#084594']).mode('lch').colors(6);
+    const c2=chroma.scale(['#fc9272','#99000d']).mode('lch').colors(6);
+    const c3=chroma.scale(['#a1d99b','#005a32']).mode('lch').colors(6);
+    const c4=chroma.scale(['#fec44f','#8c2d04']).mode('lch').colors(6);
     
         return (
             <div className="yeartoggle" style={{ left: "1%",top: "40%"}}>

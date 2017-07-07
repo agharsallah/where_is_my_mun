@@ -13,6 +13,7 @@ const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 import App from "./App.js"
 import RootMap from "./statistics/RootMap.js"
 import NewMunRoot from "./newMunStatistics/RootMap.js"
+import RootTwoMap from "./2maps/RootTwoMap.js"
 injectTapEventPlugin();
 
 ReactDOM.render(
@@ -23,6 +24,7 @@ ReactDOM.render(
         <Route  path="/" component={App}/> 
         <Route path="/statistics" component={RootMap}/> 
         <Route path="/newmun" component={NewMunRoot}/> 
+        <Route path="/electionsocio" component={RootTwoMap}/> 
 
     </Router>
     </MuiThemeProvider>

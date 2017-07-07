@@ -1,6 +1,6 @@
 import { MAPCOLORSTATE } from "../../actions/index";
 
-export default function(state = ["#ce93d8","#ff8f6c","#8bc34a"], action) {
+export default function(state = ["#0096d6","#005288","#BBDEFB"], action) {
   switch (action.type) {
     case MAPCOLORSTATE:
       return action.payload;
