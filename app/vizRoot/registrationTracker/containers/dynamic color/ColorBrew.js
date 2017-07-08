@@ -4,7 +4,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
 import ActionAutorenew from 'material-ui/svg-icons/action/autorenew';
-
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Control from 'react-leaflet-control';
+import "./colorBrew.css"
 import ColorSeries from "./ColorSeries";
 class ColorBrew extends Component {
     constructor(props){
@@ -12,6 +14,7 @@ class ColorBrew extends Component {
                 this.state={open: false} ;
     }
  handleOpen()  {
+   console.log('ddddd');
     this.setState({open: true});
   }
   
@@ -34,8 +37,9 @@ class ColorBrew extends Component {
     const c4=chroma.scale(['#fec44f','#8c2d04']).mode('lch').colors(6);
     
         return (
-            <div className="yeartoggle" style={{ left: "1%",top: "40%"}}>
-              <RaisedButton label="Change Map Color" onTouchTap={this.handleOpen.bind(this)} icon={<ActionAutorenew />}/>
+          <MuiThemeProvider>
+            <div className="buttonPosition"  style={{zIndex:1500,position:"absolute"}}>
+              <RaisedButton label="Change Map Color" onTouchTap={this.handleOpen.bind(this)} onClick={this.handleOpen.bind(this)} />
         <Dialog
           title="Choose color sets "
           actions={actions}
@@ -49,11 +53,13 @@ class ColorBrew extends Component {
         <div>
         <ColorSeries colorRange={c1} keys="a"  />
         <ColorSeries colorRange={c2} keys="b" />
-        <ColorSeries colorRange={c3} keys="b" />
-        <ColorSeries colorRange={c4} keys="b" />
+        <ColorSeries colorRange={c3} keys="c" />
+        <ColorSeries colorRange={c4} keys="d" />
         </div>
         </Dialog>  
             </div>
+            </MuiThemeProvider>
+
         );
     }
 }

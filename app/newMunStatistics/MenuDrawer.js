@@ -3,7 +3,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import ColorBrew from './dynamic color/ColorBrew';
-
+import {Link} from 'react-router' ;
 import StateSliderFilter from './containers/sliderFilter/StateSliderFilter' ;
 
 
@@ -38,8 +38,13 @@ class MenuDrawer extends Component {
                         <StateSliderFilter />
                     </div>  
 
-                    <div style={{marginLeft:"2rem",marginTop:"4rem"}}>
+                    <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
                         <ColorBrew />
+                    </div>
+                    <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
+                        <RaisedButton label="Back" 
+                        containerElement={<Link to="/viz" />} 
+                        linkButton={true} />
                     </div>
                 </Drawer>
             </div>

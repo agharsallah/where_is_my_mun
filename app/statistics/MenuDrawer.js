@@ -4,7 +4,7 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import IrieButtonFilter from './IrieButtonFilter' ;
 import ColorBrew from './dynamic color/ColorBrew';
-
+import {Link} from 'react-router' ;
 import StatePickFilter from './containers/pickFilter/StatePickFilter' ;
 import AreaPickFilter from './containers/pickFilter/AreaPickFilter' ;
 import PopPickFilter from './containers/pickFilter/PopPickFilter' ;
@@ -76,8 +76,14 @@ class MenuDrawer extends Component {
                         <IrieButtonFilter/>   
                     </div> 
 
-                    <div style={{marginLeft:"2rem",marginTop:"4rem"}}>
+                    <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
                         <ColorBrew />
+                    </div>
+                    
+                    <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
+                        <RaisedButton label="Back" 
+                        containerElement={<Link to="/viz" />} 
+                        linkButton={true} />
                     </div>
                 </Drawer>
             </div>

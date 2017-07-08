@@ -27,8 +27,8 @@ ReactDOM.render(
     <MuiThemeProvider>
     <Router history={browserHistory}>
         <Route  path="/" component={App}/> 
-        <Route path="/statistics" component={RootMap}/> 
-        <Route path="/newmun" component={NewMunRoot}/> 
+        <Route path="/viz/statistics" component={RootMap}/> 
+        <Route path="/viz/newmun" component={NewMunRoot}/> 
         <Route path="/electionsocio" component={RootTwoMap}/> 
         <Route path="/viz" component={VizRoot}/> 
         <Route path="/viz/dailyreg" component={RegTrackRoot}/> 

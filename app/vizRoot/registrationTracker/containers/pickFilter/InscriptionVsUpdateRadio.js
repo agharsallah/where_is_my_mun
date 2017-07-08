@@ -12,12 +12,12 @@ import Translate from 'react-translate-component';
 class InscriptionVsUpdateRadio extends Component {
     render() {
         return (
-			                    <Control position="topright" >
+		<Control position="topright" >
              <div className="infoLegendStat legend" style={{marginTop:"12vh"}}>
                <h4 >
                     Choose a parameter
                 </h4> 
-    <MuiThemeProvider>
+    		<MuiThemeProvider>
 
 	            <RadioButtonGroup  name="reg&update" defaultSelected="pop" onChange={ (e,value) => {this.props.getPickedFilter(value)} } >
 					<RadioButton

@@ -3,41 +3,10 @@ import StackedBar from './StackedBar' ;
 class MapKey extends Component {
 constructor(props) {
     super(props);
-    this.state={allpop:12551557,extpop:7254601,newpop:2265540,oldpop:3031416,
-                allarea:169047,extarea:115858,newarea:42348,oldarea:10841,
+    this.state={allpop:11005512,extpop:5899632,newpop:1597300,oldpop:3508580,
+                allarea:169.047,extarea:115.858,newarea:42.348,oldarea:10.841,
     }
 }
-
-
-componentWillReceiveProps(nextProps) {
-    console.log(nextProps.shape.features);
-    var array=nextProps.shape.features
-    var count=0, allpop=0,allarea=0,extpop=0,extarea=0,newpop=0,newarea=0,oldpop=0,oldarea=0
-    array.map((element,i)=>{
-            if (isNaN(parseInt( element.properties.area))) {
-                console.log(element.properties.LABEL);
-            }
-            allpop+=parseInt( element.properties.POP)
-            allarea+=parseInt( element.properties.area)
-        if (element.properties.state=="extended") {
-            extpop+=parseInt( element.properties.POP)
-            extarea+=parseInt( element.properties.area)
-        }else if(element.properties.state=="new"||element.properties.state=="new2015"){
-            newpop+=parseInt( element.properties.POP)
-            newarea+=parseInt( element.properties.area)
-                        count++
-
-        }else{
-            oldpop+=parseInt( element.properties.POP)
-            oldarea+=parseInt( element.properties.area) 
-        }
-    })
-    console.log(allpop);
-    console.log(oldpop);
-    console.log(extpop);
-    console.log(newpop);
-}
-
 
     render() {
         console.log();

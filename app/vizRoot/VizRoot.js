@@ -21,8 +21,9 @@ class VizRoot extends Component {
                     <div className="content">
                         <div className="container">
                             <div className="row">
-                                <ProjectSection img="universities.png" redirect="viz/dailyreg" title="Tunisia Election data" description="Election data is a repository of Tunisia's Election Data, which is done in order to make data driven stratigy by the Tunisian election observers 'Mourakiboun'" />
-                                <ProjectSection img="universities.png" redirect="viz/dailyreg" title="Tunisia Election data" description="Election data is a repository of Tunisia's Election Data, which is done in order to make data driven stratigy by the Tunisian election observers 'Mourakiboun'" />
+                                <ProjectSection img="newmun.PNG" redirect="viz/newmun" title="Municipalities Insight" description="Get insight about the municipalities Old, New, Extended ones" />
+                                <ProjectSection img="statistics.PNG" redirect="viz/statistics" title="Municipalities filter" description="Filter the 350 municipalities based on Population and Area" />
+                                <ProjectSection img="universities.png" redirect="viz/dailyreg" title="Tunisia Election data" description="Analyzing the distribution of the registration and updates in the election (data provided by ISIE)" />
                             </div>
                         </div>
                     </div>
