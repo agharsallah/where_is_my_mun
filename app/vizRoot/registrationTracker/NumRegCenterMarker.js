@@ -14,7 +14,7 @@ constructor(props, context) {
 
 componentWillMount() {
     let array=this.props.markerData;
-    console.log(array);
+    console.log("this.props.markerData",this.props.markerData);
         let rows=[];//append all markers
         array.map((element,i)=>{
             let lat=element.center.lat
