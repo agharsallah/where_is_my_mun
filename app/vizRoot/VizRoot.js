@@ -23,7 +23,7 @@ class VizRoot extends Component {
                             <div className="row">
                                 <ProjectSection img="newmun.PNG" redirect="viz/newmun" title="Municipalities Insight" description="Get insight about the municipalities Old, New, Extended ones" />
                                 <ProjectSection img="statistics.PNG" redirect="viz/statistics" title="Municipalities filter" description="Filter the 350 municipalities based on Population and Area" />
-                                <ProjectSection img="universities.png" redirect="viz/dailyreg" title="Tunisia Election data" description="Analyzing the distribution of the registration and updates in the election (data provided by ISIE)" />
+                                <ProjectSection img="daily_reg.PNG" redirect="viz/dailyreg" title="Registration Number of municipal election" description="Analyzing the distribution of the registration and updates in the municipal election data of 06-07-2017 (data provided by ISIE)" />
                             </div>
                         </div>
                     </div>

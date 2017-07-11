@@ -39,5 +39,17 @@ filter: {
      transport:"محطة نقل ",
      service:"مؤسسة خدماتية ",
      municipality:"بلدية"
+ },
+ navbar:{
+     ar:"arabic",
+     fr:"french",
+     en:"english",
+     about:"about",
+     viz:"vizualizations",
+     sitetitle:"Just Data Viz"
+ },
+ vizroot:{
+     title:"Raw data to viz",
+
  }
 }

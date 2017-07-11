@@ -37,7 +37,7 @@ class Layout extends Component {
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                 </button>
-                <Link className="navbar-brand" to='/' >{sitetitle}</Link>
+                <Link className="navbar-brand" to='/viz' >{sitetitle}</Link>
                 </div>
                 <div className="navbar-collapse collapse">
                 <ul className="nav navbar-nav navbar-right">
@@ -47,8 +47,8 @@ class Layout extends Component {
                         <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language<span className="caret"></span></a>
                         <ul className="dropdown-menu">
                             <li><a href="#" onClick={this.handleClick.bind(this,"en")}>{en}</a></li>
-                            <li><a href="#" onClick={this.handleClick.bind(this,"fr")}>{fr}</a></li>
-                            <li><a href="#" onClick={this.handleClick.bind(this,"ar")}>{ar}</a></li>
+                            {/*<li><a href="#" onClick={this.handleClick.bind(this,"fr")}>{fr}</a></li>
+                            <li><a href="#" onClick={this.handleClick.bind(this,"ar")}>{ar}</a></li>*/}
                         </ul>
                     </li>
                 </ul>

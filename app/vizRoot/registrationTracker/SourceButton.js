@@ -9,7 +9,6 @@ import Control from 'react-leaflet-control';
 import Download from 'material-ui/svg-icons/File/file-download';
 import { Link  } from 'react-router';
 
-import "./sourceButton.css"
 class SourceButton extends Component {
     constructor(props){
         super(props);
@@ -40,7 +39,7 @@ class SourceButton extends Component {
     
         return (
           <MuiThemeProvider>
-            <div className="sourcePosition"  style={{zIndex:1500,position:"absolute"}}>
+            <div className="sourcePosition"  style={{zIndex:1500,position:"absolute",right: "1%",marginTop: "43vh"}}>
               <RaisedButton label="Data Source" onTouchTap={this.handleOpen.bind(this)} onClick={this.handleOpen.bind(this)} />
         <Dialog
           title="Check the Raw data "

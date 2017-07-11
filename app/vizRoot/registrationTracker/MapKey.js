@@ -3,12 +3,14 @@ import React, { Component } from 'react';
 class MapKey extends Component {
 
     render() {
-         var grades = this.props.grades;
+         var grades = [0,...this.props.grades]
+         console.log("mapkey grades",grades);
+         
         return (
              <div className="infoLegendStat legend">
                 <p style={{marginLeft:"10px"}}>{this.props.keyTitle}</p>
                 {grades.map(function(object, i){
-                    var bg=this.props.getColor(object + 1,this.props.colorSet)
+                    var bg=this.props.getColor(object + 1,this.props.colorSet,this.props.grades)
                     return (
                             <div key={i+this.props.colorSet}>
                                 <i style={{background:bg}}  ></i>

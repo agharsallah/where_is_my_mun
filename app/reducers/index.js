@@ -13,6 +13,8 @@ import PopCheckbox from './activateFilterCheckbox/reducer_PopCheckbox' ;
 import StateCheckbox from './activateFilterCheckbox/reducer_StateCheckbox' ;
 import radioFilterPicker from './activateFilterCheckbox/reducer_Radio' ;
 
+import regDate from './DatePicker/reducer_datePicker' ;
+
 const rootReducer = combineReducers({
   irieCheckbox:irieCheckbox,
   changeMapColor,
@@ -25,7 +27,9 @@ const rootReducer = combineReducers({
 
   popFilter,
   areaFilter,
-  stateFilter
+  stateFilter,
+
+  regDate
 
 });
 

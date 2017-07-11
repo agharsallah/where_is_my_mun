@@ -13,6 +13,7 @@ export const SLIDERVALUE = "SLIDERVALUE";
 export const AREASLIDERVALUE = "AREASLIDERVALUE";
 export const STATESLIDERVALUE = "STATESLIDERVALUE";
 
+export const DATEPICK = "DATEPICK";
 
 export function getIrieButton(checkIrieButton) {
   return {
@@ -83,5 +84,13 @@ export function getStateValue(stateValue) {
   return {
     type: STATESLIDERVALUE,
     payload: stateValue
+  };
+}
+
+/*Choose date for registration daily tracking*/
+export function getDateValue(datevalue) {
+  return {
+    type: DATEPICK,
+    payload: datevalue
   };
 }

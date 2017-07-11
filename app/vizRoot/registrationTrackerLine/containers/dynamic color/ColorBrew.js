@@ -6,6 +6,7 @@ import Dialog from 'material-ui/Dialog';
 import ActionAutorenew from 'material-ui/svg-icons/action/autorenew';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Control from 'react-leaflet-control';
+import "./colorBrew.css"
 import ColorSeries from "./ColorSeries";
 class ColorBrew extends Component {
     constructor(props){
@@ -37,7 +38,7 @@ class ColorBrew extends Component {
     
         return (
           <MuiThemeProvider>
-            <div  style={{zIndex:1500,position:"absolute",right: "1%",marginTop: "37vh"}}>
+            <div className="buttonPosition"  style={{zIndex:1500,position:"absolute"}}>
               <RaisedButton label="Change Map Color" onTouchTap={this.handleOpen.bind(this)} onClick={this.handleOpen.bind(this)} />
         <Dialog
           title="Choose color sets "

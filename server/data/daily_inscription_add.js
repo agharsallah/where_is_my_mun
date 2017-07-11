@@ -13,7 +13,7 @@ fs.readdir('./daily_inscription', (err, files) => {
     const delExtens=/(.*)\./g;
     const gouvernorate_name = delExtens.exec(file); //file name without extension
     var qString=config.apiUrl+"/api/adddailyins/";
-console.log(dir);
+		//console.log(dir);
     fs.readFile(dir, 'utf8', function(err, data) {
 		console.log(data);
 		var options = {

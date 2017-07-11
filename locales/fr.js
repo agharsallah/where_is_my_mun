@@ -40,5 +40,17 @@
      transport:"Station de transport",
      service:"Service",
      municipality:"Municipalité"
+ },
+ navbar:{
+     ar:"arabic",
+     fr:"french",
+     en:"english",
+     about:"about",
+     viz:"vizualizations",
+     sitetitle:"Just Data Viz"
+ },
+ vizroot:{
+     title:"Raw data to viz",
+
  }
 }
