@@ -5,14 +5,17 @@ import IrieMarker from './IrieMarker' ;
 import config from '../config'
 import Control from 'react-leaflet-control';
 import MapKey from './MapKey' ;
+import ReactLoading from 'react-loading';
+
 import { connect } from "react-redux";
-import { getPopValue } from "./actions/index";
+import { getPopValue } from "../actions/index";
 import { bindActionCreators } from "redux";
 
 class StatMap extends Component {
     constructor(props){
         super(props);
-        this.state={feature:"",shape:g_mun_shapes,key:1,Irie:[],seats:"" ,population:"" ,etat:"" ,gouv_name:"",destroy:true,grades:[0,5000, 10000,20000,40000, 70000 ],keytitle:"Number of population per delegation",colorfun:null}
+        this.state={feature:"",shape:g_mun_shapes,shapeIsLoaded:false, key:1,Irie:[],seats:"" ,population:"" ,etat:"" ,gouv_name:"",destroy:true,
+        grades:[0,5000, 10000,20000,40000, 70000 ],keytitle:"Number of population per Municipality",colorfun:this.getColor}
     }
     
     componentWillMount() {
@@ -29,7 +32,7 @@ class StatMap extends Component {
             //console.log(response.data.data)
             console.log('we got shape data frm db');
             console.log(response);
-            this.setState({shape:JSON.parse(response.data.data),key:2});
+            this.setState({shape:JSON.parse(response.data.data),key:2,shapeIsLoaded:true});
             }
         )
         .catch(function (error) {
@@ -56,28 +59,19 @@ class StatMap extends Component {
     
     }
     componentWillReceiveProps(nextProps) {
-        if (nextProps.popCheckbox) {
+        if (nextProps.radioFilterPicker=="pop") {
             this.setState({grades:[0,5000, 10000,20000,40000, 70000 ],
                 keytitle:"Number of population per Municipality",
                 colorfun:this.getColor
             });
         }
-        else if(nextProps.areaCheckbox){
+        else if(nextProps.radioFilterPicker=="area"){
             this.setState({grades:[100,200,400,600,800],
                 keytitle:"Km² Area per Municipality",
                 colorfun:this.getColorArea});
 
         }
     }
-    
-    componentDidMount() {
-       /*set details for the map key*/
-            this.setState({grades:[0,5000, 10000,20000,40000, 70000 ],
-                keytitle:"Number of population per Municipality",
-                colorfun:this.getColor
-            });
-
-        } 
     
      getColor(d,c1) {
         if      (d >70000)      {return (c1[5]); }
@@ -101,12 +95,12 @@ class StatMap extends Component {
 
     style(feature) {
         //check for what we have checked as filter subject : Population || state ||
-        if (this.props.popCheckbox) {
+        if (this.props.radioFilterPicker=="pop") {
             const slider = this.props.popFilter;
             if ((feature.properties.POP>=slider.min)&&(feature.properties.POP<=slider.max)) {
                 var POPULATION = feature.properties.POP;
             }else {var POPULATION = "norange";}
-            if ((slider.min==10000)&&(feature.properties.POP<10000)) {
+            if ((slider.min==5000)&&(feature.properties.POP<5000)) {
                 var POPULATION = feature.properties.POP; 
             }
             if ((slider.max==90000)&&(feature.properties.POP>90000)) {
@@ -119,7 +113,7 @@ class StatMap extends Component {
                 weight: 2,
                 fillOpacity: 0.8
             };
-        }else if(this.props.areaCheckbox){
+        }else if(this.props.radioFilterPicker=="area"){
             const slider = this.props.areaFilter;
             if ((parseInt(feature.properties.area)>=slider.min)&&(parseInt(feature.properties.area)<=slider.max)) {
                 var AREA = parseInt(feature.properties.area);
@@ -166,11 +160,11 @@ class StatMap extends Component {
         var grades=[0,10000, 20000,30000,40000, 60000 ]
         const position = [34.855360, 8.8049795];
         return (
-            
-                <Map  maxZoom={23} center={position} zoom={7} className="initialposition" style={{height: "100vh", width: "100vw",position:"relative",zIndex:0}}>
+                <div>
+                {this.state.shapeIsLoaded ? <Map  maxZoom={23} center={position} zoom={7} className="initialposition" style={{height: "100vh", width: "100vw",position:"relative",zIndex:0}}>
                     <TileLayer
-                    url='https://api.mapbox.com/styles/v1/mapbox/streets-v10/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaHVudGVyLXgiLCJhIjoiY2l2OXhqMHJrMDAxcDJ1cGd5YzM2bHlydSJ9.jJxP2PKCIUrgdIXjf-RzlA'
-                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    url='https://api.mapbox.com/styles/v1/hunter-x/cixhpey8700q12pnwg584603g/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaHVudGVyLXgiLCJhIjoiY2l2OXhqMHJrMDAxcDJ1cGd5YzM2bHlydSJ9.jJxP2PKCIUrgdIXjf-RzlA'
+                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> A.G'
                     />
                     <GeoJSON
                     key={"a"+this.state.key}
@@ -202,8 +196,16 @@ class StatMap extends Component {
                     </Control>
                     {/*show the information Div*/}
                     {(this.state.destroy==false)?<div className="one">{this.state.population}</div>: <div>aaaaa</div> }
-                </Map>
-
+                </Map>:
+                <div>
+                    <div className="col-md-7"></div>
+                    <div className="col-md-5" style={{marginTop:"40vh"}}>
+                        <h2>"Loading Map"</h2>
+                        <ReactLoading type="bars" color="#444" className="react-Loader" delay={0} />
+                    </div>
+                </div>
+            }
+            </div>
         );
     }
 }
@@ -214,13 +216,14 @@ function mapStateToProps(state) {
   console.log("youhoooo",state);
   return {
     checkedIrieButton:state.irieCheckbox,
-    mapColor:state.mapColor,
+    mapColor:state.changeMapColor,
     
     popFilter: state.popFilter,
     areaFilter: state.areaFilter,
-    
+
     popCheckbox:state.PopCheckbox,
     areaCheckbox:state.AreaCheckbox,
+    radioFilterPicker:state.radioFilterPicker
   };
 }
 

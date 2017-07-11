@@ -8,6 +8,8 @@ var _pollingController = require('./controllers/pollingController');
 
 var _shapeController = require('./controllers/shapeController');
 
+var _daily_inscriptionController = require('./controllers/daily_inscriptionController');
+
 var _irieController = require('./controllers/irieController');
 
 var _registrationSpotsController = require('./controllers/registrationSpotsController');
@@ -30,6 +32,9 @@ var router = function router(app, apiRoutes) {
 
   apiRoutes.get('/shape/:gouv', _shapeController.getShape);
   apiRoutes.post('/addshape', _shapeController.postShape);
+
+  apiRoutes.get('/dailyins/:gouv', _daily_inscriptionController.getDailyIns);
+  apiRoutes.post('/adddailyins', _daily_inscriptionController.postDailyIns);
 
   apiRoutes.get('/irie/:gouv', _irieController.getIrie);
   apiRoutes.get('/iries', _irieController.getAllIrie);

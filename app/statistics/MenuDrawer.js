@@ -4,10 +4,11 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import IrieButtonFilter from './IrieButtonFilter' ;
 import ColorBrew from './dynamic color/ColorBrew';
-
+import {Link} from 'react-router' ;
 import StatePickFilter from './containers/pickFilter/StatePickFilter' ;
 import AreaPickFilter from './containers/pickFilter/AreaPickFilter' ;
 import PopPickFilter from './containers/pickFilter/PopPickFilter' ;
+import RadioPickFilter from './containers/pickFilter/RadioPickFilter' ;
 
 import PopSliderFilter from './containers/sliderFilter/PopSliderFilter' ;
 import AreaSliderFilter from './containers/sliderFilter/AreaSliderFilter' ;
@@ -41,9 +42,11 @@ class MenuDrawer extends Component {
                         <h3 className="widget-title"  >Pick Filter</h3>
                      </div> 
                         <div className="col-md-12" style={{marginBottom:"2rem",paddingLeft: "initial"}}>
-                            <div className="col-md-3"><PopPickFilter/> </div>
+
+                            <RadioPickFilter/>
+                            {/*<div className="col-md-3"><PopPickFilter/> </div>
                             <div className="col-md-3"><AreaPickFilter/> </div>
-                            <div className="col-md-3"><StatePickFilter/> </div>
+                            <div className="col-md-3"><StatePickFilter/> </div>*/}
                         </div> 
                    
 
@@ -61,20 +64,26 @@ class MenuDrawer extends Component {
                         <AreaSliderFilter />
                     </div>  
 
-                    <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
+{/*                    <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
                         <h3 className="widget-title"  >Filter by type</h3>
                     </div>
                     <div style={{margin:"2rem"}}>    
                         <StateSliderFilter />
-                    </div>  
+                    </div>  */}
 
                     <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
                         <h3 className="widget-title"  >Marker Filter</h3>
                         <IrieButtonFilter/>   
                     </div> 
 
-                    <div style={{marginLeft:"2rem",marginTop:"4rem"}}>
+                    <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
                         <ColorBrew />
+                    </div>
+                    
+                    <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
+                        <RaisedButton label="Back" 
+                        containerElement={<Link to="/viz" />} 
+                        linkButton={true} />
                     </div>
                 </Drawer>
             </div>

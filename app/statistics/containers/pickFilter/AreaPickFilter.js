@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Checkbox from 'material-ui/Checkbox';
 
 import { connect } from "react-redux";
-import { getAreaPickFilter } from "../../actions/index";
+import { getAreaPickFilter } from "../../../actions/index";
 import { bindActionCreators } from "redux";
 
 class AreaPickFilter extends Component {

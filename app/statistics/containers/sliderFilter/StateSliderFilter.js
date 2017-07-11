@@ -3,7 +3,7 @@ import MenuItem from 'material-ui/MenuItem';
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 import { connect } from "react-redux";
-import { getStateValue } from "../../actions/index";
+import { getStateValue } from "../../../actions/index";
 import { bindActionCreators } from "redux";
 
 import 'react-input-range/lib/css/index.css'
