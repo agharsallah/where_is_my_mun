@@ -19,6 +19,7 @@ import RootTwoMap from "./2maps/RootTwoMap.js"
 import VizRoot from "./vizRoot/VizRoot.js"
 import About from "./vizRoot/About.js"
 import RegTrackRoot from "./vizRoot/registrationTracker/RegTrackRoot.js"
+import RegTrackLineRoot from "./vizRoot/registrationTrackerLine/RegTrackLineRoot.js"
 injectTapEventPlugin();
 
 ReactDOM.render(
@@ -32,6 +33,7 @@ ReactDOM.render(
         <Route path="/electionsocio" component={RootTwoMap}/> 
         <Route path="/viz" component={VizRoot}/> 
         <Route path="/viz/dailyreg" component={RegTrackRoot}/> 
+        <Route path="/viz/dailyregcharts" component={RegTrackLineRoot}/> 
         <Route path="/viz/about" component={About}/> 
 
     </Router>

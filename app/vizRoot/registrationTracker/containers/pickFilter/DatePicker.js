@@ -22,13 +22,16 @@ class DatePicker extends Component {
                                 <SelectField
                                     floatingLabelText="Date"
                                     style={{width:"12vw"}}
+                                    iconStyle={{fill:"red"}}
                                     value={this.state.date}
                                     onChange={(event, index, value) => {this.setState({date:value});this.props.getDateValue(value)}}
+                                    maxHeight={250}
                                     >
                                     <MenuItem value={"06-07"} primaryText="06-07-2017" />
                                     <MenuItem value={"07-07"} primaryText="07-07-2017" />
                                     <MenuItem value={"08-07"} primaryText="08-07-2017" />
                                     <MenuItem value={"09-07"} primaryText="09-07-2017" />
+                                    <MenuItem value={"10-07"} primaryText="10-07-2017" />
                                 </SelectField>
             </div>
 		

@@ -9,7 +9,7 @@ import MapInfo from './MapInfo' ;
 import { connect } from "react-redux";
 import { getPopValue } from "../actions/index";
 import { bindActionCreators } from "redux";
-
+import "./s.css"
 class StatMap extends Component {
     constructor(props){
         super(props);
@@ -63,9 +63,15 @@ class StatMap extends Component {
     }
 
      getColor(d,c1) {
+        if      (d >2)      {return "#f0f0ee"; }
+        else if (d >1)      {return "#f0f0ee";}
+        else if (isNaN(d))    {return ('#f0f0ee')}
+        else                  {return "#f0f0ee";}
+	}
+         getColorc(d,c1) {
         if      (d >2)      {return (c1[2]); }
         else if (d >1)      {return (c1[1]);}
-        else if (isNaN(d))    {return ('white')}
+        else if (isNaN(d))    {return ('rgb(187, 222, 251)')}
         else                  {return (c1[0]);}
 	}
 
@@ -75,7 +81,7 @@ class StatMap extends Component {
             if(etat=="All") {
                 if(feature.properties.state=="extended"){
                     var ETAT = 1;
-                }else if(feature.properties.state=="new"){
+                }else if(feature.properties.state=="new"||feature.properties.state=="new2015"){
                     var ETAT = 2;
                 }else{
                     var ETAT = 3;
@@ -83,21 +89,63 @@ class StatMap extends Component {
             }
             if ((feature.properties.state=="extended")&&(etat=="Extended")){
                 var ETAT = 1;
-            }else if ((feature.properties.state=="new")&&(etat=="New")){
+            }else if ((feature.properties.state=="new"||feature.properties.state=="new2015")&&(etat=="New")){
                 var ETAT = 2;
             }else if ((feature.properties.state=="old")&&(etat=="Old")){
                 var ETAT = 3;
             }
            
-            
             return {
                 fillColor: this.getColor(ETAT,this.props.mapColorState),
                 color: 'black',
-                weight: 2,
+                weight: 0.5,
                 fillOpacity: 0.8
             };
-
 	}
+    
+     styleB(feature) {
+
+            return {
+                
+                color: 'black',
+                weight: 3,
+                fillOpacity: 0
+            };
+	}
+         styleBG(feature) {
+
+            return {
+                
+                color: 'black',
+                weight: 3,
+                fillOpacity: 0
+            };
+	}
+    stylef(feature){
+         const etat = this.props.stateFilter;
+            if(etat=="All") {
+                if(feature.properties.state=="extended"){
+                    var ETAT = 1;
+                }else if(feature.properties.state=="new"||feature.properties.state=="new2015"){
+                    var ETAT = 2;
+                }else{
+                    var ETAT = 3;
+                }
+            }
+            if ((feature.properties.state=="extended")&&(etat=="Extended")){
+                var ETAT = 1;
+            }else if ((feature.properties.state=="new"||feature.properties.state=="new2015")&&(etat=="New")){
+                var ETAT = 2;
+            }else if ((feature.properties.state=="old")&&(etat=="Old")){
+                var ETAT = 3;
+            }
+            return {
+                fillColor: this.getColorc(ETAT,this.props.mapColorState),
+                color: 'black',
+                weight: 0.5,
+                fillOpacity: 0.8
+            };
+    }
 
     highlightFeature(e) {
 	    const layer = e.target;
@@ -127,9 +175,9 @@ class StatMap extends Component {
                     url='https://api.mapbox.com/styles/v1/hunter-x/cixhpey8700q12pnwg584603g/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaHVudGVyLXgiLCJhIjoiY2l2OXhqMHJrMDAxcDJ1cGd5YzM2bHlydSJ9.jJxP2PKCIUrgdIXjf-RzlA'
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     />
+ 
                     <GeoJSON
-                    key={"a"+this.state.key}
-                    data= {this.state.shape}
+                    data= {shape}
                     style={this.style.bind(this)} 
                     onEachFeature={
                         (feature, layer) => {
@@ -139,24 +187,34 @@ class StatMap extends Component {
                     }    
                     }
                     />
+                     <GeoJSON
+                    data= {focus}
+                    style={this.stylef.bind(this)} 
+ 
+                 
+                    /> 
 
-                    {this.props.checkedIrieButton?
-                         <FeatureGroup color='purple'>
-                            {this.state.Irie.map(function(object, i){
-                                //console.log(object.latlon);
-                                //console.log(object);
-                                return <IrieMarker data={object.data} key={i} />;
-                            })}
-                        </FeatureGroup>:
-                        <div/>
-                    }
-                {/**/}
-                    <Control position="bottomright" >
-                        <MapKey colorSet={this.props.mapColorState} grades={this.state.grades} getColor={this.state.colorfun} keyTitle={this.state.keytitle} />
-                    </Control>
+                     <GeoJSON
+                    data= {focusGouv}
+                    style={this.styleBG.bind(this)} 
+
+                    /> 
+                    
                     <Control position="topright" >
-                        <MapInfo shape={this.state.shape}  colorSet={this.props.mapColorState}/>
+             <div className="infoLegendStat legend">
+             <div>
+                        <h3 >6 Governorates :</h3>
+                        <h4 style={{textAlign:"center",marginTop:"20px",color:"#30729c"}}>Jendouba</h4>
+                        <h4 style={{textAlign:"center",marginTop:"20px",color:"#30729c"}}>Le Kef</h4>
+                        <h4 style={{textAlign:"center",marginTop:"20px",color:"#30729c"}}>Siliana</h4>
+                        <h4 style={{textAlign:"center",marginTop:"20px",color:"#30729c"}}>Kasserine</h4>
+                        <h4 style={{textAlign:"center",marginTop:"20px",color:"#30729c"}}>Sidi Bouzid</h4>
+                        <h4 style={{textAlign:"center",marginTop:"20px",color:"#30729c"}}>Gafsa</h4>
+         <h3 style={{marginTop:"30px"}}>27 new municipality</h3>
+                        </div>
+                    </div>
                     </Control>
+                    <h2 style={{textShadow: "4px 3px 3px rgba(150, 150, 184, 0.48)",position:"relative",zIndex:"500",marginLeft:"40%",width:"38%",borderRadius: "80px", top: -"1vh",textAlign:"center", fontFamily: "Lucida Grande",color: "rgb(0, 82, 136)"}}>Governorates & Municipalities targeted for Civic engagement campaign</h2>
                     {/*show the information Div*/}
                     {(this.state.destroy==false)?<div className="one">{this.state.population}</div>: <div>aaaaa</div> }
                 </Map>

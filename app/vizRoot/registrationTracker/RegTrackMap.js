@@ -33,7 +33,7 @@ class RegTrackMap extends Component {
     }
     
     componentWillMount() {
-        let qString=config.apiUrl+"/api/dailyins/shape_reg_upd-09-07";
+        let qString=config.apiUrl+"/api/dailyins/shape_reg_upd-10_07";
         axios({
             method: 'get',
             url: qString,
