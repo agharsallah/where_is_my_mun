@@ -6,6 +6,8 @@ import config from '../config'
 import Control from 'react-leaflet-control';
 import MapKey from './MapKey' ;
 import MapInfo from './MapInfo' ;
+import ReactLoading from 'react-loading';
+
 import { connect } from "react-redux";
 import { getPopValue } from "../actions/index";
 import { bindActionCreators } from "redux";
@@ -17,7 +19,7 @@ class StatMap extends Component {
             feature:"",shape:g_mun_shapes,key:1,Irie:[],seats:"" ,population:"" ,
             etat:"" ,gouv_name:"",destroy:true,grades:["New","Extended","Old"],
             keytitle:"Municipality color Representation",colorfun:this.getColor,
-            allpop:0,allarea:0
+            allpop:0,allarea:0,shapeIsLoaded:false
         }
     }
     
@@ -35,7 +37,7 @@ class StatMap extends Component {
             //console.log(response.data.data)
             console.log('we got shape data frm db');
             console.log(response);
-            this.setState({shape:JSON.parse(response.data.data),key:2});
+            this.setState({shape:JSON.parse(response.data.data),key:2,shapeIsLoaded:true});
             }
         )
         .catch(function (error) {
@@ -121,8 +123,8 @@ class StatMap extends Component {
     render() {
         const position = [34.855360, 8.8049795];
         return (
-            
-                <Map  maxZoom={23} center={position} zoom={7} className="initialposition" style={{height: "100vh", width: "100vw",position:"relative",zIndex:0}}>
+            <div>
+                {this.state.shapeIsLoaded ? <Map  maxZoom={23} center={position} zoom={7} className="initialposition" style={{height: "100vh", width: "100vw",position:"relative",zIndex:0}}>
                     <TileLayer
                     url='https://api.mapbox.com/styles/v1/hunter-x/cixhpey8700q12pnwg584603g/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaHVudGVyLXgiLCJhIjoiY2l2OXhqMHJrMDAxcDJ1cGd5YzM2bHlydSJ9.jJxP2PKCIUrgdIXjf-RzlA'
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -160,7 +162,16 @@ class StatMap extends Component {
                     {/*show the information Div*/}
                     {(this.state.destroy==false)?<div className="one">{this.state.population}</div>: <div>aaaaa</div> }
                 </Map>
-
+                :
+                <div>
+                    <div className="col-md-7"></div>
+                    <div className="col-md-5" style={{marginTop:"40vh"}}>
+                        <h2>"Loading Map"</h2>
+                        <ReactLoading type="bars" color="#444" className="react-Loader" delay={0} />
+                    </div>
+                </div>
+            }
+            </div>
         );
     }
 }

@@ -20,6 +20,7 @@ import VizRoot from "./vizRoot/VizRoot.js"
 import About from "./vizRoot/About.js"
 import RegTrackRoot from "./vizRoot/registrationTracker/RegTrackRoot.js"
 import RegTrackLineRoot from "./vizRoot/registrationTrackerLine/RegTrackLineRoot.js"
+import DetailedRegGov from './vizRoot/detailed_registration_gouv/DetailedRegGov' ;
 injectTapEventPlugin();
 
 ReactDOM.render(
@@ -28,12 +29,13 @@ ReactDOM.render(
     <MuiThemeProvider>
     <Router history={browserHistory}>
         <Route  path="/" component={App}/> 
-        <Route path="/viz/statistics" component={RootMap}/> 
-        <Route path="/viz/newmun" component={NewMunRoot}/> 
         <Route path="/electionsocio" component={RootTwoMap}/> 
         <Route path="/viz" component={VizRoot}/> 
+        <Route path="/viz/detailedgov" component={DetailedRegGov}/> 
+        <Route path="/viz/dailyregcharts" component={RegTrackLineRoot}/>         
         <Route path="/viz/dailyreg" component={RegTrackRoot}/> 
-        <Route path="/viz/dailyregcharts" component={RegTrackLineRoot}/> 
+        <Route path="/viz/statistics" component={RootMap}/> 
+        <Route path="/viz/newmun" component={NewMunRoot}/> 
         <Route path="/viz/about" component={About}/> 
 
     </Router>

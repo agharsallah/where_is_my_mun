@@ -15,7 +15,7 @@ fs.readdir('./daily_inscription', (err, files) => {
     var qString=config.apiUrl+"/api/adddailyins/";
 		//console.log(dir);
     fs.readFile(dir, 'utf8', function(err, data) {
-		console.log(data);
+		//console.log(data);
 		var options = {
 			url: qString,
 			headers: {

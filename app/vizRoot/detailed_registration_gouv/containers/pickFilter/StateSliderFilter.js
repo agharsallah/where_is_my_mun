@@ -14,21 +14,21 @@ class StateSliderFilter extends Component {
     render() {
         return (
             <div>  
-                <RadioButtonGroup name="state of mun" defaultSelected="All" onChange={(e,value) => {console.log(value); this.props.getStateValue(value)} }>
-                    <RadioButton
-                        value="All"
-                        label="Registration in time"
-                    />
-                    <RadioButton
-                        value="Bubble"
-                        label="Bubble"
-                    />
-                    <RadioButton
-                        value="Heat"
-                        label="Heat map"
-                    />
-                </RadioButtonGroup>
-            </div>
+            <RadioButtonGroup name="state of mun" defaultSelected="All" onChange={(e,value) => {console.log(value); this.props.getStateValue(value)} }>
+                <RadioButton
+                    value="All"
+                    label="Registration in time"
+                />
+                <RadioButton
+                    value="Bubble"
+                    label="Bubble"
+                />
+                <RadioButton
+                    value="Heat"
+                    label="Heat map"
+                />
+            </RadioButtonGroup>
+                 </div>
         );
     }
 }

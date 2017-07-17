@@ -7,26 +7,26 @@ import { getStateValue } from "../../../../actions/index";
 import { bindActionCreators } from "redux";
 
 import 'react-input-range/lib/css/index.css'
-class StateSliderFilter extends Component {
- 
-    //handleChange (event, index, value) {this.props.getclickedbutton(value);this.setState({value})}
-    
+class SelectRegUpd extends Component {
+    constructor(props) {
+        super(props);
+        this.state={selectValue:"registration"}
+    }
+        handleSelectField(event, index, selectValue){this.setState({selectValue});}
+     
     render() {
         return (
             <div>  
                 <RadioButtonGroup name="state of mun" defaultSelected="All" onChange={(e,value) => {console.log(value); this.props.getStateValue(value)} }>
-                    <RadioButton
-                        value="All"
-                        label="Registration in time"
-                    />
-                    <RadioButton
-                        value="Bubble"
-                        label="Bubble"
-                    />
-                    <RadioButton
-                        value="Heat"
-                        label="Heat map"
-                    />
+                <SelectField
+                    style={{marginLeft:"2rem",marginTop:"2rem"}}
+                    floatingLabelText="Registration/Updae"
+                    value={this.state.selectValue}
+                    onChange={this.handleSelectField.bind(this)}
+                >
+                    <MenuItem value="registration" primaryText="Registration" />
+                    <MenuItem value="update" primaryText="Update" />
+                </SelectField>
                 </RadioButtonGroup>
             </div>
         );
@@ -42,4 +42,4 @@ function mapDispatchToProps(dispatch) {
 }
 
 
-export default connect(null, mapDispatchToProps)(StateSliderFilter);
+export default connect(null, mapDispatchToProps)(SelectRegUpd);

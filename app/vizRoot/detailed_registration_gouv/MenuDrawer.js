@@ -4,12 +4,7 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import {Link} from 'react-router' ;
 import StateSliderFilter from './containers/pickFilter/StateSliderFilter' ;
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 
-import { connect } from "react-redux";
-import { getPopValue } from "../../actions/index";
-import { bindActionCreators } from "redux";
 
 import counterpart  from 'counterpart';
 import Translate    from 'react-translate-component';
@@ -17,10 +12,10 @@ const _t = Translate.translate;
 class MenuDrawer extends Component {
     constructor(props) {
         super(props);
-        this.state = {open: true, selectValue:"registration"};
+        this.state = {open: true};
     }
     handleToggle() {this.setState({open: !this.state.open});this.props.getDrawerState(!this.state.open) }
-    handleSelectField(event, index, selectValue){this.setState({selectValue});}
+
     render() {
         return (
             <div>
@@ -36,41 +31,23 @@ class MenuDrawer extends Component {
 
 
                     <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
-                        <h3 className="widget-title">Choose a Visualization</h3>
+                        <h3 className="widget-title"  >Filter by type</h3>
                     </div>
-
                     <div style={{margin:"2rem"}}>    
                         <StateSliderFilter />
                     </div>  
+                    
+
 
                     <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
                         <RaisedButton label="Back" 
                         containerElement={<Link to="/viz" />} 
                         linkButton={true} />
                     </div>
-                    { this.props.stateFilter==="All"?
-                        <SelectField
-                            style={{marginLeft:"2rem",marginTop:"2rem"}}
-                            floatingLabelText="Registration/Updae"
-                            value={this.state.selectValue}
-                            onChange={this.handleSelectField.bind(this)}
-                        >
-                            <MenuItem value="registration" primaryText="Registration" />
-                            <MenuItem value="update" primaryText="Update" />
-                        </SelectField>: <div></div>
-                    }
                 </Drawer>
             </div>
         );
     }
 }
 
-function mapStateToProps(state) {
-
-  console.log("youhoooo",state);
-  return {
-    stateFilter:state.stateFilter
-
-  };
-}
-export default connect(mapStateToProps)(MenuDrawer);
+export default MenuDrawer;
