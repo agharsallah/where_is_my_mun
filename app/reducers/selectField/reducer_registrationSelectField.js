@@ -1,8 +1,8 @@
-import { STATESLIDERVALUE } from "../../actions/index";
+import { REGUPDSELECTFFIELD } from "../../actions/index";
 
-export default function(state = "All", action) {
+export default function(state = "registration", action) {
   switch (action.type) {
-    case STATESLIDERVALUE:
+    case REGUPDSELECTFFIELD:
       return action.payload;
   }
   return state;

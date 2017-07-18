@@ -3,7 +3,6 @@
   background: #fff;
   border-radius: 2px;
   display: inline-block;
-  height: 14vh;
   margin: 1rem;
   position: absolute !important;
 
@@ -35,6 +34,9 @@
 .centerimg{
       display: block;
     margin: auto;
-    width: 40%;
     margin-top: 1vh;
+}
+.maleFemaleNumText{
+      margin-top: 8px;
+    margin-bottom: 1px;
 }
