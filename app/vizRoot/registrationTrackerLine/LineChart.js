@@ -31,7 +31,6 @@ componentWillMount() {
         options:{
             chart: {
                 type: 'line',
-                height:480
             
             },
             credits: false,

@@ -20,7 +20,7 @@ import VizRoot from "./vizRoot/VizRoot.js"
 import About from "./vizRoot/About.js"
 import RegTrackRoot from "./vizRoot/registrationTracker/RegTrackRoot.js"
 import RegTrackLineRoot from "./vizRoot/registrationTrackerLine/RegTrackLineRoot.js"
-import DetailedRegGovRoot from './vizRoot/detailed_registration_gouv/DetailedRegGovRoot' ;
+import DetailedRegGovRoot from './vizRoot/detailed_registration/DetailedRegGovRoot' ;
 injectTapEventPlugin();
 
 ReactDOM.render(
