@@ -5,28 +5,27 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Checkbox from 'material-ui/Checkbox';
 
 import { connect } from "react-redux";
-import { getPickedFilter,getPopPickFilter,getDateValue } from "../../../../actions/index";
+import { getPickedFilter } from "../../../../actions/index";
 import { bindActionCreators } from "redux";
 
 import Translate from 'react-translate-component';
 
-class InscriptionVsUpdateRadio extends Component {
+class ThemeRadio extends Component {
 	constructor(props) {
 		super(props);
 		this.state={checkBoxValue:true,date:'_06_07'}
 	}
+	change(e,value){
+		this.props.getPickedFilter(value)
+	}
 	
     render() {
-		var options = [{value: "_06_07",label: "06-07" },{value: "_07_07",label: "07-07" },{value: "_08_07",label: "08-07" },{value: "_09_07",label: "09-07" }]
         return (
-		<Control position="topright" >
-             <div className="infoLegendStat legend" style={{marginTop:"12vh",minWidth:"15vw"}}>
+             <div className="infoLegendStat legend " style={{marginTop:"14vh",minWidth:"16vw",position:"fixed",zIndex:2,marginLeft:"83%"}}>
                <h4 >
                     Choose a parameter
                 </h4> 
-    		<MuiThemeProvider>
-			<div>
-	            <RadioButtonGroup  name="reg&update" defaultSelected="pop" onChange={ (e,value) => {this.props.getPickedFilter(value)} } >
+	            <RadioButtonGroup  name="reg&update" defaultSelected="pop" onChange={this.change.bind(this)} >
 					<RadioButton
 					labelStyle={{color:'black'}}
 					value="pop"
@@ -47,17 +46,13 @@ class InscriptionVsUpdateRadio extends Component {
 					/>
 				</RadioButtonGroup>
 					
-				</div>
-    </MuiThemeProvider>
-
              </div>
-</Control>
         );
     }
 }
 
 function mapDispatchToProps(dispatch) {
 
-  return bindActionCreators({ getPickedFilter,getPopPickFilter,getDateValue }, dispatch);
+  return bindActionCreators({ getPickedFilter}, dispatch);
 }
-export default connect(null, mapDispatchToProps)(InscriptionVsUpdateRadio);
+export default connect(null, mapDispatchToProps)(ThemeRadio);

@@ -15,7 +15,7 @@ import { connect } from "react-redux";
 import { getPopValue } from "../../actions/index";
 import { bindActionCreators } from "redux";
 
-class DetailedRegGovMap extends Component {
+class ActiveRegistered extends Component {
     constructor(props){
         super(props);
         this.state={
@@ -28,7 +28,7 @@ class DetailedRegGovMap extends Component {
     }
     
     componentWillMount() {
-
+        console.log('cwm');
             // preparing the basic scatter chart data
             const dataArray=this.props.shape,menElgReg=[],femaleElgReg=[],govName=[],regressionRegElg=[];
             (dataArray.features).map((object,i)=>{
@@ -44,7 +44,7 @@ class DetailedRegGovMap extends Component {
                             menElgReg,femaleElgReg,govName,regressionRegElg       
             });
     }
-        
+      
    
      getColorRegElg(d,c1,grades) {
         if      (d >grades[2])      {return (c1[5]); }
@@ -127,19 +127,6 @@ class DetailedRegGovMap extends Component {
                         </Tooltip>
 
                     </GeoJSON>
-                    
-                    {/*Left side ScatterPlot*/}
-                    <div className="col-md-7" style={{marginTop:"22rem"}}>
-                        {
-                        <ScatterRegVsElig
-                        menElgReg={this.state.menElgReg}
-                        femaleElgReg={this.state.femaleElgReg}
-                        allElgReg={this.state.regressionRegElg}
-                        govName={this.state.govName}
-                        regressionRegElg={regression.linear(this.state.regressionRegElg)}
-                        genderFilter={this.props.genderFilter}
-                        />}
-                    </div>
 
                     {/*Toggle to change the map theme*/}
 
@@ -159,8 +146,8 @@ class DetailedRegGovMap extends Component {
                     {/*Title of the map*/}
                     <Control position="topleft">
                         <div className="lefttitle" >
-                            <h1 style={{marginTop:"5px"}} > registered Versus Eligible Voters</h1>
-                            <p style={{fontSize:"13px"}}>Registered from 2011 until 10-07-17 | Eligible - INS data of 2014</p>
+                            <h1 style={{marginTop:"5px"}} > Active Registerd Voters</h1>
+                            <p style={{fontSize:"13px"}}>Percentage of registration in municipal election Versus already registered</p>
                         </div>
                     </Control>
 
@@ -180,12 +167,12 @@ class DetailedRegGovMap extends Component {
 
 function mapStateToProps(state) {
 
-  console.log("youhoooo from detailedRegGovMap",state);
+  console.log("youhoooo from ActiveRegistered",state);
   return {
     mapColor:state.changeMapColor,
     genderFilter:state.PopCheckbox
   };
 }
 
-export default connect(mapStateToProps)(DetailedRegGovMap);
+export default connect(mapStateToProps)(ActiveRegistered);
 
