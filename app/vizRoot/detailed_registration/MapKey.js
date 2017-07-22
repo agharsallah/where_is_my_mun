@@ -4,7 +4,7 @@ class MapKey extends Component {
 
     render() {
          var grades = [0,...this.props.grades]
-         console.log("mapkey grades",grades);
+         //console.log("mapkey grades",grades);
         return (
              <div className="infoLegendStat legend">
                 <p style={{marginLeft:"10px"}}>{this.props.keyTitle}</p>

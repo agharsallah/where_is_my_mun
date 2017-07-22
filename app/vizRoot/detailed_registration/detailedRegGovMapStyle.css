@@ -45,3 +45,7 @@
   width: 20px;
   height: 20px;
 }
+/*leaflet tooltip style overide*/
+.leafletTooltip{
+  border-radius: 30px
+}

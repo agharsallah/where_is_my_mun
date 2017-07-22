@@ -10,6 +10,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import  './DetailedRegGovMapStyle.css' ;
 import ScatterRegVsElig from './ScatterRegVsElig' ;
 import regression from 'regression';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 import { connect } from "react-redux";
 import { getPopValue } from "../../actions/index";
@@ -21,9 +23,10 @@ class DetailedRegGovMap extends Component {
         this.state={
             gouv_name:"",munNumber:"",destroy:true,eligVsReg:"",eligible2014:"", allRegistered:"",
             grades:[60, 70, 80],dynamicReg:[60, 70, 80 ],colorfun:this.getColorRegElg,
-            keytitle:"Percentage of Registered Versus Eligible ",
+            keyTitle:"Percentage of Registered Versus Eligible ",mapGender:"all",
+            keyColor:["#fec44f", "#eaa43c", "#d4862b","#bd681c","#a54b0f","#8c2d04"],
             menElgReg:[], femaleElgReg:[],govName:[],regressionRegElg:[],
-            dynamicUpdate:[450, 600,800, 1000],scatterGender:false
+            scatterGender:false
         }
     }
     
@@ -41,7 +44,7 @@ class DetailedRegGovMap extends Component {
               regressionRegElg.push([Number(object.properties.allreg_sum),Number(object.properties._2014_eligilevoters)])
             })
             this.setState({
-                            menElgReg,femaleElgReg,govName,regressionRegElg       
+                menElgReg,femaleElgReg,govName,regressionRegElg      
             });
     }
         
@@ -53,14 +56,43 @@ class DetailedRegGovMap extends Component {
         else if (isNaN(d))    {return ('white')}
         else                  {return (c1[0]);}
 	}
-
+/*    changeMapKeyColor(COLORSET){
+            this.setState({keyColor:COLORSET});
+    }*/
+    mapGenderSelect(e,index,value){
+        let keyColor,keyTitle;
+        value==="all"?
+            (keyColor=["#fec44f", "#eaa43c", "#d4862b","#bd681c","#a54b0f","#8c2d04"],keyTitle="Percentage of Registered VS Eligible")
+            :   (value==="male"?
+                (keyColor=["#9ecae1", "#7ab0d3", "#5895c5","#397bb6","#1e60a6","#084594"],keyTitle="Male % of Registered VS Eligible")
+                :
+                (keyColor=["#fc9272", "#e97a5c", "#d56147","#c14832","#ad2c1f","#99000d"],keyTitle="Female % of Registered VS Eligible")
+                )
+                this.setState({mapGender:value,keyColor,keyTitle})
+       
+    }
     style(feature) {
-        //check for what we have checked as filter subject : Population || state ||
-            let REGISTRATION = parseInt(feature.properties.allreg_sum);
-            let ELIGIBLE = parseInt(feature.properties._2014_eligilevoters);
+        //what we have checked as map filter 
+            let REGISTRATION, ELIGIBLE,COLORSET;
+            this.state.mapGender==="all"?
+            (REGISTRATION = parseInt(feature.properties.allreg_sum),
+             ELIGIBLE = parseInt(feature.properties._2014_eligilevoters),
+             COLORSET=["#fec44f", "#eaa43c", "#d4862b","#bd681c","#a54b0f","#8c2d04"]
+            )
+            : (this.state.mapGender==="male"?
+                (REGISTRATION = parseInt(feature.properties.allreg_male_sum),
+                ELIGIBLE = parseInt(feature.properties._2014_eligilevotersmale),
+                COLORSET=["#9ecae1", "#7ab0d3", "#5895c5","#397bb6","#1e60a6","#084594"]
+                )
+                :
+                (REGISTRATION = parseInt(feature.properties.allreg_female_sum),
+                ELIGIBLE = parseInt(feature.properties._2014_eligilevotersfemale),
+                COLORSET=["#fc9272", "#e97a5c", "#d56147","#c14832","#ad2c1f","#99000d"]
+                )
+            )
             let eligVsReg = ((REGISTRATION*100)/ELIGIBLE).toFixed(2);
             return {
-                fillColor: this.getColorRegElg(eligVsReg,this.props.mapColor,this.state.dynamicReg),
+                fillColor: this.getColorRegElg(eligVsReg,COLORSET,this.state.dynamicReg),
                 weight: 1,
                 opacity: 2,
                 color: 'white',
@@ -72,9 +104,23 @@ class DetailedRegGovMap extends Component {
     highlightFeature(e) {
         const layer = e.target;
         const property = layer.feature.properties;
-        const eligVsReg= ((property.allreg_sum*100)/property._2014_eligilevoters).toFixed(2)
+        let eligVsRegPer,eligible,registered;
+        this.state.mapGender==="all"?
+        (eligVsRegPer= ((property.allreg_sum*100)/property._2014_eligilevoters).toFixed(2),
+         eligible=property._2014_eligilevoters,registered=property.allreg_sum
+        )
+         :
+            ( this.state.mapGender==="male"?
+            (eligVsRegPer= ((property.allreg_male_sum*100)/property._2014_eligilevotersmale).toFixed(2),
+            eligible=property._2014_eligilevotersmale,registered=property.allreg_male_sum
+            )
+            :
+            (eligVsRegPer= ((property.allreg_female_sum*100)/property._2014_eligilevotersfemale).toFixed(2),
+            eligible=property._2014_eligilevotersfemale,registered=property.allreg_female_sum
+            )
+            )
         this.setState({destroy:false,gouv_name:property.NAME_EN,munNumber:property.munnumber,
-                        eligVsReg:eligVsReg,eligible2014:property._2014_eligilevoters,allRegistered:property.allreg_sum});
+                        eligVsReg:eligVsRegPer,eligible2014:eligible,allRegistered:registered});
         return layer.setStyle({
             weight: 5,
             color: '#666',
@@ -113,14 +159,15 @@ class DetailedRegGovMap extends Component {
                             }    
                         }
                     >
-                        <Tooltip direction="bottom">
+                        <Tooltip direction="bottom" className="leafletTooltip" >
                             <div>
-                                <h2>{this.state.gouv_name}</h2>
+                                <h3>{this.state.gouv_name}</h3>
                                 {
                                     <div>
-                                        <h3><b>{this.state.eligVsReg} %</b> Registered from Eligible</h3>
-                                        <h3> <b> {(this.state.eligible2014).toLocaleString()}</b> Eligible</h3>
-                                        <h3><b>{(this.state.allRegistered).toLocaleString()}</b> Registered</h3>
+                                        <h4><b>{this.state.eligVsReg} %</b> Registered from Eligible</h4>
+                                        <h4> <b> {(this.state.eligible2014).toLocaleString()}</b> Eligible</h4>
+                                        <h4><b>{(this.state.allRegistered).toLocaleString()}</b> Registered</h4>
+                                        <h4><b>{(this.state.eligible2014-this.state.allRegistered).toLocaleString()}</b> Non Registered</h4>
                                     </div>
                                 }
                             </div>
@@ -141,19 +188,29 @@ class DetailedRegGovMap extends Component {
                         />}
                     </div>
 
-                    {/*Toggle to change the map theme*/}
+                    {/*Toggle to change the map Gender*/}
+                    <div  style={{zIndex:1500,position:"fixed",right: "1%",marginTop: "30rem"}} >
+                        <SelectField
+                            floatingLabelText="Gender -map-"
+                            value={this.state.mapGender}
+                            onChange={this.mapGenderSelect.bind(this)}
+                            iconStyle={{fill:"red"}}
+                            style={{width:"12vw"}}
+                            >
+                            <MenuItem value="all" primaryText="All" />
+                            <MenuItem value="male" primaryText="Male" />
+                            <MenuItem value="female" primaryText="Female" />
+                        </SelectField>
+                    </div>
 
                     {/*Change Degree of map : Governorate - Municipality*/}
                 
-                    {/*Color changer button*/}
-                    <ColorBrew />
-
                     {/*to download raw data*/}
-                    <SourceButton/> 
+                    <SourceButton styleProp={{zIndex:1500,position:"fixed",right: "1%",marginTop: "40rem"}}/> 
                         
                     {/*Map Keys coropleth*/}
                     <Control position="bottomright" >
-                        <MapKey colorSet={this.props.mapColor} grades={this.state.grades} getColor={this.state.colorfun} keyTitle={this.state.keytitle} />
+                        <MapKey colorSet={this.state.keyColor} grades={this.state.grades} getColor={this.state.colorfun} keyTitle={this.state.keyTitle} key={this.state.keytitle} />
                     </Control>
                     
                     {/*Title of the map*/}

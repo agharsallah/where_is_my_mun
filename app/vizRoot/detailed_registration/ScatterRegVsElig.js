@@ -125,7 +125,7 @@ class ScatterRegVsElig extends Component {
          let govName= nextProps.govName;
         //console.log(nextProps.regressionRegElg);
         let regression0=nextProps.regressionRegElg.equation[0],regression1=nextProps.regressionRegElg.equation[1]
-        console.log(regression0,regression1);
+        //console.log(regression0,regression1);
         // get the max and min values of x, and calculate 
         // the corresponding y value using that x, m, and b
         

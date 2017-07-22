@@ -13,7 +13,6 @@ class ColorBrew extends Component {
                 this.state={open: false} ;
     }
  handleOpen()  {
-   console.log('ddddd');
     this.setState({open: true});
   }
   
@@ -37,7 +36,7 @@ class ColorBrew extends Component {
     
         return (
           <MuiThemeProvider>
-            <div  style={{zIndex:1500,position:"fixed",right: "1%",marginTop: "40vh"}}>
+            <div  style={this.props.styleProp}>
               <RaisedButton label="Change Map Color" onTouchTap={this.handleOpen.bind(this)} onClick={this.handleOpen.bind(this)} />
         <Dialog
           title="Choose color sets "

@@ -19,16 +19,15 @@ class ActiveRegistered extends Component {
     constructor(props){
         super(props);
         this.state={
-            gouv_name:"",munNumber:"",destroy:true,eligVsReg:"",eligible2014:"", allRegistered:"",
-            grades:[60, 70, 80],dynamicReg:[60, 70, 80 ],colorfun:this.getColorRegElg,
-            keytitle:"Percentage of Registered Versus Eligible ",
+            gouv_name:"",munNumber:"",destroy:true,activeVoterPer:"",registered2017:"", allRegistered:"",
+            grades:[2, 3, 5],dynamicReg:[2, 3, 5 ],colorfun:this.getColorRegElg,
+            keytitle:"Percentage of active registered voters",
             menElgReg:[], femaleElgReg:[],govName:[],regressionRegElg:[],
-            dynamicUpdate:[450, 600,800, 1000],scatterGender:false
+            scatterGender:false
         }
     }
     
     componentWillMount() {
-        console.log('cwm');
             // preparing the basic scatter chart data
             const dataArray=this.props.shape,menElgReg=[],femaleElgReg=[],govName=[],regressionRegElg=[];
             (dataArray.features).map((object,i)=>{
@@ -48,7 +47,7 @@ class ActiveRegistered extends Component {
    
      getColorRegElg(d,c1,grades) {
         if      (d >grades[2])      {return (c1[5]); }
-        else if (d>grades[1])        {return (c1[4]);}
+        else if (d>grades[1])        {return (c1[3]);}
         else if (d>grades[0])        {return (c1[2]);}
         else if (isNaN(d))    {return ('white')}
         else                  {return (c1[0]);}
@@ -56,11 +55,11 @@ class ActiveRegistered extends Component {
 
     style(feature) {
         //check for what we have checked as filter subject : Population || state ||
-            let REGISTRATION = parseInt(feature.properties.allreg_sum);
-            let ELIGIBLE = parseInt(feature.properties._2014_eligilevoters);
-            let eligVsReg = ((REGISTRATION*100)/ELIGIBLE).toFixed(2);
+            let REGISTRATION2017 = parseInt(feature.properties.inscription10_07);
+            let ALLREGISTRATION = parseInt(feature.properties.allreg_sum);
+            let activeVoterPer = ((REGISTRATION2017*100)/ALLREGISTRATION).toFixed(2);
             return {
-                fillColor: this.getColorRegElg(eligVsReg,this.props.mapColor,this.state.dynamicReg),
+                fillColor: this.getColorRegElg(activeVoterPer,this.props.mapColor,this.state.dynamicReg),
                 weight: 1,
                 opacity: 2,
                 color: 'white',
@@ -72,9 +71,9 @@ class ActiveRegistered extends Component {
     highlightFeature(e) {
         const layer = e.target;
         const property = layer.feature.properties;
-        const eligVsReg= ((property.allreg_sum*100)/property._2014_eligilevoters).toFixed(2)
+        const activeVoterPer= ((property.inscription10_07*100)/property.allreg_sum).toFixed(2)
         this.setState({destroy:false,gouv_name:property.NAME_EN,munNumber:property.munnumber,
-                        eligVsReg:eligVsReg,eligible2014:property._2014_eligilevoters,allRegistered:property.allreg_sum});
+                        activeVoterPer:activeVoterPer,registered2017:property.inscription10_07,allRegistered:property.allreg_sum});
         return layer.setStyle({
             weight: 5,
             color: '#666',
@@ -118,9 +117,9 @@ class ActiveRegistered extends Component {
                                 <h2>{this.state.gouv_name}</h2>
                                 {
                                     <div>
-                                        <h3><b>{this.state.eligVsReg} %</b> Registered from Eligible</h3>
-                                        <h3> <b> {(this.state.eligible2014).toLocaleString()}</b> Eligible</h3>
-                                        <h3><b>{(this.state.allRegistered).toLocaleString()}</b> Registered</h3>
+                                        <h3><b>{this.state.activeVoterPer} %</b> Active registered</h3>
+                                        <h3><b>{(this.state.allRegistered).toLocaleString()}</b> Registered in total </h3>
+                                        <h3> <b> {(this.state.registered2017).toLocaleString()}</b> Registered in 2017 (10-07)</h3>
                                     </div>
                                 }
                             </div>
@@ -128,15 +127,13 @@ class ActiveRegistered extends Component {
 
                     </GeoJSON>
 
-                    {/*Toggle to change the map theme*/}
-
                     {/*Change Degree of map : Governorate - Municipality*/}
                 
                     {/*Color changer button*/}
-                    <ColorBrew />
+                    <ColorBrew styleProp={{zIndex:1500,position:"fixed",right: "1%",marginTop: "40vh"}} />
 
                     {/*to download raw data*/}
-                    <SourceButton/> 
+                    <SourceButton styleProp={{zIndex:1500,position:"fixed",right: "1%",marginTop: "49vh"}} /> 
                         
                     {/*Map Keys coropleth*/}
                     <Control position="bottomright" >
@@ -147,7 +144,7 @@ class ActiveRegistered extends Component {
                     <Control position="topleft">
                         <div className="lefttitle" >
                             <h1 style={{marginTop:"5px"}} > Active Registerd Voters</h1>
-                            <p style={{fontSize:"13px"}}>Percentage of registration in municipal election Versus already registered</p>
+                            <p style={{fontSize:"13px"}}>Active registered voters since the beginning of municipal election </p>
                         </div>
                     </Control>
 

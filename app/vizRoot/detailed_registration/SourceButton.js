@@ -15,7 +15,7 @@ class SourceButton extends Component {
                 this.state={open: false} ;
     }
  handleOpen()  {
-   console.log('ddddd');
+   //console.log('ddddd');
     this.setState({open: true});
   }
   
@@ -39,7 +39,7 @@ class SourceButton extends Component {
     
         return (
           <MuiThemeProvider>
-            <div className="sourcePosition"  style={{zIndex:1500,position:"fixed",right: "1%",marginTop: "49vh"}}>
+            <div className="sourcePosition"  style={this.props.styleProp}>
               <RaisedButton label="Data Source" onTouchTap={this.handleOpen.bind(this)} onClick={this.handleOpen.bind(this)} />
         <Dialog
           title="Check the Raw data "
