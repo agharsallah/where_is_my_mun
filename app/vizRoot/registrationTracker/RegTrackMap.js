@@ -125,7 +125,6 @@ class RegTrackMap extends Component {
     }
     
      getColora(d,c1,grades) {
-         console.log("Geeeeeeeeeettttttt",grades);
         if      (d >grades[3])      {return (c1[5]); }
         else if (d>grades[2])        {return (c1[4]);}
         else if (d>grades[1])        {return (c1[3]);}
@@ -147,7 +146,7 @@ class RegTrackMap extends Component {
         //check for what we have checked as filter subject : Population || state ||
         if (this.props.radioFilterPicker=="pop") {
              var REGISTRATION = parseInt(feature.properties["inscription"+this.props.regDate]);
-             console.log(this.state.dynamicReg);
+             //console.log(this.state.dynamicReg);
             return {
                 fillColor: this.getColora(REGISTRATION,this.props.mapColor,this.state.dynamicReg),
                 color: 'black',

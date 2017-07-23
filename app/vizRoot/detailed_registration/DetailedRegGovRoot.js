@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Layout from '../Layout' ;
 import DetailedRegGovMap from './DetailedRegGovMap' ;
 import ActiveRegistered from './ActiveRegistered' ;
+import VoterProfile from './VoterProfile' ;
 import counterpart  from 'counterpart';
 import Translate    from 'react-translate-component';
 import axios from 'axios' ;
@@ -37,21 +38,21 @@ class DetailedRegGovRoot extends Component {
         .catch(function (error) {
             console.log(error);
         });
+    }
 
-    }
-    componentWillReceiveProps(nextProps) {
-        
-    }
-    
     render() {
         return (
             <div>
                 <Layout/>
                 <ThemeRadio/>
-                {   this.props.radioFilterPicker=="pop" ?
+                {   this.props.radioFilterPicker==="pop" ?
                     <DetailedRegGovMap shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key} />
                     :
-                    <ActiveRegistered shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key+1}/>
+                    (this.props.radioFilterPicker==="active"?
+                        <ActiveRegistered shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key+1}/>
+                        :
+                        <VoterProfile shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key+1}/>                        
+                    )
                 }
             </div>
         );

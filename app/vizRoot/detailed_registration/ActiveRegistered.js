@@ -112,14 +112,14 @@ class ActiveRegistered extends Component {
                             }    
                         }
                     >
-                        <Tooltip direction="bottom">
+                        <Tooltip direction="bottom" className="leafletTooltip" >
                             <div>
-                                <h2>{this.state.gouv_name}</h2>
+                                <h3>{this.state.gouv_name}</h3>
                                 {
                                     <div>
-                                        <h3><b>{this.state.activeVoterPer} %</b> Active registered</h3>
-                                        <h3><b>{(this.state.allRegistered).toLocaleString()}</b> Registered in total </h3>
-                                        <h3> <b> {(this.state.registered2017).toLocaleString()}</b> Registered in 2017 (10-07)</h3>
+                                        <h4><b>{this.state.activeVoterPer} %</b> Active registered</h4>
+                                        <h4><b>{(this.state.allRegistered).toLocaleString()}</b> Registered in total </h4>
+                                        <h4> <b>{(this.state.registered2017).toLocaleString()}</b> Registered in 2017 (10-07)</h4>
                                     </div>
                                 }
                             </div>
