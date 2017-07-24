@@ -7,7 +7,7 @@ class BubbleChart extends Component {
     render() {
         return (
             <div>
-            Hi Bubble
+            under development
             </div>
         );
     }

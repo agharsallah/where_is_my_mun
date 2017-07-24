@@ -82,7 +82,7 @@ class HistogramVoterProfile extends Component {
                     type: 'bar'
                 },
                 title: {
-                    text: nextProps.clickedShapeName
+                    text: nextProps.clickedShapeName+" -all ages"
                 },
                 subtitle: {
                     text: 'Isie'

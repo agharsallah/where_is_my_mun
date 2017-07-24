@@ -7,7 +7,7 @@ class HeatMapCalendar extends Component {
     render() {
         return (
             <div>
-            Hi Heat
+            Under Development
             </div>
         );
     }

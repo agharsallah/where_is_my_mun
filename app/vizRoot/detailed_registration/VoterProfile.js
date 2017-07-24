@@ -25,9 +25,9 @@ class VoterProfile extends Component {
         this.state={
             gouv_name:"",munNumber:"",destroy:true,
             colorfun:this.getColorRegElg,keyTitle:"Percentage of active registered voters"
-            ,mapAge:"18-24",
+            ,mapAge:"18-24",diffrenceArray:[],
             maleNumber:0,femaleNumber:0,radioChart:"difference",mapClicked:false,
-            maleHistogram:[],femaleHistogram:[],clickedShapeName:"Click on the map "
+            maleHistogram:[],femaleHistogram:[],clickedShapeName:"Click on the map"
         }
     }  
    
@@ -36,10 +36,42 @@ class VoterProfile extends Component {
         else                  {return "#d56147"}
 	}
     mapAgeSelect(e,index,value){
-         let keyColor,keyTitle;
-         value==="18-24" ?keyTitle="18-24 male vs female":
-         (value=="25-35"?keyTitle="25-35 male vs female":(value=="36-50"?keyTitle="36-50 male vs female":keyTitle="+50 male vs female") )
-         this.setState({mapAge:value,keyTitle});
+         let keyColor,keyTitle,diffrenceArray=[],color;
+         if (value==="18-24") {
+             keyTitle="18-24 male vs female";
+             //get the diffrence between male and female -18-24- in each govenorate
+            this.props.shape.features.map((element,i)=>{
+                parseInt(element.properties.registration_gov_10_07_m_18_21+element.properties.registration_gov_10_07_m_22_24)>parseInt(element.properties.registration_gov_10_07_f_18_21+element.properties.registration_gov_10_07_f_22_24)?color="#5895c5":color="#d56147"                
+                diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_10_07_f_18_21+element.properties.registration_gov_10_07_f_22_24)-parseInt(element.properties.registration_gov_10_07_m_18_21+element.properties.registration_gov_10_07_m_22_24))),color:color},
+                                    gouv:element.properties.NAME_EN,color:color})
+            })
+         }else if(value=="25-35"){
+            keyTitle="25-35 male vs female";
+            this.props.shape.features.map((element,i)=>{
+                parseInt(element.properties.registration_gov_10_07_m_25_35)>parseInt(element.properties.registration_gov_10_07_f_25_35)?color="#5895c5":color="#d56147"                
+                diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_10_07_m_25_35)-parseInt(element.properties.registration_gov_10_07_f_25_35))),color:color},
+                    gouv:element.properties.NAME_EN,color:color})
+            })
+         }else if(value=="36-50"){
+            keyTitle="36-50 male vs female";
+            this.props.shape.features.map((element,i)=>{
+                parseInt(element.properties.registration_gov_10_07_m_36_50)>parseInt(element.properties.registration_gov_10_07_f_36_50)?color="#5895c5":color="#d56147"
+                diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_10_07_m_36_50)-parseInt(element.properties.registration_gov_10_07_f_36_50))),color:color},
+                    gouv:element.properties.NAME_EN,color:color})
+            })
+
+         }else{
+            keyTitle="+50 male vs female";
+            this.props.shape.features.map((element,i)=>{
+                parseInt(element.properties.registration_gov_10_07_m_p51)>parseInt(element.properties.registration_gov_10_07_f_p51)?color="#5895c5":color="#d56147"
+                diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_10_07_m_p51)-parseInt(element.properties.registration_gov_10_07_f_p51))),color:color},
+                    gouv:element.properties.NAME_EN,color:color})
+                    //console.log(typeof(diffrenceArray[i].value));
+            })
+
+         }
+         diffrenceArray.sort(function(a, b){return b.value.y-a.value.y})
+         this.setState({mapAge:value,keyTitle,diffrenceArray});
     }
     handleRadioChart(e,value){
         console.log('vvvvvvvvvv',value);
@@ -161,7 +193,10 @@ class VoterProfile extends Component {
                                 clickedShapeName={this.state.clickedShapeName}
                                 />
                             :
-                                <BarMaleFemaleDiff/>}
+                                <BarMaleFemaleDiff 
+                                    alldiffrenceArray={this.state.diffrenceArray} 
+                                    title={this.state.mapAge}
+                                />}
                         
 
                     {/*Toggle to change the left chart*/}
