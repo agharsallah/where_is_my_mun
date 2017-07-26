@@ -19,8 +19,8 @@ class RegTrackLineRoot extends Component {
     constructor(props) {
         super(props);
         this.state={
-            classMenu:"col-md-3",classCharts:"col-md-9",dates:[],inscription:[],update:[],detailedDays:[],increaseDecreaseReg:[],increaseDecreaseUpd:[],
-            preRegressionInsc:[],preRegressionUpd:[],averageInsc:0,averageUpd:0,
+            classMenu:"col-md-3", classCharts:"col-md-9", dates:[], inscription:[], update:[], detailedDays:[], increaseDecreaseReg:[], increaseDecreaseUpd:[],
+            preRegressionInsc:[], preRegressionUpd:[], averageInsc:0, averageUpd:0, highestInsc:0, lowestInsc:0, highestUpd:0, lowestUpd:0,
             maleReg:0, femaleReg:0, sumReg:0, maleupdate:0, femaleupdate:0, sumupdate:0
         }
     }
@@ -29,7 +29,7 @@ class RegTrackLineRoot extends Component {
     }
     
     componentWillMount() {
-         let qString=config.apiUrl+"/api/dailyins/line_daily_reg_14-07";
+         let qString=config.apiUrl+"/api/dailyins/line_daily_reg_23-07";
         axios({
             method: 'get',
             url: qString,
@@ -43,7 +43,7 @@ class RegTrackLineRoot extends Component {
             //console.log(response.data.data);
             let inscription=[],update=[],dates=[],detailedDays=[],increaseDecreaseReg=[],increaseDecreaseUpd=[],
                 preRegressionInsc=[],preRegressionUpd=[],datas=JSON.parse(response.data.data),
-                averageInsc=0,averageUpd=0,
+                averageInsc=0,averageUpd=0,highestInsc=7520,lowestInsc=7520,highestUpd=1265,lowestUpd=1265,
                 maleReg=0, femaleReg=0, sumReg=0, maleupdate=0, femaleupdate=0, sumupdate=0
             datas.map((object,i)=>{
                 dates.push(object.date)
@@ -76,18 +76,29 @@ class RegTrackLineRoot extends Component {
                 preRegressionInsc.push([i,parseInt(object.inscription)])
                 preRegressionUpd.push([i,parseInt(object.update)])
                 // Operation for daily averaeg number
-                console.log(parseInt(object.inscription));
+                /*console.log(parseInt(object.inscription));*/
                
                 if (!isNaN ((object.inscription && object.update))) {
                     averageInsc+=parseInt(object.inscription)
                     averageUpd+=parseInt(object.update)
+                }
+                //determine the highest and lowest insc/update
+                if (!isNaN ((object.inscription && object.update))) {
+                    parseInt(object.inscription)>highestInsc ?highestInsc=parseInt(object.inscription):highestInsc=highestInsc
+                    parseInt(object.inscription)<lowestInsc ?lowestInsc=parseInt(object.inscription):lowestInsc=lowestInsc
+                    parseInt(object.update)>highestUpd ?highestUpd=parseInt(object.update):highestUpd=highestUpd
+                    parseInt(object.update)<lowestUpd ?lowestUpd=parseInt(object.update):lowestUpd=lowestUpd
                 }
             })
             console.log("averageInsc",averageInsc);
             averageInsc=(averageInsc/inscription.length).toFixed(0);
             averageUpd=(averageUpd/update.length).toFixed(0);
             dates.pop(); inscription.pop(); update.pop(); increaseDecreaseReg.pop(); increaseDecreaseUpd.pop(),preRegressionInsc.pop(),preRegressionUpd.pop()
-            this.setState({dates,inscription,update,maleReg,femaleReg,sumReg,maleupdate,femaleupdate,sumupdate,detailedDays,increaseDecreaseReg,increaseDecreaseUpd,preRegressionInsc,preRegressionUpd,averageInsc,averageUpd});
+            this.setState({dates,inscription,update,
+                        maleReg, femaleReg, sumReg, maleupdate, femaleupdate, sumupdate, detailedDays,
+                        increaseDecreaseReg, increaseDecreaseUpd,
+                        preRegressionInsc, preRegressionUpd,
+                        averageInsc ,averageUpd, highestInsc,  lowestInsc, highestUpd, lowestUpd});
         })
         .catch(function (error) {
             console.log(error);
@@ -115,11 +126,20 @@ class RegTrackLineRoot extends Component {
     }
     render() {
 
-        let inscription,maleReg,femaleReg,sumReg,subj,increaseDecrease,preRegression,averageVal;
+        let inscription,maleReg,femaleReg,sumReg,subj,increaseDecrease,preRegression,averageVal,highest,lowest;
         this.props.regUpdSelectField ==="registration" ?
-        ( inscription=this.state.inscription,maleReg=this.state.maleReg,femaleReg=this.state.femaleReg,sumReg=this.state.sumReg,subj="Registration",increaseDecrease=this.state.increaseDecreaseReg,preRegression=regression.linear(this.state.preRegressionInsc),averageVal=this.state.averageInsc )
+        (   inscription=this.state.inscription,maleReg=this.state.maleReg,femaleReg=this.state.femaleReg,sumReg=this.state.sumReg,subj="Registration",
+            increaseDecrease=this.state.increaseDecreaseReg,
+            preRegression=regression.linear(this.state.preRegressionInsc),
+            averageVal=this.state.averageInsc,
+            highest=this.state.highestInsc,lowest=this.state.lowestInsc
+        )
           :
-          ( inscription=this.state.update,maleReg=this.state.maleupdate,femaleReg=this.state.femaleupdate,sumReg=this.state.sumupdate,subj="Update",increaseDecrease=this.state.increaseDecreaseUpd,preRegression=regression.linear(this.state.preRegressionUpd),averageVal=this.state.averageUpd )
+            ( inscription=this.state.update,maleReg=this.state.maleupdate,femaleReg=this.state.femaleupdate,sumReg=this.state.sumupdate,subj="Update",
+                increaseDecrease=this.state.increaseDecreaseUpd,preRegression=regression.linear(this.state.preRegressionUpd),
+                averageVal=this.state.averageUpd,
+                highest=this.state.highestUpd,lowest=this.state.lowestUpd
+            )
         
         return (
             <div >
@@ -128,7 +148,7 @@ class RegTrackLineRoot extends Component {
                 <MenuDrawer getDrawerState={this.getDrawerState.bind(this)} />
                 </div>
                 
-                <div className={this.state.classCharts} style={{marginTop:"18rem"}} >
+                <div className={this.state.classCharts} style={{marginTop:"20rem"}} >
                 {
                     this.props.stateFilter=="All" ? 
                     <div>
@@ -145,6 +165,9 @@ class RegTrackLineRoot extends Component {
                             increaseDecrease={increaseDecrease}
                             preRegression={preRegression}
                             averageVal={averageVal}
+                            highest={highest}
+                            lowest={lowest}
+
                         />
                     </div>
                 :

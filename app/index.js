@@ -28,15 +28,15 @@ ReactDOM.render(
     <Provider store={createStoreWithMiddleware(reducers)}>
     <MuiThemeProvider>
     <Router history={browserHistory}>
-        <Route  path="/" component={App}/> 
+        {/*<Route  path="/" component={App}/> */}
         <Route path="/electionsocio" component={RootTwoMap}/> 
-        <Route path="/viz" component={VizRoot}/> 
-        <Route path="/viz/detailedgov" component={DetailedRegGovRoot}/> 
-        <Route path="/viz/dailyregcharts" component={RegTrackLineRoot}/>         
-        <Route path="/viz/dailyreg" component={RegTrackRoot}/> 
-        <Route path="/viz/statistics" component={RootMap}/> 
-        <Route path="/viz/newmun" component={NewMunRoot}/> 
-        <Route path="/viz/about" component={About}/> 
+        <Route path="/" component={VizRoot}/> 
+        <Route path="/detailedgov" component={DetailedRegGovRoot}/> 
+        <Route path="/dailyregcharts" component={RegTrackLineRoot}/>         
+        <Route path="/dailyreg" component={RegTrackRoot}/> 
+        <Route path="/statistics" component={RootMap}/> 
+        <Route path="/newmun" component={NewMunRoot}/> 
+        <Route path="/about" component={About}/> 
 
     </Router>
     </MuiThemeProvider>

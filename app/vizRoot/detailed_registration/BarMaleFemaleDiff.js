@@ -115,8 +115,8 @@ class BarMaleFemaleDiff extends Component {
                 }
             },
             tooltip: {
-                headerFormat: '<h3>{point.key}: </h3>',
-                pointFormat:'diffrence between male and female : <b>{point.y}</b>',
+                headerFormat: '<h3>{point.key} </h3>',
+                pointFormat:': <b>{point.y}</b>',
             },
             plotOptions: {
                 column: {

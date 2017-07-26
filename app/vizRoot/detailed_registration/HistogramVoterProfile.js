@@ -12,6 +12,8 @@ class HistogramVoterProfile extends Component {
         console.log(this.props.maleHistogram);
         let categories = ['18-24', '25-35', '36-50', '+50'];
         let align,maleHistogram,femaleHistogram;
+        let totalNumber =this.props.maleFemaleHistogram
+        //for component will mount fix
         this.props.mapClicked===true?(maleHistogram=this.props.maleHistogram,femaleHistogram=this.props.femaleHistogram,align="top")
             :(maleHistogram=[0],femaleHistogram=[0],align="middle")
 
@@ -50,14 +52,29 @@ class HistogramVoterProfile extends Component {
 
                 plotOptions: {
                     series: {
-                        stacking: 'normal'
+                        stacking: 'normal',
+                        dataLabels: {
+                            enabled: true,
+                            formatter: function () {
+                                console.log(this);
+                                
+                                let positiveNum=this.y
+                                if (positiveNum<0) {
+                                    positiveNum=this.y*(-1)
+                                }
+                                return (positiveNum);
+                            }
+                        }
                     }
                 },
 
                 tooltip: {
                     formatter: function () {
                         return '<b>' + this.series.name + ', age ' + this.point.category + '</b><br/>' +
-                            'Population: ' + Highcharts.numberFormat(Math.abs(this.point.y), 0);
+                            'Population: ' + Highcharts.numberFormat(Math.abs(this.point.y), 0)+'<br/>'+
+                            'TotalNumber: '+ '</b>' +totalNumber[this.point.index]+'</b>'
+                            ;
+                            
                     }
                 },
 
@@ -76,6 +93,7 @@ class HistogramVoterProfile extends Component {
         componentWillReceiveProps(nextProps) {
         console.log(nextProps.maleHistogram);
         let categories = ['18-24', '25-35', '36-50', '+50'];
+        let totalNumber =nextProps.maleFemaleHistogram
         this.setState({
             options:{
                 chart: {
@@ -110,14 +128,29 @@ class HistogramVoterProfile extends Component {
 
                 plotOptions: {
                     series: {
-                        stacking: 'normal'
+                        stacking: 'normal',
+                        dataLabels: {
+                            enabled: true,
+                            formatter: function () {
+                                console.log(this);
+                                
+                                let positiveNum=this.y
+                                if (positiveNum<0) {
+                                    positiveNum=this.y*(-1)
+                                }
+                                return (positiveNum);
+                            }
+                        }
                     }
                 },
 
                 tooltip: {
                     formatter: function () {
                         return '<b>' + this.series.name + ', age ' + this.point.category + '</b><br/>' +
-                            'Population: ' + Highcharts.numberFormat(Math.abs(this.point.y), 0);
+                            'Population: ' + Highcharts.numberFormat(Math.abs(this.point.y), 0)+'<br/>'+
+                            'TotalNumber: '+ '</b>' +totalNumber[this.point.index]+'</b>'
+                            ;
+                            
                     }
                 },
 

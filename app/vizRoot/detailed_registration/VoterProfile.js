@@ -27,7 +27,7 @@ class VoterProfile extends Component {
             colorfun:this.getColorRegElg,keyTitle:"Percentage of active registered voters"
             ,mapAge:"18-24",diffrenceArray:[],
             maleNumber:0,femaleNumber:0,radioChart:"difference",mapClicked:false,
-            maleHistogram:[],femaleHistogram:[],clickedShapeName:"Click on the map"
+            maleHistogram:[],femaleHistogram:[],maleFemaleHistogram:[],clickedShapeName:"Click on the map"
         }
     }  
    
@@ -36,35 +36,36 @@ class VoterProfile extends Component {
         else                  {return "#d56147"}
 	}
     mapAgeSelect(e,index,value){
+        //for the male female difference
          let keyColor,keyTitle,diffrenceArray=[],color;
          if (value==="18-24") {
              keyTitle="18-24 male vs female";
              //get the diffrence between male and female -18-24- in each govenorate
             this.props.shape.features.map((element,i)=>{
-                parseInt(element.properties.registration_gov_10_07_m_18_21+element.properties.registration_gov_10_07_m_22_24)>parseInt(element.properties.registration_gov_10_07_f_18_21+element.properties.registration_gov_10_07_f_22_24)?color="#5895c5":color="#d56147"                
-                diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_10_07_f_18_21+element.properties.registration_gov_10_07_f_22_24)-parseInt(element.properties.registration_gov_10_07_m_18_21+element.properties.registration_gov_10_07_m_22_24))),color:color},
+                parseInt(element.properties.registration_gov_m_18_21+element.properties.registration_gov_m_22_24)>parseInt(element.properties.registration_gov_f_18_21+element.properties.registration_gov_f_22_24)?color="#5895c5":color="#d56147"                
+                diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_f_18_21+element.properties.registration_gov_f_22_24)-parseInt(element.properties.registration_gov_m_18_21+element.properties.registration_gov_m_22_24))),color:color},
                                     gouv:element.properties.NAME_EN,color:color})
             })
          }else if(value=="25-35"){
             keyTitle="25-35 male vs female";
             this.props.shape.features.map((element,i)=>{
-                parseInt(element.properties.registration_gov_10_07_m_25_35)>parseInt(element.properties.registration_gov_10_07_f_25_35)?color="#5895c5":color="#d56147"                
-                diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_10_07_m_25_35)-parseInt(element.properties.registration_gov_10_07_f_25_35))),color:color},
+                parseInt(element.properties.registration_gov_m_25_35)>parseInt(element.properties.registration_gov_f_25_35)?color="#5895c5":color="#d56147"                
+                diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_m_25_35)-parseInt(element.properties.registration_gov_f_25_35))),color:color},
                     gouv:element.properties.NAME_EN,color:color})
             })
          }else if(value=="36-50"){
             keyTitle="36-50 male vs female";
             this.props.shape.features.map((element,i)=>{
-                parseInt(element.properties.registration_gov_10_07_m_36_50)>parseInt(element.properties.registration_gov_10_07_f_36_50)?color="#5895c5":color="#d56147"
-                diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_10_07_m_36_50)-parseInt(element.properties.registration_gov_10_07_f_36_50))),color:color},
+                parseInt(element.properties.registration_gov_m_36_50)>parseInt(element.properties.registration_gov_f_36_50)?color="#5895c5":color="#d56147"
+                diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_m_36_50)-parseInt(element.properties.registration_gov_f_36_50))),color:color},
                     gouv:element.properties.NAME_EN,color:color})
             })
 
          }else{
             keyTitle="+50 male vs female";
             this.props.shape.features.map((element,i)=>{
-                parseInt(element.properties.registration_gov_10_07_m_p51)>parseInt(element.properties.registration_gov_10_07_f_p51)?color="#5895c5":color="#d56147"
-                diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_10_07_m_p51)-parseInt(element.properties.registration_gov_10_07_f_p51))),color:color},
+                parseInt(element.properties.registration_gov_m_p51)>parseInt(element.properties.registration_gov_f_p51)?color="#5895c5":color="#d56147"
+                diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_m_p51)-parseInt(element.properties.registration_gov_f_p51))),color:color},
                     gouv:element.properties.NAME_EN,color:color})
                     //console.log(typeof(diffrenceArray[i].value));
             })
@@ -80,16 +81,16 @@ class VoterProfile extends Component {
     style(feature) {
         let property = feature.properties;
         let chosen;
-        
+        //for the map Coloring 
         if (this.state.mapAge=="18-24") {
-            (property.registration_gov_10_07_m_18_21+property.registration_gov_10_07_m_22_24)>(property.registration_gov_10_07_f_18_21+property.registration_gov_10_07_f_22_24)?
+            (property.registration_gov_m_18_21+property.registration_gov_m_22_24)>(property.registration_gov_f_18_21+property.registration_gov_f_22_24)?
                 chosen="blue":chosen="red"
         }else if(this.state.mapAge=="25-35"){
-            property.registration_gov_10_07_m_25_35>property.registration_gov_10_07_f_25_35 ? chosen="blue": chosen="red"
+            property.registration_gov_m_25_35>property.registration_gov_f_25_35 ? chosen="blue": chosen="red"
         }else if(this.state.mapAge=="36-50"){
-            property.registration_gov_10_07_m_36_50>property.registration_gov_10_07_f_36_50 ? chosen="blue": chosen="red"
+            property.registration_gov_m_36_50>property.registration_gov_f_36_50 ? chosen="blue": chosen="red"
         }else{
-            property.registration_gov_10_07_m_p51>property.registration_gov_10_07_f_p51 ? chosen="blue": chosen="red"
+            property.registration_gov_m_p51>property.registration_gov_f_p51 ? chosen="blue": chosen="red"
         }
 
             return {
@@ -106,18 +107,19 @@ class VoterProfile extends Component {
         const layer = e.target;
         const property = layer.feature.properties;
         let maleNumber, femaleNumber;
+        //for the tooltip
         if (this.state.mapAge=="18-24") {
-            femaleNumber=property.registration_gov_10_07_f_18_21+property.registration_gov_10_07_f_22_24;
-            maleNumber=property.registration_gov_10_07_m_18_21+property.registration_gov_10_07_m_22_24;
+            femaleNumber=property.registration_gov_f_18_21+property.registration_gov_f_22_24;
+            maleNumber=property.registration_gov_m_18_21+property.registration_gov_m_22_24;
         }else if(this.state.mapAge=="25-35"){
-            maleNumber= property.registration_gov_10_07_m_25_35;
-            femaleNumber=property.registration_gov_10_07_f_25_35;
+            maleNumber= property.registration_gov_m_25_35;
+            femaleNumber=property.registration_gov_f_25_35;
         }else if(this.state.mapAge=="36-50"){
-            maleNumber=property.registration_gov_10_07_m_36_50;
-            femaleNumber=property.registration_gov_10_07_f_36_50;
+            maleNumber=property.registration_gov_m_36_50;
+            femaleNumber=property.registration_gov_f_36_50;
         }else{
-            maleNumber= property.registration_gov_10_07_m_p51;
-            femaleNumber= property.registration_gov_10_07_f_p51;
+            maleNumber= property.registration_gov_m_p51;
+            femaleNumber= property.registration_gov_f_p51;
         }
         this.setState({destroy:false,gouv_name:property.NAME_EN,munNumber:property.munnumber,maleNumber,femaleNumber});
         return layer.setStyle({
@@ -135,9 +137,11 @@ class VoterProfile extends Component {
         this.setState({destroy:true});
 	}
     clickedShape(e){
+        //for the histogram age BarChart
         let property=e.target.feature.properties;
-        this.setState({maleHistogram:[-(property.registration_gov_10_07_m_18_21+property.registration_gov_10_07_m_22_24),-property.registration_gov_10_07_m_25_35,-property.registration_gov_10_07_m_36_50,-property.registration_gov_10_07_m_p51],
-            femaleHistogram:[(property.registration_gov_10_07_f_18_21+property.registration_gov_10_07_f_22_24),property.registration_gov_10_07_f_25_35,property.registration_gov_10_07_f_36_50,property.registration_gov_10_07_f_p51]
+        this.setState({maleHistogram:[-(property.registration_gov_m_18_21+property.registration_gov_m_22_24),-property.registration_gov_m_25_35,-property.registration_gov_m_36_50,-property.registration_gov_m_p51],
+            femaleHistogram:[(property.registration_gov_f_18_21+property.registration_gov_f_22_24),property.registration_gov_f_25_35,property.registration_gov_f_36_50,property.registration_gov_f_p51],
+            maleFemaleHistogram:[(property.registration_gov_f_18_21+property.registration_gov_f_22_24)+(property.registration_gov_m_18_21+property.registration_gov_m_22_24),property.registration_gov_f_25_35+property.registration_gov_m_25_35,property.registration_gov_f_36_50+property.registration_gov_m_36_50,property.registration_gov_f_p51+property.registration_gov_m_p51]
             ,radioChart:"barChart",mapClicked:true,clickedShapeName:property.NAME_EN
         });
         console.log('eeeeeeeeeeeeeeeeeeeeeeee');
@@ -191,6 +195,7 @@ class VoterProfile extends Component {
                                 femaleHistogram={this.state.femaleHistogram}
                                 mapClicked={this.state.mapClicked}
                                 clickedShapeName={this.state.clickedShapeName}
+                                maleFemaleHistogram={this.state.maleFemaleHistogram}
                                 />
                             :
                                 <BarMaleFemaleDiff 

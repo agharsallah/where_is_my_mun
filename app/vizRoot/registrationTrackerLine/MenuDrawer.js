@@ -43,7 +43,7 @@ class MenuDrawer extends Component {
 
                     <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
                         <RaisedButton label="Back" 
-                        containerElement={<Link to="/viz" />} 
+                        containerElement={<Link to="/" />} 
                         linkButton={true} />
                     </div>
                     

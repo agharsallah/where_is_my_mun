@@ -33,7 +33,7 @@ class RegTrackMap extends Component {
     }
     
     componentWillMount() {
-        let qString=config.apiUrl+"/api/dailyins/shape_reg_upd-10_07";
+        let qString=config.apiUrl+"/api/dailyins/shape_reg_upd-23_07";
         axios({
             method: 'get',
             url: qString,
@@ -79,6 +79,7 @@ class RegTrackMap extends Component {
                 allInscription.push({value:parseInt(element.properties["inscription"+nextProps.regDate]),gouv:element.properties.NAME_EN})
                 allUpdate.push({value:parseInt(element.properties["update"+nextProps.regDate]),gouv:element.properties.NAME_EN})
             })
+            console.log(allInscription);
             
             /*making a sorted inscription-update array*/
             allInscription.sort(function(a, b){return b.value-a.value})
@@ -186,12 +187,12 @@ class RegTrackMap extends Component {
 
     render() {
         var grades=[0,10000, 20000,30000,40000, 60000 ]
-        const position = [35.305360, 8.049795];
+        const position = [34.05360, 3.59795];
         var markerData=[];
         let charttitle="Municipality Organization of "+ this.state.gouv_name;
         return (
                 <div>
-                {this.state.shapeIsLoaded ? <Map  maxZoom={23} center={position} zoom={7} className="initialposition" style={{height: "100vh", width: "100vw",position:"relative",zIndex:0}}>
+                {this.state.shapeIsLoaded ? <Map  maxZoom={23} center={position} zoom={6} className="initialposition" style={{height: "100vh", width: "100vw",position:"relative",zIndex:0}}>
                     <TileLayer
                     url='https://api.mapbox.com/styles/v1/hunter-x/cixhpey8700q12pnwg584603g/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaHVudGVyLXgiLCJhIjoiY2l2OXhqMHJrMDAxcDJ1cGd5YzM2bHlydSJ9.jJxP2PKCIUrgdIXjf-RzlA'
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> '
@@ -212,7 +213,7 @@ class RegTrackMap extends Component {
                         }    
                     }
                     >
-                        <Tooltip direction="bottom">
+                        <Tooltip direction="bottom" className="leafletTooltip">
                             <div>
                                 <h2>{this.state.gouv_name}</h2>
                                 {this.props.radioFilterPicker=="pop"?
@@ -245,7 +246,7 @@ class RegTrackMap extends Component {
                     </GeoJSON>
 
                     {/*Left side top column chart*/}
-                    <Control position="bottomleft">
+                    <div className="col-md-7" style={{marginTop:"22rem"}}>
                         {this.props.radioFilterPicker=="pop" ?
                         <BasicColumnRankedInscription
                         title="inscription per irie" 
@@ -261,7 +262,7 @@ class RegTrackMap extends Component {
                         ytitle="Update number"
                         subtitle={ this.props.regDate +"-2017"}
                         />}
-                    </Control>
+                    </div>
 
                     {/*Toggle to change the map*/}
                     <InscriptionVsUpdateRadio/>

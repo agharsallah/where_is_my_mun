@@ -20,7 +20,7 @@ class ActiveRegistered extends Component {
         super(props);
         this.state={
             gouv_name:"",munNumber:"",destroy:true,activeVoterPer:"",registered2017:"", allRegistered:"",
-            grades:[2, 3, 5],dynamicReg:[2, 3, 5 ],colorfun:this.getColorRegElg,
+            grades:[4, 8, 10],dynamicReg:[4, 8, 10 ],colorfun:this.getColorRegElg,
             keytitle:"Percentage of active registered voters",
             menElgReg:[], femaleElgReg:[],govName:[],regressionRegElg:[],
             scatterGender:false
@@ -55,7 +55,7 @@ class ActiveRegistered extends Component {
 
     style(feature) {
         //check for what we have checked as filter subject : Population || state ||
-            let REGISTRATION2017 = parseInt(feature.properties.inscription10_07);
+            let REGISTRATION2017 = parseInt(feature.properties.inscription23_07);
             let ALLREGISTRATION = parseInt(feature.properties.allreg_sum);
             let activeVoterPer = ((REGISTRATION2017*100)/ALLREGISTRATION).toFixed(2);
             return {
@@ -71,9 +71,9 @@ class ActiveRegistered extends Component {
     highlightFeature(e) {
         const layer = e.target;
         const property = layer.feature.properties;
-        const activeVoterPer= ((property.inscription10_07*100)/property.allreg_sum).toFixed(2)
+        const activeVoterPer= ((property.inscription23_07*100)/property.allreg_sum).toFixed(2)
         this.setState({destroy:false,gouv_name:property.NAME_EN,munNumber:property.munnumber,
-                        activeVoterPer:activeVoterPer,registered2017:property.inscription10_07,allRegistered:property.allreg_sum});
+                        activeVoterPer:activeVoterPer,registered2017:property.inscription23_07,allRegistered:property.allreg_sum});
         return layer.setStyle({
             weight: 5,
             color: '#666',
@@ -119,7 +119,7 @@ class ActiveRegistered extends Component {
                                     <div>
                                         <h4><b>{this.state.activeVoterPer} %</b> Active registered</h4>
                                         <h4><b>{(this.state.allRegistered).toLocaleString()}</b> Registered in total </h4>
-                                        <h4> <b>{(this.state.registered2017).toLocaleString()}</b> Registered in 2017 (10-07)</h4>
+                                        <h4> <b>{(this.state.registered2017).toLocaleString()}</b> Registered in 2017 (23-07)</h4>
                                     </div>
                                 }
                             </div>

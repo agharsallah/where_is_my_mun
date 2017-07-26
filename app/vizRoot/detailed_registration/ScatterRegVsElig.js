@@ -23,7 +23,7 @@ class ScatterRegVsElig extends Component {
         // the corresponding y value using that x, m, and b
         var x0 = 25000, 
             y0 = regression0*x0 + regression1;
-        var xf = 300000, 
+        var xf = 450000, 
             yf = regression0*xf + regression1;
         this.setState({
             options:{
@@ -39,7 +39,7 @@ class ScatterRegVsElig extends Component {
     subtitle: {
         text: 'Source: ISIE - INS'
     },
-    xAxis: {
+    yAxis: {
         title: {
             enabled: true,
             text: 'Registered Voters'
@@ -48,7 +48,7 @@ class ScatterRegVsElig extends Component {
         endOnTick: true,
         showLastLabel: true
     },
-    yAxis: {
+    xAxis: {
         title: {
             text: 'Eligible Voters'
         }
@@ -131,7 +131,7 @@ class ScatterRegVsElig extends Component {
         
         if (nextProps.genderFilter==true) {
             var x0 = 25000,y0 = regression0*x0 + regression1;
-            var xf = 300000,yf = regression0*xf + regression1;
+            var xf = 450000,yf = regression0*xf + regression1;
             var title="Registered Versus Eligible by Gender"
            var dataSeries= [
                 {name: 'Female',color: 'rgba(223, 83, 83, .5)', data: nextProps.menElgReg},
@@ -141,7 +141,7 @@ class ScatterRegVsElig extends Component {
                 ]
         }else{
             var x0 = 25000,y0 = regression0*x0 + regression1;
-            var xf = 600000,yf = regression0*xf + regression1;
+            var xf = 800000,yf = regression0*xf + regression1;
            var title="Registered Versus Eligible"
            var dataSeries= [
                 {name: 'Governorate',color: 'black', data: nextProps.allElgReg},
@@ -165,7 +165,7 @@ class ScatterRegVsElig extends Component {
     subtitle: {
         text: 'Source: ISIE - INS'
     },
-    xAxis: {
+    yAxis: {
         title: {
             enabled: true,
             text: 'Registered Voters'
@@ -174,7 +174,7 @@ class ScatterRegVsElig extends Component {
         endOnTick: true,
         showLastLabel: true
     },
-    yAxis: {
+    xAxis: {
         title: {
             text: 'Eligible Voters'
         }

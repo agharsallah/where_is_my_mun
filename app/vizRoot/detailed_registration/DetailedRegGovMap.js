@@ -35,13 +35,13 @@ class DetailedRegGovMap extends Component {
             // preparing the basic scatter chart data
             const dataArray=this.props.shape,menElgReg=[],femaleElgReg=[],govName=[],regressionRegElg=[];
             (dataArray.features).map((object,i)=>{
-              menElgReg.push([Number(object.properties.allreg_male_sum),Number(object.properties._2014_eligilevotersmale)] )
-              femaleElgReg.push([Number(object.properties.allreg_female_sum),Number(object.properties._2014_eligilevotersfemale)] )
+              menElgReg.push([Number(object.properties._2014_eligilevotersmale),Number(object.properties.allreg_male_sum)] )
+              femaleElgReg.push([Number(object.properties._2014_eligilevotersfemale),Number(object.properties.allreg_female_sum)] )
               
               //gov name for hhighchart tooltip
               govName.push(object.properties.NAME_EN);
               //regression array for regression line
-              regressionRegElg.push([Number(object.properties.allreg_sum),Number(object.properties._2014_eligilevoters)])
+              regressionRegElg.push([Number(object.properties._2014_eligilevoters),Number(object.properties.allreg_sum)])
             })
             this.setState({
                 menElgReg,femaleElgReg,govName,regressionRegElg      
@@ -164,9 +164,9 @@ class DetailedRegGovMap extends Component {
                                 <h3>{this.state.gouv_name}</h3>
                                 {
                                     <div>
-                                        <h4><b>{this.state.eligVsReg} %</b> Registered from Eligible</h4>
                                         <h4> <b> {(this.state.eligible2014).toLocaleString()}</b> Eligible</h4>
                                         <h4><b>{(this.state.allRegistered).toLocaleString()}</b> Registered</h4>
+                                        <h4><b>{this.state.eligVsReg} %</b> Registered from Eligible</h4>
                                         <h4><b>{(this.state.eligible2014-this.state.allRegistered).toLocaleString()}</b> Non Registered</h4>
                                     </div>
                                 }
@@ -216,8 +216,8 @@ class DetailedRegGovMap extends Component {
                     {/*Title of the map*/}
                     <Control position="topleft">
                         <div className="lefttitle" >
-                            <h1 style={{marginTop:"5px"}} > registered Versus Eligible Voters</h1>
-                            <p style={{fontSize:"13px"}}>Registered from 2011 until 10-07-17 | Eligible - INS data of 2014</p>
+                            <h1 style={{marginTop:"5px"}} > Registered Versus Eligible Voters</h1>
+                            <p style={{fontSize:"13px"}}>Registered from 2011 until 23-07-17 | Eligible - INS data of 2014</p>
                         </div>
                     </Control>
 

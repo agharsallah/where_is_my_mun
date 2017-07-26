@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 var Highcharts = require('highcharts');
 import HighchartInit from './HighchartInit' ;
-import regression from 'regression';
 
 import './box-css.css';
 
@@ -99,33 +98,46 @@ componentWillMount() {
         femalePercentage=((Number(this.props.femaleReg)*100)/Number(this.props.sumReg)).toFixed(2)
         return (
             <div className="container_row">
-                <div className={"backwardedChart col-md-12"} >
+                <div className={"backwardedChart col-md-12"} style={{marginTop:"2rem"}} >
                 <HighchartInit key={this.props.chartkey+this.props.inscription}  options={this.state.options}/>
                 </div>
 
-                <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"5rem"}}>
+                <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"2rem"}}>
                     Total {this.props.subj}<br/>
                     <img className="centerimg" style={{height:"30px"}} src="/img/sum.svg" />
                     <p className="maleFemaleNumText">{this.props.sumReg}</p>
                 </div>
 
-                <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"21rem"}}>
+                <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"17rem"}}>
                     Female {this.props.subj}<br/>
                     <img className="centerimg" style={{height:"30px"}} src="/img/woman.svg" />
                     <p className="maleFemaleNumText">{this.props.femaleReg} - {isNaN(femalePercentage)?"0":femalePercentage} %</p>
                 </div>
                 
-                <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"39rem"}}>
+                <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"33rem"}}>
                     Male {this.props.subj}<br/>
                     <img className="centerimg" style={{height:"30px"}} src="/img/man.svg" />
                     <p className="maleFemaleNumText">{this.props.maleReg} - { isNaN(malePercentage)?"0":malePercentage} %</p>
                 </div>
                 
-                <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"55rem"}}>
+                <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"48rem"}}>
                     average {this.props.subj}<br/>
                     <img className="centerimg" style={{height:"30px"}} src="/img/average.PNG" />
                     <p className="maleFemaleNumText">{this.props.averageVal} per day</p>
                 </div>
+
+                <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"65rem"}}>
+                    Highest {this.props.subj} <br/>
+                    <img className="centerimg" style={{height:"30px"}} src="/img/increaseArrow.svg" />
+                    <p className="maleFemaleNumText">{this.props.highest} </p>
+                </div>
+
+                <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"82rem"}}>
+                    Lowest {this.props.subj} <br/>
+                    <img className="centerimg" style={{height:"30px"}} src="/img/decreaseArrow.svg" />
+                    <p className="maleFemaleNumText">{this.props.lowest} </p>
+                </div>
+
             </div>
         );
     }

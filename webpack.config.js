@@ -42,7 +42,7 @@ var config = {
     colors: true,
     historyApiFallback: true,
     inline: true
-  }/*,plugins:[
+  }/* ,plugins:[
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({mangle: true,
       compress: {
@@ -70,7 +70,7 @@ var config = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     })
-  ]*/
+  ] */
 }
 
 /*

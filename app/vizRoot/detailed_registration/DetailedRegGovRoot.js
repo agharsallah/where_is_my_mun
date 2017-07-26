@@ -21,7 +21,7 @@ class DetailedRegGovRoot extends Component {
     }
     
     componentWillMount() {
-        let qString=config.apiUrl+"/api/dailyins/detailed_gov_10-07";
+        let qString=config.apiUrl+"/api/dailyins/detailed_gov_23-07";
         axios({
             method: 'get',
             url: qString,

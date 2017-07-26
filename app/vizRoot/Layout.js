@@ -37,12 +37,12 @@ class Layout extends Component {
                     <span className="icon-bar"></span>
                     <span className="icon-bar"></span>
                 </button>
-                <Link className="navbar-brand" to='/viz' >{sitetitle}</Link>
+                <Link className="navbar-brand" to='/' >{sitetitle}</Link>
                 </div>
                 <div className="navbar-collapse collapse">
                 <ul className="nav navbar-nav navbar-right">
-                    <NavItem to='/viz' >{viz}</NavItem>
-                    <NavItem to='viz/about'  >{about}</NavItem>
+                    <NavItem to='/' >{viz}</NavItem>
+                    <NavItem to='/about'  >{about}</NavItem>
                     <li className="dropdown">
                         <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language<span className="caret"></span></a>
                         <ul className="dropdown-menu">
