@@ -9,7 +9,9 @@ class HistogramVoterProfile extends Component {
     }
 
     componentWillMount() {
-        //console.log(this.props.maleHistogram);
+        console.log("female",this.props.femaleHistogram);
+        console.log("aaaaaaaaa",this.props.maleFemaleHistogram);
+        var male=[-174422,-610844,-834034,-1073835],female=[188444,658784,749027,830257]
         let categories = ['18-24', '25-35', '36-50', '+50'];
         let align,maleHistogram,femaleHistogram;
         let totalNumber =this.props.maleFemaleHistogram
@@ -20,15 +22,14 @@ class HistogramVoterProfile extends Component {
         this.setState({
             options:{
                 chart: {
-                    type: 'bar',
-                    backgroundColor: 'rgba(255, 255, 255, .4)'
+                    type: 'bar'
                 },
                 title: {
-                    text: this.props.clickedShapeName,
+                    text: "Tunisia Registration Per Age & Sexe",
                 },
                 credits:false,
                 subtitle: {
-                    text: 'Isie'
+                    text: 'Data of the Registration Database till 23-07-2017'
                 },
                 xAxis: [{
                     categories: categories,
@@ -81,11 +82,11 @@ class HistogramVoterProfile extends Component {
 
                 series: [{
                     name: 'Male',
-                    data: this.props.maleHistogram,
+                    data: male,
                     color:"#5895c5"
                 }, {
                     name: 'Female',
-                    data: this.props.femaleHistogram,
+                    data: female,
                     color:"#d56147"
                 }]
             }
@@ -98,8 +99,7 @@ class HistogramVoterProfile extends Component {
         this.setState({
             options:{
                 chart: {
-                    type: 'bar',
-                    backgroundColor: 'rgba(255, 255, 255, .4)'
+                    type: 'bar'
                 },
                 title: {
                     text: nextProps.clickedShapeName+" -all ages"

@@ -29,16 +29,11 @@ class VoterProfile extends Component {
             maleNumber:0,femaleNumber:0,radioChart:"difference",mapClicked:false,
             maleHistogram:[],femaleHistogram:[],maleFemaleHistogram:[],clickedShapeName:"Click on the map"
         }
-    }  
-   
-     getColorRegElg(d) {
-        if(d ==  "blue")      {return "#5895c5" }
-        else                  {return "#d56147"}
-	}
-    mapAgeSelect(e,index,value){
-        //for the male female difference
-         let keyColor,keyTitle,diffrenceArray=[],color;
-         if (value==="18-24") {
+    }
+    componentWillReceiveProps(nextProps) {
+
+        let keyColor,keyTitle,diffrenceArray=[],color;
+         if (nextProps.mapAgeSlider==="18-24") {
              keyTitle="18-24 male vs female";
              //get the diffrence between male and female -18-24- in each govenorate
             this.props.shape.features.map((element,i)=>{
@@ -46,14 +41,14 @@ class VoterProfile extends Component {
                 diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_f_18_21+element.properties.registration_gov_f_22_24)-parseInt(element.properties.registration_gov_m_18_21+element.properties.registration_gov_m_22_24))),color:color},
                                     gouv:element.properties.NAME_EN,color:color})
             })
-         }else if(value=="25-35"){
+         }else if(nextProps.mapAgeSlider=="25-35"){
             keyTitle="25-35 male vs female";
             this.props.shape.features.map((element,i)=>{
                 parseInt(element.properties.registration_gov_m_25_35)>parseInt(element.properties.registration_gov_f_25_35)?color="#5895c5":color="#d56147"                
                 diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_m_25_35)-parseInt(element.properties.registration_gov_f_25_35))),color:color},
                     gouv:element.properties.NAME_EN,color:color})
             })
-         }else if(value=="36-50"){
+         }else if(nextProps.mapAgeSlider=="36-50"){
             keyTitle="36-50 male vs female";
             this.props.shape.features.map((element,i)=>{
                 parseInt(element.properties.registration_gov_m_36_50)>parseInt(element.properties.registration_gov_f_36_50)?color="#5895c5":color="#d56147"
@@ -69,11 +64,17 @@ class VoterProfile extends Component {
                     gouv:element.properties.NAME_EN,color:color})
                     //console.log(typeof(diffrenceArray[i].value));
             })
-
          }
          diffrenceArray.sort(function(a, b){return b.value.y-a.value.y})
-         this.setState({mapAge:value,keyTitle,diffrenceArray});
+         this.setState({mapAge:nextProps.mapAgeSlider,keyTitle,diffrenceArray});
+
     }
+    
+     getColorRegElg(d) {
+        if(d ==  "blue")      {return "#5895c5" }
+        else                  {return "#d56147"}
+    }  
+
     handleRadioChart(e,value){
         console.log('vvvvvvvvvv',value);
         this.setState({radioChart:value});
@@ -144,11 +145,10 @@ class VoterProfile extends Component {
             maleFemaleHistogram:[(property.registration_gov_f_18_21+property.registration_gov_f_22_24)+(property.registration_gov_m_18_21+property.registration_gov_m_22_24),property.registration_gov_f_25_35+property.registration_gov_m_25_35,property.registration_gov_f_36_50+property.registration_gov_m_36_50,property.registration_gov_f_p51+property.registration_gov_m_p51]
             ,radioChart:"barChart",mapClicked:true,clickedShapeName:property.NAME_EN
         });
-        console.log('eeeeeeeeeeeeeeeeeeeeeeee');
     }
 
     render() {
-        const position = [34.05360, 3.59795];
+        const position = [34.85360, 6.59795];
         return (
                 <div>
                 {this.props.shapeIsLoaded ? <Map  maxZoom={23} center={position} zoom={6} className="initialposition" style={{height: "100vh", width: "100vw",position:"relative",zIndex:0}}>
@@ -188,7 +188,10 @@ class VoterProfile extends Component {
                     </GeoJSON>
 
                     {/*Left side ScatterPlot*/}
-                    <div className="col-md-7" style={{marginTop:"22rem"}}>
+                    <div className="col-md-6" style={{marginTop:"22rem"}}>
+                        {/*Toggle to change the left chart*/}
+
+
                             {this.state.radioChart==="barChart" ?
                                 <HistogramVoterProfile
                                 maleHistogram={this.state.maleHistogram}
@@ -202,32 +205,31 @@ class VoterProfile extends Component {
                                     alldiffrenceArray={this.state.diffrenceArray} 
                                     title={this.state.mapAge}
                                 />}
-                        
-
-                    {/*Toggle to change the left chart*/}
-                            <div  style={{marginTop:"-64vh",zIndex: 0,width:"19rem",float:"right"}}>
+                            <div  style={{background:"white",marginTop:"-64vh",zIndex: 0,width:"19rem",float:"right"}}>
                                 <RadioButtonGroup name="activeVoterChart"  onChange={this.handleRadioChart.bind(this)} valueSelected={this.state.radioChart} >
+                                    <RadioButton
+                                        value="age"
+                                        label="Age Percentage"
+                                    />
                                     <RadioButton
                                         value="difference"
                                         label="male/female difference"
                                     />
                                     <RadioButton
                                         value="barChart"
-                                        label="Age BarChart"
+                                        label="Age Histogram"
                                     />
                                 </RadioButtonGroup>
                             </div>
                         
                     </div>
 
-                    
-
                     {/*Toggle to change the map AGE Tranche*/}
+                    
                     <div  style={{zIndex:1500,position:"fixed",right: "1%",marginTop: "30rem"}} >
                         <SelectField
                             floatingLabelText="Age Tranche -map-"
                             value={this.state.mapAge}
-                            onChange={this.mapAgeSelect.bind(this)}
                             iconStyle={{fill:"red"}}
                             style={{width:"12vw"}}
                             >
@@ -274,9 +276,9 @@ function mapStateToProps(state) {
   console.log("youhoooo from VoterProfile",state);
   return {
     mapColor:state.changeMapColor,
-    genderFilter:state.PopCheckbox
+    genderFilter:state.PopCheckbox,
+    mapAgeSlider:state.popFilter
   };
 }
 
 export default connect(mapStateToProps)(VoterProfile);
-

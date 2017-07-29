@@ -82,8 +82,8 @@ class BarMaleFemaleDiff extends Component {
             diffArray.push((element.value))
             gouvNameArray.push(element.gouv)
         })
-        console.log(diffArray);
-        console.log(gouvNameArray);
+        //console.log(diffArray);
+        //console.log(gouvNameArray);
         this.setState({
                 options:{
             chart: {
