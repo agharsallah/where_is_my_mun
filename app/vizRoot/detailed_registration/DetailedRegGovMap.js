@@ -174,7 +174,7 @@ class DetailedRegGovMap extends Component {
                         </Tooltip>
 
                     </GeoJSON>
-                    
+                    <ThemeRadio defaultSelected="pop" styles={{marginTop:"14vh",minWidth:"16vw",position:"fixed",zIndex:2,marginLeft:"83%"}}/>
                     {/*Left side ScatterPlot*/}
                     <div className="col-md-7" style={{marginTop:"22rem"}}>
                         {

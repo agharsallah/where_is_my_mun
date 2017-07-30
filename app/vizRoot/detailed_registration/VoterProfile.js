@@ -14,6 +14,7 @@ import MenuItem from 'material-ui/MenuItem';
 import HistogramVoterProfile from './HistogramVoterProfile' ;
 import BarMaleFemaleDiff from './BarMaleFemaleDiff' ;
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
+import MenuDrawerVoterProfile from './MenuDrawerVoterProfile' ;
 
 import { connect } from "react-redux";
 import { getPopValue } from "../../actions/index";
@@ -75,8 +76,7 @@ class VoterProfile extends Component {
         else                  {return "#d56147"}
     }  
 
-    handleRadioChart(e,value){
-        console.log('vvvvvvvvvv',value);
+    getRadioChart(value){
         this.setState({radioChart:value});
     }
     style(feature) {
@@ -151,7 +151,7 @@ class VoterProfile extends Component {
         const position = [34.85360, 6.59795];
         return (
                 <div>
-                {this.props.shapeIsLoaded ? <Map  maxZoom={23} center={position} zoom={6} className="initialposition" style={{height: "100vh", width: "100vw",position:"relative",zIndex:0}}>
+                {this.props.shapeIsLoaded ? <div><Map  maxZoom={23} center={position} zoom={6} className="initialposition" style={{height: "100vh", width: "100vw",position:"relative",zIndex:0}}>
                     <TileLayer
                     url='https://api.mapbox.com/styles/v1/hunter-x/cixhpey8700q12pnwg584603g/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaHVudGVyLXgiLCJhIjoiY2l2OXhqMHJrMDAxcDJ1cGd5YzM2bHlydSJ9.jJxP2PKCIUrgdIXjf-RzlA'
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> '
@@ -186,12 +186,11 @@ class VoterProfile extends Component {
                         </Tooltip>
 
                     </GeoJSON>
-
-                    {/*Left side ScatterPlot*/}
-                    <div className="col-md-6" style={{marginTop:"22rem"}}>
-                        {/*Toggle to change the left chart*/}
-
-
+                        
+                        {/*Left side ScatterPlot*/}
+                        <div className="col-md-6" style={{marginTop:"22rem"}}>
+                       
+                            {/*Toggle to change the left chart*/}
                             {this.state.radioChart==="barChart" ?
                                 <HistogramVoterProfile
                                 maleHistogram={this.state.maleHistogram}
@@ -204,41 +203,10 @@ class VoterProfile extends Component {
                                 <BarMaleFemaleDiff 
                                     alldiffrenceArray={this.state.diffrenceArray} 
                                     title={this.state.mapAge}
-                                />}
-                            <div  style={{background:"white",marginTop:"-64vh",zIndex: 0,width:"19rem",float:"right"}}>
-                                <RadioButtonGroup name="activeVoterChart"  onChange={this.handleRadioChart.bind(this)} valueSelected={this.state.radioChart} >
-                                    <RadioButton
-                                        value="age"
-                                        label="Age Percentage"
-                                    />
-                                    <RadioButton
-                                        value="difference"
-                                        label="male/female difference"
-                                    />
-                                    <RadioButton
-                                        value="barChart"
-                                        label="Age Histogram"
-                                    />
-                                </RadioButtonGroup>
-                            </div>
-                        
-                    </div>
+                                />
+                            }
+                         </div>
 
-                    {/*Toggle to change the map AGE Tranche*/}
-                    
-                    <div  style={{zIndex:1500,position:"fixed",right: "1%",marginTop: "30rem"}} >
-                        <SelectField
-                            floatingLabelText="Age Tranche -map-"
-                            value={this.state.mapAge}
-                            iconStyle={{fill:"red"}}
-                            style={{width:"12vw"}}
-                            >
-                            <MenuItem value="18-24" primaryText="18-24" />
-                            <MenuItem value="25-35" primaryText="25-35" />
-                            <MenuItem value="36-50" primaryText="36-50" />
-                            <MenuItem value="+50" primaryText="+50" />
-                        </SelectField>
-                    </div>
                     {/*Change Degree of map : Governorate - Municipality*/}
                 
                     {/*to download raw data*/}
@@ -257,7 +225,11 @@ class VoterProfile extends Component {
                         </div>
                     </Control>
 
-                </Map>:
+                    </Map>
+                    {/* Menu Drawer */}
+                    <MenuDrawerVoterProfile getRadioChart={this.getRadioChart.bind(this)} />
+                </div>
+                :
                 <div>
                     <div className="col-md-5"></div>
                     <div className="col-md-5" style={{marginTop:"43vh"}}>

@@ -20,12 +20,15 @@ class ThemeRadio extends Component {
 	}
 	
     render() {
+		let styles=this.props.styles
+		let defaultSelecteds=this.props.defaultSelected
+		console.log(defaultSelecteds);
         return (
-             <div className="infoLegendStat legend " style={{marginTop:"14vh",minWidth:"16vw",position:"fixed",zIndex:2,marginLeft:"83%"}}>
+             <div  style={styles}>
                <h4 >
-                    Choose a parameter
+                    Choose a Map 
                 </h4> 
-	            <RadioButtonGroup  name="reg&update" defaultSelected="pop" onChange={this.change.bind(this)} >
+	            <RadioButtonGroup  name="reg&update" defaultSelected={defaultSelecteds} onChange={this.change.bind(this)} >
 					<RadioButton
 					labelStyle={{color:'black'}}
 					value="pop"

@@ -3,6 +3,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import {Link} from 'react-router' ;
+import ThemeRadio from './containers/pickFilter/ThemeRadio' ;
+import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 
 import PopSliderFilter from './containers/sliderFilter/PopSliderFilter' ;
 
@@ -14,10 +16,14 @@ const _t = Translate.translate;
 class MenuDrawerVoterProfile extends Component {
     constructor(props) {
         super(props);
-        this.state = {open: true};
+        this.state = {open: true,radioChart:"difference"};
     }
     handleToggle() {this.setState({open: !this.state.open})}
-
+    
+    handleRadioChart(e,value){
+        this.setState({radioChart:value});
+        this.props.getRadioChart(value)
+    }
     render() {
         return (
             <div>
@@ -33,15 +39,44 @@ class MenuDrawerVoterProfile extends Component {
                         containerStyle={{top:"12vh"}}
                         onRequestChange={(open) => this.setState({open})}>
                     <AppBar title="Menu" onLeftIconButtonTouchTap={this.handleToggle.bind(this)} />
-                    <div className="mb-30">&nbsp;</div>
 
-                    <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
-                        <h3 className="widget-title"  >Choose a Viz</h3>
+                    <div>
+                        <ThemeRadio styles={{borderRadius:"10px",paddingLeft:"2vh"}} defaultSelected="profile" />
                     </div>
-                    <div style={{margin:"3rem"}}>    
+                    
+                    {/* Slider filter */}
+                    <div style={{padding:"2vh"}}>
+                        <h4 >
+                            Map Age Slider :
+                        </h4>   
+                    </div>
+                    <div style={{paddingRight:"4vh",paddingLeft:"4vh"}}>  
                         <PopSliderFilter />
                     </div>  
-                    
+
+                    {/* Left chart controller */}
+                    <div style={{paddingTop:"5vh",paddingLeft:"2vh"}}>
+                        <h4 >
+                            Chart Options :
+                        </h4>   
+                    </div>
+                    <div  style={{paddingLeft:"2vh"}}>
+                                <RadioButtonGroup name="activeVoterChart"  onChange={this.handleRadioChart.bind(this)} valueSelected={this.state.radioChart} >
+                                    <RadioButton
+                                        value="age"
+                                        label="Age Percentage"
+                                    />
+                                    <RadioButton
+                                        value="difference"
+                                        label="male/female difference"
+                                    />
+                                    <RadioButton
+                                        value="barChart"
+                                        label="Age Histogram"
+                                    />
+                                </RadioButtonGroup>
+                    </div>
+
                     <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
                         <RaisedButton label="Back" 
                         containerElement={<Link to="/" />} 

@@ -7,8 +7,6 @@ import counterpart  from 'counterpart';
 import Translate    from 'react-translate-component';
 import axios from 'axios' ;
 import config from '../../config'
-import ThemeRadio from './containers/pickFilter/ThemeRadio' ;
-import MenuDrawerVoterProfile from './MenuDrawerVoterProfile' ;
 
 import { connect } from "react-redux";
 import { getPopValue } from "../../actions/index";
@@ -45,7 +43,6 @@ class DetailedRegGovRoot extends Component {
         return (
             <div>
                 <Layout/>
-                <ThemeRadio/>
                 {   this.props.radioFilterPicker==="pop" ?
                     <DetailedRegGovMap shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key} />
                     :
@@ -54,7 +51,6 @@ class DetailedRegGovRoot extends Component {
                         :
                         <div>
                             <VoterProfile shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key+1}/>                        
-                            <MenuDrawerVoterProfile/>
                         </div>
                     )
                 }
