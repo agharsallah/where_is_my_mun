@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { Map, Popup, TileLayer, GeoJSON, FeatureGroup, Tooltip,LayersControl,Circle,CircleMarker } from 'react-leaflet';
 import Control from 'react-leaflet-control';
 import ReactLoading from 'react-loading';
-import ThemeRadio from './containers/pickFilter/ThemeRadio' ;
-import ColorBrew from './containers/dynamic color/ColorBrew';
-import SourceButton from './SourceButton' ;
+import ThemeRadio from '../containers/pickFilter/ThemeRadio' ;
+import ColorBrew from '../containers/dynamic color/ColorBrew';
 import RaisedButton from 'material-ui/RaisedButton';
-import  './DetailedRegGovMapStyle.css' ;
+import  '../DetailedRegGovMapStyle.css' ;
 import regression from 'regression';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -14,9 +13,10 @@ import HistogramVoterProfile from './HistogramVoterProfile' ;
 import BarMaleFemaleDiff from './BarMaleFemaleDiff' ;
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import MenuDrawerVoterProfile from './MenuDrawerVoterProfile' ;
+import DescriptionVoterProfile from './DescriptionVoterProfile' ;
 
 import { connect } from "react-redux";
-import { getPopValue } from "../../actions/index";
+import { getPopValue } from "../../../actions/index";
 import { bindActionCreators } from "redux";
 
 class VoterProfile extends Component {
@@ -28,7 +28,7 @@ class VoterProfile extends Component {
             ,mapAge:"18-24",diffrenceArray:[],
             maleNumber:0,femaleNumber:0,radioChart:"difference",mapClicked:false,
             maleHistogram:[],femaleHistogram:[],maleFemaleHistogram:[],clickedShapeName:"Click on the map",
-            dynamicPercentage:[7,9,12],tranchePercentage:0,dynamicColor:["#f7fbff","#c6dbef","#6baed6","#084594"]
+            dynamicPercentage:[7,9,12],tranchePercentage:0,dynamicColor:["#f7fbff","#c6dbef","#6baed6","#084594"],
         }
     }
     componentWillReceiveProps(nextProps) {
@@ -224,7 +224,7 @@ class VoterProfile extends Component {
                                 <h4>{this.state.gouv_name}</h4>
                                 {
                                     <div>
-                                        <h5>{this.state.tranchePercentage} </h5>
+                                        <h5>{(this.state.tranchePercentage).toFixed(2)}% </h5>
                                     </div>
                                 }
                             </div>
@@ -255,10 +255,16 @@ class VoterProfile extends Component {
 
                     {/*Change Degree of map : Governorate - Municipality*/}
                 
-                    {/*to download raw data*/}
-                    <SourceButton styleProp={{zIndex:1500,position:"fixed",right: "1%",marginTop: "40rem"}} /> 
+                    {/*to show description*/}
+                    {console.log(this.props.count)}
+                    {
+                    this.props.count==1?
+                    <DescriptionVoterProfile styleProp={{zIndex:1500,position:"fixed",right: "1%",marginTop: "40rem"}}/>
+                    :
+                    <div></div>
+                    } 
                     
-                    {/*Title of the map*/}
+                   {/*Title of the map*/}
                     <Control position="topleft">
                         <div className="lefttitle" >
                             <h1 style={{marginTop:"5px"}} > Voter Profile</h1>
@@ -285,12 +291,9 @@ class VoterProfile extends Component {
 }
 
 function mapStateToProps(state) {
-
-  console.log("youhoooo from VoterProfile",state);
   return {
     mapColor:state.changeMapColor,
-    genderFilter:state.PopCheckbox,
-    mapAgeSlider:state.popFilter
+    mapAgeSlider:state.popFilter,
   };
 }
 

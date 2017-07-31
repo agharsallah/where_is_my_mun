@@ -3,11 +3,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import {Link} from 'react-router' ;
-import ThemeRadio from './containers/pickFilter/ThemeRadio' ;
+import ThemeRadio from '../containers/pickFilter/ThemeRadio' ;
 import {RadioButton, RadioButtonGroup} from 'material-ui/RadioButton';
 import MapKeyVoterProfile from './MapKeyVoterProfile' ;
-import MapKey from './MapKey' ;
-import PopSliderFilter from './containers/sliderFilter/PopSliderFilter' ;
+import MapKey from '../MapKey' ;
+import PopSliderFilter from '../containers/sliderFilter/PopSliderFilter' ;
 
 
 

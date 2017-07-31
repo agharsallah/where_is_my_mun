@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Layout from '../Layout' ;
-import DetailedRegGovMap from './DetailedRegGovMap' ;
-import ActiveRegistered from './ActiveRegistered' ;
-import VoterProfile from './VoterProfile' ;
+import DetailedRegGovMap from './RegVsElig/DetailedRegGovMap' ;
+import ActiveRegistered from './Active/ActiveRegistered' ;
+import VoterProfile from './Profile/VoterProfile' ;
 import counterpart  from 'counterpart';
 import Translate    from 'react-translate-component';
 import axios from 'axios' ;
@@ -16,7 +16,7 @@ class DetailedRegGovRoot extends Component {
     
     constructor(props) {
         super(props);
-        this.state={shape:g_mun_shapes,shapeIsLoaded:false, key:1,}
+        this.state={shape:g_mun_shapes,shapeIsLoaded:false, key:1,countProfile:0,countRegVs:0,countActive:0}
     }
     
     componentWillMount() {
@@ -39,18 +39,31 @@ class DetailedRegGovRoot extends Component {
         });
     }
 
+    //count the numer of how much radiobutton has been chosen to show the description only one time
+    componentWillReceiveProps(nextProps) {
+        let compteur=this.state.countProfile
+                if (nextProps.radioFilterPicker==="pop") {
+           this.setState({countRegVs:this.state.countRegVs+1}); 
+        }else if (nextProps.radioFilterPicker==="active") {
+           this.setState({countActive:this.state.countActive+1}); 
+        }else{
+        this.setState({countProfile:this.state.countProfile+1});
+        }
+    }
+    
+
     render() {
         return (
             <div>
                 <Layout/>
                 {   this.props.radioFilterPicker==="pop" ?
-                    <DetailedRegGovMap shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key} />
+                    <DetailedRegGovMap count={this.state.countRegVs} shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key} />
                     :
                     (this.props.radioFilterPicker==="active"?
-                        <ActiveRegistered shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key+1}/>
+                        <ActiveRegistered count={this.state.countActive} shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key+1}/>
                         :
                         <div>
-                            <VoterProfile shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key+1}/>                        
+                            <VoterProfile count={this.state.countProfile} shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key+1}/>                        
                         </div>
                     )
                 }
@@ -60,8 +73,6 @@ class DetailedRegGovRoot extends Component {
 }
 
 function mapStateToProps(state) {
-
-  console.log("youhoooo DetailedRegGovRoot",state);
   return {
     radioFilterPicker:state.radioFilterPicker,
   };

@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import { Map, Popup, TileLayer, GeoJSON, FeatureGroup, Tooltip,LayersControl,Circle,CircleMarker } from 'react-leaflet';
 import Control from 'react-leaflet-control';
-import MapKey from './MapKey' ;
+import MapKey from '../MapKey' ;
 import ReactLoading from 'react-loading';
-import ThemeRadio from './containers/pickFilter/ThemeRadio' ;
-import ColorBrew from './containers/dynamic color/ColorBrew';
-import SourceButton from './SourceButton' ;
+import ThemeRadio from '../containers/pickFilter/ThemeRadio' ;
+import ColorBrew from '../containers/dynamic color/ColorBrew';
 import RaisedButton from 'material-ui/RaisedButton';
-import  './DetailedRegGovMapStyle.css' ;
+import  '../DetailedRegGovMapStyle.css' ;
 import ScatterRegVsElig from './ScatterRegVsElig' ;
 import regression from 'regression';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
 import { connect } from "react-redux";
-import { getPopValue } from "../../actions/index";
+import { getPopValue } from "../../../actions/index";
 import { bindActionCreators } from "redux";
 
 class DetailedRegGovMap extends Component {
@@ -206,7 +205,6 @@ class DetailedRegGovMap extends Component {
                     {/*Change Degree of map : Governorate - Municipality*/}
                 
                     {/*to download raw data*/}
-                    <SourceButton styleProp={{zIndex:1500,position:"fixed",right: "1%",marginTop: "40rem"}}/> 
                         
                     {/*Map Keys coropleth*/}
                     <Control position="bottomright" >

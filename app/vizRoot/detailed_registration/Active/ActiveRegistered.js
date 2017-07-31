@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { Map, Popup, TileLayer, GeoJSON, FeatureGroup, Tooltip,LayersControl,Circle,CircleMarker } from 'react-leaflet';
 import Control from 'react-leaflet-control';
-import MapKey from './MapKey' ;
+import MapKey from '../MapKey' ;
 import ReactLoading from 'react-loading';
-import ThemeRadio from './containers/pickFilter/ThemeRadio' ;
-import ColorBrew from './containers/dynamic color/ColorBrew';
-import SourceButton from './SourceButton' ;
+import ThemeRadio from '../containers/pickFilter/ThemeRadio' ;
+import ColorBrew from '../containers/dynamic color/ColorBrew';
 import RaisedButton from 'material-ui/RaisedButton';
-import  './DetailedRegGovMapStyle.css' ;
-import ScatterRegVsElig from './ScatterRegVsElig' ;
+import  '../DetailedRegGovMapStyle.css' ;
 import regression from 'regression';
 
 import { connect } from "react-redux";
-import { getPopValue } from "../../actions/index";
+import { getPopValue } from "../../../actions/index";
 import { bindActionCreators } from "redux";
 
 class ActiveRegistered extends Component {
@@ -133,7 +131,6 @@ class ActiveRegistered extends Component {
                     <ColorBrew styleProp={{zIndex:1500,position:"fixed",right: "1%",marginTop: "40vh"}} />
 
                     {/*to download raw data*/}
-                    <SourceButton styleProp={{zIndex:1500,position:"fixed",right: "1%",marginTop: "49vh"}} /> 
                         
                     {/*Map Keys coropleth*/}
                     <Control position="bottomright" >

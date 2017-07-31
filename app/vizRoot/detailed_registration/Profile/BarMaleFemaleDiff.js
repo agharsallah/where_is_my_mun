@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 var Highcharts = require('highcharts');
-import HighchartInit from './HighchartInit' ;
+import HighchartInit from '../HighchartInit' ;
 
 class BarMaleFemaleDiff extends Component {
     constructor(props) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 var Highcharts = require('highcharts');
-import HighchartInit from './HighchartInit' ;
-import GenderPickFilter from './containers/pickFilter/GenderPickFilter' ;
+import HighchartInit from '../HighchartInit' ;
+import GenderPickFilter from '../containers/pickFilter/GenderPickFilter' ;
 
 class ScatterRegVsElig extends Component {
     constructor(props) {
