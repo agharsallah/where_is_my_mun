@@ -46,9 +46,9 @@ class ActiveRegistered extends Component {
       
    
      getColorRegElg(d,c1,grades) {
-        if      (d >grades[2])      {return (c1[5]); }
-        else if (d>grades[1])        {return (c1[3]);}
-        else if (d>grades[0])        {return (c1[2]);}
+        if      (d >grades[2])      {return (c1[3]); }
+        else if (d>grades[1])        {return (c1[2]);}
+        else if (d>grades[0])        {return (c1[1]);}
         else if (isNaN(d))    {return ('white')}
         else                  {return (c1[0]);}
 	}
@@ -166,7 +166,7 @@ function mapStateToProps(state) {
 
   console.log("youhoooo from ActiveRegistered",state);
   return {
-    mapColor:state.changeMapColor,
+    mapColor:state.changeMapColorState,
     genderFilter:state.PopCheckbox
   };
 }

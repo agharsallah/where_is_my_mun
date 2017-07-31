@@ -29,10 +29,10 @@ class ColorBrew extends Component {
       />
       
     ];
-    const c1=chroma.scale(['#9ecae1','#084594']).mode('lch').colors(6);
-    const c2=chroma.scale(['#fc9272','#99000d']).mode('lch').colors(6);
-    const c3=chroma.scale(['#a1d99b','#005a32']).mode('lch').colors(6);
-    const c4=chroma.scale(['#fec44f','#8c2d04']).mode('lch').colors(6);
+    const c1=chroma.scale(['#9ecae1','#084594']).mode('lch').colors(4);
+    const c2=chroma.scale(['#fc9272','#99000d']).mode('lch').colors(4);
+    const c3=chroma.scale(['#a1d99b','#005a32']).mode('lch').colors(4);
+    const c4=chroma.scale(['#fec44f','#8c2d04']).mode('lch').colors(4);
     
         return (
           <MuiThemeProvider>

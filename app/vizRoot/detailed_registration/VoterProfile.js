@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Map, Popup, TileLayer, GeoJSON, FeatureGroup, Tooltip,LayersControl,Circle,CircleMarker } from 'react-leaflet';
 import Control from 'react-leaflet-control';
-import MapKeyVoterProfile from './MapKeyVoterProfile' ;
 import ReactLoading from 'react-loading';
 import ThemeRadio from './containers/pickFilter/ThemeRadio' ;
 import ColorBrew from './containers/dynamic color/ColorBrew';
@@ -25,15 +24,16 @@ class VoterProfile extends Component {
         super(props);
         this.state={
             gouv_name:"",munNumber:"",destroy:true,
-            colorfun:this.getColorRegElg,keyTitle:"Percentage of active registered voters"
+            colorfun:this.getColorRegElg,keyTitle:"18-24 male vs female"
             ,mapAge:"18-24",diffrenceArray:[],
             maleNumber:0,femaleNumber:0,radioChart:"difference",mapClicked:false,
-            maleHistogram:[],femaleHistogram:[],maleFemaleHistogram:[],clickedShapeName:"Click on the map"
+            maleHistogram:[],femaleHistogram:[],maleFemaleHistogram:[],clickedShapeName:"Click on the map",
+            dynamicPercentage:[7,9,12],tranchePercentage:0,dynamicColor:["#f7fbff","#c6dbef","#6baed6","#084594"]
         }
     }
     componentWillReceiveProps(nextProps) {
 
-        let keyColor,keyTitle,diffrenceArray=[],color;
+        let keyColor,keyTitle,diffrenceArray=[],color,dynamicPercentage,dynamicColor;
          if (nextProps.mapAgeSlider==="18-24") {
              keyTitle="18-24 male vs female";
              //get the diffrence between male and female -18-24- in each govenorate
@@ -42,6 +42,7 @@ class VoterProfile extends Component {
                 diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_f_18_21+element.properties.registration_gov_f_22_24)-parseInt(element.properties.registration_gov_m_18_21+element.properties.registration_gov_m_22_24))),color:color},
                                     gouv:element.properties.NAME_EN,color:color})
             })
+            dynamicPercentage=[7,9,12];dynamicColor=["#f7fbff","#c6dbef","#6baed6","#084594"]
          }else if(nextProps.mapAgeSlider=="25-35"){
             keyTitle="25-35 male vs female";
             this.props.shape.features.map((element,i)=>{
@@ -49,6 +50,7 @@ class VoterProfile extends Component {
                 diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_m_25_35)-parseInt(element.properties.registration_gov_f_25_35))),color:color},
                     gouv:element.properties.NAME_EN,color:color})
             })
+            dynamicPercentage=[23,26,29];dynamicColor=["#f7fcf5","#c7e9c0","#74c476","#005a32"]
          }else if(nextProps.mapAgeSlider=="36-50"){
             keyTitle="36-50 male vs female";
             this.props.shape.features.map((element,i)=>{
@@ -56,7 +58,7 @@ class VoterProfile extends Component {
                 diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_m_36_50)-parseInt(element.properties.registration_gov_f_36_50))),color:color},
                     gouv:element.properties.NAME_EN,color:color})
             })
-
+            dynamicPercentage=[28,30,32];dynamicColor=["#f7fcf5","#c7e9c0","#74c476","#005a32"]
          }else{
             keyTitle="+50 male vs female";
             this.props.shape.features.map((element,i)=>{
@@ -65,64 +67,96 @@ class VoterProfile extends Component {
                     gouv:element.properties.NAME_EN,color:color})
                     //console.log(typeof(diffrenceArray[i].value));
             })
+            dynamicPercentage=[34,38,42];dynamicColor=["#fff7ec","#fee8c8","#fc8d59","#990000"]
          }
          diffrenceArray.sort(function(a, b){return b.value.y-a.value.y})
-         this.setState({mapAge:nextProps.mapAgeSlider,keyTitle,diffrenceArray});
+         this.setState({mapAge:nextProps.mapAgeSlider,keyTitle,diffrenceArray,
+                        dynamicPercentage,dynamicColor
+                        });
 
     }
-    
-     getColorRegElg(d) {
+    //get the value of the bar chart that control the Left chart and map (keep the same page : age profile)
+    getRadioChart(value){
+        this.setState({radioChart:value});
+        value==="diffrence"?this.setState({ colorfun:this.getColorRegElg}):this.setState({ colorfun:this.getColorAgePercentage});
+    }
+
+    getColorRegElg(d) {
         if(d ==  "blue")      {return "#5895c5" }
         else                  {return "#d56147"}
     }  
+    
+    getColorAgePercentage(d,c1,grades) {
+        if      (d >grades[2])       {return (c1[3]); }
+        else if (d>grades[1])        {return (c1[2]);}
+        else if (d>grades[0])        {return (c1[1]);}
+        else                         {return (c1[0]);}
+	}
 
-    getRadioChart(value){
-        this.setState({radioChart:value});
-    }
     style(feature) {
         let property = feature.properties;
-        let chosen;
-        //for the map Coloring 
+        let chosen,tranchePercentage;
+        //for the map Coloring Male Vs Female | age percentage
         if (this.state.mapAge=="18-24") {
             (property.registration_gov_m_18_21+property.registration_gov_m_22_24)>(property.registration_gov_f_18_21+property.registration_gov_f_22_24)?
-                chosen="blue":chosen="red"
+                chosen="blue":chosen="red";
+            //18-24 percentage of all voters
+            tranchePercentage=((property.registration_gov_m_18_21+property.registration_gov_m_22_24+property.registration_gov_f_18_21+property.registration_gov_f_22_24)*100)/property.allreg_sum
         }else if(this.state.mapAge=="25-35"){
-            property.registration_gov_m_25_35>property.registration_gov_f_25_35 ? chosen="blue": chosen="red"
+            property.registration_gov_m_25_35>property.registration_gov_f_25_35 ? chosen="blue": chosen="red";
+            tranchePercentage=((property.registration_gov_m_25_35+property.registration_gov_f_25_35)*100)/property.allreg_sum
         }else if(this.state.mapAge=="36-50"){
-            property.registration_gov_m_36_50>property.registration_gov_f_36_50 ? chosen="blue": chosen="red"
+            property.registration_gov_m_36_50>property.registration_gov_f_36_50 ? chosen="blue": chosen="red";
+            tranchePercentage=((property.registration_gov_m_36_50+property.registration_gov_f_36_50)*100)/property.allreg_sum
         }else{
-            property.registration_gov_m_p51>property.registration_gov_f_p51 ? chosen="blue": chosen="red"
+            property.registration_gov_m_p51>property.registration_gov_f_p51 ? chosen="blue": chosen="red";
+            tranchePercentage=((property.registration_gov_m_p51+property.registration_gov_f_p51)*100)/property.allreg_sum
         }
-
-            return {
-                fillColor: this.getColorRegElg(chosen),
-                weight: 1,
-                opacity: 2,
-                color: 'white',
-                dashArray: '3',
+            if (this.state.radioChart==="difference") {
+               return {
+                    fillColor: this.getColorRegElg(chosen),
+                    weight: 1,
+                    opacity: 2,
+                    color: 'white',
+                    dashArray: '3',
+                    fillOpacity: 0.8
+                }; 
+            }else{
+                return {
+                fillColor: this.getColorAgePercentage(tranchePercentage,this.state.dynamicColor,this.state.dynamicPercentage),
+                color: 'black',
+                weight: 2,
                 fillOpacity: 0.8
             };
+            }
+            
 	}
 
     highlightFeature(e) {
         const layer = e.target;
         const property = layer.feature.properties;
-        let maleNumber, femaleNumber;
+        let maleNumber, femaleNumber,tranchePercentage;
         //for the tooltip
         if (this.state.mapAge=="18-24") {
             femaleNumber=property.registration_gov_f_18_21+property.registration_gov_f_22_24;
             maleNumber=property.registration_gov_m_18_21+property.registration_gov_m_22_24;
+            tranchePercentage= ((maleNumber+ femaleNumber)*100)/property.allreg_sum; 
         }else if(this.state.mapAge=="25-35"){
             maleNumber= property.registration_gov_m_25_35;
             femaleNumber=property.registration_gov_f_25_35;
+            tranchePercentage= ((maleNumber+ femaleNumber)*100)/property.allreg_sum; 
         }else if(this.state.mapAge=="36-50"){
             maleNumber=property.registration_gov_m_36_50;
             femaleNumber=property.registration_gov_f_36_50;
+            tranchePercentage= ((maleNumber+ femaleNumber)*100)/property.allreg_sum; 
         }else{
             maleNumber= property.registration_gov_m_p51;
             femaleNumber= property.registration_gov_f_p51;
+            tranchePercentage= ((maleNumber+ femaleNumber)*100)/property.allreg_sum; 
         }
-        this.setState({destroy:false,gouv_name:property.NAME_EN,munNumber:property.munnumber,maleNumber,femaleNumber});
+        this.setState({destroy:false,gouv_name:property.NAME_EN,munNumber:property.munnumber,maleNumber,femaleNumber,
+                       tranchePercentage 
+                    });
         return layer.setStyle({
             weight: 5,
             color: '#666',
@@ -143,7 +177,7 @@ class VoterProfile extends Component {
         this.setState({maleHistogram:[-(property.registration_gov_m_18_21+property.registration_gov_m_22_24),-property.registration_gov_m_25_35,-property.registration_gov_m_36_50,-property.registration_gov_m_p51],
             femaleHistogram:[(property.registration_gov_f_18_21+property.registration_gov_f_22_24),property.registration_gov_f_25_35,property.registration_gov_f_36_50,property.registration_gov_f_p51],
             maleFemaleHistogram:[(property.registration_gov_f_18_21+property.registration_gov_f_22_24)+(property.registration_gov_m_18_21+property.registration_gov_m_22_24),property.registration_gov_f_25_35+property.registration_gov_m_25_35,property.registration_gov_f_36_50+property.registration_gov_m_36_50,property.registration_gov_f_p51+property.registration_gov_m_p51]
-            ,radioChart:"barChart",mapClicked:true,clickedShapeName:property.NAME_EN
+            ,radioChart:"age",mapClicked:true,clickedShapeName:property.NAME_EN,colorfun:this.getColorAgePercentage
         });
     }
 
@@ -171,6 +205,7 @@ class VoterProfile extends Component {
                             }    
                         }
                     >
+                        {this.state.radioChart==="difference"?
                         <Tooltip direction="bottom" className="leafletTooltip" >
                             <div>
                                 <h4>{this.state.gouv_name}</h4>
@@ -183,7 +218,18 @@ class VoterProfile extends Component {
                                     </div>
                                 }
                             </div>
+                        </Tooltip>:
+                        <Tooltip direction="bottom" className="leafletTooltip" >
+                            <div>
+                                <h4>{this.state.gouv_name}</h4>
+                                {
+                                    <div>
+                                        <h5>{this.state.tranchePercentage} </h5>
+                                    </div>
+                                }
+                            </div>
                         </Tooltip>
+                        }
 
                     </GeoJSON>
                         
@@ -191,19 +237,19 @@ class VoterProfile extends Component {
                         <div className="col-md-6" style={{marginTop:"22rem"}}>
                        
                             {/*Toggle to change the left chart*/}
-                            {this.state.radioChart==="barChart" ?
-                                <HistogramVoterProfile
+                            {this.state.radioChart==="difference" ?
+                                <BarMaleFemaleDiff 
+                                    alldiffrenceArray={this.state.diffrenceArray} 
+                                    title={this.state.mapAge}
+                                />
+                            :
+                               <HistogramVoterProfile
                                 maleHistogram={this.state.maleHistogram}
                                 femaleHistogram={this.state.femaleHistogram}
                                 mapClicked={this.state.mapClicked}
                                 clickedShapeName={this.state.clickedShapeName}
                                 maleFemaleHistogram={this.state.maleFemaleHistogram}
-                                />
-                            :
-                                <BarMaleFemaleDiff 
-                                    alldiffrenceArray={this.state.diffrenceArray} 
-                                    title={this.state.mapAge}
-                                />
+                                /> 
                             }
                          </div>
 
@@ -211,11 +257,6 @@ class VoterProfile extends Component {
                 
                     {/*to download raw data*/}
                     <SourceButton styleProp={{zIndex:1500,position:"fixed",right: "1%",marginTop: "40rem"}} /> 
-                        
-                    {/*Map Keys coropleth*/}
-                    <Control position="bottomright" >
-                        <MapKeyVoterProfile colorSet={this.props.mapColor} grades={this.state.grades} getColor={this.state.colorfun} keyTitle={this.state.keyTitle} key={this.state.keyTitle} />
-                    </Control>
                     
                     {/*Title of the map*/}
                     <Control position="topleft">
@@ -227,7 +268,7 @@ class VoterProfile extends Component {
 
                     </Map>
                     {/* Menu Drawer */}
-                    <MenuDrawerVoterProfile getRadioChart={this.getRadioChart.bind(this)} />
+                    <MenuDrawerVoterProfile getRadioChart={this.getRadioChart.bind(this)} colorSet={this.state.dynamicColor} grades={this.state.dynamicPercentage} getColor={this.state.colorfun} keyTitle={this.state.keyTitle} mapKey={this.state.keyTitle} radioChart= {this.state.radioChart} />
                 </div>
                 :
                 <div>

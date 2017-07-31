@@ -22,11 +22,11 @@ class ThemeRadio extends Component {
     render() {
 		let styles=this.props.styles
 		let defaultSelecteds=this.props.defaultSelected
-		console.log(defaultSelecteds);
+		//console.log(defaultSelecteds);
         return (
              <div  style={styles}>
                <h4 >
-                    Choose a Map 
+                    Choose a Theme
                 </h4> 
 	            <RadioButtonGroup  name="reg&update" defaultSelected={defaultSelecteds} onChange={this.change.bind(this)} >
 					<RadioButton
