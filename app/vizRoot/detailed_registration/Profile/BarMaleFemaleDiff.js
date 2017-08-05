@@ -138,7 +138,7 @@ class BarMaleFemaleDiff extends Component {
         render() {
             return (
                 <div style={{position:"absolute!important"}} >
-                <HighchartInit  options={this.state.options} key={this.props.title} />
+                <HighchartInit  options={this.state.options} key={this.props.title} styles={{height:"65vh"}}/>
                 </div>
             );
         }

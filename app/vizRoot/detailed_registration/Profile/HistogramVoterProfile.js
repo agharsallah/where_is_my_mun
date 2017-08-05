@@ -172,7 +172,7 @@ class HistogramVoterProfile extends Component {
         render() {
             return (
                 <div style={{position:"absolute!important"}} >
-                <HighchartInit  options={this.state.options} key={this.props.maleHistogram} />
+                <HighchartInit  options={this.state.options} key={this.props.maleHistogram} styles={{height:"65vh"}}/>
                 </div>
             );
         }

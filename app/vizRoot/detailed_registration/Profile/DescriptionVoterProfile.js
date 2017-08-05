@@ -37,7 +37,7 @@ class DescriptionVoterProfile extends Component {
         return (
           <MuiThemeProvider>
             <div className="sourcePosition"  style={this.props.styleProp}>
-              <RaisedButton label="Data Source" onTouchTap={this.handleOpen.bind(this)} onClick={this.handleOpen.bind(this)} />
+              <RaisedButton label="Map Manual" onTouchTap={this.handleOpen.bind(this)} onClick={this.handleOpen.bind(this)} />
         <Dialog
           title="Check the Raw data "
           actions={actions}

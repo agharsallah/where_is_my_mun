@@ -16,7 +16,7 @@ class DetailedRegGovRoot extends Component {
     
     constructor(props) {
         super(props);
-        this.state={shape:g_mun_shapes,shapeIsLoaded:false, key:1,countProfile:0,countRegVs:0,countActive:0}
+        this.state={shape:g_mun_shapes,munShape:{},shapeIsLoaded:false, key:1,countProfile:0,countRegVs:0,countActive:0}
     }
     
     componentWillMount() {
@@ -30,8 +30,26 @@ class DetailedRegGovRoot extends Component {
             }
         })
         .then(response=>{
-            this.setState({shape:JSON.parse(response.data.data),key:2,shapeIsLoaded:true
+            this.setState({shape:JSON.parse(response.data.data),key:2
             });
+        }
+        )
+        .catch(function (error) {
+            console.log(error);
+        });
+
+        let qString2=config.apiUrl+"/api/dailyins/detailed_mun_02-08";
+        axios({
+            method: 'get',
+            url: qString2,
+            headers: {
+                'name': 'Isie',
+                'password': 'Isie@ndDi'
+            }
+        })
+        .then(response=>{
+            //console.log(response.data.data);
+              this.setState({munShape:JSON.parse(response.data.data),shapeIsLoaded:true});
         }
         )
         .catch(function (error) {
@@ -39,7 +57,7 @@ class DetailedRegGovRoot extends Component {
         });
     }
 
-    //count the numer of how much radiobutton has been chosen to show the description only one time
+    //count the number of how much radiobutton has been chosen to show the description only one time
     componentWillReceiveProps(nextProps) {
         let compteur=this.state.countProfile
                 if (nextProps.radioFilterPicker==="pop") {
@@ -63,7 +81,7 @@ class DetailedRegGovRoot extends Component {
                         <ActiveRegistered count={this.state.countActive} shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key+1}/>
                         :
                         <div>
-                            <VoterProfile count={this.state.countProfile} shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key+1}/>                        
+                            <VoterProfile count={this.state.countProfile} shape={this.state.shape} munShape={this.state.munShape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key+1}/>                        
                         </div>
                     )
                 }

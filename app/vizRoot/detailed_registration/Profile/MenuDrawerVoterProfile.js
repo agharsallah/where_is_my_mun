@@ -89,10 +89,10 @@ class MenuDrawerVoterProfile extends Component {
                     {
                         this.state.radioChart==="difference"?
                         <div style={{padding:"1vh"}}>
-                            <MapKeyVoterProfile  colorSet={this.props.colorSet} grades={this.props.grades} getColor={this.props.getColor} keyTitle={this.props.keyTitle} key={this.state.radioChart}/>
+                            <MapKeyVoterProfile  colorSet={this.props.colorSet} grades={this.props.grades} getColor={this.props.getColor} keyTitle={this.props.keyTitleDiff} key={this.state.radioChart}/>
                         </div>:
                         <div style={{padding:"1vh"}}>
-                            <MapKey  colorSet={this.props.colorSet} grades={this.props.grades} getColor={this.props.getColor} keyTitle={this.props.keyTitle} key={this.state.radioChart}/>
+                            <MapKey  colorSet={this.props.colorSet} grades={this.props.grades} getColor={this.props.getColor} keyTitle={this.props.keyTitleRegPerc} key={this.state.radioChart}/>
                         </div>
                     }
                 
