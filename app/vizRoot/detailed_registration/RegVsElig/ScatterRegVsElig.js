@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 var Highcharts = require('highcharts');
 import HighchartInit from '../HighchartInit' ;
-import GenderPickFilter from '../containers/pickFilter/GenderPickFilter' ;
 
 class ScatterRegVsElig extends Component {
     constructor(props) {
@@ -10,21 +9,21 @@ class ScatterRegVsElig extends Component {
     }
 
     componentWillMount() {
-        let govName= this.props.govName;
-        //console.log(this.props.regressionRegElg);
+         let govName= this.props.govName;
+        //console.log(nextProps.regressionRegElg);
         let regression0=this.props.regressionRegElg.equation[0],regression1=this.props.regressionRegElg.equation[1]
-        // create array of x values
-        var xs = [];
-        (this.props.menElgReg).forEach(function(d){
-            //console.log(d);
-            xs.push(d);
-        });
-        // get the max and min values of x, and calculate 
-        // the corresponding y value using that x, m, and b
-        var x0 = 25000, 
-            y0 = regression0*x0 + regression1;
+
         var xf = 450000, 
             yf = regression0*xf + regression1;
+            var x0 = 25000,y0 = regression0*x0 + regression1;
+            var xf = 800000,yf = regression0*xf + regression1;
+           var title="Registered Versus Eligible"
+           var dataSeries= [
+                {name: 'Governorate',color: 'black', data: this.props.allElgReg},
+                {type: 'line',name: 'Regression Line',data: [[x0, y0], [xf, yf]],marker: {enabled:false},states: {hover: {lineWidth: 0}}, enableMouseTracking: false},
+                {type: 'line',color:"orange",name: 'Ideal',data: [[x0, x0], [xf, xf]],marker: {enabled:false},states: {hover: {lineWidth: 0}}, enableMouseTracking: false}
+
+           ]
         this.setState({
             options:{
     chart: {
@@ -83,30 +82,7 @@ class ScatterRegVsElig extends Component {
             },
         }
     },
-    series: [{
-        name: 'Female',
-        color: 'rgba(223, 83, 83, .5)',
-        data: this.props.menElgReg
-    }, {
-        name: 'Male',
-        color: 'rgba(119, 152, 191, .5)',
-        data: this.props.femaleElgReg
-    },{
-        type: 'line',
-        name: 'Regression Line',
-        data: [[x0, y0], [xf, yf]],
-        marker: {
-            enabled: false
-        },
-        states: {
-            hover: {
-                lineWidth: 0
-            }
-        },
-        enableMouseTracking: false
-    },
-    {type: 'line',color:"orange",name: 'Ideal',data: [[x0, x0], [xf, xf]],marker: {enabled:false},states: {hover: {lineWidth: 0}}, enableMouseTracking: false}
-    ],
+    series: dataSeries,
                 tooltip: {
                 style:{"z-index":"555"},
                 useHTML: true,
@@ -114,7 +90,7 @@ class ScatterRegVsElig extends Component {
                     //formating date
                     let govNames=govName[this.point.index]
                     //console.log("govName",govName);
-                    return '<b>'+this.series.name+' - '+govNames+'</b><br/><br/><p> Registered : <b>'+this.point.x+'</b><p/> <p> Eligible : <b>'+this.point.y+'</b><p/> '
+                    return '<b>'+this.series.name+' - '+govNames+'</b><br/><br/><p> Eligible : <b>'+this.point.x+'</b><p/> <p> Registered : <b>'+this.point.y+'</b><p/> '
                 }   
             }
 }
@@ -129,17 +105,26 @@ class ScatterRegVsElig extends Component {
         // get the max and min values of x, and calculate 
         // the corresponding y value using that x, m, and b
         
-        if (nextProps.genderFilter==true) {
+        if (nextProps.genderFilter=="Male") {
             var x0 = 25000,y0 = regression0*x0 + regression1;
             var xf = 450000,yf = regression0*xf + regression1;
             var title="Registered Versus Eligible by Gender"
-           var dataSeries= [
-                {name: 'Female',color: 'rgba(223, 83, 83, .5)', data: nextProps.menElgReg},
+            var dataSeries= [
                 {name: 'Male',color: 'rgba(119, 152, 191, .5)',data: nextProps.femaleElgReg},
                 {type: 'line',name: 'Regression Line',data: [[x0, y0], [xf, yf]],marker: {enabled:false},states: {hover: {lineWidth: 0}}, enableMouseTracking: false},
                 {type: 'line',color:"orange",name: 'Ideal',data: [[x0, x0], [xf, xf]],marker: {enabled:false},states: {hover: {lineWidth: 0}}, enableMouseTracking: false}
-                ]
-        }else{
+            ]
+        }else if (nextProps.genderFilter=="Female"){
+            var x0 = 25000,y0 = regression0*x0 + regression1;
+            var xf = 450000,yf = regression0*xf + regression1;
+            var title="Registered Versus Eligible by Gender"
+            var dataSeries= [
+                {name: 'Female',color: 'rgba(223, 83, 83, .5)', data: nextProps.menElgReg},
+                {type: 'line',name: 'Regression Line',data: [[x0, y0], [xf, yf]],marker: {enabled:false},states: {hover: {lineWidth: 0}}, enableMouseTracking: false},
+                {type: 'line',color:"orange",name: 'Ideal',data: [[x0, x0], [xf, xf]],marker: {enabled:false},states: {hover: {lineWidth: 0}}, enableMouseTracking: false}
+            ] 
+        }
+        else{
             var x0 = 25000,y0 = regression0*x0 + regression1;
             var xf = 800000,yf = regression0*xf + regression1;
            var title="Registered Versus Eligible"
@@ -217,7 +202,7 @@ class ScatterRegVsElig extends Component {
                     //formating date
                     let govNames=govName[this.point.index]
                     //console.log("govName",govName);
-                    return '<b>'+this.series.name+' - '+govNames+'</b><br/><br/><p> Registered : <b>'+this.point.x+'</b><p/> <p> Eligible : <b>'+this.point.y+'</b><p/> '
+                    return '<b>'+this.series.name+' - '+govNames+'</b><br/><br/><p> Eligible : <b>'+this.point.x+'</b><p/> <p> Registered : <b>'+this.point.y+'</b><p/> '
                 }   
             }
     }
@@ -227,11 +212,7 @@ class ScatterRegVsElig extends Component {
         render() {
             return (
                 <div style={{position:"absolute!important"}} >
-                <HighchartInit  options={this.state.options} key={this.props.genderFilter} />
-                <div className="col-md-10"></div>
-                <div className="cardinfo card-1 centerbox"  style={{marginTop:"-65vh",zIndex: 0,width:"21vh"}}>
-                <GenderPickFilter/>
-                </div>
+                <HighchartInit  options={this.state.options} styles={{height:"65vh"}} key={this.props.genderFilter} />
                 </div>
             );
         }

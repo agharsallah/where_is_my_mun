@@ -39,7 +39,7 @@ class DescriptionVoterProfile extends Component {
             <div className="sourcePosition"  style={this.props.styleProp}>
               <RaisedButton label="Map Manual" onTouchTap={this.handleOpen.bind(this)} onClick={this.handleOpen.bind(this)} />
         <Dialog
-          title="Check the Raw data "
+          title="Visualization description "
           actions={actions}
           modal={false}
           open={this.state.open}
@@ -51,9 +51,28 @@ class DescriptionVoterProfile extends Component {
           <div>
             
             <div className="col-md-12">
-            
-              <h2 className="col-md-8" style={{marginTop:"1rem"}}>Voter Profile</h2>
-            </div>
+              <h4 style={{marginTop:"1rem"}}>This map shows the voter profile by age and sexe. Data source from  <a href="http://www.isie.tn/actualites/2017/08/07/statistiques-quotidiennes-de-loperation-dinscription-06-08-2017/">ISIE</a> </h4>
+              
+              <div>
+                <div className="col-md-6" style={{top:"100px"}}> You can use the slider to visualize diffrent age tranches  </div>
+                <div className="col-md-6" style={{textAlign:"center",marginTop:"2rem"}}><img  style={{height:"200px"}} src="/img/slider.PNG" /></div>
+                <br/>
+              </div>
+
+              <div>
+                <div className="col-md-6" style={{top:"100px"}}> You can Change the map delimitation  </div>
+                <div className="col-md-6" style={{textAlign:"center",marginTop:"2rem"}}><img  style={{height:"200px"}} src="/img/munToggle.PNG" /></div>
+                <br/>
+              </div>
+
+              <div>
+                <div className="col-md-6" style={{top:"100px"}}> You can get additional infos when hover on the map or the chart  </div>
+                <div className="col-md-6" style={{textAlign:"center",marginTop:"2rem"}}><img style={{height:"250px"}} src="/img/hover.PNG" /></div>
+              </div>
+              
+              <h4 style={{marginTop:"2rem"}}>You can Drag the map Right and Left.<br/><br/> you can also zoom in and out by scrolling or double clicking</h4>          
+
+              </div>
 
           </div>
 

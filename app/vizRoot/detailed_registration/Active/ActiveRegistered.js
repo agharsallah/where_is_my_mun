@@ -7,7 +7,7 @@ import ThemeRadio from '../containers/pickFilter/ThemeRadio' ;
 import ColorBrew from '../containers/dynamic color/ColorBrew';
 import RaisedButton from 'material-ui/RaisedButton';
 import  '../DetailedRegGovMapStyle.css' ;
-import regression from 'regression';
+import MenuDrawerActiveReg from './MenuDrawerActiveReg' ;
 
 import { connect } from "react-redux";
 import { getPopValue } from "../../../actions/index";
@@ -44,11 +44,10 @@ class ActiveRegistered extends Component {
       
    
      getColorRegElg(d,c1,grades) {
-        if      (d >grades[2])      {return (c1[3]); }
+        if      (d >grades[2])       {return (c1[3]); }
         else if (d>grades[1])        {return (c1[2]);}
         else if (d>grades[0])        {return (c1[1]);}
-        else if (isNaN(d))    {return ('white')}
-        else                  {return (c1[0]);}
+        else                         {return (c1[0]);}
 	}
 
     style(feature) {
@@ -57,7 +56,7 @@ class ActiveRegistered extends Component {
             let ALLREGISTRATION = parseInt(feature.properties.allreg_sum);
             let activeVoterPer = ((REGISTRATION2017*100)/ALLREGISTRATION).toFixed(2);
             return {
-                fillColor: this.getColorRegElg(activeVoterPer,this.props.mapColor,this.state.dynamicReg),
+                fillColor: this.getColorRegElg(activeVoterPer,["#ffffcc", "#c2e699", "#78c679","#238443"],this.state.dynamicReg),
                 weight: 1,
                 opacity: 2,
                 color: 'white',
@@ -88,10 +87,10 @@ class ActiveRegistered extends Component {
 	}
 
     render() {
-        const position = [34.05360, 3.59795];
+        const position = [35.25360, 9.09795];
         return (
                 <div>
-                {this.props.shapeIsLoaded ? <Map  maxZoom={23} center={position} zoom={6} className="initialposition" style={{height: "100vh", width: "100vw",position:"relative",zIndex:0}}>
+                {this.props.shapeIsLoaded ? <Map  maxZoom={23} center={position} zoom={7} className="initialposition" style={{height: "100vh", width: "100vw",position:"relative",zIndex:0}}>
                     <TileLayer
                     url='https://api.mapbox.com/styles/v1/hunter-x/cixhpey8700q12pnwg584603g/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaHVudGVyLXgiLCJhIjoiY2l2OXhqMHJrMDAxcDJ1cGd5YzM2bHlydSJ9.jJxP2PKCIUrgdIXjf-RzlA'
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> '
@@ -127,14 +126,9 @@ class ActiveRegistered extends Component {
 
                     {/*Change Degree of map : Governorate - Municipality*/}
                 
-                    {/*Color changer button*/}
-                    <ColorBrew styleProp={{zIndex:1500,position:"fixed",right: "1%",marginTop: "40vh"}} />
-
-                    {/*to download raw data*/}
-                        
                     {/*Map Keys coropleth*/}
                     <Control position="bottomright" >
-                        <MapKey colorSet={this.props.mapColor} grades={this.state.grades} getColor={this.state.colorfun} keyTitle={this.state.keytitle} />
+                        <MapKey colorSet={["#ffffcc", "#c2e699", "#78c679","#238443"]} grades={this.state.grades} getColor={this.state.colorfun} keyTitle={this.state.keytitle} />
                     </Control>
                     
                     {/*Title of the map*/}
@@ -144,6 +138,8 @@ class ActiveRegistered extends Component {
                             <p style={{fontSize:"13px"}}>Active registered voters since the beginning of municipal election </p>
                         </div>
                     </Control>
+                    {/* Menu Drawer" */}
+                    <MenuDrawerActiveReg colorSet={["#ffffcc", "#c2e699", "#78c679","#238443"]} grades={this.state.grades} getColor={this.state.colorfun} keyTitle={this.state.keytitle}/>
 
                 </Map>:
                 <div>
@@ -164,7 +160,6 @@ function mapStateToProps(state) {
   console.log("youhoooo from ActiveRegistered",state);
   return {
     mapColor:state.changeMapColorState,
-    genderFilter:state.PopCheckbox
   };
 }
 

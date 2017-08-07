@@ -26,7 +26,7 @@ class VoterProfile extends Component {
     constructor(props){
         super(props);
         this.state={
-            gouv_name:"",munNumber:"",destroy:true,
+            gouv_name:"",govForMunTooltip:"",munNumber:"",destroy:true,
             colorfun:this.getColorRegElg,keyTitleDiff:"18-24 male vs female",keyTitleRegPerc:"Percentage of registered 18-24"
             ,mapAge:"18-24",diffrenceArray:[],
             maleNumber:0,femaleNumber:0,radioChart:"difference",mapClicked:false,
@@ -169,7 +169,7 @@ class VoterProfile extends Component {
     highlightFeature(e) {
         const layer = e.target;
         const property = layer.feature.properties;
-        let maleNumber, femaleNumber,tranchePercentage,allreg_sum;
+        let maleNumber, femaleNumber,tranchePercentage,allreg_sum,govForMunTooltip;
         //Data to shoow in the tooltip
         if (this.state.mapAge=="18-24") {
             femaleNumber=property.registration_gov_f_18_21+property.registration_gov_f_22_24;
@@ -189,7 +189,8 @@ class VoterProfile extends Component {
             tranchePercentage= ((maleNumber+ femaleNumber)*100)/property.allreg_sum; 
         }
         allreg_sum=property.allreg_sum;
-        this.setState({destroy:false,gouv_name:property.NAME_EN,munNumber:property.munnumber,maleNumber,femaleNumber,
+        property.gouv_name?govForMunTooltip=","+property.gouv_name:govForMunTooltip=""
+        this.setState({destroy:false,gouv_name:property.NAME_EN,govForMunTooltip,munNumber:property.munnumber,maleNumber,femaleNumber,
                        tranchePercentage,allreg_sum
                     });
         return layer.setStyle({
@@ -258,7 +259,7 @@ class VoterProfile extends Component {
                         {this.state.radioChart==="difference"?
                         <Tooltip direction="left"  className="leafletTooltip" maxWidth={350} maxHeight={250} >
                             <div>
-                                     <SemiPie title={this.state.gouv_name} male={this.state.maleNumber} female={this.state.femaleNumber} />
+                                     <SemiPie title={this.state.gouv_name+" "+this.state.govForMunTooltip} male={this.state.maleNumber} female={this.state.femaleNumber} />
                                         <div style={{textAlign:"center",position:"relative",marginTop:"-45px"}}>
                                         <h4><b>{(this.state.maleNumber+this.state.femaleNumber).toLocaleString()} </b> total registered {this.state.mapAge} </h4>
                                         <h4><b>{(this.state.maleNumber).toLocaleString()}</b> registered male </h4>
@@ -270,7 +271,7 @@ class VoterProfile extends Component {
                         </Tooltip>:
                         <Tooltip direction="left" className="leafletTooltip" >
                             <div>
-                                <TooltipPie title={this.state.gouv_name} allReg={this.state.allreg_sum} chosenAge={this.state.mapAge} registeredTranche={(this.state.maleNumber+this.state.femaleNumber)} />
+                                <TooltipPie title={this.state.gouv_name+" "+this.state.govForMunTooltip} allReg={this.state.allreg_sum} chosenAge={this.state.mapAge} registeredTranche={(this.state.maleNumber+this.state.femaleNumber)} />
                                     <div style={{textAlign:"center",position:"relative",marginTop:"-10px"}}>
                                         <h4><b>{(this.state.maleNumber+this.state.femaleNumber).toLocaleString()}</b>: registered {this.state.mapAge}</h4>
                                         <h4><b>{(this.state.allreg_sum-(this.state.maleNumber+this.state.femaleNumber)).toLocaleString()}</b>: Other registered tranches</h4>

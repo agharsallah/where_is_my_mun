@@ -11,7 +11,7 @@ import ScatterRegVsElig from './ScatterRegVsElig' ;
 import regression from 'regression';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-
+import MenuDrawerRegVsElig from './MenuDrawerRegVsElig' ;
 import { connect } from "react-redux";
 import { getPopValue } from "../../../actions/index";
 import { bindActionCreators } from "redux";
@@ -22,8 +22,8 @@ class DetailedRegGovMap extends Component {
         this.state={
             gouv_name:"",munNumber:"",destroy:true,eligVsReg:"",eligible2014:"", allRegistered:"",
             grades:[60, 70, 80],dynamicReg:[60, 70, 80 ],colorfun:this.getColorRegElg,
-            keyTitle:"Percentage of Registered Versus Eligible ",mapGender:"all",
-            keyColor:["#fec44f", "#eaa43c", "#d4862b","#bd681c","#a54b0f","#8c2d04"],
+            keyTitle:"Percentage of Registered Versus Eligible ",mapGender:"All",
+            keyColor:["#ffffcc", "#c2e699", "#78c679","#238443"],
             menElgReg:[], femaleElgReg:[],govName:[],regressionRegElg:[],
             scatterGender:false
         }
@@ -49,44 +49,31 @@ class DetailedRegGovMap extends Component {
         
    
      getColorRegElg(d,c1,grades) {
-        if      (d >grades[2])      {return (c1[5]); }
-        else if (d>grades[1])        {return (c1[4]);}
-        else if (d>grades[0])        {return (c1[2]);}
-        else if (isNaN(d))    {return ('white')}
-        else                  {return (c1[0]);}
+        if      (d >grades[2])       {return (c1[3]); }
+        else if (d>grades[1])        {return (c1[2]);}
+        else if (d>grades[0])        {return (c1[1]);}
+        else                         {return (c1[0]);}
 	}
 /*    changeMapKeyColor(COLORSET){
             this.setState({keyColor:COLORSET});
     }*/
-    mapGenderSelect(e,index,value){
-        let keyColor,keyTitle;
-        value==="all"?
-            (keyColor=["#fec44f", "#eaa43c", "#d4862b","#bd681c","#a54b0f","#8c2d04"],keyTitle="Percentage of Registered VS Eligible")
-            :   (value==="male"?
-                (keyColor=["#9ecae1", "#7ab0d3", "#5895c5","#397bb6","#1e60a6","#084594"],keyTitle="Male % of Registered VS Eligible")
-                :
-                (keyColor=["#fc9272", "#e97a5c", "#d56147","#c14832","#ad2c1f","#99000d"],keyTitle="Female % of Registered VS Eligible")
-                )
-                this.setState({mapGender:value,keyColor,keyTitle})
-       
-    }
     style(feature) {
         //what we have checked as map filter 
             let REGISTRATION, ELIGIBLE,COLORSET;
-            this.state.mapGender==="all"?
+            this.state.mapGender==="All"?
             (REGISTRATION = parseInt(feature.properties.allreg_sum),
              ELIGIBLE = parseInt(feature.properties._2014_eligilevoters),
-             COLORSET=["#fec44f", "#eaa43c", "#d4862b","#bd681c","#a54b0f","#8c2d04"]
+             COLORSET=["#ffffcc", "#c2e699", "#78c679","#238443"]
             )
-            : (this.state.mapGender==="male"?
+            : (this.state.mapGender==="Male"?
                 (REGISTRATION = parseInt(feature.properties.allreg_male_sum),
                 ELIGIBLE = parseInt(feature.properties._2014_eligilevotersmale),
-                COLORSET=["#9ecae1", "#7ab0d3", "#5895c5","#397bb6","#1e60a6","#084594"]
+                COLORSET=["#f7fbff","#c6dbef","#6baed6","#084594"]
                 )
                 :
                 (REGISTRATION = parseInt(feature.properties.allreg_female_sum),
                 ELIGIBLE = parseInt(feature.properties._2014_eligilevotersfemale),
-                COLORSET=["#fc9272", "#e97a5c", "#d56147","#c14832","#ad2c1f","#99000d"]
+                COLORSET=["#feebe2","#fbb4b9","#f768a1","#ae017e"]
                 )
             )
             let eligVsReg = ((REGISTRATION*100)/ELIGIBLE).toFixed(2);
@@ -104,12 +91,12 @@ class DetailedRegGovMap extends Component {
         const layer = e.target;
         const property = layer.feature.properties;
         let eligVsRegPer,eligible,registered;
-        this.state.mapGender==="all"?
+        this.state.mapGender==="All"?
         (eligVsRegPer= ((property.allreg_sum*100)/property._2014_eligilevoters).toFixed(2),
          eligible=property._2014_eligilevoters,registered=property.allreg_sum
         )
          :
-            ( this.state.mapGender==="male"?
+            ( this.state.mapGender==="Male"?
             (eligVsRegPer= ((property.allreg_male_sum*100)/property._2014_eligilevotersmale).toFixed(2),
             eligible=property._2014_eligilevotersmale,registered=property.allreg_male_sum
             )
@@ -133,10 +120,22 @@ class DetailedRegGovMap extends Component {
 	        weight: 5
 	    });
         this.setState({destroy:true});
-	}
+    }
+
+    getMapGender(value){
+        let keyColor,keyTitle;
+        value==="All"?
+            (keyColor=["#ffffcc", "#c2e699", "#78c679","#238443"],keyTitle="Percentage of Registered VS Eligible")
+            :   (value==="Male"?
+                (keyColor=["#f7fbff","#c6dbef","#6baed6","#084594"],keyTitle="Male % of Registered VS Eligible")
+                :
+                (keyColor=["#feebe2","#fbb4b9","#f768a1","#ae017e"],keyTitle="Female % of Registered VS Eligible")
+                )
+                this.setState({mapGender:value,keyColor,keyTitle})
+    }
 
     render() {
-        const position = [34.05360, 3.59795];
+        const position = [34.05360, 5.59795];
         return (
                 <div>
                 {this.props.shapeIsLoaded ? <Map  maxZoom={23} center={position} zoom={6} className="initialposition" style={{height: "100vh", width: "100vw",position:"relative",zIndex:0}}>
@@ -175,7 +174,7 @@ class DetailedRegGovMap extends Component {
                     </GeoJSON>
                     <ThemeRadio defaultSelected="pop" styles={{marginTop:"14vh",minWidth:"16vw",position:"fixed",zIndex:2,marginLeft:"83%"}}/>
                     {/*Left side ScatterPlot*/}
-                    <div className="col-md-7" style={{marginTop:"22rem"}}>
+                    <div className="col-md-6" style={{marginTop:"22rem"}}>
                         {
                         <ScatterRegVsElig
                         menElgReg={this.state.menElgReg}
@@ -183,23 +182,8 @@ class DetailedRegGovMap extends Component {
                         allElgReg={this.state.regressionRegElg}
                         govName={this.state.govName}
                         regressionRegElg={regression.linear(this.state.regressionRegElg)}
-                        genderFilter={this.props.genderFilter}
+                        genderFilter={this.state.mapGender}
                         />}
-                    </div>
-
-                    {/*Toggle to change the map Gender*/}
-                    <div  style={{zIndex:1500,position:"fixed",right: "1%",marginTop: "30rem"}} >
-                        <SelectField
-                            floatingLabelText="Gender -map-"
-                            value={this.state.mapGender}
-                            onChange={this.mapGenderSelect.bind(this)}
-                            iconStyle={{fill:"red"}}
-                            style={{width:"12vw"}}
-                            >
-                            <MenuItem value="all" primaryText="All" />
-                            <MenuItem value="male" primaryText="Male" />
-                            <MenuItem value="female" primaryText="Female" />
-                        </SelectField>
                     </div>
 
                     {/*Change Degree of map : Governorate - Municipality*/}
@@ -218,6 +202,9 @@ class DetailedRegGovMap extends Component {
                             <p style={{fontSize:"13px"}}>Registered from 2011 until 23-07-17 | Eligible - INS data of 2014</p>
                         </div>
                     </Control>
+                    
+                    {/* Menu Drawer */}
+                    <MenuDrawerRegVsElig getMapGender={this.getMapGender.bind(this)} colorSet={this.state.keyColor} grades={this.state.grades} getColor={this.state.colorfun} keyTitle={this.state.keyTitle} mapGender= {this.state.mapGender} />
 
                 </Map>:
                 <div>
