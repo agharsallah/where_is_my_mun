@@ -19,7 +19,7 @@ class RegTrackLineRoot extends Component {
     constructor(props) {
         super(props);
         this.state={
-            classMenu:"col-md-3", classCharts:"col-md-9", dates:[], inscription:[], update:[], detailedDays:[], increaseDecreaseReg:[], increaseDecreaseUpd:[],
+            classMenu:"col-md-2", classCharts:"col-md-10", dates:[], inscription:[], update:[], detailedDays:[], increaseDecreaseReg:[], increaseDecreaseUpd:[],
             preRegressionInsc:[], preRegressionUpd:[], averageInsc:0, averageUpd:0, highestInsc:0, lowestInsc:0, highestUpd:0, lowestUpd:0,
             maleReg:0, femaleReg:0, sumReg:0, maleupdate:0, femaleupdate:0, sumupdate:0
         }
@@ -63,14 +63,14 @@ class RegTrackLineRoot extends Component {
                 //operation for increase decrease
                 i==0 ?increaseDecreaseReg.push(""):
                 (parseInt(datas[i].inscription)>parseInt(datas[i-1].inscription) 
-                ? increaseDecreaseReg.push( (((parseInt(datas[i].inscription)-parseInt(datas[i-1].inscription))*100)/parseInt(datas[i].inscription)).toFixed(2)+" % increase compared to the last day"  )
-                : increaseDecreaseReg.push( (((parseInt(datas[i-1].inscription)-parseInt(datas[i].inscription))*100)/parseInt(datas[i-1].inscription)).toFixed(2)+" % decrease compared to the last day " )  
+                ? increaseDecreaseReg.push( (((parseInt(datas[i].inscription)-parseInt(datas[i-1].inscription))*100)/parseInt(datas[i].inscription)).toFixed(2)+" % "+counterpart.translate('LineChart.increased')  )
+                : increaseDecreaseReg.push( (((parseInt(datas[i-1].inscription)-parseInt(datas[i].inscription))*100)/parseInt(datas[i-1].inscription)).toFixed(2)+" % "+counterpart.translate('LineChart.decreased') )  
                 )
 
                 i==0 ?increaseDecreaseUpd.push(""):
                 (parseInt(datas[i].update)>parseInt(datas[i-1].update) 
-                ? increaseDecreaseUpd.push( (((parseInt(datas[i].update)-parseInt(datas[i-1].update))*100)/parseInt(datas[i].update)).toFixed(2)+" % increase compared to the last day"  )
-                : increaseDecreaseUpd.push( (((parseInt(datas[i-1].update)-parseInt(datas[i].update))*100)/parseInt(datas[i-1].update)).toFixed(2)+" % decrease compared to the last day " )  
+                ? increaseDecreaseUpd.push( (((parseInt(datas[i].update)-parseInt(datas[i-1].update))*100)/parseInt(datas[i].update)).toFixed(2)+" % "+counterpart.translate('LineChart.increased')  )
+                : increaseDecreaseUpd.push( (((parseInt(datas[i-1].update)-parseInt(datas[i].update))*100)/parseInt(datas[i-1].update)).toFixed(2)+" % "+counterpart.translate('LineChart.decreased') )  
                 )
                 //operation for regression preparation
                 preRegressionInsc.push([i,parseInt(object.inscription)])
@@ -108,19 +108,19 @@ class RegTrackLineRoot extends Component {
     weekday(val){
         switch (val) {
             case 0:
-                return "Sunday"
+                return counterpart.translate('LineChart.Sunday')
             case 1:
-                return "Monday"
+                return counterpart.translate('LineChart.Monday')
             case 2:
-                return "Tuesday"
+                return counterpart.translate('LineChart.Tuesday')
             case 3:
-                return "Wednesday"
+                return counterpart.translate('LineChart.Wednesday')
             case 4:
-                return "Thursday"
+                return counterpart.translate('LineChart.Thursday')
             case 5:
-                return "Friday"
+                return counterpart.translate('LineChart.Friday')
             case 6:
-                return "Saturday"
+                return counterpart.translate('LineChart.Saturday')
 
         }
     }
@@ -128,14 +128,14 @@ class RegTrackLineRoot extends Component {
 
         let inscription,maleReg,femaleReg,sumReg,subj,increaseDecrease,preRegression,averageVal,highest,lowest;
         this.props.regUpdSelectField ==="registration" ?
-        (   inscription=this.state.inscription,maleReg=this.state.maleReg,femaleReg=this.state.femaleReg,sumReg=this.state.sumReg,subj="Registration",
+        (   inscription=this.state.inscription,maleReg=this.state.maleReg,femaleReg=this.state.femaleReg,sumReg=this.state.sumReg,subj=counterpart.translate('LineChart.registration'),
             increaseDecrease=this.state.increaseDecreaseReg,
             preRegression=regression.linear(this.state.preRegressionInsc),
             averageVal=this.state.averageInsc,
             highest=this.state.highestInsc,lowest=this.state.lowestInsc
         )
           :
-            ( inscription=this.state.update,maleReg=this.state.maleupdate,femaleReg=this.state.femaleupdate,sumReg=this.state.sumupdate,subj="Update",
+            ( inscription=this.state.update,maleReg=this.state.maleupdate,femaleReg=this.state.femaleupdate,sumReg=this.state.sumupdate,subj=counterpart.translate('LineChart.update'),
                 increaseDecrease=this.state.increaseDecreaseUpd,preRegression=regression.linear(this.state.preRegressionUpd),
                 averageVal=this.state.averageUpd,
                 highest=this.state.highestUpd,lowest=this.state.lowestUpd
@@ -143,11 +143,7 @@ class RegTrackLineRoot extends Component {
         
         return (
             <div >
-                <Layout/>
-                <div className={this.state.classMenu}  >
-                <MenuDrawer getDrawerState={this.getDrawerState.bind(this)} />
-                </div>
-                
+                <Layout/>             
                 <div className={this.state.classCharts} style={{marginTop:"20rem"}} >
                 {
                     this.props.stateFilter=="All" ? 
@@ -175,6 +171,9 @@ class RegTrackLineRoot extends Component {
                         <HeatMapCalendar/>
                     )
                 }
+                </div>
+                <div className={this.state.classMenu}  >
+                    <MenuDrawer getDrawerState={this.getDrawerState.bind(this)} />
                 </div>
             </div>
         );

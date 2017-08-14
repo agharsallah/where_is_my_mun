@@ -1,11 +1,9 @@
 
 .cardinfo {
   background: #fff;
-  border-radius: 2px;
+  border-radius: 65px;
   display: inline-block;
   margin: 1rem;
-  position: absolute !important;
-
 }
 
 .card-1 {

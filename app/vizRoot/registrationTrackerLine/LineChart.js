@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 var Highcharts = require('highcharts');
 import HighchartInit from './HighchartInit' ;
+import counterpart  from 'counterpart';
 
 import './box-css.css';
 
@@ -30,14 +31,13 @@ componentWillMount() {
         options:{
             chart: {
                 type: 'line',
-            
             },
             credits: false,
             title: {
-                text: 'Daily '+ this.props.subj +' Number <br/> Municipal Election'
+                text: counterpart.translate('LineChart.TitleDaily')+ this.props.subj +counterpart.translate('LineChart.TitleNumber')
             },
             subtitle: {
-                text: 'Source: ISIE.tn'
+                text: counterpart.translate('LineChart.source')
             },
             xAxis: {
                 text: 'Number of '+this.props.subj,
@@ -45,7 +45,7 @@ componentWillMount() {
             },
             yAxis: {
                 title: {
-                    text: 'Number of '+ this.props.subj 
+                    text: counterpart.translate('LineChart.numberOf') + this.props.subj 
                 }
             },
             plotOptions: {
@@ -58,11 +58,11 @@ componentWillMount() {
                 }
             },
             series: [{
-                name: this.props.subj +' number',
+                name: counterpart.translate('LineChart.numberOf')+this.props.subj ,
                 data: this.props.inscription,
                     },{
                 type: 'line',
-                name: 'Regression Line',
+                name: counterpart.translate('LineChart.regression'),
                 data: [[x0, y0], [xf, yf]],
                 marker: {
                     enabled: false
@@ -81,7 +81,7 @@ componentWillMount() {
                     let dat=(this.x).split("-")
                     //prepare the color of days
                     let dayString=detailedDays[this.point.index],incDcr=increaseDecrease[this.point.index] ,colored_day,state,statePercentage,image;
-                    (dayString=="Saturday"||dayString=="Sunday") ? (colored_day='The value for <b style="color:red">' + detailedDays[this.point.index]+ '</b> '):(colored_day='The value for <b style="color:blue">' + detailedDays[this.point.index]+ '</b>')
+                    (dayString=="Saturday"||dayString=="Sunday"||dayString=="Samedi"||dayString=="Dimanche") ? (colored_day='The value for <b style="color:red">' + detailedDays[this.point.index]+ '</b> '):(colored_day=counterpart.translate('LineChart.valuefor') + detailedDays[this.point.index]+ '</b>')
                     //adding image to increase decrease
                     //incDcr.includes("increase") ? (incDcr=incDcr.replace("increase with", ""),image ="<img height='50px' src='/img/profits.svg'/>" ):(incDcr=incDcr.replace("decrease with", ""),image ="<img height='50px' src='/img/loss.svg'/>" )
                     //console.log(this);
@@ -101,42 +101,55 @@ componentWillMount() {
                 <div className={"backwardedChart col-md-12"} style={{marginTop:"2rem"}} >
                 <HighchartInit key={this.props.chartkey+this.props.inscription}  options={this.state.options}/>
                 </div>
-
-                <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"2rem"}}>
-                    Total {this.props.subj}<br/>
-                    <img className="centerimg" style={{height:"30px"}} src="/img/sum.svg" />
-                    <p className="maleFemaleNumText">{this.props.sumReg.toLocaleString()}</p>
+                <div className="col-md-12">
+                <div className="cardinfo card-1 centerbox col-md-2" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem"}}>
+                    <div className="col-md-12">
+                        Total {this.props.subj}<br/>
+                        <img className="centerimg" style={{height:"30px"}} src="/img/sum.svg" />
+                        <p className="maleFemaleNumText">{this.props.sumReg.toLocaleString()}</p>
+                    </div>
                 </div>
 
-                <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"17rem"}}>
-                    Female {this.props.subj}<br/>
-                    <img className="centerimg" style={{height:"30px"}} src="/img/woman.svg" />
-                    <p className="maleFemaleNumText">{this.props.femaleReg.toLocaleString()} - {isNaN(femalePercentage)?"0":femalePercentage} %</p>
+                <div className="cardinfo card-1 centerbox col-md-2" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem"}}>
+                    <div className="col-md-12">
+                        Female {this.props.subj}<br/>
+                        <img className="centerimg" style={{height:"30px"}} src="/img/woman.svg" />
+                        <p className="maleFemaleNumText">{this.props.femaleReg.toLocaleString()} - {isNaN(femalePercentage)?"0":femalePercentage} %</p>
+                    </div>
                 </div>
                 
-                <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"33rem"}}>
-                    Male {this.props.subj}<br/>
-                    <img className="centerimg" style={{height:"30px"}} src="/img/man.svg" />
-                    <p className="maleFemaleNumText">{this.props.maleReg.toLocaleString()} - { isNaN(malePercentage)?"0":malePercentage} %</p>
+                 <div className="cardinfo card-1 centerbox col-md-2" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem"}}>
+                    <div className="col-md-12">
+                        Male {this.props.subj}<br/>
+                        <img className="centerimg" style={{height:"30px"}} src="/img/man.svg" />
+                        <p className="maleFemaleNumText">{this.props.maleReg.toLocaleString()} - { isNaN(malePercentage)?"0":malePercentage} %</p>
+                    </div>
                 </div>
                 
-                <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"48rem"}}>
-                    average {this.props.subj}<br/>
-                    <img className="centerimg" style={{height:"30px"}} src="/img/average.PNG" />
-                    <p className="maleFemaleNumText">{this.props.averageVal.toLocaleString()} per day</p>
+                <div className="cardinfo card-1 centerbox col-md-2" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem"}}>
+                    <div className="col-md-12">
+                        average {this.props.subj}<br/>
+                        <img className="centerimg" style={{height:"30px"}} src="/img/average.PNG" />
+                        <p className="maleFemaleNumText">{this.props.averageVal.toLocaleString()} per day</p>
+                    </div>
                 </div>
 
-                <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"65rem"}}>
-                    Highest {this.props.subj} <br/>
-                    <img className="centerimg" style={{height:"30px"}} src="/img/increaseArrow.svg" />
-                    <p className="maleFemaleNumText">{this.props.highest.toLocaleString()} </p>
+                <div className="cardinfo card-1 centerbox col-md-2" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem"}}>
+                    <div className="col-md-12">
+                        Highest {this.props.subj} <br/>
+                        <img className="centerimg" style={{height:"30px"}} src="/img/increaseArrow.svg" />
+                        <p className="maleFemaleNumText">{this.props.highest.toLocaleString()} </p>
+                    </div>
                 </div>
 
-                <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"82rem"}}>
-                    Lowest {this.props.subj} <br/>
-                    <img className="centerimg" style={{height:"30px"}} src="/img/decreaseArrow.svg" />
-                    <p className="maleFemaleNumText">{this.props.lowest.toLocaleString()} </p>
-                </div>
+                <div className="cardinfo card-1 centerbox col-md-2" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem"}}>
+                    <div className="col-md-12">
+                        Lowest {this.props.subj} <br/>
+                        <img className="centerimg" style={{height:"30px"}} src="/img/decreaseArrow.svg" />
+                        <p className="maleFemaleNumText">{this.props.lowest.toLocaleString()} </p>
+                    </div>
+                </div> 
+            </div>
 
             </div>
         );

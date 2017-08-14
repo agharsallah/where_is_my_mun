@@ -53,7 +53,7 @@ class TooltipPie extends Component {
                 innerSize: '50%',
                 animation:false,
                 data: [
-                            { name:counterpart.translate('TooltipPie.registerd') +this.props.chosenAge+" Tranche", y:registeredTranche,selected:true,sliced:true},
+                            {name:counterpart.translate('TooltipPie.registerd') +this.props.chosenAge+" Tranche", y:registeredTranche,selected:true,sliced:true},
                             {name:counterpart.translate('TooltipPie.otherReg'), y:allReg-registeredTranche}
                         ]
             }]

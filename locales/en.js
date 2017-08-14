@@ -157,5 +157,24 @@ click:"Click on the map"
 TooltipPie:{
     registerd:"registered",
     otherReg:"Other Registered Tranches"
+},
+LineChart:{
+    LineChart:"",
+    source:"Source: ISIE.tn",
+    numberOf:"Number of ",
+    registration:"Registration",
+    update:"Update",
+    TitleDaily:"Daily",
+    TitleNumber:"Number <br/> Municipal Election",regression:"Regression Line",
+    valuefor:'The value for <b style="color:blue">',
+    increased:" increase compared to the last day",
+    decreased:" decrease compared to the last day ",
+    Sunday:"Sunday",
+    Monday:"Monday",
+    Tuesday:"Tuesday",
+    Wednesday:"Wednesday",
+    Thursday:"Thursday",
+    Friday:"Friday",
+    Saturday:"Saturday"
 }
 }

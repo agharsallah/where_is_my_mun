@@ -23,18 +23,18 @@ class MenuDrawer extends Component {
         return (
             <div>
                 <RaisedButton
-                style={{ position:"absolute",left:"10px",top:"90vh",zIndex:"2"}}
+                style={{ position:"absolute",right:"2vh",top:"90vh",zIndex:"2"}}
                 label="Open filter"
                 primary={true}
                 onClick={this.handleToggle.bind(this)}
                 />
-                <Drawer width={"25%"} containerStyle={{height:"90rem",top:"8rem"}}  open={this.state.open}  onRequestChange={(open) => this.setState({open})}>
+                <Drawer width={"17%"} containerStyle={{height:"90rem",top:"8rem"}}  open={this.state.open} openSecondary={true}  onRequestChange={(open) => this.setState({open})}>
                     <AppBar title="Menu"  onLeftIconButtonTouchTap={this.handleToggle.bind(this)} />
                     <div className="mb-30">&nbsp;</div>
 
 
                     <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
-                        <h3 className="widget-title">Choose a Visualization</h3>
+                        <h3 className="widget-title">Choose Viz</h3>
                     </div>
 
                     <div style={{margin:"2rem"}}>    
