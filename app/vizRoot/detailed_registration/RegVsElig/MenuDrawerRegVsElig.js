@@ -29,6 +29,14 @@ class MenuDrawerRegVsElig extends Component {
     }
     
     render() {
+        const MENU= <Translate type="text" content="MenuDrawer.MENU"/>
+        const GENDERRADIO= <Translate type="text" content="MenuDrawer.GENDERRADIO"/>
+        const MAPKEY= <Translate type="text" content="MenuDrawer.MAPKEY"/>
+        const ALL= <Translate type="text" content="MenuDrawer.ALL"/>
+        const FEMALE= <Translate type="text" content="MenuDrawer.FEMALE"/>
+        const MALE= <Translate type="text" content="MenuDrawer.MALE"/>
+        const BACK= <Translate type="text" content="MenuDrawer.BACK"/>
+
         return (
             <div>
                 <RaisedButton
@@ -37,45 +45,45 @@ class MenuDrawerRegVsElig extends Component {
                 primary={true}
                 onClick={this.handleToggle.bind(this)}
                 />
-                <Drawer width={"20%"}
+                <Drawer width={"21%"}
                         open={this.state.open}
                         openSecondary={true}
-                        containerStyle={{top:"12vh",height:"88%"}}
+                        containerStyle={{top:"12vh",height:"88%",zIndex:"1001"}}
                         onRequestChange={(open) => this.setState({open})}
                         zDepth={2}
                 >
-                    <AppBar title="Menu" onLeftIconButtonTouchTap={this.handleToggle.bind(this)} />
+                    <AppBar title={MENU} onLeftIconButtonTouchTap={this.handleToggle.bind(this)} />
 
                     <div>
                         <ThemeRadio styles={{borderRadius:"10px",paddingLeft:"2vh"}} defaultSelected="pop" />
                     </div>
 
                     {/* Left chart controller */}
-                    <div style={{paddingTop:"5vh",paddingLeft:"2vh"}}>
+                    <div style={{paddingTop:"2vh",paddingLeft:"2vh"}}>
                         <h4 >
-                            Map By Gender:
+                            {GENDERRADIO}
                         </h4>   
                     </div>
                     <div  style={{paddingLeft:"2vh"}}>
                                 <RadioButtonGroup name="activeVoterChart"  onChange={this.handleMapGender.bind(this)} valueSelected={this.state.mapGender} >
                                     <RadioButton
                                         value="All"
-                                        label="All"
+                                        label={ALL}
                                     />
                                     <RadioButton
                                         value="Female"
-                                        label="Female"
+                                        label={FEMALE}
                                     />
                                     <RadioButton
                                         value="Male"
-                                        label="Male"
+                                        label={MALE}
                                     />
                                 </RadioButtonGroup>
                     </div>
                     {/* Map Key */}
                     <div style={{paddingTop:"1vh",paddingLeft:"2vh"}}>
                         <h4 >
-                            Map Key :
+                            {MAPKEY} :
                         </h4>   
                     </div>
                    
@@ -85,7 +93,7 @@ class MenuDrawerRegVsElig extends Component {
                     
                 
                     <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
-                        <RaisedButton label="Back" 
+                        <RaisedButton label={BACK} 
                         containerElement={<Link to="/" />} 
                         linkButton={true} />
                     </div>

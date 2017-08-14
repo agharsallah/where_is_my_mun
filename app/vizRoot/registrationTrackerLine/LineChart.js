@@ -105,37 +105,37 @@ componentWillMount() {
                 <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"2rem"}}>
                     Total {this.props.subj}<br/>
                     <img className="centerimg" style={{height:"30px"}} src="/img/sum.svg" />
-                    <p className="maleFemaleNumText">{this.props.sumReg}</p>
+                    <p className="maleFemaleNumText">{this.props.sumReg.toLocaleString()}</p>
                 </div>
 
                 <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"17rem"}}>
                     Female {this.props.subj}<br/>
                     <img className="centerimg" style={{height:"30px"}} src="/img/woman.svg" />
-                    <p className="maleFemaleNumText">{this.props.femaleReg} - {isNaN(femalePercentage)?"0":femalePercentage} %</p>
+                    <p className="maleFemaleNumText">{this.props.femaleReg.toLocaleString()} - {isNaN(femalePercentage)?"0":femalePercentage} %</p>
                 </div>
                 
                 <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"33rem"}}>
                     Male {this.props.subj}<br/>
                     <img className="centerimg" style={{height:"30px"}} src="/img/man.svg" />
-                    <p className="maleFemaleNumText">{this.props.maleReg} - { isNaN(malePercentage)?"0":malePercentage} %</p>
+                    <p className="maleFemaleNumText">{this.props.maleReg.toLocaleString()} - { isNaN(malePercentage)?"0":malePercentage} %</p>
                 </div>
                 
                 <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"48rem"}}>
                     average {this.props.subj}<br/>
                     <img className="centerimg" style={{height:"30px"}} src="/img/average.PNG" />
-                    <p className="maleFemaleNumText">{this.props.averageVal} per day</p>
+                    <p className="maleFemaleNumText">{this.props.averageVal.toLocaleString()} per day</p>
                 </div>
 
                 <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"65rem"}}>
                     Highest {this.props.subj} <br/>
                     <img className="centerimg" style={{height:"30px"}} src="/img/increaseArrow.svg" />
-                    <p className="maleFemaleNumText">{this.props.highest} </p>
+                    <p className="maleFemaleNumText">{this.props.highest.toLocaleString()} </p>
                 </div>
 
                 <div className="cardinfo card-1 centerbox" style={{position:"absolute !important",zIndex: 2,marginTop:"-10rem",marginLeft:"82rem"}}>
                     Lowest {this.props.subj} <br/>
                     <img className="centerimg" style={{height:"30px"}} src="/img/decreaseArrow.svg" />
-                    <p className="maleFemaleNumText">{this.props.lowest} </p>
+                    <p className="maleFemaleNumText">{this.props.lowest.toLocaleString()} </p>
                 </div>
 
             </div>

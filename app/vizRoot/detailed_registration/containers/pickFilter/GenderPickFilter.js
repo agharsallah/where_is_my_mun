@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Toggle from 'material-ui/Toggle';
+import Translate from 'react-translate-component';
 
 import { connect } from "react-redux";
 import { getPopPickFilter } from "../../../../actions/index";

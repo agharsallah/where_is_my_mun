@@ -42,15 +42,21 @@
      municipality:"Municipalité"
  },
  navbar:{
-     ar:"arabic",
-     fr:"french",
-     en:"english",
-     about:"about",
+     ar:"العربية",
+     fr:"Français",
+     en:"English",
+     about:"A propos",
      viz:"vizualizations",
      sitetitle:"Just Data Viz"
  },
  vizroot:{
      title:"Raw data to viz",
 
- }
+ },
+ScatterReg:{
+    SCATTER_TITLE:"Registered Versus Eligible french",
+    SCATTER_TITLE_MALE:"Registered Versus Eligible Male ",
+    SCATTER_TITLE_FEMALE:"Registered Versus Eligible Female "
+
+}
 }

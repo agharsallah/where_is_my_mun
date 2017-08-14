@@ -6,7 +6,7 @@ var CompressionPlugin = require("compression-webpack-plugin");
  */
 /*eval-source-map | cheap-source-map*/
 var config = {
-  devtool: 'cheap-source-map',
+  devtool: 'source-map',
   entry:  __dirname + "/app/index.js",
   output: {
     path: __dirname + "/public",
@@ -42,16 +42,16 @@ var config = {
     colors: true,
     historyApiFallback: true,
     inline: true
-  }/* ,plugins:[
+  }/*  ,plugins:[
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({mangle: true,
       compress: {
         warnings: false, // Suppress uglification warnings
         pure_getters: true,
-        unsafe: true,
+        unsafe: false,
         unsafe_comps: true,
         screw_ie8: true,
-        drop_console: true
+        drop_console: true,
       },
       output: {
         comments: false,
@@ -70,7 +70,7 @@ var config = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     })
-  ] */
+  ]  */
 }
 
 /*

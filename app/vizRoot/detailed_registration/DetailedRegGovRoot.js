@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Layout from '../Layout' ;
-import DetailedRegGovMap from './RegVsElig/DetailedRegGovMap' ;
+import RegVsElig from './RegVsElig/RegVsElig' ;
 import ActiveRegistered from './Active/ActiveRegistered' ;
 import VoterProfile from './Profile/VoterProfile' ;
 import counterpart  from 'counterpart';
@@ -30,7 +30,7 @@ class DetailedRegGovRoot extends Component {
             }
         })
         .then(response=>{
-            this.setState({shape:JSON.parse(response.data.data),key:2
+            this.setState({shape:JSON.parse(response.data.data),key:2,shapeIsLoaded:true
             });
         }
         )
@@ -49,7 +49,7 @@ class DetailedRegGovRoot extends Component {
         })
         .then(response=>{
             //console.log(response.data.data);
-              this.setState({munShape:JSON.parse(response.data.data),shapeIsLoaded:true});
+              this.setState({munShape:JSON.parse(response.data.data)});
         }
         )
         .catch(function (error) {
@@ -75,7 +75,7 @@ class DetailedRegGovRoot extends Component {
             <div>
                 <Layout/>
                 {   this.props.radioFilterPicker==="pop" ?
-                    <DetailedRegGovMap count={this.state.countRegVs} shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key} />
+                    <RegVsElig count={this.state.countRegVs} shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key} />
                     :
                     (this.props.radioFilterPicker==="active"?
                         <ActiveRegistered count={this.state.countActive} shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key+1}/>

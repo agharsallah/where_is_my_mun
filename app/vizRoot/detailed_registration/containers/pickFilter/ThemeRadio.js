@@ -20,31 +20,36 @@ class ThemeRadio extends Component {
 	}
 	
     render() {
+		const THEME= <Translate type="text" content="MenuDrawer.THEME"/>
+		const REGVSELG= <Translate type="text" content="MenuDrawer.REGVSELG"/>
+		const ACTIVEREG= <Translate type="text" content="MenuDrawer.ACTIVEREG"/>
+		const VOTERPROFILE= <Translate type="text" content="MenuDrawer.VOTERPROFILE"/>
+		
 		let styles=this.props.styles
 		let defaultSelecteds=this.props.defaultSelected
 		//console.log(defaultSelecteds);
         return (
              <div  style={styles}>
                <h4 >
-                    Choose a Theme
+                    {THEME}
                 </h4> 
 	            <RadioButtonGroup  name="reg&update" defaultSelected={defaultSelecteds} onChange={this.change.bind(this)} >
 					<RadioButton
 					labelStyle={{color:'black'}}
 					value="pop"
-					label="Registered vs Eligible"
+					label={REGVSELG}
 					 style={{marginTop:"7px"}}
 					 />
 					<RadioButton
 					labelStyle={{color:'black'}}
 					value="active"
-					label="Active Registered"				        
+					label={ACTIVEREG}				        
 					style={{marginTop:"7px"}}
 					/>
 					<RadioButton
 					labelStyle={{color:'black'}}
 					value="profile"
-					label="Voter Profile"				        
+					label={VOTERPROFILE}				        
 					style={{marginTop:"7px"}}
 					/>
 				</RadioButtonGroup>

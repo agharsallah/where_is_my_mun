@@ -4,6 +4,9 @@ import counterpart  from 'counterpart';
 import Translate from 'react-translate-component';
 import activeComponent from 'react-router-active-component'
 import './layout.css'
+counterpart.registerTranslations('en',require('./../../locales/en'));
+counterpart.registerTranslations('fr',require('./../../locales/fr'));
+counterpart.registerTranslations('ar',require('./../../locales/ar'));
 
 class Layout extends Component {
     	constructor(props) {
@@ -26,6 +29,7 @@ class Layout extends Component {
 		const en = <Translate type="text" content="navbar.en"/>
 		const fr = <Translate type="text" content="navbar.fr"/>
 		const ar = <Translate type="text" content="navbar.ar"/>
+		const language = <Translate type="text" content="navbar.language"/>
        let NavItem = activeComponent('li');	
 
         return (
@@ -44,11 +48,11 @@ class Layout extends Component {
                     <NavItem to='/' >{viz}</NavItem>
                     <NavItem to='/about'  >{about}</NavItem>
                     <li className="dropdown">
-                        <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Language<span className="caret"></span></a>
+                        <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{language}<span className="caret"></span></a>
                         <ul className="dropdown-menu">
                             <li><a href="#" onClick={this.handleClick.bind(this,"en")}>{en}</a></li>
-                            {/*<li><a href="#" onClick={this.handleClick.bind(this,"fr")}>{fr}</a></li>
-                            <li><a href="#" onClick={this.handleClick.bind(this,"ar")}>{ar}</a></li>*/}
+                            <li><a href="#" onClick={this.handleClick.bind(this,"fr")}>{fr}</a></li>
+                            <li><a href="#" onClick={this.handleClick.bind(this,"ar")}>{ar}</a></li> 
                         </ul>
                     </li>
                 </ul>

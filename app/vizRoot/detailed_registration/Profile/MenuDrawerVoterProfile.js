@@ -9,11 +9,10 @@ import MapKeyVoterProfile from './MapKeyVoterProfile' ;
 import MapKey from '../MapKey' ;
 import PopSliderFilter from '../containers/sliderFilter/PopSliderFilter' ;
 
-
-
 import counterpart  from 'counterpart';
 import Translate    from 'react-translate-component';
 const _t = Translate.translate;
+
 class MenuDrawerVoterProfile extends Component {
     constructor(props) {
         super(props);
@@ -31,6 +30,14 @@ class MenuDrawerVoterProfile extends Component {
     }
     
     render() {
+        const SLIDERTITLE= <Translate type="text" content="MenuDrawer.SLIDERTITLE"/>
+        const OPTIONTITLE= <Translate type="text" content="MenuDrawer.OPTIONTITLE"/>
+        const MALE_FEMALE_DIFF= <Translate type="text" content="MenuDrawer.MALE_FEMALE_DIFF"/>
+        const AGEPER= <Translate type="text" content="MenuDrawer.AGEPER"/>
+        const MAPKEY= <Translate type="text" content="MenuDrawer.MAPKEY"/>
+        const BACK= <Translate type="text" content="MenuDrawer.BACK"/>
+        const MENU= <Translate type="text" content="MenuDrawer.MENU"/>
+        
         return (
             <div>
                 <RaisedButton
@@ -42,11 +49,11 @@ class MenuDrawerVoterProfile extends Component {
                 <Drawer width={"20%"}
                         open={this.state.open}
                         openSecondary={true}
-                        containerStyle={{top:"12vh",height:"88%"}}
+                        containerStyle={{top:"12vh",height:"88%",zIndex:"1001"}}
                         onRequestChange={(open) => this.setState({open})}
                         zDepth={2}
                 >
-                    <AppBar title="Menu" onLeftIconButtonTouchTap={this.handleToggle.bind(this)} />
+                    <AppBar title={MENU} onLeftIconButtonTouchTap={this.handleToggle.bind(this)} />
 
                     <div>
                         <ThemeRadio styles={{borderRadius:"10px",paddingLeft:"2vh"}} defaultSelected="profile" />
@@ -55,7 +62,7 @@ class MenuDrawerVoterProfile extends Component {
                     {/* Slider filter */}
                     <div style={{padding:"2vh"}}>
                         <h4 >
-                            Map Age Slider :
+                            {SLIDERTITLE}
                         </h4>  
                     </div>
                     <div style={{paddingRight:"4vh",paddingLeft:"4vh"}}>  
@@ -65,25 +72,25 @@ class MenuDrawerVoterProfile extends Component {
                     {/* Left chart controller */}
                     <div style={{paddingTop:"5vh",paddingLeft:"2vh"}}>
                         <h4 >
-                            Chart Options :
+                            {OPTIONTITLE}
                         </h4>   
                     </div>
                     <div  style={{paddingLeft:"2vh"}}>
                                 <RadioButtonGroup name="activeVoterChart"  onChange={this.handleRadioChart.bind(this)} valueSelected={this.state.radioChart} >
                                     <RadioButton
                                         value="difference"
-                                        label="male/female difference"
+                                        label={MALE_FEMALE_DIFF}
                                     />
                                     <RadioButton
                                         value="age"
-                                        label="Age Percentage"
+                                        label=  {AGEPER}
                                     />
                                 </RadioButtonGroup>
                     </div>
                     {/* Map Key */}
                     <div style={{paddingTop:"1vh",paddingLeft:"2vh"}}>
                         <h4 >
-                            Map Key :
+                           {MAPKEY}
                         </h4>   
                     </div>
                     {
@@ -97,7 +104,7 @@ class MenuDrawerVoterProfile extends Component {
                     }
                 
                     <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
-                        <RaisedButton label="Back" 
+                        <RaisedButton label={BACK} 
                         containerElement={<Link to="/" />} 
                         linkButton={true} />
                     </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 var Highcharts = require('highcharts');
 import HighchartInit from '../HighchartInit' ;
+import counterpart from 'counterpart' ;
 
 class TooltipPie extends Component {
     constructor(props) {
@@ -52,8 +53,8 @@ class TooltipPie extends Component {
                 innerSize: '50%',
                 animation:false,
                 data: [
-                            { name:"registered "+this.props.chosenAge+" Tranche", y:registeredTranche,selected:true,sliced:true},
-                            {name:"Other Registered Tranches", y:allReg-registeredTranche}
+                            { name:counterpart.translate('TooltipPie.registerd') +this.props.chosenAge+" Tranche", y:registeredTranche,selected:true,sliced:true},
+                            {name:counterpart.translate('TooltipPie.otherReg'), y:allReg-registeredTranche}
                         ]
             }]
             

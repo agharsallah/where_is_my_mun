@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 var Highcharts = require('highcharts');
 import HighchartInit from '../HighchartInit' ;
+import counterpart from 'counterpart' ;
 
 class HistogramVoterProfile extends Component {
     constructor(props) {
@@ -72,19 +73,19 @@ class HistogramVoterProfile extends Component {
                 tooltip: {
                     formatter: function () {
                         return '<b>' + this.series.name + ', age ' + this.point.category + '</b><br/>' +
-                            'Population: ' + Highcharts.numberFormat(Math.abs(this.point.y), 0)+'<br/>'+
-                            'TotalNumber: '+ '</b>' +totalNumber[this.point.index]+'</b>'
+                             counterpart.translate('HistogramVoterProfile.population') + Highcharts.numberFormat(Math.abs(this.point.y), 0)+'<br/>'+
+                            counterpart.translate('HistogramVoterProfile.totalNumber')+ '</b>' +totalNumber[this.point.index]+'</b>'
                             ;
                             
                     }
                 },
 
                 series: [{
-                    name: 'Male',
+                    name: counterpart.translate('HistogramVoterProfile.Male'),
                     data: this.props.maleHistogram,
                     color:"#5895c5"
                 }, {
-                    name: 'Female',
+                    name: counterpart.translate('HistogramVoterProfile.Female'),
                     data: this.props.femaleHistogram,
                     color:"#d56147"
                 }]
@@ -104,6 +105,7 @@ class HistogramVoterProfile extends Component {
                 title: {
                     text: nextProps.clickedShapeName+" -all ages"
                 },
+                credits:false,
                 subtitle: {
                     text: 'Isie'
                 },
@@ -149,19 +151,19 @@ class HistogramVoterProfile extends Component {
                 tooltip: {
                     formatter: function () {
                         return '<b>' + this.series.name + ', age ' + this.point.category + '</b><br/>' +
-                            'Population: ' + Highcharts.numberFormat(Math.abs(this.point.y), 0)+'<br/>'+
-                            'TotalNumber: '+ '</b>' +totalNumber[this.point.index]+'</b>'
+                            counterpart.translate('HistogramVoterProfile.population') + Highcharts.numberFormat(Math.abs(this.point.y), 0)+'<br/>'+
+                            counterpart.translate('HistogramVoterProfile.totalNumber')+ '</b>' +totalNumber[this.point.index]+'</b>'
                             ;
                             
                     }
                 },
 
                 series: [{
-                    name: 'Male',
+                    name: counterpart.translate('HistogramVoterProfile.Male'),
                     data: nextProps.maleHistogram,
                     color:"#5895c5"
                 }, {
-                    name: 'Female',
+                    name: counterpart.translate('HistogramVoterProfile.Female'),
                     data: nextProps.femaleHistogram,
                     color:"#d56147"
                 }]

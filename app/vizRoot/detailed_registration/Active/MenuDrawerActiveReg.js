@@ -29,6 +29,8 @@ class MenuDrawerActiveReg extends Component {
     }
     
     render() {
+        const BACK= <Translate type="text" content="MenuDrawer.BACK"/>
+        const MAPKEY= <Translate type="text" content="MenuDrawer.MAPKEY"/>
         return (
             <div>
                 <RaisedButton
@@ -40,7 +42,7 @@ class MenuDrawerActiveReg extends Component {
                 <Drawer width={"20%"}
                         open={this.state.open}
                         openSecondary={true}
-                        containerStyle={{top:"12vh",height:"88%"}}
+                        containerStyle={{top:"12vh",height:"88%",zIndex:"1001"}}
                         onRequestChange={(open) => this.setState({open})}
                         zDepth={2}
                 >
@@ -53,7 +55,7 @@ class MenuDrawerActiveReg extends Component {
                     {/* Map Key */}
                     <div style={{paddingTop:"1vh",paddingLeft:"2vh"}}>
                         <h4 >
-                            Map Key :
+                            {MAPKEY}
                         </h4>   
                     </div>
                    
@@ -63,7 +65,7 @@ class MenuDrawerActiveReg extends Component {
                     
                 
                     <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
-                        <RaisedButton label="Back" 
+                        <RaisedButton label={BACK} 
                         containerElement={<Link to="/" />} 
                         linkButton={true} />
                     </div>

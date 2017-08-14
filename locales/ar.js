@@ -41,12 +41,13 @@ filter: {
      municipality:"بلدية"
  },
  navbar:{
-     ar:"arabic",
-     fr:"french",
-     en:"english",
-     about:"about",
-     viz:"vizualizations",
-     sitetitle:"Just Data Viz"
+     ar:"العربية",
+     fr:"Français",
+     en:"English",
+     about:"حول الموقع",
+     viz:" الرسوم البيانية",
+     language:"اللغة",
+     sitetitle:""
  },
  vizroot:{
      title:"Raw data to viz",

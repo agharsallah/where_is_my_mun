@@ -18,6 +18,9 @@ import Paper from 'material-ui/Paper';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 import SemiPie from './SemiPie' ;
 import TooltipPie from './TooltipPie' ;
+import Translate    from 'react-translate-component';
+import counterpart from 'counterpart' ;
+
 import { connect } from "react-redux";
 import { getPopValue } from "../../../actions/index";
 import { bindActionCreators } from "redux";
@@ -27,10 +30,11 @@ class VoterProfile extends Component {
         super(props);
         this.state={
             gouv_name:"",govForMunTooltip:"",munNumber:"",destroy:true,
-            colorfun:this.getColorRegElg,keyTitleDiff:"18-24 male vs female",keyTitleRegPerc:"Percentage of registered 18-24"
+            colorfun:this.getColorRegElg,
+            keyTitleDiff:counterpart.translate('VoterProfile.keyTitleDiff18'),keyTitleRegPerc:counterpart.translate('VoterProfile.keyTitleRegPerc18')
             ,mapAge:"18-24",diffrenceArray:[],
             maleNumber:0,femaleNumber:0,radioChart:"difference",mapClicked:false,
-            maleHistogram:[],femaleHistogram:[],maleFemaleHistogram:[],clickedShapeName:"Click on the map",
+            maleHistogram:[],femaleHistogram:[],maleFemaleHistogram:[],clickedShapeName:counterpart.translate('HistogramVoterProfile.click'),
             dynamicPercentage:[7,9,12],tranchePercentage:0,allreg_sum:0,dynamicColor:["#f7fbff","#c6dbef","#6baed6","#084594"],
             selectedMapLevel:"gov",buttonLabelGov:"#00bcd4",buttonLabelMun:"black"
         }
@@ -43,14 +47,14 @@ class VoterProfile extends Component {
         :
         this.setState({buttonLabelMun:"#00bcd4",buttonLabelGov:"black",selectedMapLevel:"mun"})
     }
-    
 
     componentWillReceiveProps(nextProps) {
-
+        console.log(nextProps.mapAgeSlider);
         let keyColor,keyTitleDiff,keyTitleRegPerc,diffrenceArray=[],color,dynamicPercentage,dynamicColor;
-         if (nextProps.mapAgeSlider==="18-24") {
-             keyTitleDiff="18-24 male vs female";
-             keyTitleRegPerc="Percentage of registered 18-24"
+        let mapAge=nextProps.mapAgeSlider;
+         if (mapAge==="18-24") {
+             keyTitleDiff=counterpart.translate('VoterProfile.keyTitleDiff18');
+             keyTitleRegPerc=counterpart.translate('VoterProfile.keyTitleRegPerc18')
              //get the diffrence between male and female -18-24- in each govenorate
             this.props.shape.features.map((element,i)=>{
                 parseInt(element.properties.registration_gov_m_18_21+element.properties.registration_gov_m_22_24)>parseInt(element.properties.registration_gov_f_18_21+element.properties.registration_gov_f_22_24)?color="#5895c5":color="#d56147"                
@@ -58,27 +62,27 @@ class VoterProfile extends Component {
                                     gouv:element.properties.NAME_EN,color:color})
             })
             dynamicPercentage=[7,9,12];dynamicColor=["#f7fbff","#c6dbef","#6baed6","#084594"]
-         }else if(nextProps.mapAgeSlider=="25-35"){
-            keyTitleDiff="25-35 male vs female";
-            keyTitleRegPerc="Percentage of registered 25-35"
+         }else if(mapAge==="25-35"){
+            keyTitleDiff=counterpart.translate('VoterProfile.keyTitleDiff25');
+            keyTitleRegPerc=counterpart.translate('VoterProfile.keyTitleRegPerc25')
             this.props.shape.features.map((element,i)=>{
                 parseInt(element.properties.registration_gov_m_25_35)>parseInt(element.properties.registration_gov_f_25_35)?color="#5895c5":color="#d56147"                
                 diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_m_25_35)-parseInt(element.properties.registration_gov_f_25_35))),color:color},
                     gouv:element.properties.NAME_EN,color:color})
             })
             dynamicPercentage=[23,26,29];dynamicColor=["#f7fcf5","#c7e9c0","#74c476","#005a32"]
-         }else if(nextProps.mapAgeSlider=="36-50"){
-            keyTitleDiff="36-50 male vs female";
-            keyTitleRegPerc="Percentage of registered 36-50"
+         }else if(mapAge==="36-50"){
+            keyTitleDiff=counterpart.translate('VoterProfile.keyTitleDiff36');
+            keyTitleRegPerc=counterpart.translate('VoterProfile.keyTitleRegPerc36')
             this.props.shape.features.map((element,i)=>{
                 parseInt(element.properties.registration_gov_m_36_50)>parseInt(element.properties.registration_gov_f_36_50)?color="#5895c5":color="#d56147"
                 diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_m_36_50)-parseInt(element.properties.registration_gov_f_36_50))),color:color},
                     gouv:element.properties.NAME_EN,color:color})
             })
             dynamicPercentage=[28,30,32];dynamicColor=["#f7fcf5","#c7e9c0","#74c476","#005a32"]
-         }else{
-            keyTitleDiff="+50 male vs female";
-            keyTitleRegPerc="Percentage of registered +50"
+         }else if (mapAge==="+50"){
+            keyTitleDiff=counterpart.translate('VoterProfile.keyTitleDiff50');
+            keyTitleRegPerc=counterpart.translate('VoterProfile.keyTitleRegPerc50')
             this.props.shape.features.map((element,i)=>{
                 parseInt(element.properties.registration_gov_m_p51)>parseInt(element.properties.registration_gov_f_p51)?color="#5895c5":color="#d56147"
                 diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_m_p51)-parseInt(element.properties.registration_gov_f_p51))),color:color},
@@ -86,9 +90,19 @@ class VoterProfile extends Component {
                     //console.log(typeof(diffrenceArray[i].value));
             })
             dynamicPercentage=[34,38,42];dynamicColor=["#fff7ec","#fee8c8","#fc8d59","#990000"]
+         }else{
+            keyTitleDiff=counterpart.translate('VoterProfile.keyTitleRegPerc18');
+             keyTitleRegPerc=counterpart.translate('VoterProfile.keyTitleRegPerc18')
+            this.props.shape.features.map((element,i)=>{
+                parseInt(element.properties.registration_gov_m_18_21+element.properties.registration_gov_m_22_24)>parseInt(element.properties.registration_gov_f_18_21+element.properties.registration_gov_f_22_24)?color="#5895c5":color="#d56147"                
+                diffrenceArray.push({value:{y:(Math.abs(parseInt(element.properties.registration_gov_f_18_21+element.properties.registration_gov_f_22_24)-parseInt(element.properties.registration_gov_m_18_21+element.properties.registration_gov_m_22_24))),color:color},
+                                    gouv:element.properties.NAME_EN,color:color})
+            })
+            dynamicPercentage=[7,9,12];dynamicColor=["#f7fbff","#c6dbef","#6baed6","#084594"]
+            mapAge="18-24"
          }
          diffrenceArray.sort(function(a, b){return b.value.y-a.value.y})
-         this.setState({mapAge:nextProps.mapAgeSlider,diffrenceArray,
+         this.setState({mapAge,diffrenceArray,
                         dynamicPercentage,dynamicColor,keyTitleRegPerc,keyTitleDiff
                         });
 
@@ -222,7 +236,19 @@ class VoterProfile extends Component {
         //choose which shape to load based on the delimiattion
         let chosenSape,GeojsonKeyChanger;
         this.state.selectedMapLevel=="gov"?(chosenSape=this.props.shape,GeojsonKeyChanger="gov"):(chosenSape=this.props.munShape,GeojsonKeyChanger="mun")
-        //var markerData=[];
+        const GOV= <Translate type="text" content="VoterProfile.gov"/>
+        const MUN= <Translate type="text" content="VoterProfile.mun"/>
+        const TITLE= <Translate type="text" content="VoterProfile.title"/>
+        const SUBTITLE= <Translate type="text" content="VoterProfile.subtitle"/>
+
+        //tooltip
+        const TOTALREG= <Translate type="text" content="VoterProfile.totalReg"/>
+        const MALEREG= <Translate type="text" content="VoterProfile.maleReg"/>
+        const FEMALEREG= <Translate type="text" content="VoterProfile.femaleReg"/>
+        const VOTEDIFF= <Translate type="text" content="VoterProfile.voteDiff"/>
+        const REGTRANCHE= <Translate type="text" content="VoterProfile.regTranche"/>
+        const OTHERREG= <Translate type="text" content="VoterProfile.otherReg"/>
+
         return (
                 <div>
                 {this.props.shapeIsLoaded ? <div><Map  maxZoom={23} center={position} zoom={6} className="initialposition" style={{height: "100vh", width: "100vw",position:"relative",zIndex:0}}>
@@ -261,10 +287,10 @@ class VoterProfile extends Component {
                             <div>
                                      <SemiPie title={this.state.gouv_name+" "+this.state.govForMunTooltip} male={this.state.maleNumber} female={this.state.femaleNumber} />
                                         <div style={{textAlign:"center",position:"relative",marginTop:"-45px"}}>
-                                        <h4><b>{(this.state.maleNumber+this.state.femaleNumber).toLocaleString()} </b> total registered {this.state.mapAge} </h4>
-                                        <h4><b>{(this.state.maleNumber).toLocaleString()}</b> registered male </h4>
-                                        <h4><b>{(this.state.femaleNumber).toLocaleString()}</b> Registered female</h4>
-                                        <h4><b>{(Math.abs(this.state.femaleNumber-this.state.maleNumber)).toLocaleString()}</b> voters Difference</h4>
+                                        <h4><b>{(this.state.maleNumber+this.state.femaleNumber).toLocaleString()} </b> {TOTALREG}  {this.state.mapAge} </h4>
+                                        <h4><b>{(this.state.maleNumber).toLocaleString()}</b>  {MALEREG}  </h4>
+                                        <h4><b>{(this.state.femaleNumber).toLocaleString()}</b>  {FEMALEREG} </h4>
+                                        <h4><b>{(Math.abs(this.state.femaleNumber-this.state.maleNumber)).toLocaleString()}</b> {VOTEDIFF} </h4>
                                     </div>
                                 
                             </div>
@@ -273,8 +299,8 @@ class VoterProfile extends Component {
                             <div>
                                 <TooltipPie title={this.state.gouv_name+" "+this.state.govForMunTooltip} allReg={this.state.allreg_sum} chosenAge={this.state.mapAge} registeredTranche={(this.state.maleNumber+this.state.femaleNumber)} />
                                     <div style={{textAlign:"center",position:"relative",marginTop:"-10px"}}>
-                                        <h4><b>{(this.state.maleNumber+this.state.femaleNumber).toLocaleString()}</b>: registered {this.state.mapAge}</h4>
-                                        <h4><b>{(this.state.allreg_sum-(this.state.maleNumber+this.state.femaleNumber)).toLocaleString()}</b>: Other registered tranches</h4>
+                                        <h4><b>{(this.state.maleNumber+this.state.femaleNumber).toLocaleString()}</b>{REGTRANCHE}{this.state.mapAge}</h4>
+                                        <h4><b>{(this.state.allreg_sum-(this.state.maleNumber+this.state.femaleNumber)).toLocaleString()}</b>{OTHERREG}</h4>
                                     </div>
                             </div>
                         </Tooltip>
@@ -287,8 +313,8 @@ class VoterProfile extends Component {
                     <div className="col-md-12" style={{zIndex:1500,position:"fixed",marginTop: "94vh"}} >
                     <div className="col-md-6">_</div>
                     <div className="col-md-6">
-                        <RaisedButton onTouchTap={this.MapLevelClick.bind(this,"gov")} label="Governorate"  labelColor={this.state.buttonLabelGov} />
-                        <RaisedButton onTouchTap={this.MapLevelClick.bind(this,"mun")} label="Municipality" style={{marginLeft:"1vh"}} labelColor={this.state.buttonLabelMun} />
+                        <RaisedButton onTouchTap={this.MapLevelClick.bind(this,"gov")} label={GOV}  labelColor={this.state.buttonLabelGov} />
+                        <RaisedButton onTouchTap={this.MapLevelClick.bind(this,"mun")} label={MUN} style={{marginLeft:"1vh"}} labelColor={this.state.buttonLabelMun} />
 
                     </div>   
                     </div>    
@@ -323,8 +349,8 @@ class VoterProfile extends Component {
                    {/*Title of the map*/}
                     <Control position="topleft">
                         <div className="lefttitle" >
-                            <h1 style={{marginTop:"5px"}} > Voter Profile</h1>
-                            <p style={{fontSize:"13px"}}>this map shows upon choosing an age category which is more male or female </p>
+                            <h1 style={{marginTop:"5px"}} >{TITLE} </h1>
+                            <p style={{fontSize:"13px"}}>{SUBTITLE}</p>
                         </div>
                     </Control>
 
@@ -350,6 +376,7 @@ class VoterProfile extends Component {
 }
 
 function mapStateToProps(state) {
+    console.log(state);
   return {
     mapColor:state.changeMapColor,
     mapAgeSlider:state.popFilter,

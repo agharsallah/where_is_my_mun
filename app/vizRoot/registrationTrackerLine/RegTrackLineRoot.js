@@ -29,7 +29,7 @@ class RegTrackLineRoot extends Component {
     }
     
     componentWillMount() {
-         let qString=config.apiUrl+"/api/dailyins/line_daily_reg_23-07";
+         let qString=config.apiUrl+"/api/dailyins/line_daily reg_09-08";
         axios({
             method: 'get',
             url: qString,
@@ -167,7 +167,6 @@ class RegTrackLineRoot extends Component {
                             averageVal={averageVal}
                             highest={highest}
                             lowest={lowest}
-
                         />
                     </div>
                 :

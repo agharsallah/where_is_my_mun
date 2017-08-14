@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 var Highcharts = require('highcharts');
 import HighchartInit from '../HighchartInit' ;
+import counterpart from 'counterpart' ;
 
 class BarMaleFemaleDiff extends Component {
     constructor(props) {
@@ -32,10 +33,10 @@ class BarMaleFemaleDiff extends Component {
             },
             credits: false,
             title: {
-                text: "difference in voters sexe -" +this.props.title
+                text: counterpart.translate('BarMaleFemaleDiff.title') +this.props.title
             },
             subtitle: {
-                text: "if the color is red than difference is in favor of female <br/> else in favor of male"
+                text: counterpart.translate('BarMaleFemaleDiff.subtitle')
 
             },
             xAxis: {
@@ -52,7 +53,7 @@ class BarMaleFemaleDiff extends Component {
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'voteres sexe difference number'
+                    text: counterpart.translate('BarMaleFemaleDiff.yaxe')
                 }
             },
             tooltip: {
@@ -92,10 +93,10 @@ class BarMaleFemaleDiff extends Component {
             },
             credits: false,
             title: {
-                text: "difference in voters sexe: " +nextProps.title
+                text: counterpart.translate('BarMaleFemaleDiff.title') +this.props.title +nextProps.title
             },
             subtitle: {
-                text: "if the color is red than difference is in favor of female<br/> else in favor of male"
+                text: counterpart.translate('BarMaleFemaleDiff.subtitle')
             },
             xAxis: {
                 categories:gouvNameArray,
@@ -111,7 +112,7 @@ class BarMaleFemaleDiff extends Component {
             yAxis: {
                 min: 0,
                 title: {
-                    text: this.props.ytitle
+                    text: counterpart.translate('BarMaleFemaleDiff.yaxe')
                 }
             },
             tooltip: {

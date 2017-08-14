@@ -8,6 +8,8 @@ import ColorBrew from '../containers/dynamic color/ColorBrew';
 import RaisedButton from 'material-ui/RaisedButton';
 import  '../DetailedRegGovMapStyle.css' ;
 import MenuDrawerActiveReg from './MenuDrawerActiveReg' ;
+import Translate    from 'react-translate-component';
+import counterpart from 'counterpart' ;
 
 import { connect } from "react-redux";
 import { getPopValue } from "../../../actions/index";
@@ -18,8 +20,8 @@ class ActiveRegistered extends Component {
         super(props);
         this.state={
             gouv_name:"",munNumber:"",destroy:true,activeVoterPer:"",registered2017:"", allRegistered:"",
-            grades:[4, 8, 10],dynamicReg:[4, 8, 10 ],colorfun:this.getColorRegElg,
-            keytitle:"Percentage of active registered voters",
+            grades:[4, 7, 10],dynamicReg:[4, 7, 10 ],colorfun:this.getColorRegElg,
+            keytitle:counterpart.translate('ActiveReg.keytitle'),
             menElgReg:[], femaleElgReg:[],govName:[],regressionRegElg:[],
             scatterGender:false
         }
@@ -88,6 +90,13 @@ class ActiveRegistered extends Component {
 
     render() {
         const position = [35.25360, 9.09795];
+        const TITLE= <Translate type="text" content="ActiveReg.title"/>
+        const SUBTITLE= <Translate type="text" content="ActiveReg.subtitle"/>
+        
+        /* Tooltip */
+        const ACTIVEREG= <Translate type="text" content="ActiveReg.activeReg"/>
+        const TOTALREG= <Translate type="text" content="ActiveReg.totalReg"/>
+        const NEWREG= <Translate type="text" content="ActiveReg.newReg"/>
         return (
                 <div>
                 {this.props.shapeIsLoaded ? <Map  maxZoom={23} center={position} zoom={7} className="initialposition" style={{height: "100vh", width: "100vw",position:"relative",zIndex:0}}>
@@ -114,9 +123,9 @@ class ActiveRegistered extends Component {
                                 <h3>{this.state.gouv_name}</h3>
                                 {
                                     <div>
-                                        <h4><b>{this.state.activeVoterPer} %</b> Active registered</h4>
-                                        <h4><b>{(this.state.allRegistered).toLocaleString()}</b> Registered in total </h4>
-                                        <h4> <b>{(this.state.registered2017).toLocaleString()}</b> Registered in 2017 (23-07)</h4>
+                                        <h4><b>{this.state.activeVoterPer} %</b> {ACTIVEREG}</h4>
+                                        <h4><b>{(this.state.allRegistered).toLocaleString()}</b> {TOTALREG} </h4>
+                                        <h4> <b>{(this.state.registered2017).toLocaleString()}</b> {NEWREG}</h4>
                                     </div>
                                 }
                             </div>
@@ -134,8 +143,8 @@ class ActiveRegistered extends Component {
                     {/*Title of the map*/}
                     <Control position="topleft">
                         <div className="lefttitle" >
-                            <h1 style={{marginTop:"5px"}} > Active Registerd Voters</h1>
-                            <p style={{fontSize:"13px"}}>Active registered voters since the beginning of municipal election </p>
+                            <h1 style={{marginTop:"5px"}} > {TITLE}</h1>
+                            <p style={{fontSize:"13px"}}>{SUBTITLE} </p>
                         </div>
                     </Control>
                     {/* Menu Drawer" */}
