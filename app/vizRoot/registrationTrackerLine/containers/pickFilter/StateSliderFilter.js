@@ -22,10 +22,12 @@ class StateSliderFilter extends Component {
                     <RadioButton
                         value="Bubble"
                         label="Bubble"
+                        disabled={true}
                     />
                     <RadioButton
                         value="Heat"
                         label="Heat map"
+                        disabled={true}
                     />
                 </RadioButtonGroup>
             </div>

@@ -40,7 +40,7 @@ class MenuDrawerRegVsElig extends Component {
         return (
             <div>
                 <RaisedButton
-                style={{position: "absolute",right: "2vh",top: "50vh"}}
+                style={{position: "absolute",right: "2vh",top: "50vh",zIndex:500}}
                 label={_t('statDrawer.open')}
                 primary={true}
                 onClick={this.handleToggle.bind(this)}

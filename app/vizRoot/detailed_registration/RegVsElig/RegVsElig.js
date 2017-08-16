@@ -190,7 +190,7 @@ class RegVsElig extends Component {
                     </GeoJSON>
                     <ThemeRadio defaultSelected="pop" styles={{marginTop:"14vh",minWidth:"16vw",position:"fixed",zIndex:2,marginLeft:"83%"}}/>
                     {/*Left side ScatterPlot*/}
-                    <div className="col-md-6" style={{marginTop:"22rem"}}>
+                    <div className="col-md-6" style={{marginTop:"22rem",zIndex:1500}}>
                         {
                         <ScatterRegVsElig
                         menElgReg={this.state.menElgReg}

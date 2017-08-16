@@ -6,6 +6,9 @@ import Layout from './Layout' ;
 import './layout.css'
 
 class VizRoot extends Component {
+    
+
+    
     render() {
         const detailedRegTitle= <Translate type="text" content="vizroot.detailedRegTitle"/>
         const detailedRegDesc= <Translate type="text" content="vizroot.detailedRegDesc"/>

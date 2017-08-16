@@ -4,7 +4,6 @@ import Control from 'react-leaflet-control';
 import MapKey from '../MapKey' ;
 import ReactLoading from 'react-loading';
 import ThemeRadio from '../containers/pickFilter/ThemeRadio' ;
-import ColorBrew from '../containers/dynamic color/ColorBrew';
 import RaisedButton from 'material-ui/RaisedButton';
 import  '../DetailedRegGovMapStyle.css' ;
 import MenuDrawerActiveReg from './MenuDrawerActiveReg' ;

@@ -18,7 +18,10 @@ class DetailedRegGovRoot extends Component {
         super(props);
         this.state={shape:g_mun_shapes,munShape:{},shapeIsLoaded:false, key:1,countProfile:0,countRegVs:0,countActive:0}
     }
-    
+    componentWillUnmount() {
+        console.log('unmounte');
+           this.setState( {shape:g_mun_shapes,munShape:{},shapeIsLoaded:false, key:1,countProfile:0,countRegVs:0,countActive:0})
+    } 
     componentWillMount() {
         let qString=config.apiUrl+"/api/dailyins/detailed_gov_23-07";
         axios({
@@ -68,7 +71,6 @@ class DetailedRegGovRoot extends Component {
         this.setState({countProfile:this.state.countProfile+1});
         }
     }
-    
 
     render() {
         return (
@@ -78,7 +80,7 @@ class DetailedRegGovRoot extends Component {
                     <RegVsElig count={this.state.countRegVs} shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key} />
                     :
                     (this.props.radioFilterPicker==="active"?
-                        <ActiveRegistered count={this.state.countActive} shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key+1}/>
+                        <ActiveRegistered count={this.state.countActive} shape={this.state.shape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key+2}/>
                         :
                         <div>
                             <VoterProfile count={this.state.countProfile} shape={this.state.shape} munShape={this.state.munShape} shapeIsLoaded={this.state.shapeIsLoaded} key={this.state.key+1}/>                        

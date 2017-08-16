@@ -29,7 +29,7 @@ class BarMaleFemaleDiff extends Component {
         options:{
             chart: {
                 type: 'column',
-                backgroundColor: 'rgba(255, 255, 255, .4)',
+                backgroundColor: 'rgba(255, 255, 255, .6)',
             },
             credits: false,
             title: {
@@ -89,7 +89,7 @@ class BarMaleFemaleDiff extends Component {
                 options:{
             chart: {
                 type: 'column',
-                backgroundColor: 'rgba(255, 255, 255, .4)',
+                backgroundColor: 'rgba(255, 255, 255, .6)',
             },
             credits: false,
             title: {

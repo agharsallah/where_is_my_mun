@@ -232,7 +232,7 @@ class VoterProfile extends Component {
     }
 
     render() {
-        const position = [34.85360, 6.59795];
+        const position = [34.85360, 2.40795];
         //choose which shape to load based on the delimiattion
         let chosenSape,GeojsonKeyChanger;
         this.state.selectedMapLevel=="gov"?(chosenSape=this.props.shape,GeojsonKeyChanger="gov"):(chosenSape=this.props.munShape,GeojsonKeyChanger="mun")
@@ -283,8 +283,8 @@ class VoterProfile extends Component {
                         
                     >
                         {this.state.radioChart==="difference"?
-                        <Tooltip direction="left"  className="leafletTooltip" maxWidth={350} maxHeight={250} >
-                            <div>
+                        <Tooltip direction="left"  className="leafletTooltip" sticky={true} maxWidth={350} maxHeight={250} >
+                                <div style={{zIndex:1501}}>
                                      <SemiPie title={this.state.gouv_name+" "+this.state.govForMunTooltip} male={this.state.maleNumber} female={this.state.femaleNumber} />
                                         <div style={{textAlign:"center",position:"relative",marginTop:"-45px"}}>
                                         <h4><b>{(this.state.maleNumber+this.state.femaleNumber).toLocaleString()} </b> {TOTALREG}  {this.state.mapAge} </h4>
@@ -293,11 +293,16 @@ class VoterProfile extends Component {
                                         <h4><b>{(Math.abs(this.state.femaleNumber-this.state.maleNumber)).toLocaleString()}</b> {VOTEDIFF} </h4>
                                     </div>
                                 
-                            </div>
+                                </div>
                         </Tooltip>:
-                        <Tooltip direction="left" className="leafletTooltip" >
-                            <div>
-                                <TooltipPie title={this.state.gouv_name+" "+this.state.govForMunTooltip} allReg={this.state.allreg_sum} chosenAge={this.state.mapAge} registeredTranche={(this.state.maleNumber+this.state.femaleNumber)} />
+                        <Tooltip direction="left" className="leafletTooltip" zIndex={2000} >
+                            <div style={{zIndex:1501}} >
+                                <TooltipPie 
+                                    title={this.state.gouv_name+" "+this.state.govForMunTooltip}
+                                    allReg={this.state.allreg_sum}
+                                    chosenAge={this.state.mapAge} 
+                                    registeredTranche={(this.state.maleNumber+this.state.femaleNumber)} 
+                                />
                                     <div style={{textAlign:"center",position:"relative",marginTop:"-10px"}}>
                                         <h4><b>{(this.state.maleNumber+this.state.femaleNumber).toLocaleString()}</b>{REGTRANCHE}{this.state.mapAge}</h4>
                                         <h4><b>{(this.state.allreg_sum-(this.state.maleNumber+this.state.femaleNumber)).toLocaleString()}</b>{OTHERREG}</h4>
@@ -311,8 +316,8 @@ class VoterProfile extends Component {
                     {/* bottom Navigation To Change map : Governorate - Municipality */}
                     
                     <div className="col-md-12" style={{zIndex:1500,position:"fixed",marginTop: "94vh"}} >
-                    <div className="col-md-6">_</div>
-                    <div className="col-md-6">
+                    <div className="col-md-7">_</div>
+                    <div className="col-md-5">
                         <RaisedButton onTouchTap={this.MapLevelClick.bind(this,"gov")} label={GOV}  labelColor={this.state.buttonLabelGov} />
                         <RaisedButton onTouchTap={this.MapLevelClick.bind(this,"mun")} label={MUN} style={{marginLeft:"1vh"}} labelColor={this.state.buttonLabelMun} />
 
@@ -320,7 +325,7 @@ class VoterProfile extends Component {
                     </div>    
                         
                     {/*Left side ScatterPlot*/}
-                    <div className="col-md-6" style={{marginTop:"22rem"}}>
+                    <div className="col-md-6" style={{marginTop:"22rem",zIndex:1500}}>
                     {this.state.radioChart==="difference" ?
                         <BarMaleFemaleDiff 
                             alldiffrenceArray={this.state.diffrenceArray} 

@@ -22,7 +22,7 @@ class HistogramVoterProfile extends Component {
             options:{
                 chart: {
                     type: 'bar',
-                    backgroundColor: 'rgba(255, 255, 255, .4)'
+                    backgroundColor: 'rgba(255, 255, 255, .6)'
                 },
                 title: {
                     text: this.props.clickedShapeName,
@@ -100,7 +100,7 @@ class HistogramVoterProfile extends Component {
             options:{
                 chart: {
                     type: 'bar',
-                    backgroundColor: 'rgba(255, 255, 255, .4)'
+                    backgroundColor: 'rgba(255, 255, 255, .6)'
                 },
                 title: {
                     text: nextProps.clickedShapeName+" -all ages"

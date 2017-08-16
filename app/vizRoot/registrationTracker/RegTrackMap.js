@@ -33,6 +33,7 @@ class RegTrackMap extends Component {
     }
     
     componentWillMount() {
+        console.log('ssssssssssssssssssssss');
         let qString=config.apiUrl+"/api/dailyins/shape_reg_upd-23_07";
         axios({
             method: 'get',
@@ -58,7 +59,7 @@ class RegTrackMap extends Component {
 
             allInscription.sort(function(a, b){return b.value-a.value})
             allUpdate.sort(function(a, b){return b.value-a.value})
-            console.log('sorted table',allUpdate);
+            //console.log('sorted table',allUpdate);
             /*Sum of all inscription - update*/
            allInscription.map((element)=>{sumInscription+=element.value})
            allUpdate.map((element)=>{sumUpdate+=element.value})
@@ -79,12 +80,12 @@ class RegTrackMap extends Component {
                 allInscription.push({value:parseInt(element.properties["inscription"+nextProps.regDate]),gouv:element.properties.NAME_EN})
                 allUpdate.push({value:parseInt(element.properties["update"+nextProps.regDate]),gouv:element.properties.NAME_EN})
             })
-            console.log(allInscription);
+            //console.log(allInscription);
             
             /*making a sorted inscription-update array*/
             allInscription.sort(function(a, b){return b.value-a.value})
             allUpdate.sort(function(a, b){return b.value-a.value})
-            console.log('new sorted table',allUpdate);
+            //console.log('new sorted table',allUpdate);
         if (nextProps.radioFilterPicker=="pop") {
                 //Calculate the Map Grades --dynamic : we get an array of 6 rounded values values, we pick 4 
             var newDynamic=[]
@@ -145,19 +146,19 @@ class RegTrackMap extends Component {
 
     style(feature) {
         //check for what we have checked as filter subject : Population || state ||
-        if (this.props.radioFilterPicker=="pop") {
-             var REGISTRATION = parseInt(feature.properties["inscription"+this.props.regDate]);
-             //console.log(this.state.dynamicReg);
+        if(this.props.radioFilterPicker=="update"){
+            var UPDATE = parseInt(feature.properties["update"+this.props.regDate]);
             return {
-                fillColor: this.getColora(REGISTRATION,this.props.mapColor,this.state.dynamicReg),
+                fillColor: this.getColorUpdate(UPDATE,this.props.mapColor,this.state.dynamicUpdate),
                 color: 'black',
                 weight: 2,
                 fillOpacity: 0.8
             };
-        }else if(this.props.radioFilterPicker=="update"){
-            var UPDATE = parseInt(feature.properties["update"+this.props.regDate]);
+        }else {
+             var REGISTRATION = parseInt(feature.properties["inscription"+this.props.regDate]);
+ 
             return {
-                fillColor: this.getColorUpdate(UPDATE,this.props.mapColor,this.state.dynamicUpdate),
+                fillColor: this.getColora(REGISTRATION,this.props.mapColor,this.state.dynamicReg),
                 color: 'black',
                 weight: 2,
                 fillOpacity: 0.8
@@ -199,7 +200,7 @@ class RegTrackMap extends Component {
                     />
 
                     <GeoJSON
-                    key={"a"+this.state.key}
+                    key={"jjjujyfgdf"+this.state.key}
                     data= {this.state.shape}
                     style={this.style.bind(this)} 
                     onEachFeature={
@@ -209,7 +210,7 @@ class RegTrackMap extends Component {
                             //layer.bindTooltip(feature.properties.NAME_EN,{ permanent: false,className:"tooltipnamear",direction:"right" })
                             layer.on({mouseover: this.highlightFeature.bind(this)});
                             layer.on({mouseout: this.resetFeature.bind(this)});
-                            console.log("markerData",markerData);
+                            //console.log("markerData",markerData);
                         }    
                     }
                     >
@@ -246,7 +247,7 @@ class RegTrackMap extends Component {
                     </GeoJSON>
 
                     {/*Left side top column chart*/}
-                    <div className="col-md-7" style={{marginTop:"22rem"}}>
+                    <div className="col-md-7" style={{marginTop:"22rem",zIndex:500}}>
                         {this.props.radioFilterPicker=="pop" ?
                         <BasicColumnRankedInscription
                         title="inscription per irie" 

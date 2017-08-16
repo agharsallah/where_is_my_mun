@@ -19,10 +19,11 @@ class SelectRegUpd extends Component {
         return (
             <div>  
                 <SelectField
-                    style={{marginLeft:"2rem",marginTop:"2rem"}}
+                    style={{marginLeft:"2rem",marginTop:"2rem",width:"150px"}}
                     floatingLabelText="Registration/Updae"
                     value={this.state.selectValue}
                     onChange={this.handleSelectField.bind(this)}
+                    iconStyle={{fill:"#00bcd4"}}
                 >
                     <MenuItem value="registration" primaryText="Registration" />
                     <MenuItem value="update" primaryText="Update" />

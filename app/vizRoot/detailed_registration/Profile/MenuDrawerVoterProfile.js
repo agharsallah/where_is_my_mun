@@ -41,12 +41,12 @@ class MenuDrawerVoterProfile extends Component {
         return (
             <div>
                 <RaisedButton
-                style={{position: "absolute",right: "2vh",top: "50vh"}}
+                style={{position: "absolute",right: "2vh",top: "50vh",zIndex:500}}
                 label={_t('statDrawer.open')}
                 primary={true}
                 onClick={this.handleToggle.bind(this)}
                 />
-                <Drawer width={"20%"}
+                <Drawer width={"18%"}
                         open={this.state.open}
                         openSecondary={true}
                         containerStyle={{top:"12vh",height:"88%",zIndex:"1001"}}
@@ -56,7 +56,7 @@ class MenuDrawerVoterProfile extends Component {
                     <AppBar title={MENU} onLeftIconButtonTouchTap={this.handleToggle.bind(this)} />
 
                     <div>
-                        <ThemeRadio styles={{borderRadius:"10px",paddingLeft:"2vh"}} defaultSelected="profile" />
+                        <ThemeRadio styles={{borderRadius:"10px",paddingLeft:"2vh",}} defaultSelected="profile" />
                     </div>
                     
                     {/* Slider filter */}
