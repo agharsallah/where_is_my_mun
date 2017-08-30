@@ -14,7 +14,7 @@ class MapKey extends Component {
                     return (
                             <div key={i+this.props.colorSet}>
                                 <i style={{background:bg}}  ></i>
-                                {(grades[i + 1] ? (grades[i]+' % - '+grades[i+1]+" %"): '+ '+grades[i]+" %" ) }
+                                {(grades[i + 1] ? (grades[i]+' %  -  '+grades[i+1]+" % "): ' + '+grades[i]+" % " ) }
                                 <br/>
                             </div>
                         )

@@ -23,7 +23,7 @@ class DetailedRegGovRoot extends Component {
            this.setState( {shape:g_mun_shapes,munShape:{},shapeIsLoaded:false, key:1,countProfile:0,countRegVs:0,countActive:0})
     } 
     componentWillMount() {
-        let qString=config.apiUrl+"/api/dailyins/detailed_gov_23-07";
+        let qString=config.apiUrl+"/api/dailyins/detailed_gov_10-08";
         axios({
             method: 'get',
             url: qString,
@@ -41,7 +41,7 @@ class DetailedRegGovRoot extends Component {
             console.log(error);
         });
 
-        let qString2=config.apiUrl+"/api/dailyins/detailed_mun_02-08";
+        let qString2=config.apiUrl+"/api/dailyins/detailed_mun_10-08";
         axios({
             method: 'get',
             url: qString2,

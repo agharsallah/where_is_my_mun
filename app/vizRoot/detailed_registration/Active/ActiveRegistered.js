@@ -19,7 +19,7 @@ class ActiveRegistered extends Component {
         super(props);
         this.state={
             gouv_name:"",munNumber:"",destroy:true,activeVoterPer:"",registered2017:"", allRegistered:"",
-            grades:[4, 7, 10],dynamicReg:[4, 7, 10 ],colorfun:this.getColorRegElg,
+            grades:[8,12,15],dynamicReg:[8,12,15],colorfun:this.getColorRegElg,
             keytitle:counterpart.translate('ActiveReg.keytitle'),
             menElgReg:[], femaleElgReg:[],govName:[],regressionRegElg:[],
             scatterGender:false
@@ -53,7 +53,7 @@ class ActiveRegistered extends Component {
 
     style(feature) {
         //check for what we have checked as filter subject : Population || state ||
-            let REGISTRATION2017 = parseInt(feature.properties.inscription23_07);
+            let REGISTRATION2017 = parseInt(feature.properties.inscription_09_08);
             let ALLREGISTRATION = parseInt(feature.properties.allreg_sum);
             let activeVoterPer = ((REGISTRATION2017*100)/ALLREGISTRATION).toFixed(2);
             return {
@@ -69,9 +69,10 @@ class ActiveRegistered extends Component {
     highlightFeature(e) {
         const layer = e.target;
         const property = layer.feature.properties;
-        const activeVoterPer= ((property.inscription23_07*100)/property.allreg_sum).toFixed(2)
+        console.log('eeeeeeeeeeeeeeeeeee',property.inscription_09_08);
+        const activeVoterPer= ((property.inscription_09_08*100)/property.allreg_sum).toFixed(2)
         this.setState({destroy:false,gouv_name:property.NAME_EN,munNumber:property.munnumber,
-                        activeVoterPer:activeVoterPer,registered2017:property.inscription23_07,allRegistered:property.allreg_sum});
+                        activeVoterPer:activeVoterPer,registered2017:property.inscription_09_08,allRegistered:property.allreg_sum});
         return layer.setStyle({
             weight: 5,
             color: '#666',

@@ -32,7 +32,7 @@ module.exports = {
      menu:"Menu"
  },
   registrationMapKey:{
-     title:"Registration Map Key :",
+     title:"Registration Map Key ",
      shopping:"Shopping center",
      post:"Post Office",
      transport:"Transportaion station",
@@ -46,13 +46,13 @@ module.exports = {
      about:"about",
      viz:"vizualizations",
      language:"Languages",
-     sitetitle:"Just Data Viz"
+     sitetitle:"Election Data Visualization"
  },
  vizroot:{
-    title:"Raw data to viz",
+    title:"Municipal election data",
 
-    detailedRegTitle:"Registered Citizens per Sexe & Age",
-    detailedRegDesc:"Visualizing registered citizens per Age and Sexe until 10-07-2017 - (data provided by ISIE)",
+    detailedRegTitle:"Registeration per Sexe & Age",
+    detailedRegDesc:"Visualizing Municipal registration per Age and Sexe - (data provided by ISIE)",
     
     dailyRegLineTitle:"Daily Registration Number (Charts)",
     dailyRegLineDesc:"Analyzing the registration and updates of the municipal election density in Time -data Daily updatable- (data provided by ISIE)",
@@ -64,7 +64,7 @@ module.exports = {
     newmunDesc:"Get insight about the municipalities Old, New, Extended ones",
      
     statisticsTitle:"Municipalities filter",
-    statisticsDesc:"Filter the 350 municipalities based on Population and Area",
+    statisticsDesc:"Filtrer les 350 municipalités en fonction de la population et de la supérficie",
 
 },
 projectSection:{
@@ -80,16 +80,17 @@ projectSection:{
     ALL:"All",
     FEMALE:"Females",
     MALE:"Male",
-    MAPKEY:"Map Key :",
+    MAPKEY:"Map Key ",
     BACK:"Back",
     SLIDERTITLE:"Map Age Slider",
-OPTIONTITLE:"Chart Options :",
-MALE_FEMALE_DIFF:"male/female difference",
-AGEPER:"Age Percentage"
+    OPTIONTITLE:"Chart Options :",
+    MALE_FEMALE_DIFF:"male/female difference",
+    AGEPER:"Age Percentage",
+    zoomplaceholder:"choose a mun"
 },
 RegVsElig:{
     TITLE:"Registered Versus Eligible Voters",
-    SUBTITLE:"Registered from 2011 until 23-07-17 | Eligible - INS data of 2014",
+    SUBTITLE:"Registered till 10-08 | Eligible voters from INS data 2014",
     ELIGIBLE:"Eligible",
     REGISTERED:"Registered",
     REGELG:"Registered from Eligible",

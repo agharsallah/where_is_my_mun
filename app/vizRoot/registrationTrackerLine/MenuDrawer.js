@@ -40,16 +40,16 @@ class MenuDrawer extends Component {
                     <div style={{margin:"2rem"}}>    
                         <StateSliderFilter />
                     </div>  
-
+                    
+                    { this.props.stateFilter==="All"?
+                        <SelectRegUpd/>: <div></div>
+                    }
+                    
                     <div style={{marginLeft:"2rem",marginTop:"2rem"}}>
                         <RaisedButton label="Back" 
                         containerElement={<Link to="/" />} 
                         linkButton={true} />
                     </div>
-                    
-                    { this.props.stateFilter==="All"?
-                        <SelectRegUpd/>: <div></div>
-                    }
                 </Drawer>
             </div>
         );

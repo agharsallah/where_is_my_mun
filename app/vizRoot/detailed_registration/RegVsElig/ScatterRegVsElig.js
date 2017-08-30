@@ -35,7 +35,7 @@ class ScatterRegVsElig extends Component {
         var xf = 450000, 
             yf = regression0*xf + regression1;
             var x0 = 25000,y0 = regression0*x0 + regression1;
-            var xf = 800000,yf = regression0*xf + regression1;
+            var xf = 850000,yf = regression0*xf + regression1;
            var dataSeries= [
                 {name: this.state.Governorate,color: 'black', data: this.props.allElgReg},
                 {type: 'line',name: this.state.Regression,data: [[x0, y0], [xf, yf]],marker: {enabled:false},states: {hover: {lineWidth: 0}}, enableMouseTracking: false},
@@ -154,7 +154,7 @@ class ScatterRegVsElig extends Component {
         }
         else{
             var x0 = 25000,y0 = regression0*x0 + regression1;
-            var xf = 800000,yf = regression0*xf + regression1;
+            var xf = 850000,yf = regression0*xf + regression1;
            var title="Registered Versus Eligible"
            var dataSeries= [
                 {name: this.state.Governorate,color: 'black', data: nextProps.allElgReg},

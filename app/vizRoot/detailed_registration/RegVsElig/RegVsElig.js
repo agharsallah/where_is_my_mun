@@ -25,7 +25,7 @@ class RegVsElig extends Component {
         super(props);
         this.state={
             gouv_name:"",munNumber:"",destroy:true,eligVsReg:"",eligible2014:"", allRegistered:"",
-            grades:[60, 70, 80],dynamicReg:[60, 70, 80 ],colorfun:this.getColorRegElg,
+            grades:[60, 65, 70],dynamicReg:[60, 65, 70],colorfun:this.getColorRegElg,
             keyTitle:counterpart.translate('RegVsElig.ALLKEY'),mapGender:"All",
             keyColor:["#ffffcc", "#c2e699", "#78c679","#238443"],
             menElgReg:[], femaleElgReg:[],govName:[],regressionRegElg:[],
