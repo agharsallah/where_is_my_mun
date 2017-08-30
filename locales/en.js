@@ -21,10 +21,8 @@ module.exports = {
     BackButton:'Back',
     PollingCheck:'Polling Station',
     RegistrationCheck:'Registration Center',
-        WhereAmI:"My location ",
-                    download:'Registration center'
-
-
+    WhereAmI:"My location ",
+    download:'Registration center'
  },
  filter: {
     placeholder:'Check the box above & Select your PC',
@@ -34,7 +32,7 @@ module.exports = {
      menu:"Menu"
  },
   registrationMapKey:{
-     title:"Registration Map Key :",
+     title:"Registration Map Key ",
      shopping:"Shopping center",
      post:"Post Office",
      transport:"Transportaion station",
@@ -42,15 +40,142 @@ module.exports = {
      municipality:"Municipality"
  },
  navbar:{
-     ar:"arabic",
-     fr:"french",
-     en:"english",
+     ar:"العربية",
+     fr:"Français",
+     en:"English",
      about:"about",
      viz:"vizualizations",
-     sitetitle:"Just Data Viz"
+     language:"Languages",
+     sitetitle:"Election Data Visualization"
  },
  vizroot:{
-     title:"Raw data to viz",
+    title:"Municipal election data",
 
- }
+    detailedRegTitle:"Registeration per Sexe & Age",
+    detailedRegDesc:"Visualizing Municipal registration per Age and Sexe - (data provided by ISIE)",
+    
+    dailyRegLineTitle:"Daily Registration Number (Charts)",
+    dailyRegLineDesc:"Analyzing the registration and updates of the municipal election density in Time -data Daily updatable- (data provided by ISIE)",
+     
+    dailyRegTitle:"Daily Registration Number (gouvernorate map)",
+    dailyRegDesc:"Analyzing the distribution of the registration and updates in the municipal election -data Daily updatable- (data provided by ISIE)",
+     
+    newmunTitle:"Municipalities Insight",
+    newmunDesc:"Get insight about the municipalities Old, New, Extended ones",
+     
+    statisticsTitle:"Municipalities filter",
+    statisticsDesc:"Filtrer les 350 municipalités en fonction de la population et de la supérficie",
+
+},
+projectSection:{
+    READMORE:"Read More"
+},
+    MenuDrawer:{
+    MENU:"Menu",
+    THEME:"Choose a Theme",
+    REGVSELG:"Registered vs Eligible",
+    ACTIVEREG:"Active Registered",
+    VOTERPROFILE:"Voter Profile",
+    GENDERRADIO:"Map By Gender",
+    ALL:"All",
+    FEMALE:"Females",
+    MALE:"Male",
+    MAPKEY:"Map Key ",
+    BACK:"Back",
+    SLIDERTITLE:"Map Age Slider",
+    OPTIONTITLE:"Chart Options :",
+    MALE_FEMALE_DIFF:"male/female difference",
+    AGEPER:"Age Percentage",
+    zoomplaceholder:"choose a mun"
+},
+RegVsElig:{
+    TITLE:"Registered Versus Eligible Voters",
+    SUBTITLE:"Registered till 10-08 | Eligible voters from INS data 2014",
+    ELIGIBLE:"Eligible",
+    REGISTERED:"Registered",
+    REGELG:"Registered from Eligible",
+    NONREG:"Non Registered",
+    ALLKEY:"Percentage of Registered from Eligible",
+    MALEKEY:"Male percentage of Registered from Eligible",
+    FEMALEKEY:"Female percentage of Registered from Eligible"
+},
+ScatterReg:{
+    SCATTER_TITLE:"Registered Versus Eligible",
+    SCATTER_TITLE_MALE:"Registered Versus Eligible Male ",
+    SCATTER_TITLE_FEMALE:"Registered Versus Eligible Female ",
+    Governorate:"Governorate",
+    Male:"Male",
+    Female:"Female",
+    Regression:"Regression Line",
+    Ideal:"Ideal",
+    Eligible:"Eligible Voters",
+    Registered:"Registered Voters"
+
+},
+ActiveReg:{
+    activeReg:"Active registered",
+    totalReg:"Registered in total",
+    newReg:"Registered in 2017",
+    title:"Active Registerd Voters",
+    subtitle:"Active registered voters since the beginning of municipal election",
+    keytitle:"Percentage of active registered voters"
+},
+VoterProfile:{
+    totalReg:"total registered ",
+    maleReg:"registered male",
+    femaleReg:"Registered female",
+    voteDiff:"voters Difference ",
+    gov:"Governorate",
+    mun:"Municipality",
+    keytitleDiff:"male vs female",
+    regTranche:": registered ",
+    otherReg:": Other registered ",
+    title:"Voter Profile",
+    subtitle:"This map shows upon choosing an age category which is more male or female ",
+    femaleMore:"Female are more",
+    maleMore:"Male are more ",
+    keyTitleDiff18:"18-24 male vs female",
+    keyTitleRegPerc18:"Percentage of registered 18-24",
+    keyTitleDiff25:"25-35 male vs female",
+    keyTitleRegPerc25:"Percentage of registered 25-35",
+    keyTitleDiff36:"36-50 male vs female",
+    keyTitleRegPerc36:"Percentage of registered 36-50",
+    keyTitleDiff50:"+50 male vs female",
+    keyTitleRegPerc50:"Percentage of registered +50"
+},
+BarMaleFemaleDiff:{
+    title:"difference in voters sexe -",
+    subtitle:"if the color is red than difference is in favor of female <br/> else in favor of male",
+    yaxe:"voteres sexe difference number"
+},
+HistogramVoterProfile:{
+    Male:"Male",  
+Female:"Female",
+population:"Population:",
+totalNumber:"Total Number:",
+click:"Click on the map"
+},
+TooltipPie:{
+    registerd:"registered",
+    otherReg:"Other Registered Tranches"
+},
+LineChart:{
+    LineChart:"",
+    source:"Source: ISIE.tn",
+    numberOf:"Number of ",
+    registration:"Registration",
+    update:"Update",
+    TitleDaily:"Daily",
+    TitleNumber:"Number <br/> Municipal Election",regression:"Regression Line",
+    valuefor:'The value for <b style="color:blue">',
+    increased:" increase compared to the last day",
+    decreased:" decrease compared to the last day ",
+    Sunday:"Sunday",
+    Monday:"Monday",
+    Tuesday:"Tuesday",
+    Wednesday:"Wednesday",
+    Thursday:"Thursday",
+    Friday:"Friday",
+    Saturday:"Saturday"
+}
 }

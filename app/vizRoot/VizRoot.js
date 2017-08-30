@@ -6,7 +6,25 @@ import Layout from './Layout' ;
 import './layout.css'
 
 class VizRoot extends Component {
+    
+
+    
     render() {
+        const detailedRegTitle= <Translate type="text" content="vizroot.detailedRegTitle"/>
+        const detailedRegDesc= <Translate type="text" content="vizroot.detailedRegDesc"/>
+
+        const dailyRegLineTitle= <Translate type="text" content="vizroot.dailyRegLineTitle"/>
+        const dailyRegLineDesc= <Translate type="text" content="vizroot.dailyRegLineDesc"/>
+        
+        const dailyRegTitle= <Translate type="text" content="vizroot.dailyRegTitle"/>
+        const dailyRegDesc= <Translate type="text" content="vizroot.dailyRegDesc"/>
+        
+        const newmunTitle= <Translate type="text" content="vizroot.newmunTitle"/>
+        const newmunDesc= <Translate type="text" content="vizroot.newmunDesc"/>
+
+        const statisticsTitle= <Translate type="text" content="vizroot.statisticsTitle"/>
+        const statisticsDesc= <Translate type="text" content="vizroot.statisticsDesc"/>
+
         return (
         <div>
             <Layout/>
@@ -21,9 +39,13 @@ class VizRoot extends Component {
                     <div className="content">
                         <div className="container">
                             <div className="row">
-                                <ProjectSection img="newmun.PNG" redirect="viz/newmun" title="Municipalities Insight" description="Get insight about the municipalities Old, New, Extended ones" />
-                                <ProjectSection img="statistics.PNG" redirect="viz/statistics" title="Municipalities filter" description="Filter the 350 municipalities based on Population and Area" />
-                                <ProjectSection img="daily_reg.PNG" redirect="viz/dailyreg" title="Registration Number of municipal election" description="Analyzing the distribution of the registration and updates in the municipal election data of 06-07-2017 (data provided by ISIE)" />
+                                <ProjectSection img="detailed_reg.PNG" redirect="/detailedgov" title={detailedRegTitle} description={detailedRegDesc} />
+                                <ProjectSection img="daily_reg_line.PNG" redirect="/dailyregcharts" title={dailyRegLineTitle}  description={dailyRegLineDesc} />
+                                <ProjectSection img="daily_reg.PNG" redirect="/dailyreg" title={dailyRegTitle} description={dailyRegDesc} />
+                            </div>
+                             <div className="row">
+                                <ProjectSection img="newmun.PNG" redirect="/newmun" title={newmunTitle} description={newmunDesc} />
+                                <ProjectSection img="statistics.PNG" redirect="/statistics" title={statisticsTitle} description={statisticsDesc} />
                             </div>
                         </div>
                     </div>

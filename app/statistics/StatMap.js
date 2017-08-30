@@ -95,25 +95,7 @@ class StatMap extends Component {
 
     style(feature) {
         //check for what we have checked as filter subject : Population || state ||
-        if (this.props.radioFilterPicker=="pop") {
-            const slider = this.props.popFilter;
-            if ((feature.properties.POP>=slider.min)&&(feature.properties.POP<=slider.max)) {
-                var POPULATION = feature.properties.POP;
-            }else {var POPULATION = "norange";}
-            if ((slider.min==5000)&&(feature.properties.POP<5000)) {
-                var POPULATION = feature.properties.POP; 
-            }
-            if ((slider.max==90000)&&(feature.properties.POP>90000)) {
-                var POPULATION = feature.properties.POP; 
-            }
-            
-            return {
-                fillColor: this.getColor(POPULATION,this.props.mapColor),
-                color: 'black',
-                weight: 2,
-                fillOpacity: 0.8
-            };
-        }else if(this.props.radioFilterPicker=="area"){
+         if(this.props.radioFilterPicker=="area"){
             const slider = this.props.areaFilter;
             if ((parseInt(feature.properties.area)>=slider.min)&&(parseInt(feature.properties.area)<=slider.max)) {
                 var AREA = parseInt(feature.properties.area);
@@ -132,6 +114,24 @@ class StatMap extends Component {
                 weight: 2,
                 fillOpacity: 0.8
             };            
+        }  else {
+            const slider = this.props.popFilter;
+            if ((feature.properties.POP>=slider.min)&&(feature.properties.POP<=slider.max)) {
+                var POPULATION = feature.properties.POP;
+            }else {var POPULATION = "norange";}
+            if ((slider.min==5000)&&(feature.properties.POP<5000)) {
+                var POPULATION = feature.properties.POP; 
+            }
+            if ((slider.max==90000)&&(feature.properties.POP>90000)) {
+                var POPULATION = feature.properties.POP; 
+            }
+            
+            return {
+                fillColor: this.getColor(POPULATION,this.props.mapColor),
+                color: 'black',
+                weight: 2,
+                fillOpacity: 0.8
+            };
         }
 
 	}

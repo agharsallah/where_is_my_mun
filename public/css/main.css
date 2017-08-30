@@ -196,7 +196,7 @@ html, body, #statmapmap {
         z-index: 2;
         left: 0;
         top: 0;
-        height: 750px;
+        height: 110vh;
         width:99%
     }
 /*AutoSuggest title*/

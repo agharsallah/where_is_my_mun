@@ -42,15 +42,141 @@
      municipality:"Municipalité"
  },
  navbar:{
-     ar:"arabic",
-     fr:"french",
-     en:"english",
+    ar:"العربية",
+     fr:"Français",
+     en:"English",
      about:"about",
      viz:"vizualizations",
-     sitetitle:"Just Data Viz"
+     language:"Languages",
+     sitetitle:"Visualization des données électorales"
  },
  vizroot:{
-     title:"Raw data to viz",
+    title:"Donnée de l'élection municipale",
 
- }
+    detailedRegTitle:"Inscription des citoyens par sexe et âge",
+    detailedRegDesc:"Visualisation des citoyens enregistrés selon l'âge et le sexe jusqu'à 10-07-2017 - (données fournies par ISIE)",
+    
+    dailyRegLineTitle:"Nombre d'enregistrement quotidien (Graphiques)",
+    dailyRegLineDesc:"Analyse de la densité d'enregistrement et de mises à jour des élections municipales - (données fournies par ISIE)",
+     
+    dailyRegTitle:"Nombre d'enregistrement quotidien (Carte)",
+    dailyRegDesc:"Analyse de la densité d'enregistrement et de mises à jour des élections municipales - (données fournies par ISIE)",
+     
+    newmunTitle:"Informations générales sur les commune",
+    newmunDesc:"Identification rapide de type des communes: nouvelles,ancien et étandue",
+     
+    statisticsTitle:"Sélection des municipalités selon les critères",
+    statisticsDesc:"Filter the 350 municipalities based on Population and Area",
+
+},
+projectSection:{
+    READMORE:"Read More"
+},
+    MenuDrawer:{
+    MENU:"Menu",
+    THEME:"Choose a Theme",
+    REGVSELG:"Registered vs Eligible",
+    ACTIVEREG:"Active Registered",
+    VOTERPROFILE:"Voter Profile",
+    GENDERRADIO:"Map By Gender",
+    ALL:"All",
+    FEMALE:"Females",
+    MALE:"Male",
+    MAPKEY:"Map Key :",
+    BACK:"Back",
+    SLIDERTITLE:"Map Age Slider",
+OPTIONTITLE:"Chart Options :",
+MALE_FEMALE_DIFF:"male/female difference",
+AGEPER:"Age Percentage"
+},
+RegVsElig:{
+    TITLE:"Registered Versus Eligible Voters",
+    SUBTITLE:"Registered from 2011 until 23-07-17 | Eligible - INS data of 2014",
+    ELIGIBLE:"Eligible",
+    REGISTERED:"Registered",
+    REGELG:"Registered from Eligible",
+    NONREG:"Non Registered",
+    ALLKEY:"Percentage of Registered from Eligible",
+    MALEKEY:"Male percentage of Registered from Eligible",
+    FEMALEKEY:"Female percentage of Registered from Eligible"
+},
+ScatterReg:{
+    SCATTER_TITLE:"Registered Versus Eligible",
+    SCATTER_TITLE_MALE:"Registered Versus Eligible Male ",
+    SCATTER_TITLE_FEMALE:"Registered Versus Eligible Female ",
+    Governorate:"Governorate",
+    Male:"Male",
+    Female:"Female",
+    Regression:"Regression Line",
+    Ideal:"Ideal",
+    Eligible:"Eligible Voters",
+    Registered:"Registered Voters"
+
+},
+ActiveReg:{
+    activeReg:"Active registered",
+    totalReg:"Registered in total",
+    newReg:"Registered in 2017",
+    title:"Active Registerd Voters",
+    subtitle:"Active registered voters since the beginning of municipal election",
+    keytitle:"Percentage of active registered voters"
+},
+VoterProfile:{
+    totalReg:"total registered ",
+    maleReg:"registered male",
+    femaleReg:"Registered female",
+    voteDiff:"voters Difference ",
+    gov:"Governorate",
+    mun:"Municipality",
+    keytitleDiff:"male vs female",
+    regTranche:": registered ",
+    otherReg:": Other registered ",
+    title:"Voter Profile",
+    subtitle:"This map shows upon choosing an age category which is more male or female ",
+    femaleMore:"Female are more",
+    maleMore:"Male are more ",
+    keyTitleDiff18:"18-24 male vs female",
+    keyTitleRegPerc18:"Percentage of registered 18-24",
+    keyTitleDiff25:"25-35 male vs female",
+    keyTitleRegPerc25:"Percentage of registered 25-35",
+    keyTitleDiff36:"36-50 male vs female",
+    keyTitleRegPerc36:"Percentage of registered 36-50",
+    keyTitleDiff50:"+50 male vs female",
+    keyTitleRegPerc50:"Percentage of registered +50"
+},
+BarMaleFemaleDiff:{
+    title:"difference in voters sexe -",
+    subtitle:"if the color is red than difference is in favor of female <br/> else in favor of male",
+    yaxe:"voteres sexe difference number"
+},
+HistogramVoterProfile:{
+    Male:"Male",  
+Female:"Female",
+population:"Population:",
+totalNumber:"Total Number:",
+click:"Click on the map"
+},
+TooltipPie:{
+    registerd:"registered",
+    otherReg:"Other Registered Tranches"
+},
+LineChart:{
+    LineChart:"",
+    source:"Source: ISIE.tn",
+    numberOf:"Number of ",
+    registration:"Registration",
+    update:"Update",
+    TitleDaily:"Daily",
+    TitleNumber:"Number <br/> Municipal Election",regression:"Regression Line",
+    valuefor:'The value for <b style="color:blue">',
+    increased:" increase compared to the last day",
+    decreased:" decrease compared to the last day ",
+    Sunday:"Sunday",
+    Monday:"Monday",
+    Tuesday:"Tuesday",
+    Wednesday:"Wednesday",
+    Thursday:"Thursday",
+    Friday:"Friday",
+    Saturday:"Saturday"
+}
 }

@@ -14,6 +14,7 @@ export const AREASLIDERVALUE = "AREASLIDERVALUE";
 export const STATESLIDERVALUE = "STATESLIDERVALUE";
 
 export const DATEPICK = "DATEPICK";
+export const REGUPDSELECTFFIELD="REGUPDSELECTFFIELD";
 
 export function getIrieButton(checkIrieButton) {
   return {
@@ -92,5 +93,12 @@ export function getDateValue(datevalue) {
   return {
     type: DATEPICK,
     payload: datevalue
+  };
+}
+/*choose registration or update in Linechart*/
+export function getRegOrUpd(chosenVal) {
+  return {
+    type: REGUPDSELECTFFIELD,
+    payload: chosenVal
   };
 }

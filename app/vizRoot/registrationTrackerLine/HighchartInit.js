@@ -15,7 +15,7 @@ componentDidMount() {
     render() {
 
         return (
-            <div ref="chart"/>
+            <div ref="chart" style={{height:"70vh"}}/>
         );
     }
 }

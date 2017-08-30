@@ -55,7 +55,7 @@ componentWillMount() {
     },
     series: [{
         showInLegend: false,
-        name: 'Tokyo',
+        name: 'inscription',
         data: inscriptionArray,
         /*dataLabels: {
             enabled: true,

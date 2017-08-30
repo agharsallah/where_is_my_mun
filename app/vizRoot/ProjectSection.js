@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router';
 
 import counterpart  from 'counterpart';
 import Translate    from 'react-translate-component';
@@ -9,25 +10,24 @@ class ProjectSection extends Component {
     render() {
             var imageLink="/img/"+this.props.img
             var redirectLink=this.props.redirect
+            const READMORE= <Translate type="text" content="projectSection.READMORE"/>
         return (
             <div className="col-xs-12 col-sm-4">
+
                         <div className="card">
-                            <a className="img-card" href={redirectLink}>
-                            <img src={imageLink} />
-                          </a>
+                            <Link to={redirectLink} className="img-card" > <img src={imageLink} /></Link>                  
+
                             <div className="card-content">
                                 <h4 className="card-title">
-                                    <a href={redirectLink}>{this.props.title}
-                                  </a>
+                                  <Link to={redirectLink} >{this.props.title}</Link>
                                 </h4>
                                 <p className="">
                                 {this.props.description}
                                 </p>
                             </div>
+
                             <div className="card-read-more">
-                                <a href={redirectLink} className="btn btn-link btn-block">
-                                    Read More
-                                </a>
+                                 <Link to={redirectLink} className="btn btn-link btn-block" >{READMORE}</Link>
                             </div>
                         </div>
                     </div>
