@@ -20,7 +20,7 @@ var Statistics   = require('./app/models/statistics'); // get Stat model
 // =================================================================
 // configuration ===================================================
 // =================================================================
-var port = process.env.PORT || 3000; // used to create, sign, and verify tokens
+var port = process.env.PORT || 3030; // used to create, sign, and verify tokens
 mongoose.Promise = global.Promise;
 mongoose.connect(config.database); // connect to database
 app.set('superSecret', config.secret); // secret variable

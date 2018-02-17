@@ -22,6 +22,8 @@ var _locationStatController = require('./controllers/locationStatController');
 
 var _userController = require('./controllers/userController');
 
+var _regshapeController = require('./controllers/regshapeController');
+
 var router = function router(app, apiRoutes) {
   app.post('/setup', _userController.postUser);
 
@@ -32,6 +34,9 @@ var router = function router(app, apiRoutes) {
 
   apiRoutes.get('/shape/:gouv', _shapeController.getShape);
   apiRoutes.post('/addshape', _shapeController.postShape);
+
+  apiRoutes.get('/reg/:gov', _regshapeController.getregshape);
+  apiRoutes.post('/addregshape', _regshapeController.postregshape);
 
   apiRoutes.get('/dailyins/:gouv', _daily_inscriptionController.getDailyIns);
   apiRoutes.post('/adddailyins', _daily_inscriptionController.postDailyIns);

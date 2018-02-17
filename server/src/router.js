@@ -7,6 +7,7 @@ import { getOneMunCoord, getMunCoords,postMunCoord } from './controllers/munCoor
 import { postStatistics } from './controllers/statisticsController';
 import { postLoctionStat } from './controllers/locationStatController';
 import { postUser } from './controllers/userController';
+import { getregshape, postregshape} from './controllers/regshapeController';
 
 const router = (app,apiRoutes) => {
   app.post('/setup',postUser );
@@ -18,6 +19,9 @@ const router = (app,apiRoutes) => {
  
   apiRoutes.get('/shape/:gouv', getShape);
   apiRoutes.post('/addshape', postShape);
+
+  apiRoutes.get('/reg/:gov', getregshape);
+  apiRoutes.post('/addregshape', postregshape);
 
   apiRoutes.get('/dailyins/:gouv', getDailyIns);
   apiRoutes.post('/adddailyins', postDailyIns);

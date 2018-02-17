@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Map, Popup, TileLayer, GeoJSON, FeatureGroup, Tooltip,LayersControl } from 'react-leaflet';
-import axios from 'axios' ;
 import IrieMarker from './IrieMarker' ; 
-import config from '../config'
 import Control from 'react-leaflet-control';
 import MapKey from './MapKey' ;
 import ReactLoading from 'react-loading';
@@ -14,50 +12,10 @@ import { bindActionCreators } from "redux";
 class StatMap extends Component {
     constructor(props){
         super(props);
-        this.state={feature:"",shape:g_mun_shapes,shapeIsLoaded:false, key:1,Irie:[],seats:"" ,population:"" ,etat:"" ,gouv_name:"",destroy:true,
+        this.state={key:1,Irie:[],seats:"" ,population:"" ,etat:"" ,gouv_name:"",destroy:true,
         grades:[0,5000, 10000,20000,40000, 70000 ],keytitle:"Number of population per Municipality",colorfun:this.getColor}
     }
-    
-    componentWillMount() {
-        let qString=config.apiUrl+"/api/shape/AllShapes";
-        axios({
-            method: 'get',
-            url: qString,
-            headers: {
-                'name': 'Isie',
-                'password': 'Isie@ndDi'
-            }
-        })
-        .then(response=>{
-            //console.log(response.data.data)
-            console.log('we got shape data frm db');
-            console.log(response);
-            this.setState({shape:JSON.parse(response.data.data),key:2,shapeIsLoaded:true});
-            }
-        )
-        .catch(function (error) {
-            console.log(error);
-        });
 
-        let qString2=config.apiUrl+"/api/iries/";
-            axios({
-                method: 'get',
-                url: qString2,
-                headers: {
-                    'name': 'Isie',
-                    'password': 'Isie@ndDi'
-                }
-            })
-        .then(response=>{
-            console.log('we got polling data frm db');
-            this.setState({Irie:response.data});
-            }
-        )
-        .catch(function (error) {
-            console.log(error);
-        });
-    
-    }
     componentWillReceiveProps(nextProps) {
         if (nextProps.radioFilterPicker=="pop") {
             this.setState({grades:[0,5000, 10000,20000,40000, 70000 ],
@@ -161,14 +119,14 @@ class StatMap extends Component {
         const position = [34.855360, 8.8049795];
         return (
                 <div>
-                {this.state.shapeIsLoaded ? <Map  maxZoom={23} center={position} zoom={7} className="initialposition" style={{height: "100vh", width: "100vw",position:"relative",zIndex:0}}>
+                {this.props.shapeIsLoaded ? <Map  maxZoom={23} center={position} zoom={7} className="initialposition" style={{height: "100vh", width: "100vw",position:"relative",zIndex:0}}>
                     <TileLayer
                     url='https://api.mapbox.com/styles/v1/hunter-x/cixhpey8700q12pnwg584603g/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoiaHVudGVyLXgiLCJhIjoiY2l2OXhqMHJrMDAxcDJ1cGd5YzM2bHlydSJ9.jJxP2PKCIUrgdIXjf-RzlA'
-                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> A.G'
+                    attribution='&copy; <a href="www.mapbox.com">MapBox</a>'
                     />
                     <GeoJSON
                     key={"a"+this.state.key}
-                    data= {this.state.shape}
+                    data= {this.props.shape}
                     style={this.style.bind(this)} 
                     onEachFeature={
                         (feature, layer) => {

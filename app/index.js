@@ -28,7 +28,7 @@ ReactDOM.render(
     <Provider store={createStoreWithMiddleware(reducers)}>
     <MuiThemeProvider>
     <Router history={browserHistory}>
-        {/*<Route  path="/" component={App}/> */}
+        <Route  path="/isie" component={App}/> 
         <Route path="/electionsocio" component={RootTwoMap}/> 
         <Route path="/" component={VizRoot}/> 
         <Route path="/detailedgov" component={DetailedRegGovRoot}/> 

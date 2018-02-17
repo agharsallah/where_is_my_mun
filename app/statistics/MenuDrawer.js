@@ -34,7 +34,7 @@ class MenuDrawer extends Component {
                 primary={true}
                 onClick={this.handleToggle.bind(this)}
                 />
-                <Drawer width={"30%"}  open={this.state.open}  onRequestChange={(open) => this.setState({open})}>
+                <Drawer width={"20%"}  open={this.state.open}  onRequestChange={(open) => this.setState({open})}>
                     <AppBar title="Menu" onLeftIconButtonTouchTap={this.handleToggle.bind(this)} />
                     <div className="mb-30">&nbsp;</div>
 

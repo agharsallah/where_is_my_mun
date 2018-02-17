@@ -183,9 +183,7 @@ function mapStateToProps(state) {
   return {
     checkedIrieButton:state.irieCheckbox,
     mapColorState:state.changeMapColorState,
-
     stateFilter:state.stateFilter,
-
   };
 }
 
