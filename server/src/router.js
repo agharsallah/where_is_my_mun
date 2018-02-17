@@ -8,6 +8,7 @@ import { postStatistics } from './controllers/statisticsController';
 import { postLoctionStat } from './controllers/locationStatController';
 import { postUser } from './controllers/userController';
 import { getregshape, postregshape} from './controllers/regshapeController';
+import { getCandidateLists, postCandidatesLists} from './controllers/dailyCandidateListNumController';
 
 const router = (app,apiRoutes) => {
   app.post('/setup',postUser );
@@ -41,6 +42,11 @@ const router = (app,apiRoutes) => {
   apiRoutes.post('/addstat', postStatistics);
 
   apiRoutes.post('/addlocationstat', postLoctionStat);
+
+  /* get the candidates list data by governorate or municipality associated to the map in question  */
+  apiRoutes.get('/candidatesListNumMap/', getCandidateLists);
+  apiRoutes.post('/addCandidateListStatMap/', postCandidatesLists);
+
 };
 
 export default router;

@@ -4,8 +4,11 @@ const CandidateListNumberShape = require('../app/models/dailyCandidatesListNumbe
  * Fetch polling Center of 
  */
 export const getCandidateLists = (req, res, next) => {
+	//console.log(req.query);
+	console.log(req.query.timeOfCollection);
+	console.log(req.query.dateOfCollection);
 
-	Shape.findOne({name:req.params.gouv}, function(err, datashape) {
+	CandidateListNumberShape.findOne({name:req.query.type,timeOfCollection:req.query.timeOfCollection,dateOfCollection:req.query.dateOfCollection}, function(err, datashape) {
 			if (err) { return next(err); }
 
 			res.json(datashape);
